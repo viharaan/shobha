@@ -20,17 +20,31 @@ const midFloor = (wing: number) => Math.round((TOWERS.find((t) => t.wing === win
 
 type Rec = (typeof FLATS)[number];
 
-function Chip({ on, n, disabled, onClick, children, title }: { on: boolean; n?: number; disabled?: boolean; onClick: () => void; children: React.ReactNode; title?: string }) {
+/**
+ * One filter as a labelled native select: quiet when unset ("Any"), gold edge when set. Option text carries the
+ * match count; options that would leave nothing are disabled rather than hidden, so the choices stay stable.
+ */
+function FilterSelect({ label, value, onChange, options, title }: { label: string; value: string; onChange: (v: string) => void; options: { value: string; label: string; n?: number; disabled?: boolean }[]; title?: string }) {
+  const set = value !== '';
   return (
-    <button type="button" className={`btn shrink-0 whitespace-nowrap px-2.5 py-1.5 text-xs max-lg:bg-black/60 max-lg:backdrop-blur ${disabled ? 'opacity-40' : ''}`} aria-pressed={on} disabled={disabled} onClick={onClick} title={title}>
-      {children}{n !== undefined && n > 0 && <span className={`text-[10px] ${on ? 'text-black/60' : 'text-fg-muted'}`}>{n}</span>}
-    </button>
+    <label className="relative block min-w-0" title={title}>
+      <span className="label pointer-events-none absolute left-2.5 top-1.5 z-10 !text-[9px] !tracking-[0.12em]">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={`w-full cursor-pointer appearance-none truncate rounded-lg border bg-black/60 pb-1.5 pl-2.5 pr-7 pt-[1.15rem] text-[13px] leading-tight text-fg backdrop-blur transition-colors hover:border-accent/60 focus:outline-none focus-visible:border-accent ${set ? 'border-accent/70' : 'border-line'}`}
+      >
+        <option value="">Any</option>
+        {options.map((o) => <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}{o.n !== undefined ? ` · ${o.n}` : ''}</option>)}
+      </select>
+      <svg viewBox="0 0 24 24" className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-fg-muted" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="m6 9 6 6 6-6" /></svg>
+    </label>
   );
 }
 
 /**
  * Find a home inside the stage (`find=1`, Community mode). Filters (bedrooms, finish, facing; legacy `config`) live in
- * the URL as before; every chip shows how many printed flat positions it would leave. Towers without a match are
+ * the URL as before; each option shows how many printed flat positions it would leave. Towers without a match are
  * ghosted in the 3D model and their labels carry the count, so filtering lights up where the homes are. Picking a
  * tower glides the camera there and lists its flats; picking a flat gives the summary, price, shortlist and Step inside.
  * Only homes printed on the sales sheet are offered; nothing is invented for the unlabelled wings.
@@ -70,46 +84,19 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
   if (wing !== null && flat !== null) crumbs.push({ label: `Flat ${flat}` });
 
   const nav = (
-    <div className="flex min-h-0 flex-col gap-1.5 lg:gap-2.5">
-      <div className="flex gap-1 overflow-x-auto pb-0.5 [scrollbar-width:none] lg:flex-col lg:gap-2.5 lg:overflow-visible lg:pb-0">
-        <div className="flex shrink-0 items-center gap-1 lg:flex-wrap">
-          <span className="label w-full px-1 max-lg:hidden">Bedrooms</span>
-          {[1, 2, 3, 4].map((b) => {
-            const n = count('beds', (r) => bedsOf(r.config) === b);
-            return <Chip key={b} on={beds === b} n={n} disabled={n === 0} onClick={() => set({ beds: beds === b ? null : b, config: null, flat: null, ...(b === 1 ? { finish: null } : {}) })}>{b} BHK</Chip>;
-          })}
-        </div>
-        <div className="flex shrink-0 items-center gap-1 lg:flex-wrap">
-          <span className="label w-full px-1 max-lg:hidden">Finish</span>
-          {(['Grande', 'Luxe'] as const).map((f) => {
-            const n = count('finish', (r) => finishOf(r.config) === f);
-            return <Chip key={f} on={finish === f} n={n} disabled={n === 0} onClick={() => set({ finish: finish === f ? null : f, config: null, flat: null })} title="Grande = the larger plan of the same bedroom count">{f}</Chip>;
-          })}
-        </div>
-        <div className="flex shrink-0 items-center gap-1 lg:flex-wrap">
-          <span className="label w-full px-1 max-lg:hidden">Facing (printed)</span>
-          {FACINGS.map((f) => {
-            const n = count('facing', (r) => r.facing === f);
-            return <Chip key={f} on={facing === f} n={n} disabled={n === 0} onClick={() => set({ facing: facing === f ? null : f, flat: null })} title={FACING_NOTE}>{FACING_NAME[f] ?? f}</Chip>;
-          })}
-        </div>
-      </div>
-      <div>
-        <div className="label px-1 pb-1 max-lg:hidden">Towers · lit ones have matches</div>
-        <div className="flex gap-1 overflow-x-auto pb-0.5 [scrollbar-width:none] lg:grid lg:grid-cols-7 lg:overflow-visible lg:pb-0">
-          {TOWERS.map((t) => {
-            const unl = UNLABELLED_WINGS.includes(t.wing);
-            const n = wingCount(t.wing);
-            return (
-              <button key={t.wing} type="button" disabled={unl} aria-pressed={wing === t.wing} onClick={() => selectWing(wing === t.wing ? null : t.wing)} title={unl ? 'Not labelled on the sales sheet' : `Wing ${t.wing} · ${n} matching flat position${n === 1 ? '' : 's'}`}
-                className={`btn shrink-0 flex-col gap-0.5 px-2 py-1 max-lg:flex-row max-lg:bg-black/60 lg:justify-center lg:px-0 ${n === 0 ? 'opacity-35' : ''}`}>
-                <span className="max-lg:hidden">{t.wing}</span><span className="lg:hidden">Wing {t.wing}</span>
-                <span className={`text-[9px] leading-none ${wing === t.wing ? 'text-black/60' : 'text-fg-muted'}`}>{unl ? '–' : n}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+    <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 lg:grid-cols-2">
+      <FilterSelect label="Bedrooms" value={beds !== null ? String(beds) : ''}
+        onChange={(v) => set({ beds: v || null, config: null, flat: null, ...(v === '1' ? { finish: null } : {}) })}
+        options={[1, 2, 3, 4].map((b) => { const n = count('beds', (r) => bedsOf(r.config) === b); return { value: String(b), label: `${b} BHK`, n, disabled: n === 0 }; })} />
+      <FilterSelect label="Finish" value={finish ?? ''} title="Grande = the larger plan of the same bedroom count"
+        onChange={(v) => set({ finish: v || null, config: null, flat: null })}
+        options={(['Grande', 'Luxe'] as const).map((f) => { const n = count('finish', (r) => finishOf(r.config) === f); return { value: f, label: f, n, disabled: n === 0 }; })} />
+      <FilterSelect label="Facing" value={facing ?? ''} title={FACING_NOTE}
+        onChange={(v) => set({ facing: v || null, flat: null })}
+        options={FACINGS.map((f) => { const n = count('facing', (r) => r.facing === f); return { value: f, label: FACING_NAME[f] ?? f, n, disabled: n === 0 }; })} />
+      <FilterSelect label="Tower" value={wing !== null ? String(wing) : ''} title="Lit towers in the model have matching homes"
+        onChange={(v) => selectWing(v ? Number(v) : null)}
+        options={TOWERS.map((t) => { const unl = UNLABELLED_WINGS.includes(t.wing); const n = wingCount(t.wing); return { value: String(t.wing), label: `Wing ${t.wing}${unl ? ' · not labelled' : ''}`, n: unl ? undefined : n, disabled: unl || n === 0 }; })} />
     </div>
   );
 
