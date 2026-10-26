@@ -9,6 +9,7 @@ import { NavPad } from './NavPad';
 import CommunityStage from './CommunityStage';
 import HomeStage from './HomeStage';
 import LocationStage from './LocationStage';
+import MediaStage from './MediaStage';
 
 /**
  * The hero of the single page: one full-viewport 3D stage with two modes (Community = site model,
@@ -21,8 +22,9 @@ import LocationStage from './LocationStage';
  */
 export default function Stage() {
   const { params, set, num } = useUrlState();
-  const mode = params.get('mode') === 'home' ? 'home' : params.get('mode') === 'map' ? 'map' : 'community';
-  const is3d = mode !== 'map';
+  const m = params.get('mode');
+  const mode = m === 'home' || m === 'map' || m === 'media' ? m : 'community';
+  const is3d = mode === 'community' || mode === 'home';
   const present = params.get('present') === '1';
   const touring = !!params.get('tour');
   const [touched, setTouched] = useState(false);
@@ -86,11 +88,11 @@ export default function Stage() {
       </details>
     </div>
   );
-  const legendText = mode === 'home' ? '← → rooms · ↑ ↓ floor · esc back' : mode === 'map' ? '← → topics · esc back' : '← → places and towers · ↑ ↓ floors · ↵ step in · esc back';
+  const legendText = mode === 'home' ? '← → rooms · ↑ ↓ floor · esc back' : mode === 'map' ? '← → topics · esc back' : mode === 'media' ? '← → videos, plans and pages · esc back' : '← → places and towers · ↑ ↓ floors · ↵ step in · esc back';
 
   return (
-    <section ref={stageRef} id="explore" aria-label="Interactive stage" className="relative h-[calc(100svh-3.5rem)] min-h-[560px] w-full overflow-hidden border-b border-line bg-bg" onPointerDownCapture={() => setTouched(true)}>
-      {mode === 'community' ? <CommunityStage key="community" resetToken={resetToken} intro={intro} railExtras={railExtras} /> : mode === 'home' ? <HomeStage key="home" resetToken={resetToken} railExtras={railExtras} /> : <LocationStage key="map" keys={chrome} />}
+    <section ref={stageRef} id="explore" aria-label="Interactive stage" className="relative h-svh min-h-[560px] w-full overflow-hidden bg-bg" onPointerDownCapture={() => setTouched(true)}>
+      {mode === 'community' ? <CommunityStage key="community" resetToken={resetToken} intro={intro} railExtras={railExtras} /> : mode === 'home' ? <HomeStage key="home" resetToken={resetToken} railExtras={railExtras} /> : mode === 'map' ? <LocationStage key="map" keys={chrome} /> : <MediaStage key="media" keys={chrome} />}
 
       {/* top bar: mode switch left; compass and full screen right. Everything else is in the dock (see Dock.tsx) */}
       <div className="absolute left-3 top-3 z-30 flex items-center gap-2">
@@ -98,7 +100,13 @@ export default function Stage() {
           <button type="button" role="tab" aria-selected={mode === 'community'} onClick={() => set({ mode: null, tour: null })}><span className="max-sm:hidden">Community</span><span className="sm:hidden">Site</span></button>
           <button type="button" role="tab" aria-selected={mode === 'home'} onClick={() => set({ mode: 'home', tour: null, find: null })}>Home</button>
           <button type="button" role="tab" aria-selected={mode === 'map'} onClick={() => set({ mode: 'map', tour: null, find: null })}><span className="max-sm:hidden">Location</span><span className="sm:hidden">Map</span></button>
+          <button type="button" role="tab" aria-selected={mode === 'media'} onClick={() => set({ mode: 'media', tour: null, find: null })}>Media</button>
         </div>
+      </div>
+      {/* the wordmark, now that there is no header: top centre on wide screens */}
+      <div className="pointer-events-none absolute left-1/2 top-5 z-20 -translate-x-1/2 items-baseline gap-2 whitespace-nowrap max-lg:hidden lg:flex" aria-hidden>
+        <span className="text-[12px] tracking-[0.35em] text-fg">SOBHA</span>
+        <span className="text-[12px] tracking-[0.2em] text-accent">ONEWORLD</span>
       </div>
       <div className="absolute right-3 top-3 z-30 flex items-start gap-2">
         {!intro && is3d && <Compass onReset={() => setResetToken((t) => t + 1)} />}

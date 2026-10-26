@@ -21,7 +21,6 @@ import { TourBar } from '@/components/ui/TourBar';
 import { planTour, siteStopInUnitFrame, siteTour } from '@/lib/tour';
 import { buildingFloorLevelM } from '@/lib/unit/buildingFloor';
 import { resolveHome } from '@/lib/homes';
-import { useShortlist } from '@/lib/shortlist';
 import { useUrlState } from '@/lib/useUrlState';
 import { PLANS } from '@/data/manifest';
 import { TOWERS, WALL_HEIGHT_M } from '@/data/project';
@@ -49,7 +48,6 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
   const resolved = useMemo(() => (wingP && flatP ? resolveHome({ wing: wingP, flat: flatP, floor: floorP ?? 1 }) : null), [wingP, flatP, floorP]);
   const planId = params.get('plan') ?? resolved?.planId ?? PLANS[0].id;
   const plan = useMemo(() => PLANS.find((p) => p.id === planId) ?? PLANS[0], [planId]);
-  const { has: shortlisted, toggle: toggleShortlist } = useShortlist();
 
   const [overrides, setOverrides] = useState<Record<string, PlanCalibration | null | undefined>>({});
   const [tool, setTool] = useState<PlanTool>('pan');
@@ -235,7 +233,6 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
       badge={<StatusBadge status="source" title="Areas from the sales sheet and the floor-plan PDF" />}
       lead={<>{plan.sbaSqft.toLocaleString('en-IN')} sq ft SBA · {plan.carpetSqft.toLocaleString('en-IN')} carpet{facing != null ? ` · balcony faces ${compassPoint(facing)}` : ''}{isRefugeFloor(wingN, floor) && choice ? <span className="text-warn"> · refuge floor</span> : null}</>}
       actions={<>
-        {homeRef && <button type="button" className="btn btn-primary" aria-pressed={shortlisted(homeRef)} onClick={() => toggleShortlist(homeRef)}>{shortlisted(homeRef) ? '★ Shortlisted' : '☆ Shortlist'}</button>}
         <button type="button" className="btn" onClick={() => onOpenTab('home')}>Change home</button>
       </>}
     />
@@ -442,7 +439,7 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
       {chrome && <Dock current={stepper} tabs={tabs} openTab={tab} onOpenTab={onOpenTab} extra={<VRButton compact />} />}
 
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={{ label: 'Find this home', onClick: () => set({ tour: null, mode: null, find: 1 }) }} />}
-      {present && tourIndex === null && <PresentationBar label={homeRef ? `${plan.name} · Wing ${homeRef.wing} · Flat ${homeRef.flat} · Floor ${homeRef.floor}` : plan.name} current={homeRef} target="plans" onExit={() => set({ present: null })} />}
+      {present && tourIndex === null && <PresentationBar label={homeRef ? `${plan.name} · Wing ${homeRef.wing} · Flat ${homeRef.flat} · Floor ${homeRef.floor}` : plan.name} onExit={() => set({ present: null })} />}
 
 
     </div>

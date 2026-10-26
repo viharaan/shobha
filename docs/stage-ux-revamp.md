@@ -51,6 +51,10 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 **One page.** The Community section below the stage is gone; its content moved to where it is used: the six **realms** are a Community dock tab (each glides to a high view over its traced legend markers, with its own card and ‹ › stepping); **phases and handover** (with the RERA and floor-count notes) open under the tower choice in Configure your home; **connectivity** is the second Location topic. The badge legend moved to View → How to read the data. The header reads Explore · Find a home · Location · Media · Shortlist; below the stage only the shortlist (Compare) remains.
 
+**The stage is the page.** No header: the stage fills the screen, with a small SOBHA OneWorld wordmark top centre on wide screens. **Media** is a fourth mode (Community · Home · Location · Media): the selected video or image fills the stage, the dock steps through all 41 items (7 videos, 4 plans and creatives, 30 brochure pages) and its Videos / Plans / Brochure tabs show thumbnail grids; `/media` forwards there. **Compare and the shortlist are removed** (the ☆ buttons, the overlay, the header chip); Present mode keeps a glass bar with what is on screen and Exit; old `/compare` links land on the stage.
+
+**Prices without the PLC picker.** The sheet does not publish which preferred-location (PLC) tier a flat carries, and the base tier is literally named "Select", which read like an empty dropdown. Prices now show as a range, from the base tier to the highest tier the flat's size allows (Prime+, Elite+ and Grande+ are 4 BHK only), e.g. "₹2.15 Cr – 2.22 Cr", with one plain line saying why.
+
 ## Inside a home: eye level and sunlight
 
 - **Eye-level 360° room view** (default). Picking a room (list, ← →, minimap, room tour) now stands you in it at 1.6 m, at the same free spot walk mode and VR use, facing along the room; drag turns the view in place like a 360° photo (no pan or zoom). Ceiling and the floors above are on, so light comes in only through the openings; room labels and the red tour pin are off. The room card has an Eye level / Top switch; Top is the previous look-down framing.
@@ -59,7 +63,7 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 ## Kept as it was
 
-URL keys and shareable links (plus `find=1` and `mode=map`), both tours and the hand-off, VR (one canvas / one XR tree per mode), provenance badges (every card carries one), finder logic, shortlist and compare, every map layer and the measure tool, present mode, the plan minimap (now bottom-right on desktop, next to the camera pad; top-left on phones), touch rules (`touch-action: pan-y`), legacy redirects.
+URL keys and shareable links (plus `find=1` and `mode=map`), both tours and the hand-off, VR (one canvas / one XR tree per mode), provenance badges (every card carries one), finder logic, every map layer and the measure tool, present mode, the plan minimap (now bottom-right on desktop, next to the camera pad; top-left on phones), touch rules (`touch-action: pan-y`), legacy redirects.
 
 ## Verified
 

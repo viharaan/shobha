@@ -16,7 +16,7 @@ import { UNLABELLED_WINGS } from '@/data/sobha/flats/directory';
 import { PLANS, SITE_IMAGE } from '@/data/manifest';
 import { FLOOR_TO_FLOOR_M, HOTSPOTS, PODIUM_HEIGHT_M, PROJECT, TOWERS, UNIT_TYPES } from '@/data/project';
 import { imageRingToLocal, ringAreaM2 } from '@/lib/geo';
-import { indicativePrice } from '@/lib/pricing';
+import { indicativePrice, topPlcTier } from '@/lib/pricing';
 import { fmtCr, fmtInr } from '@/lib/scale';
 import { istHoursNow, istTodayYmd } from '@/lib/solar';
 import { Facts, InfoCard, PeekNext, StageTrail, useStageKeys, type Crumb, type Stepper } from './ContextUI';
@@ -74,7 +74,6 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const [landscape, setLandscape] = useState(true);
   const [groundOpacity, setGroundOpacity] = useState(1);
   const [resetToken, setResetToken] = useState(0);
-  const [plc, setPlc] = useState('Select');
   const [date, setDate] = useState(() => istTodayYmd());
   // first view in daylight: the live IST hour when the sun is up, else mid-morning ("Now (IST)" restores the clock)
   const [hour, setHour] = useState(() => { const h = Math.round(istHoursNow() * 2) / 2; return h >= 7 && h <= 17.5 ? h : 10.5; });
@@ -103,7 +102,10 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const hs = hotspot ? HOTSPOTS.find((h) => h.id === hotspot) ?? null : null;
   const samplePlan = tower?.samplePlanId ? PLANS.find((p) => p.id === tower.samplePlanId) : null;
   const sampleType = samplePlan ? UNIT_TYPES.find((u) => u.code === samplePlan.typeCode) : null;
-  const price = samplePlan && floor ? indicativePrice(samplePlan.sbaSqft, floor + 1, plc) : null; // floor 1 typical ≈ 2nd storey band
+  // floor 1 typical ≈ 2nd storey band; the flat's PLC tier is not published, so from the base tier up to the highest its size allows
+  const topTier = sampleType ? topPlcTier(sampleType.bedrooms) : null;
+  const price = samplePlan && floor ? indicativePrice(samplePlan.sbaSqft, floor + 1) : null;
+  const priceTop = samplePlan && floor && topTier ? indicativePrice(samplePlan.sbaSqft, floor + 1, topTier.tier) : null;
   const chrome = !present && tourIndex === null && !intro;
   const stepInside = samplePlan && tower ? () => set({ mode: 'home', plan: samplePlan.id, wing: tower.wing, flat: null, floor }) : null;
 
@@ -182,8 +184,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
           {samplePlan && sampleType && (
             <div className="rounded-md border border-line p-2">
               <div className="label !text-[10px]">Sample · Type {samplePlan.typeCode} · {samplePlan.sbaSqft.toLocaleString('en-IN')} sq ft</div>
-              <label className="mt-1 block text-[11px] text-fg-muted">PLC tier <select value={plc} onChange={(e) => setPlc(e.target.value)} className="ml-1 rounded border border-line bg-bg-2 px-1 text-xs">{['Select', 'Prime', 'Prime+', 'Elite', 'Elite+', 'Grande+'].map((t) => <option key={t}>{t}</option>)}</select></label>
-              {price && <div className="mt-1">Indicative <b>{fmtCr(price.total)}</b> <span className="text-fg-muted">({fmtInr(price.perSqft)}/sq ft incl. floor rise + PLC; excl. taxes, parking, deposits)</span></div>}
+              {price && <div className="mt-1">Indicative <b>{priceTop && priceTop.total > price.total ? `${fmtCr(price.total)} – ${fmtCr(priceTop.total).replace('₹', '')}` : fmtCr(price.total)}</b> <span className="text-fg-muted">(from {fmtInr(price.perSqft)}/sq ft with floor rise{topTier && topTier.rate > 0 ? `; up to ${fmtInr(topTier.rate)}/sq ft more for a preferred location` : ''}; excl. taxes, parking, deposits)</span></div>}
             </div>
           )}
         </div>
@@ -364,7 +365,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
       {chrome && !finder.active && <PeekNext next={nextView}>{card}</PeekNext>}
       {chrome && <Dock current={stepper} tabs={tabs} openTab={openTab} onOpenTab={onOpenTab} extra={<VRButton compact />} />}
 
-      {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} current={null} target="explore" onExit={() => set({ present: null })} />}
+      {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} onExit={() => set({ present: null })} />}
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={handoff} />}
 
 

@@ -9,8 +9,8 @@
  *   view=2d|3d           home-mode layout (absent = split)
  *   tour=1 | rooms       guided tour running; `rooms` starts at the first room stop
  *   present=1            presentation mode
- *   homes=1-5-23,…       shared compare list
- *   #explore #compare   section (finding a home, location, realms and phases live in the stage)
+ *   mode=media           the developer's videos, plans and brochure in the stage
+ *   #explore             the stage (everything lives in it)
  *
  * Pure helpers here (safe in server components); the hook is in useUrlState.ts.
  */

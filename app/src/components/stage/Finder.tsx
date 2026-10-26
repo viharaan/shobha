@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { PHASES, PLC_TIERS, PROJECT, TOWERS, UNIT_TYPES } from '@/data/project';
+import { PHASES, PROJECT, TOWERS, UNIT_TYPES } from '@/data/project';
+import { topPlcTier } from '@/lib/pricing';
 import { FLATS } from '@/data/sobha/flats/directory';
 import { compass, homePrice, resolveHome } from '@/lib/homes';
 import { fmtCr, fmtInr } from '@/lib/scale';
-import { useShortlist } from '@/lib/shortlist';
 import { useUrlState } from '@/lib/useUrlState';
 import { Facts } from './ContextUI';
 
@@ -52,10 +52,8 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
   const beds = num('beds');
   const finish = params.get('finish');
   const facing = params.get('facing');
-  const [plc, setPlc] = useState('Select');
   const [copied, setCopied] = useState(false);
   const [skipped, setSkipped] = useState<Partial<Record<Step, boolean>>>({});
-  const { has, toggle } = useShortlist();
 
   const matches = (r: Rec, skip?: 'wing' | 'beds' | 'finish' | 'facing') =>
     (skip === 'wing' || wing === null || r.wing === wing) &&
@@ -188,7 +186,10 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
 
   // the answer: the chosen flat, its floor and price, and what to do next
   const chosen = step === 'done' && wing !== null && flat !== null ? resolveHome({ wing, flat, floor: floor ?? midFloor(wing) }) : null;
-  const price = chosen ? homePrice(chosen, plc) : null;
+  // the flat's PLC tier is not published: price from the base tier up to the highest tier its size allows
+  const top = chosen?.record ? topPlcTier(bedsOf(chosen.record.config)) : null;
+  const price = chosen ? homePrice(chosen, 'Select') : null;
+  const priceTop = chosen && top ? homePrice(chosen, top.tier) : null;
   const share = async () => {
     try { await navigator.clipboard.writeText(window.location.href); setCopied(true); setTimeout(() => setCopied(false), 1500); } catch { /* clipboard blocked */ }
   };
@@ -198,7 +199,7 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
         <>
           <div className="flex items-end justify-between gap-2">
             <div>
-              <div className="display text-2xl leading-none text-fg">{price ? fmtCr(price.total) : '—'}</div>
+              <div className="display text-2xl leading-none text-fg">{price ? (priceTop && priceTop.total > price.total ? `${fmtCr(price.total)} – ${fmtCr(priceTop.total).replace('₹', '')}` : fmtCr(price.total)) : '—'}</div>
               <div className="mt-1 text-fg-muted">{chosen.record.config} · {chosen.record.sbaSft ? `${chosen.record.sbaSft.toLocaleString('en-IN')} sq ft` : 'SBA not printed'}</div>
             </div>
           </div>
@@ -210,14 +211,12 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
             ['Facing', chosen.record.facing ? <span key="f" title={FACING_NOTE}>{FACING_NAME[chosen.record.facing] ?? chosen.record.facing} (printed)</span> : '–'],
             ['Balcony', chosen.balconyBearingDeg !== null ? `≈ ${compass(chosen.balconyBearingDeg)} (estimated)` : '–'],
             ['Handover', chosen.phase ? `${chosen.phase.handover} · phase ${chosen.phase.phase}` : '–'],
-            ['PLC tier', <select key="plc" value={plc} onChange={(e) => setPlc(e.target.value)} className="rounded border border-line bg-bg-2 px-1 text-xs">{PLC_TIERS.map((t) => <option key={t.tier}>{t.tier}</option>)}</select>],
           ]} />
-          {price && <p className="text-[11px] text-fg-muted">Indicative: {fmtInr(price.perSqft)}/sq ft = basic {fmtInr(PROJECT.basicRatePerSqft.launch)} + floor rise + PLC; excl. taxes, parking, deposits. Per-flat PLC tier is not published.</p>}
+          {price && <p className="text-[11px] text-fg-muted">Indicative, at floor {chosen.ref.floor}: basic {fmtInr(PROJECT.basicRatePerSqft.launch)} + floor rise {fmtInr(chosen.floorRiseRate)} per sq ft{top && top.rate > 0 ? `, plus a preferred-location charge of up to ${fmtInr(top.rate)}/sq ft depending on the flat's position (not published per flat)` : ''}. Excludes taxes, parking and deposits.</p>}
         </>
       )}
       <div className="flex flex-wrap gap-1">
         {chosen.planId && <button type="button" className="btn btn-primary" onClick={() => set({ mode: 'home', plan: chosen.planId, find: null })}>Step inside</button>}
-        <button type="button" className="btn" aria-pressed={has(chosen.ref)} onClick={() => toggle(chosen.ref)}>{has(chosen.ref) ? '★ Shortlisted' : '☆ Shortlist'}</button>
         <button type="button" className="btn" onClick={share}>{copied ? 'Link copied' : 'Copy link'}</button>
       </div>
     </div>

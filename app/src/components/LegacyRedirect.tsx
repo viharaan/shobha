@@ -20,7 +20,7 @@ export function legacyTarget(route: LegacyRoute, q: URLSearchParams): string {
     case 'homes':
       return `/${buildQuery(null, { wing: g('wing'), config: g('config'), floor: g('floor'), flat: g('flat'), find: 1 })}#explore`;
     case 'compare':
-      return `/${buildQuery(null, { homes: g('homes') })}#compare`;
+      return '/#explore'; // compare is retired; the stage is the page
     case 'geo':
       return '/?mode=map#explore';
   }

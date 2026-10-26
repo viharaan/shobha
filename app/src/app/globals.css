@@ -44,7 +44,6 @@
 html { height: 100%; }
 body { min-height: 100%; } /* not height: a sticky header's containing block is the body, so a fixed-height body stops sticking after one screen */
 html { scroll-behavior: smooth; }
-section[id] { scroll-margin-top: 3.5rem; }
 #explore:fullscreen { height: 100vh !important; min-height: 0 !important; background: var(--bg); }
 body {
   background: var(--bg);
