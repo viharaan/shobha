@@ -125,16 +125,15 @@ const OVER_MAP = 1;
 
 export interface MapMarker { u: number; v: number; active?: boolean; onClick?: () => void }
 /** Clickable area in image fractions (0..1, v down). */
-export interface MapRegion { u0: number; v0: number; u1: number; v1: number; active?: boolean; /** the pointer ray is on this room's floor in 3-D */ hovered?: boolean; onClick: () => void }
 
 /**
- * Mini-map for the anchored panel: a top-down image (plan raster or master plan) with tappable regions
- * (rooms) and markers (wings), plus the live red position marker. The image itself takes no clicks, so a
- * tap on empty map space selects nothing. `toUV` maps world x,z (metres) to image fractions.
+ * Mini-map for the head-locked HUD: a top-down image (plan raster or master plan) with tower markers, the live red
+ * position marker, and a plain light where the controller ray points; the trigger there moves the player to that
+ * spot (`onPick`). No room boxes: they flickered under the ray. `toUV` maps world x,z (metres) to image fractions.
  */
-export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], regions = [], onPick }: {
+export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], onPick }: {
   src: string | Texture; aspect: number; width?: number; toUV: (x: number, z: number) => [number, number];
-  markers?: MapMarker[]; regions?: MapRegion[];
+  markers?: MapMarker[];
   /** trigger on an empty part of the map: go there (map u, v in 0..1, v down) */
   onPick?: (u: number, v: number) => void;
 }) {
@@ -144,6 +143,8 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
   // as the rooms tied with them for the ray and flickered between the two every frame.
   const surface = useRef<ComponentRef<typeof Container>>(null);
   const [aim, setAim] = useState<[number, number] | null>(null);
+  const leaveTimer = useRef(0); // the ray jitters across the edge: clear the light only after it has really left
+  useEffect(() => () => clearTimeout(leaveTimer.current), []);
   const uvOf = (e: { point: Vector3 }): [number, number] | null => {
     const o = surface.current as Object3D | null; // a uikit Container is a three.js Object3D
     if (!o) return null;
@@ -151,8 +152,6 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
     return [Math.min(1, Math.max(0, p.x + 0.5)), Math.min(1, Math.max(0, 0.5 - p.y))];
   };
   const pct = (f: number) => `${Math.min(1, Math.max(0, f)) * 100}%` as const;
-  // largest first so smaller rooms (bathrooms, closets) sit on top and stay tappable
-  const ordered = [...regions].sort((a, b) => (b.u1 - b.u0) * (b.v1 - b.v0) - (a.u1 - a.u0) * (a.v1 - a.v0));
   return (
     <Container
       ref={surface}
@@ -165,29 +164,12 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
       backgroundColor="#000000"
       overflow="hidden"
       cursor={onPick ? 'pointer' : undefined}
-      onPointerMove={(e) => setAim(uvOf(e))}
-      onPointerLeave={() => setAim(null)}
+      onPointerMove={(e) => { if (leaveTimer.current) { clearTimeout(leaveTimer.current); leaveTimer.current = 0; } setAim(uvOf(e)); }}
+      onPointerLeave={() => { if (!leaveTimer.current) leaveTimer.current = window.setTimeout(() => { leaveTimer.current = 0; setAim(null); }, 200); }}
       onClick={onPick ? (e) => { const uv = uvOf(e); if (uv) onPick(uv[0], uv[1]); } : undefined}
     >
       {/* eslint-disable-next-line jsx-a11y/alt-text -- uikit Image is a textured quad, not a DOM <img> */}
       <Image src={src} positionType="absolute" positionLeft={0} positionTop={0} width={width} height={height} pointerEvents="none" />
-      {ordered.map((r, i) => (
-        <Container
-          key={`r${i}`}
-          zIndex={OVER_MAP}
-          positionType="absolute"
-          positionLeft={pct(r.u0)}
-          positionTop={pct(r.v0)}
-          width={pct(r.u1 - r.u0)}
-          height={pct(r.v1 - r.v0)}
-          borderWidth={r.active || r.hovered ? 2 : 1}
-          borderColor={r.active ? ACCENT : r.hovered ? '#ffffff' : '#c9a96e88'}
-          backgroundColor={r.active ? '#c9a96e55' : r.hovered ? '#3f6f9aaa' : '#00000000'}
-          hover={{ backgroundColor: '#3f6f9acc', borderColor: '#ffffff', borderWidth: 2 }}
-          cursor="pointer"
-          onClick={(e) => { e.stopPropagation?.(); r.onClick(); }}
-        />
-      ))}
       {markers.map((m, i) => (
         <Container
           key={`m${i}`}
@@ -209,8 +191,9 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
         />
       ))}
       {aim && (
-        <Container zIndex={OVER_MAP + 1} positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-10} transformTranslateY={-10} width={20} height={20} borderRadius={10} borderWidth={2} borderColor="#ffffff" alignItems="center" justifyContent="center" pointerEvents="none">
-          <Container width={4} height={4} borderRadius={2} backgroundColor={ACCENT} pointerEvents="none" />
+        // a plain light: soft halo with a bright core, no box
+        <Container zIndex={OVER_MAP + 1} positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-8} transformTranslateY={-8} width={16} height={16} borderRadius={8} backgroundColor="#fff1c859" alignItems="center" justifyContent="center" pointerEvents="none">
+          <Container width={7} height={7} borderRadius={4} backgroundColor="#ffffff" pointerEvents="none" />
         </Container>
       )}
       <PlayerMarker toUV={toUV} />

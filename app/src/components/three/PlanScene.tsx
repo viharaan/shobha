@@ -354,19 +354,6 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
   }, [focusRect]);
 
   const toUV = useCallback((x: number, z: number): [number, number] => [(x + w / 2) / w, (z + d / 2) / d], [w, d]);
-  // the room under the pointer ray on the 3-D floor, mirrored on the minimap
-  const [hoverRoom, setHoverRoom] = useState<PlanRoom | null>(null);
-  const hoverRef = useRef<PlanRoom | null>(null);
-  const onFloorHover = useCallback((pt: [number, number, number] | null) => {
-    const r = pt ? roomAtPoint(rects, pt[0], pt[2])?.room ?? null : null;
-    if (r !== hoverRef.current) { hoverRef.current = r; setHoverRoom(r); }
-  }, [rects]);
-  const regions = useMemo(() => rects.map((r) => ({
-    u0: (r.x0 + w / 2) / w, v0: (r.z0 + d / 2) / d, u1: (r.x1 + w / 2) / w, v1: (r.z1 + d / 2) / d,
-    active: r.room === focusRoom,
-    hovered: r.room === hoverRoom,
-    onClick: () => onFocusRoom?.(r.room),
-  })), [rects, w, d, focusRoom, hoverRoom, onFocusRoom]);
 
   return (
     <XR store={xrStore}>
@@ -411,7 +398,6 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
           setMode('walk');
           rig.current?.flyTo({ x: p[0] * mx, z: p[1] }, 0);
         }}
-        onHover={inXR ? onFloorHover : undefined}
       />
 
       {realistic ? (
@@ -469,7 +455,7 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
       </XRRig>
       {inXR && floorTex && (
         <XRMapHud>
-          <XRMiniMap src={floorTex} aspect={w / d} width={220} toUV={toUV} regions={regions} onPick={(u, v) => {
+          <XRMiniMap src={floorTex} aspect={w / d} width={220} toUV={toUV} onPick={(u, v) => {
             // inverse of toUV, then the nearest free cell (as a floor teleport does)
             const p = nav ? nearestFree(nav, (u * w - w / 2) * mx, v * d - d / 2) : [(u * w - w / 2) * mx, v * d - d / 2];
             if (!p) return;

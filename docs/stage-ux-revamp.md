@@ -63,7 +63,10 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 ## VR minimap
 
-The controller's own ray and cursor were drawn before the map HUD (render order 1–2 against the HUD's 200, no depth test), so the map painted over the cursor; they now draw after it (299 / 300, cursor more opaque). Within the map, uikit draws plain boxes before images, so the map image covered everything laid on it (player marker, room outlines, tower markers, the aim ring); those now take zIndex 1 (checked on desktop: markers and player marker now show). Pointing the controller ray anywhere on the head-locked minimap also shows a white ring (tracked on the map container itself; an earlier separate aim layer tied with the room outlines for the ray and flickered) where it meets the map (rooms and tower markers keep their own highlight); the trigger there moves you to that spot (site: not into a tower; home: the nearest free floor cell, as a floor teleport does). Not yet tried on a headset.
+- The controller's ray and cursor drew before the head-locked map (render order 1–2 against the map's 200, no depth test), so the map hid the cursor; they now draw after it (299 / 300).
+- uikit draws plain boxes before images within one container, so the map image covered everything laid on it; the player marker, tower markers and the aim light now take zIndex 1.
+- No room boxes on the VR map any more (by request): the gold focus box and the blue hover box flickered under the ray. Where the ray meets the map there is just a plain light (soft halo, bright core) that holds for 200 ms through ray jitter; the trigger there moves you to that spot (site: not into a tower; home: the nearest free floor cell).
+- Desktop-checked with the HUD forced on; the pointer behaviour itself was tuned from headset videos.
 
 ## Kept as it was
 
