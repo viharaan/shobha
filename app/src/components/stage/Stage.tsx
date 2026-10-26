@@ -106,7 +106,7 @@ export default function Stage() {
       )}
 
       {/* camera pad, opt-in from View options (walk / VR ignore it); phones use two-finger gestures instead */}
-      {chrome && !intro && is3d && pad && <NavPad className="absolute bottom-4 right-3 z-30 max-md:hidden max-lg:bottom-auto max-lg:top-[10.5rem]" />}
+      {chrome && !intro && is3d && pad && <NavPad className="absolute bottom-4 left-3 z-30 max-md:hidden max-lg:bottom-auto max-lg:left-auto max-lg:right-3 max-lg:top-[10.5rem]" />}
 
       {/* keyboard legend, wide screens only; fades after a while or the first key */}
       {chrome && !intro && (

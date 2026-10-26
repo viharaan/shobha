@@ -427,8 +427,8 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
       {/* the plan as a minimap: the red dot is the camera / walker; a click on a room moves the view there */}
       {layout === 'map' && !present && (
         <div className={`absolute z-30 overflow-hidden rounded-xl border border-line bg-black/85 shadow-2xl transition-[width,height] duration-200 ${mapBig
-          ? 'left-3 right-3 top-16 bottom-[4.75rem] lg:left-auto lg:w-[min(56vw,780px)]'
-          : 'left-3 top-16 h-28 w-40 sm:h-36 sm:w-52 lg:left-auto lg:right-3 lg:h-52 lg:w-72'}`} aria-label="Floor plan minimap">
+          ? 'left-3 right-3 top-16 bottom-[4.75rem] lg:right-auto lg:bottom-4 lg:w-[min(56vw,780px)]'
+          : 'left-3 top-16 h-28 w-40 sm:h-36 sm:w-52 lg:bottom-4 lg:top-auto lg:h-52 lg:w-72'}`} aria-label="Floor plan minimap">
           <PlanViewer2D key={plan.id} plan={plan} mPerUnit={mPerUnit} tool={tool} points={points} onPointsChange={setPoints} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} showRooms northDeg={northPrinted} beacon={roomStop} onPick={pickRoom} />
           <div className="pointer-events-none absolute left-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-fg-muted max-sm:hidden">Plan · click a room</div>
           <button type="button" className="btn absolute right-1.5 top-1.5 min-h-0 px-2 py-1 text-[11px]" onClick={() => setMapBig(!mapBig)} aria-expanded={mapBig} aria-label={mapBig ? 'Shrink the plan' : 'Expand the plan'}>{mapBig ? '⤡' : '⤢'}</button>

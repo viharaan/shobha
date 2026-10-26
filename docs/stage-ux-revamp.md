@@ -35,7 +35,7 @@ A breadcrumb (`SOBHA OneWorld › Wing 8 › Floor 23 › Flat 5 › Living`) si
 
 ## The dock (latest pass)
 
-After two more reference reels (the ICG Gallery walk-through and an Unreal interactive-map demo with one bottom tab strip), every control moved into **one dock at the bottom centre** (`components/stage/Dock.tsx`):
+After two more reference reels (the ICG Gallery walk-through and an Unreal interactive-map demo with one bottom tab strip), every control moved into **one dock at the bottom right** (centred on phones; its popups open above it on the right, so the model's centre stays clear; the Home plan minimap moved to the bottom left) (`components/stage/Dock.tsx`):
 
 - **Collapsed** it is a stepper, `‹ One Club 2 / 4 ›`: the arrows step through the places at this level (places, towers, rooms, map topics). Tap the middle to open the tabs.
 - **Tabs by mode.** Community: Places · Floors (at a tower) · Find a home · Guided tour · Time of day · View · Enter VR. Home: Rooms · This home · Room tour · Walk · View · Enter VR. Enter VR appears only when the browser reports an immersive-VR device (Quest, Pico, PC-VR, visionOS), so laptops and phones never see a dead button. Location: Topics · Layers · Measure · Fly to site · 3D site.
