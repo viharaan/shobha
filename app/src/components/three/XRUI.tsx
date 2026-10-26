@@ -110,12 +110,18 @@ function PlayerMarker({ toUV }: { toUV: (x: number, z: number) => [number, numbe
     return subscribeNavPose(update);
   }, [toUV, sig]);
   return (
-    <Container positionType="absolute" positionLeft={sig.left} positionTop={sig.top} transformTranslateX={-11} transformTranslateY={-11} transformRotateZ={sig.rot} visibility={sig.show} width={22} height={22} alignItems="center" justifyContent="center" pointerEvents="none">
+    <Container zIndex={OVER_MAP} positionType="absolute" positionLeft={sig.left} positionTop={sig.top} transformTranslateX={-11} transformTranslateY={-11} transformRotateZ={sig.rot} visibility={sig.show} width={22} height={22} alignItems="center" justifyContent="center" pointerEvents="none">
       <Container positionType="absolute" positionTop={-7} width={6} height={12} borderRadius={3} backgroundColor={PLAYER} borderWidth={1} borderColor="#000000" />
       <Container width={14} height={14} borderRadius={7} backgroundColor={sig.fill} borderWidth={3} borderColor={PLAYER} />
     </Container>
   );
 }
+
+/**
+ * uikit draws plain boxes before images within one container, so the map image would cover everything laid on it (the
+ * player marker, room outlines, tower markers, the aim ring): those take a higher zIndex to draw over the image.
+ */
+const OVER_MAP = 1;
 
 export interface MapMarker { u: number; v: number; active?: boolean; onClick?: () => void }
 /** Clickable area in image fractions (0..1, v down). */
@@ -152,6 +158,7 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
       {/* the aim surface, under the rooms and markers so those keep their own hover and click */}
       <Container
         ref={surface}
+        zIndex={OVER_MAP}
         positionType="absolute"
         positionLeft={0}
         positionTop={0}
@@ -166,6 +173,7 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
       {ordered.map((r, i) => (
         <Container
           key={`r${i}`}
+          zIndex={OVER_MAP}
           positionType="absolute"
           positionLeft={pct(r.u0)}
           positionTop={pct(r.v0)}
@@ -182,6 +190,7 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
       {markers.map((m, i) => (
         <Container
           key={`m${i}`}
+          zIndex={OVER_MAP}
           positionType="absolute"
           positionLeft={pct(m.u)}
           positionTop={pct(m.v)}
@@ -199,7 +208,7 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
         />
       ))}
       {aim && (
-        <Container positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-11} transformTranslateY={-11} width={22} height={22} borderRadius={11} borderWidth={2} borderColor="#ffffff" backgroundColor="#3f6f9a99" pointerEvents="none" />
+        <Container zIndex={OVER_MAP} positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-11} transformTranslateY={-11} width={22} height={22} borderRadius={11} borderWidth={2} borderColor="#ffffff" backgroundColor="#3f6f9a99" pointerEvents="none" />
       )}
       <PlayerMarker toUV={toUV} />
     </Container>
