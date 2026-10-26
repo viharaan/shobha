@@ -27,7 +27,7 @@ const Chevron = ({ d }: { d: string }) => (
 );
 
 /**
- * The stage's one control surface, a dock at the bottom right (bottom centre on small screens). Collapsed it is a stepper: ‹ where you are › (the
+ * The stage's one control surface, a dock at the bottom centre. Collapsed it is a stepper: ‹ where you are › (the
  * arrows step through the places at this level, as the arrow keys do); tapping the middle opens a strip of tabs for
  * this mode. A tab is either an action (tour, walk, VR) or a broader choice that opens as a popup above the dock
  * (configure your home, this home, view options). `openTab` / `onOpenTab` let a mode drive the popup from the URL.
@@ -54,11 +54,10 @@ export function Dock({ current, tabs, openTab: ctlOpen, onOpenTab, extra }: { cu
   });
 
   return (
-    // bottom-right on wide screens, so the popups open beside the model instead of over its centre; centred below 1024 px
-    <div className="pointer-events-none absolute inset-x-3 bottom-4 z-40 flex flex-col items-center gap-2 lg:left-auto lg:right-3 lg:items-end">
+    <div className="pointer-events-none absolute inset-x-3 bottom-4 z-40 flex flex-col items-center gap-2">
       {tab && (
-        <section key={tab.id} className="ctx-enter pointer-events-auto flex max-h-[min(62svh,34rem)] w-full max-w-[26rem] flex-col lg:max-h-[calc(100svh-12.5rem)] lg:w-[24rem] overflow-hidden rounded-2xl border border-line bg-bg/90 shadow-2xl backdrop-blur-xl" aria-label={tab.label}>
-          <header className="flex items-center justify-between gap-2 border-b border-line/70 px-4 py-2.5">
+        <section key={tab.id} className="ctx-enter pointer-events-auto flex max-h-[min(62svh,34rem)] w-full max-w-[26rem] flex-col lg:max-h-[calc(100svh-12.5rem)] lg:w-[24rem] overflow-hidden glass-strong rounded-[1.75rem]" aria-label={tab.label}>
+          <header className="flex items-center justify-between gap-2 border-b border-white/10 px-4 py-2.5">
             <h2 className="label !text-[10px] !tracking-[0.18em] text-fg">{tab.label}</h2>
             <button type="button" className="grid h-7 w-7 place-items-center rounded-full text-fg-muted hover:bg-surface-2 hover:text-fg" onClick={() => setOpen(null)} aria-label="Close" title="Close (Esc)">
               <Chevron d="M6 6l12 12M18 6 6 18" />
@@ -68,7 +67,7 @@ export function Dock({ current, tabs, openTab: ctlOpen, onOpenTab, extra }: { cu
         </section>
       )}
 
-      <div className="pointer-events-auto flex max-w-full items-center gap-1 rounded-full border border-line bg-black/65 p-1 shadow-2xl backdrop-blur-xl">
+      <div className="pointer-events-auto flex max-w-full items-center gap-1 glass rounded-full p-1">
         <DockBtn label="Previous" onClick={current.onPrev}><Chevron d="m15 6-6 6 6 6" /></DockBtn>
         {showTabs ? (
           <div className="flex min-w-0 items-center gap-0.5 overflow-x-auto [scrollbar-width:none]" role="tablist" aria-label="Stage controls">

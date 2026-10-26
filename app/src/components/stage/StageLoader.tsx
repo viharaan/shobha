@@ -46,7 +46,7 @@ export function StageLoader({ ready, steps, poster, caption }: { ready: boolean;
       <img src={poster} alt="" className="stage-poster absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-bg/50" aria-hidden />
       {/* status: centred in the upper half, clear of the intro copy (bottom-left), the context chrome and the plan minimap */}
-      <div className="absolute left-1/2 top-[34%] flex w-[min(20rem,calc(100%-2rem))] -translate-x-1/2 flex-col gap-2 rounded-xl bg-black/40 p-3 backdrop-blur-sm lg:top-[26%]">
+      <div className="absolute left-1/2 top-[34%] flex w-[min(20rem,calc(100%-2rem))] -translate-x-1/2 flex-col gap-2 glass rounded-2xl p-3 lg:top-[26%]">
         <div className="flex items-center gap-3 text-xs text-fg-muted">
           <span className="h-3 w-3 shrink-0 animate-spin rounded-full border-2 border-line border-t-accent" aria-hidden />
           <span className="min-w-0 flex-1 truncate">{pending ? `${pending.label}…` : total && loaded < total ? `Textures and models ${loaded} / ${total}…` : 'Almost there…'}</span>

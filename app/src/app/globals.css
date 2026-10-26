@@ -14,6 +14,12 @@
   --warn: #e0b35a;
   --bad: #e07a6a;
   --info: #7fb2e0;
+  /* liquid glass (iOS-style): clear, heavily blurred and slightly saturated backdrop, a light edge with a top highlight */
+  --glass-bg: linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,.04) 45%, rgba(255,255,255,.07)), rgba(16,19,24,.56);
+  --glass-bg-strong: linear-gradient(160deg, rgba(255,255,255,.13), rgba(255,255,255,.03) 45%, rgba(255,255,255,.05)), rgba(14,17,22,.72);
+  --glass-edge: rgba(255,255,255,.2);
+  --glass-blur: blur(22px) saturate(185%) brightness(1.05);
+  --glass-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(255,255,255,.06), 0 12px 32px rgba(0,0,0,.32);
 }
 
 @theme inline {
@@ -73,9 +79,10 @@ input[type="range"] { accent-color: var(--accent); }
 .maplibregl-ctrl-group button { filter: invert(1) hue-rotate(180deg); }
 
 /* stage chrome: segmented mode switch */
-.seg { display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.6); backdrop-filter: blur(12px); }
+.seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; }
+.seg:not(.\!bg-transparent) { background: var(--glass-bg); border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
 .seg > button { border: 0; border-radius: 999px; padding: .4rem .9rem; font-size: .8rem; line-height: 1; color: var(--fg-muted); background: transparent; cursor: pointer; transition: background .15s, color .15s; }
-.seg > button[aria-selected="true"] { background: var(--fg); color: #141008; }
+.seg > button[aria-selected="true"] { background: rgba(255,255,255,.92); color: #141008; box-shadow: 0 1px 6px rgba(0,0,0,.25); text-shadow: none; }
 .seg > button:hover:not([aria-selected="true"]) { color: var(--fg); }
 
 /* touch: bigger targets; one finger scrolls the page over the stage (two fingers / horizontal drags still drive the camera; OrbitControls sets touch-action:none inline, hence !important) */
@@ -96,3 +103,17 @@ input[type="range"] { accent-color: var(--accent); }
 #explore .maplibregl-ctrl-top-right { top: 7rem; }
 @media (min-width: 1024px) { #explore .maplibregl-ctrl-top-right { top: 8.5rem; } #explore .maplibregl-ctrl-bottom-left { left: 20.25rem; } }
 @media (max-width: 1023px) { #explore .maplibregl-ctrl-bottom-left { display: none; } }
+
+/* liquid glass surfaces: .glass for chrome over the scene (dock, trail, top bar), .glass-strong where text has to read (cards, popups) */
+.glass, .glass-strong { border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); }
+.glass { background: var(--glass-bg); }
+/* light ground shows through the glass: a faint shadow keeps white type crisp on it */
+:is(.glass, .glass-strong, .seg) { text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+/* secondary text on glass: the page's muted grey is too dark against a light ground showing through */
+:is(.glass, .glass-strong) .text-fg-muted, .seg > button:not([aria-selected="true"]) { color: rgba(236,233,226,.78); }
+.glass-strong { background: var(--glass-bg-strong); }
+/* buttons and fields inside glass go translucent too, so the surface reads as one piece */
+:is(.glass, .glass-strong) .btn:not(.btn-primary):not([aria-pressed="true"]) { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.14); }
+:is(.glass, .glass-strong) .btn:not(.btn-primary):not([aria-pressed="true"]):hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.28); }
+:is(.glass, .glass-strong) :is(select, input[type="date"], input[type="number"]) { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.16) !important; }
+:is(.glass, .glass-strong) .panel { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); -webkit-backdrop-filter: none; backdrop-filter: none; }

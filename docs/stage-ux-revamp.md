@@ -35,13 +35,15 @@ A breadcrumb (`SOBHA OneWorld › Wing 8 › Floor 23 › Flat 5 › Living`) si
 
 ## The dock (latest pass)
 
-After two more reference reels (the ICG Gallery walk-through and an Unreal interactive-map demo with one bottom tab strip), every control moved into **one dock at the bottom right** (centred on phones; its popups open above it on the right, so the model's centre stays clear; the Home plan minimap moved to the bottom left) (`components/stage/Dock.tsx`):
+After two more reference reels (the ICG Gallery walk-through and an Unreal interactive-map demo with one bottom tab strip), every control moved into **one dock at the bottom centre** (its popups open above it; the Home plan minimap sits bottom left) (`components/stage/Dock.tsx`):
 
 - **Collapsed** it is a stepper, `‹ One Club 2 / 4 ›`: the arrows step through the places at this level (places, towers, rooms, map topics). Tap the middle to open the tabs.
 - **Tabs by mode.** Community: Places · Floors (at a tower) · Find a home · Guided tour · Time of day · View · Enter VR. Home: Rooms · This home · Room tour · Walk · View · Enter VR. Enter VR appears only when the browser reports an immersive-VR device (Quest, Pico, PC-VR, visionOS), so laptops and phones never see a dead button. Location: Topics · Layers · Measure · Fly to site · 3D site.
 - **Broader choices open as a popup above the dock** (configure your home, this home's type / flat / floor, view options, map layers); direct actions (tour, walk, VR, measure) just run. Esc closes the popup first.
 - **Keyboard:** ← → siblings, ↑ ↓ floors, Enter steps in, Esc steps back (off during tours, walk mode and VR). A one-line legend shows once and fades.
 - **On screen otherwise:** the mode switch, compass and full screen; a small card with a trail over it once a place is picked (none on the site overview); the plan minimap in Home. The left column, the separate View button, the bottom action bar and the camera pad are gone (the pad is an opt-in in View; Present mode moved there too).
+
+**Look: liquid glass.** The dock, popups, cards, trail, mode switch, compass and full-screen button share an iOS-style glass surface (`.glass` for chrome, `.glass-strong` where text must read; tokens `--glass-*` in `globals.css`): a tinted, heavily blurred and saturated backdrop, a light edge with a top highlight and a soft shadow. Secondary text on glass is lifted and carries a faint shadow so it stays legible over the light ground of the model.
 
 ## Inside a home: eye level and sunlight
 

@@ -80,7 +80,7 @@ export default function Stage() {
       </div>
       <div className="absolute right-3 top-3 z-30 flex items-start gap-2">
         {!intro && is3d && <Compass onReset={() => setResetToken((t) => t + 1)} />}
-        <button type="button" className="btn h-10 w-10 justify-center px-0" aria-pressed={full} onClick={toggleFull} title={full ? 'Exit full screen (Esc)' : 'Full screen'} aria-label={full ? 'Exit full screen' : 'Full screen'}>
+        <button type="button" className="glass grid h-10 w-10 place-items-center rounded-full text-fg hover:brightness-125" aria-pressed={full} onClick={toggleFull} title={full ? 'Exit full screen (Esc)' : 'Full screen'} aria-label={full ? 'Exit full screen' : 'Full screen'}>
           <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>{full ? <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /> : <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />}</svg>
         </button>
       </div>
@@ -93,9 +93,9 @@ export default function Stage() {
           <h1 className="display mt-3 text-5xl leading-[0.92] sm:text-6xl md:text-8xl">SOBHA<br />OneWorld</h1>
           <p className="mt-4 max-w-md text-sm text-fg/80 md:text-base">{PROJECT.siteAreaAcres} acres, {PROJECT.totalWings} wings, {PROJECT.totalUnits.toLocaleString('en-IN')} homes. Glide through the community, then step into a home at 1:1.</p>
           <div className="pointer-events-auto mt-6 flex flex-wrap gap-2">
-            <button type="button" className="btn btn-primary h-11 px-5 text-sm" onClick={() => set({ tour: 1 })}>▶ Take the guided tour</button>
-            <button type="button" className="btn h-11 bg-black/50 px-5 text-sm backdrop-blur" onClick={() => setTouched(true)}>Explore freely</button>
-            <button type="button" className="btn h-11 bg-black/50 px-5 text-sm backdrop-blur" onClick={() => { setTouched(true); set({ find: 1 }); }}>Find a home</button>
+            <button type="button" className="btn btn-primary h-11 rounded-full px-5 text-sm" onClick={() => set({ tour: 1 })}>▶ Take the guided tour</button>
+            <button type="button" className="glass h-11 rounded-full px-5 text-sm text-fg hover:brightness-125" onClick={() => setTouched(true)}>Explore freely</button>
+            <button type="button" className="glass h-11 rounded-full px-5 text-sm text-fg hover:brightness-125" onClick={() => { setTouched(true); set({ find: 1 }); }}>Find a home</button>
           </div>
         </div>
       )}

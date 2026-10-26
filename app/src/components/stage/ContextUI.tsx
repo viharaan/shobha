@@ -81,7 +81,7 @@ export function Crumbs({ items }: { items: Crumb[] }) {
     ? [items[0], { label: '…', folded: items.slice(1, -2), onClick: items[items.length - 3].onClick }, ...items.slice(-2)]
     : items;
   return (
-    <ol className="flex w-fit max-w-full min-w-0 items-center gap-1 overflow-hidden whitespace-nowrap rounded-full bg-black/55 px-2.5 py-1 text-[11px] backdrop-blur" aria-label="You are here">
+    <ol className="flex w-fit max-w-full min-w-0 items-center gap-1 overflow-hidden whitespace-nowrap glass rounded-full px-2.5 py-1 text-[11px]" aria-label="You are here">
       {shown.map((c, i) => {
         const last = i === shown.length - 1;
         const label = i === 0 ? 'Site' : c.label;
@@ -105,7 +105,7 @@ export function Crumbs({ items }: { items: Crumb[] }) {
 export function InfoCard({ eyebrow, title, badge, lead, details, actions, detailsOpen = false }: { eyebrow: string; title: React.ReactNode; badge?: React.ReactNode; lead?: React.ReactNode; details?: React.ReactNode; actions?: React.ReactNode; detailsOpen?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
-    <section className="ctx-enter rounded-xl border border-line bg-bg/80 p-3 shadow-2xl backdrop-blur-md" aria-label={typeof title === 'string' ? title : eyebrow}>
+    <section className="ctx-enter glass-strong rounded-[1.4rem] p-3.5" aria-label={typeof title === 'string' ? title : eyebrow}>
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <div className="eyebrow !text-[10px]">{eyebrow}</div>

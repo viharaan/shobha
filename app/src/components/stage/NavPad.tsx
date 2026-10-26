@@ -17,7 +17,7 @@ const Btn = ({ cmd, icon, title }: { cmd: NavCommand; icon: React.ReactNode; tit
 );
 
 const Group = ({ children, row = false }: { children: React.ReactNode; row?: boolean }) => (
-  <div className={`flex overflow-hidden rounded-lg border border-line bg-surface/95 shadow-lg backdrop-blur ${row ? 'flex-row divide-x divide-line' : 'flex-col divide-y divide-line'}`}>{children}</div>
+  <div className={`flex overflow-hidden glass rounded-2xl ${row ? 'flex-row divide-x divide-line' : 'flex-col divide-y divide-line'}`}>{children}</div>
 );
 
 /** Map-style camera controls (as in Google / Apple Maps): rotate pair, tilt toggle, zoom. Panning is drag. */
