@@ -70,6 +70,8 @@ export interface SiteSceneProps {
   extraLabels?: readonly LabelEntry[] | null;
   /** wings to frame with the orbit camera whenever the set changes (the home configurator zooms to its matches) */
   frameWings?: readonly number[] | null;
+  /** wings to hide above the podium (a realm view: the gardens between the towers stay in sight) */
+  hideWings?: readonly number[] | null;
   /** wings to ghost (the home finder lights only the towers with matching flats) */
   dimWings?: readonly number[] | null;
   /** slow idle orbit for the first impression (stops as soon as the visitor takes the camera) */
@@ -438,8 +440,8 @@ export function SiteScene(p: SiteSceneProps) {
         return (
           <group key={t.wing} position-y={groundY(cx, cz)}>
             <Podium tower={t} section={section} />
-            <TowerStack tower={t} selectedWing={p.selectedWing} selectedFloor={p.selectedFloor} isolateFloor={p.isolateFloor} explode={p.explode} section={section} dim={dim} onSelectWing={p.onSelectWing} />
-            {!(p.isolateFloor && p.selectedWing !== null) && !dim && <Crown tower={t} explode={p.explode} section={section} />}
+            {!p.hideWings?.includes(t.wing) && <TowerStack tower={t} selectedWing={p.selectedWing} selectedFloor={p.selectedFloor} isolateFloor={p.isolateFloor} explode={p.explode} section={section} dim={dim} onSelectWing={p.onSelectWing} />}
+            {!(p.isolateFloor && p.selectedWing !== null) && !dim && !p.hideWings?.includes(t.wing) && <Crown tower={t} explode={p.explode} section={section} />}
           </group>
         );
       })}

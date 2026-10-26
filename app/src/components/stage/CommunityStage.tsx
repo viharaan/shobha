@@ -84,7 +84,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   // a place picked outside the tour glides the camera to the tour's pose for it
   const placeGoal = useMemo(() => (hotspot && tourIndex === null ? placeStop(hotspot, tourWing) : null), [hotspot, tourIndex, tourWing]);
   const realmGoal = useMemo(() => (realm && tourIndex === null ? realmStop(realm) : null), [realm, tourIndex]);
-  // a realm sits between 140 m towers: while one is picked the towers go see-through and its places get markers
+  // a realm sits between 140 m towers: while one is picked the towers are hidden above their podiums and its places get markers
   const realmPlaces = useMemo(() => (realm ? amenities.filter((a) => a.realm === realm).map((a) => ({ a, p: amenityPoint(a.code) })).filter((x): x is { a: (typeof amenities)[number]; p: [number, number, number] } => !!x.p) : []), [realm]);
   const realmLabels = useMemo(() => realmPlaces.map(({ a, p }) => ({ id: `am-${a.code}`, position: p })), [realmPlaces]);
   const allWings = useMemo(() => TOWERS.map((t) => t.wing), []);
@@ -344,13 +344,13 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
         <HeadingProbe toBearing={siteBearing} />
         <NavDriver />
         <Suspense fallback={null}>
-          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal ?? realmGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={realm && !finder.active ? allWings : finder.dimWings} extraLabels={realmLabels} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
+          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal ?? realmGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} hideWings={realm && !finder.active ? allWings : null} extraLabels={realmLabels} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
           <Mounted onMount={onSceneMount} />
         </Suspense>
       </Canvas>
       {labels && !intro && (
         <LabelLayer>
-          {TOWERS.filter((t) => !tourStop || tourStop.wing === t.wing).map((t) => (
+          {TOWERS.filter((t) => (!tourStop || tourStop.wing === t.wing) && !realm).map((t) => (
             <DomLabel key={t.wing} id={`wing-${t.wing}`} active={wing === t.wing} onClick={() => selectWing(wing === t.wing ? null : t.wing)} className={realm || finder.dimWings?.includes(t.wing) ? 'opacity-40' : ''}>Wing {t.wing}{finder.active && !UNLABELLED_WINGS.includes(t.wing) ? ` · ${finder.wingCount(t.wing)}` : ''}</DomLabel>
           ))}
           {realmPlaces.map(({ a }) => (
