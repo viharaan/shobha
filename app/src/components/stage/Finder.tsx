@@ -151,6 +151,29 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
         })}
       </div>
     ) : <p className="text-xs text-fg-muted">No printed home matches these answers. Change one above.</p>;
+    // handover by phase, earliest first, beside the tower choice it informs (the towers with matches are marked)
+    options = (
+      <div className="flex flex-col gap-3">
+        {options}
+        <details className="group rounded-xl border border-white/10 px-3 py-2 text-xs">
+          <summary className="flex cursor-pointer list-none items-center justify-between text-fg-muted">
+            <span>Handover by phase · 2032 to 2033</span><span className="transition-transform group-open:rotate-180" aria-hidden>▾</span>
+          </summary>
+          <ol className="mt-2 divide-y divide-white/10">
+            {[...PHASES].sort((a, b) => a.handover.localeCompare(b.handover)).map((p) => {
+              const here = p.wings.some((w) => lit.includes(w));
+              return (
+                <li key={p.phase} className="flex items-baseline justify-between gap-3 py-1.5">
+                  <span className={here ? 'text-fg' : 'text-fg-muted'}>Phase {p.phase} <span className="text-fg-muted">· Wings {p.wings.join(', ')}</span></span>
+                  <span className="tnum font-mono text-[11px] text-fg-muted">{p.handover}</span>
+                </li>
+              );
+            })}
+          </ol>
+          <p className="mt-2 text-[11px] text-fg-muted">RERA approved {PROJECT.reraApproval}, one registration per phase. Wings 1, 2 and 9 to 14 have 46 typical floors; wings 3 to 8 have 45. Refuge units on floors {PROJECT.refugeFloors.join(', ')}.</p>
+        </details>
+      </div>
+    );
   } else if (step === 'flat') {
     options = candidates.length ? (
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">

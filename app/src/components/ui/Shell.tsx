@@ -9,7 +9,6 @@ import { useShortlist } from '@/lib/shortlist';
 const SECTIONS = [
   { id: 'explore', label: 'Explore' },
   { id: 'compare', label: 'Compare' },
-  { id: 'community', label: 'Community' },
 ];
 
 /** Header links. Find a home and Location are stage modes now, so they open the stage in that mode. */
@@ -17,7 +16,6 @@ const NAV: { href: string; label: string; section?: string }[] = [
   { href: '/#explore', label: 'Explore', section: 'explore' },
   { href: '/?find=1#explore', label: 'Find a home' },
   { href: '/?mode=map#explore', label: 'Location' },
-  { href: '/#community', label: 'Community', section: 'community' },
 ];
 
 /** Which section is in view: the last one whose top has passed 40 % of the viewport. Only meaningful on `/`. */

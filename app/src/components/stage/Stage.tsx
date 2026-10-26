@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { PROJECT } from '@/data/project';
-import { scrollToSection, useUrlState } from '@/lib/useUrlState';
+import { FLOOR_TO_FLOOR_M, PROJECT } from '@/data/project';
+import { StatusBadge } from '@/components/ui/primitives';
+import { useUrlState } from '@/lib/useUrlState';
 import { Compass } from './Compass';
 import { NavPad } from './NavPad';
 import CommunityStage from './CommunityStage';
@@ -71,6 +72,18 @@ export default function Stage() {
     <div className="panel flex flex-wrap gap-1 p-3">
       <button type="button" className="btn" onClick={() => set({ present: 1 })} title="Hide the panels; keep a bottom bar with the shortlist">Present mode</button>
       <button type="button" className="btn" aria-pressed={pad} onClick={() => setPad(!pad)} title="Rotate, tilt and zoom buttons for people new to 3D">Camera buttons</button>
+      <details className="w-full pt-1 text-[11px] text-fg-muted">
+        <summary className="label cursor-pointer !text-[10px]">How to read the data</summary>
+        <ul className="mt-2 space-y-1.5">
+          <li><StatusBadge status="source-verified" /> cross-checked inside the document, e.g. plan scale from 12 room labels</li>
+          <li><StatusBadge status="source" /> as printed in SOBHA documents</li>
+          <li><StatusBadge status="external" /> OpenStreetMap and open datasets, with attribution</li>
+          <li><StatusBadge status="approximate" /> traced from a raster or fitted by a documented method</li>
+          <li><StatusBadge status="assumed" /> not in any source, e.g. {FLOOR_TO_FLOOR_M} m floor height</li>
+          <li><StatusBadge status="unverified" /> conflicts with official documents</li>
+        </ul>
+        <p className="mt-2">Tower shapes come from OpenStreetMap outlines and the traced master plan; heights are illustrative. Furniture and finishes in the home viewer are illustrative and not part of any sale.</p>
+      </details>
     </div>
   );
   const legendText = mode === 'home' ? '← → rooms · ↑ ↓ floor · esc back' : mode === 'map' ? '← → topics · esc back' : '← → places and towers · ↑ ↓ floors · ↵ step in · esc back';
@@ -107,11 +120,6 @@ export default function Stage() {
             <button type="button" className="glass h-11 rounded-full px-5 text-sm text-fg hover:brightness-125" onClick={() => { setTouched(true); set({ find: 1 }); }}>Find a home</button>
           </div>
         </div>
-      )}
-      {intro && (
-        <button type="button" className="absolute bottom-4 left-1/2 z-[26] -translate-x-1/2 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] text-fg-muted hover:text-fg" onClick={() => scrollToSection('community')}>
-          Realms · phases · connectivity ↓
-        </button>
       )}
 
       {/* camera pad, opt-in from View options (walk / VR ignore it); phones use two-finger gestures instead */}

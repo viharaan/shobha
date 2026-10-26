@@ -10,7 +10,7 @@
  *   tour=1 | rooms       guided tour running; `rooms` starts at the first room stop
  *   present=1            presentation mode
  *   homes=1-5-23,…       shared compare list
- *   #explore #compare #community   section (find and location now live in the stage)
+ *   #explore #compare   section (finding a home, location, realms and phases live in the stage)
  *
  * Pure helpers here (safe in server components); the hook is in useUrlState.ts.
  */

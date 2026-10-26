@@ -49,6 +49,8 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 **No source badges on cards and popups** (by request): they show the details only. The provenance stays in the accessible text of each card, in View → About this model, and in the badge legend of the Community section.
 
+**One page.** The Community section below the stage is gone; its content moved to where it is used: the six **realms** are a Community dock tab (each glides to a high view over its traced legend markers, with its own card and ‹ › stepping); **phases and handover** (with the RERA and floor-count notes) open under the tower choice in Configure your home; **connectivity** is the second Location topic. The badge legend moved to View → How to read the data. The header reads Explore · Find a home · Location · Media · Shortlist; below the stage only the shortlist (Compare) remains.
+
 ## Inside a home: eye level and sunlight
 
 - **Eye-level 360° room view** (default). Picking a room (list, ← →, minimap, room tour) now stands you in it at 1.6 m, at the same free spot walk mode and VR use, facing along the room; drag turns the view in place like a 360° photo (no pan or zoom). Ceiling and the floors above are on, so light comes in only through the openings; room labels and the red tour pin are off. The room card has an Eye level / Top switch; Top is the previous look-down framing.

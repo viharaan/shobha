@@ -8,7 +8,9 @@ import { Panel, StatusBadge } from '@/components/ui/primitives';
 import { PresentationBar } from '@/components/ui/PresentationBar';
 import { TourBar } from '@/components/ui/TourBar';
 import { GOOGLE_MAPS_KEY } from '@/components/three/GoogleTiles';
-import { placeStop, siteTour, siteTourHandoff } from '@/lib/tour';
+import { placeStop, realmStop, siteTour, siteTourHandoff } from '@/lib/tour';
+import { realms } from '@/data/sobha/realms';
+import { amenities, realmColor } from '@/data/sobha/amenities';
 import { useUrlState } from '@/lib/useUrlState';
 import { UNLABELLED_WINGS } from '@/data/sobha/flats/directory';
 import { PLANS, SITE_IMAGE } from '@/data/manifest';
@@ -63,6 +65,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const [photorealOffset, setPhotorealOffset] = useState(0);
   const [mode, setMode] = useState<ViewMode>('exterior');
   const [hotspot, setHotspot] = useState<string | null>(null);
+  const [realm, setRealm] = useState<string | null>(null); // one of the six named realms, shown like a place
   const [isolate, setIsolate] = useState(false);
   const [explode, setExplode] = useState(0);
   const [sectionOn, setSectionOn] = useState(false);
@@ -81,6 +84,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const tourStop = tourIndex !== null ? tour[Math.min(tourIndex, tour.length - 1)] : null;
   // a place picked outside the tour glides the camera to the tour's pose for it
   const placeGoal = useMemo(() => (hotspot && tourIndex === null ? placeStop(hotspot, tourWing) : null), [hotspot, tourIndex, tourWing]);
+  const realmGoal = useMemo(() => (realm && tourIndex === null ? realmStop(realm) : null), [realm, tourIndex]);
   const exitTour = () => set({ tour: null });
   const goTourStop = (i: number) => {
     const s = tour[Math.max(0, Math.min(i, tour.length - 1))];
@@ -90,8 +94,8 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   };
   const hand = siteTourHandoff(tourWing);
   const handoff = hand ? { label: hand.label, onClick: () => set({ mode: 'home', plan: hand.plan, wing: tourWing, flat: null, floor: hand.floor, tour: 'rooms' }) } : null;
-  const selectWing = (w: number | null) => { if (w === null) setIsolate(false); setHotspot(null); set({ wing: w, ...(w === null || w !== wing ? { floor: null } : {}) }); };
-  const selectPlace = (id: string | null) => { setIsolate(false); setHotspot(id); if (id && wing !== null) set({ wing: null, floor: null }); };
+  const selectWing = (w: number | null) => { if (w === null) setIsolate(false); setHotspot(null); setRealm(null); set({ wing: w, ...(w === null || w !== wing ? { floor: null } : {}) }); };
+  const selectPlace = (id: string | null) => { setIsolate(false); setRealm(null); setHotspot(id); if (id && wing !== null) set({ wing: null, floor: null }); };
   const setFloor = (f: number | null) => { if (f === null) setIsolate(false); set({ floor: f }); };
 
   const finder = useFinder({ selectWing });
@@ -105,6 +109,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
 
   // where you are, as a small trail over the card: site → a place, or site → tower → floor
   const crumbs: Crumb[] = [{ label: 'SOBHA OneWorld', onClick: () => { selectPlace(null); selectWing(null); } }];
+  if (realm) crumbs.push({ label: realm });
   if (hs) crumbs.push({ label: PLACES.find((p) => p.id === hs.id)?.name ?? hs.label.split(' — ')[0] });
   if (tower) crumbs.push({ label: `Wing ${tower.wing}`, onClick: () => setFloor(null) });
   if (tower && floor !== null) crumbs.push({ label: `Floor ${floor}` });
@@ -129,20 +134,42 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
     const f0 = latestNum('floor');
     setFloor(f0 === null ? Math.round(t.typicalFloors / 2) : Math.min(t.typicalFloors, Math.max(1, f0 + d)));
   };
-  const nextView = tower
+  const realmIdx = realm ? realms.findIndex((r) => r.name === realm) : -1;
+  const selectRealm = (name: string | null) => { setIsolate(false); setHotspot(null); setRealm(name); if (name && wing !== null) set({ wing: null, floor: null }); };
+  const cycleRealm = (d: number) => selectRealm(realms[(realmIdx + d + realms.length) % realms.length].name);
+  const nextView = realm
+    ? { label: realms[(realmIdx + 1) % realms.length].name, onClick: () => cycleRealm(1) }
+    : tower
     ? { label: `Wing ${TOWERS[(towerIdx + 1) % TOWERS.length].wing}`, onClick: () => cycleTower(1) }
     : { label: PLACES[(placeIdx + 1) % PLACES.length].name, onClick: () => cyclePlace(1) };
-  const stepper: Stepper = tower
+  const stepper: Stepper = realm
+    ? { label: realm, pos: `${realmIdx + 1} / ${realms.length}`, onPrev: () => cycleRealm(-1), onNext: () => cycleRealm(1) }
+    : tower
     ? { label: floor !== null ? `Wing ${tower.wing} · Floor ${floor}` : `Wing ${tower.wing}`, pos: `${towerIdx + 1} / ${TOWERS.length}`, onPrev: () => cycleTower(-1), onNext: () => cycleTower(1) }
     : hs && placeIdx >= 0
       ? { label: PLACES[placeIdx].name, pos: `${placeIdx + 1} / ${PLACES.length}`, onPrev: () => cyclePlace(-1), onNext: () => cyclePlace(1) }
       : { label: 'Places to visit', pos: `${PLACES.length}`, onPrev: () => cyclePlace(-1), onNext: () => cyclePlace(1) };
-  useStageKeys(tower
+  useStageKeys(realm
+    ? { prev: () => cycleRealm(-1), next: () => cycleRealm(1), back: () => selectRealm(null) }
+    : tower
     ? { prev: () => cycleTower(-1), next: () => cycleTower(1), up: () => stepFloor(1), down: () => stepFloor(-1), enter: stepInside ?? undefined, back: () => (floor !== null ? setFloor(null) : selectWing(null)) }
     : { prev: () => cyclePlace(-1), next: () => cyclePlace(1), enter: hs ? undefined : () => cyclePlace(1), back: hs ? () => selectPlace(null) : undefined },
   chrome && !finder.active && mode !== 'firstPerson');
 
-  const card = tower && floor !== null ? (
+  const realmCard = realm && realmIdx >= 0 ? (() => {
+    const r = realms[realmIdx];
+    const items = amenities.filter((a) => a.realm === r.name);
+    return (
+      <InfoCard
+        key={`realm-${r.name}`}
+        eyebrow={`Realm · ${items.length ? `${items.length} places` : 'clubhouse'}`}
+        title={<span className="flex items-center gap-2"><span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: realmColor[r.name] }} aria-hidden />{r.name}</span>}
+        badge={<StatusBadge status="source" title={r.note} />}
+        lead={r.blurb}
+      />
+    );
+  })() : null;
+  const card = realmCard ?? (tower && floor !== null ? (
     <InfoCard
       key={`floor-${tower.wing}-${floor}`}
       eyebrow={`Wing ${tower.wing} · Phase ${tower.phase}`}
@@ -193,7 +220,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
       lead={hs.description ?? hs.label.split(' — ')[1] ?? hs.label}
       actions={nextPlace ? <button type="button" className="btn btn-primary" onClick={() => selectPlace(nextPlace.id)}>Next: {nextPlace.name} ›</button> : undefined}
     />
-  ) : null;
+  ) : null);
 
 
   // the dock's popups: broader choices live here, out of the way until asked for
@@ -277,8 +304,28 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
     else if (finder.active) set({ find: null, flat: null });
     setTab(id === 'find' ? null : id);
   };
+  const realmsPanel = (
+    <ul className="flex flex-col">
+      {realms.map((r) => {
+        const n = amenities.filter((a) => a.realm === r.name).length;
+        return (
+          <li key={r.name}>
+            <button type="button" aria-current={realm === r.name ? 'true' : undefined} onClick={() => { selectRealm(r.name); setTab(null); }}
+              className={`grid w-full grid-cols-[12px_1fr] gap-3 rounded-xl px-2.5 py-2 text-left transition-colors ${realm === r.name ? 'bg-accent/15' : 'hover:bg-white/5'}`}>
+              <span className="mt-1.5 h-2.5 w-2.5 rounded-full" style={{ background: realmColor[r.name] }} aria-hidden />
+              <span>
+                <span className="flex items-baseline justify-between gap-3"><span className={`text-sm ${realm === r.name ? 'text-accent' : 'text-fg'}`}>{r.name}</span>{n > 0 && <span className="tnum text-[11px] text-fg-muted">{n} places</span>}</span>
+                <span className="mt-0.5 block text-xs text-fg-muted">{r.blurb}</span>
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
   const tabs: DockTab[] = [
     { id: 'places', label: 'Places', panel: placesPanel },
+    { id: 'realms', label: 'Realms', panel: realmsPanel },
     ...(floorsPanel ? [{ id: 'floors', label: 'Floors', panel: floorsPanel }] : []),
     { id: 'find', label: 'Find a home', panel: finder.card },
     { id: 'tour', label: 'Guided tour', onClick: () => set({ tour: 1 }), title: 'Gate → club → stadium → courts → wing, then into a home' },
@@ -288,11 +335,11 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
 
   return (
     <div className="absolute inset-0">
-      <Canvas shadows camera={{ position: [380, 300, 520], fov: 45, near: 0.5, far: 4000 }} dpr={[1, 1.5]} gl={{ antialias: true, logarithmicDepthBuffer: true, localClippingEnabled: true }} onPointerMissed={() => { selectWing(null); setHotspot(null); }}>
+      <Canvas shadows camera={{ position: [380, 300, 520], fov: 45, near: 0.5, far: 4000 }} dpr={[1, 1.5]} gl={{ antialias: true, logarithmicDepthBuffer: true, localClippingEnabled: true }} onPointerMissed={() => { selectWing(null); setHotspot(null); setRealm(null); }}>
         <HeadingProbe toBearing={siteBearing} />
         <NavDriver />
         <Suspense fallback={null}>
-          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
+          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal ?? realmGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
           <Mounted onMount={onSceneMount} />
         </Suspense>
       </Canvas>

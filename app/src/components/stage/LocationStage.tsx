@@ -24,13 +24,13 @@ const ALL = CATEGORIES.map((c) => c.key);
 /** What a visitor asks about the location; each topic filters the pins and fills the card. */
 const TOPICS: { id: string; name: string; cats: string[] }[] = [
   { id: 'overview', name: 'Overview', cats: ALL },
+  { id: 'infra', name: 'Connectivity', cats: [] },
   { id: 'education', name: 'Schools & colleges', cats: ['school', 'college', 'university'] },
   { id: 'health', name: 'Healthcare', cats: ['hospital', 'clinic'] },
   { id: 'malls', name: 'Malls', cats: ['mall'] },
   { id: 'transit', name: 'Metro, rail & toll', cats: ['station', 'toll_booth'] },
   { id: 'projects', name: 'Projects nearby', cats: ['construction'] },
   { id: 'ladder', name: 'Brochure distances', cats: ALL },
-  { id: 'infra', name: 'Upcoming roads', cats: [] },
 ];
 
 /**
@@ -115,8 +115,8 @@ export default function LocationStage({ keys = true }: { keys?: boolean }) {
     );
   } else if (t.id === 'infra') {
     card = (
-      <InfoCard key="infra" eyebrow="As the brochure states" title="Upcoming roads" badge={<StatusBadge status="source" />}
-        lead="Alignments are not drawn: no official geometry was supplied."
+      <InfoCard key="infra" eyebrow="Connectivity, as stated" title="Roads and metro" badge={<StatusBadge status="source" />}
+        lead="Brochure claims. Alignments are not drawn and no travel times are computed: no official geometry or routing service was supplied."
         details={<ul className="space-y-1.5">{INFRASTRUCTURE.map((i) => <li key={i.name}><b className="text-fg">{i.name}</b><div className="text-fg-muted">{i.detail} · {i.status}</div></li>)}</ul>} detailsOpen
       />
     );
