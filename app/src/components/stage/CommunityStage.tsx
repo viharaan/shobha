@@ -213,7 +213,7 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
         <HeadingProbe toBearing={siteBearing} />
         <NavDriver />
         <Suspense fallback={null}>
-          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
+          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
           <Mounted onMount={onSceneMount} />
         </Suspense>
       </Canvas>
@@ -235,7 +235,7 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
       )}
 
       {chrome && (finder.active
-        ? <ContextColumn crumbs={finder.crumbs} nav={finder.nav} card={finder.card} hideCard={showRail} />
+        ? <ContextColumn crumbs={finder.crumbs} card={finder.card} hideCard={showRail} tall />
         : <ContextColumn crumbs={crumbs} nav={nav} card={card} hideCard={showRail} />)}
 
       {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} current={null} target="explore" onExit={() => set({ present: null })} />}

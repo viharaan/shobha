@@ -88,7 +88,7 @@ input[type="range"] { accent-color: var(--accent); }
 }
 
 /* context chrome: cards slide in when the place changes; the loading poster drifts slowly */
-@keyframes ctx-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes ctx-in { from { transform: translateY(6px); } to { transform: none; } } /* transform only: a busy main thread (scene build) must never leave a card invisible */
 .ctx-enter { animation: ctx-in .35s ease-out both; }
 /* the render stills carry burned-in captions bottom-right: zoom toward the top-left so they stay off screen */
 @keyframes poster-drift { from { transform: scale(1.55); } to { transform: scale(1.68); } }

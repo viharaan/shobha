@@ -66,6 +66,8 @@ export interface SiteSceneProps {
   photorealOffset?: number;
   /** master-plan landscape: club, wall, roads, track, field, water, trees, amenity props (default on) */
   community?: boolean;
+  /** wings to frame with the orbit camera whenever the set changes (the home configurator zooms to its matches) */
+  frameWings?: readonly number[] | null;
   /** wings to ghost (the home finder lights only the towers with matching flats) */
   dimWings?: readonly number[] | null;
   /** slow idle orbit for the first impression (stops as soon as the visitor takes the camera) */
@@ -254,7 +256,7 @@ function Podium({ tower, section }: { tower: Tower; section: Plane[] | null }) {
   );
 }
 
-function CameraRig({ mode, selectedWing, resetToken, northToken = 0, tourGoal }: { mode: ViewMode; selectedWing: number | null; resetToken: number; northToken?: number; tourGoal?: TourGoal | null }) {
+function CameraRig({ mode, selectedWing, resetToken, northToken = 0, tourGoal, frameWings = null }: { mode: ViewMode; selectedWing: number | null; resetToken: number; northToken?: number; tourGoal?: TourGoal | null; frameWings?: readonly number[] | null }) {
   const controls = useThree((s) => s.controls) as unknown as ControlsLike;
   const camera = useThree((s) => s.camera);
   const goal = useRef<{ pos: Vector3; target: Vector3; t: number; rate: number } | null>(null);
@@ -271,6 +273,20 @@ function CameraRig({ mode, selectedWing, resetToken, northToken = 0, tourGoal }:
     goal.current = { pos, target, t: 0, rate: 1.6 };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, selectedWing, resetToken]);
+  // a set of wings to frame (configurator): glide to fit them all, from the default south-east three-quarter view
+  const frameKey = frameWings ? frameWings.join(',') : '';
+  useEffect(() => {
+    if (!frameKey || mode === 'firstPerson' || tourGoal || selectedWing) return;
+    const pts = TOWERS.filter((t) => frameWings!.includes(t.wing)).map((t) => new Vector3(...towerWorld(t)));
+    if (!pts.length) return;
+    const c = pts.reduce((a, b) => a.add(b), new Vector3()).multiplyScalar(1 / pts.length);
+    const r = Math.max(...pts.map((q) => Math.hypot(q.x - c.x, q.z - c.z))) + 45;
+    const target = c.clone().setY(PODIUM_HEIGHT_M + 55);
+    const d = Math.max(240, r * 2.9);
+    const pos = mode === 'top' ? target.clone().add(new Vector3(0, d * 1.4, 0.5)) : target.clone().add(new Vector3(0.535, 0.48, 0.732).normalize().multiplyScalar(d));
+    goal.current = { pos, target, t: 0, rate: 1.1 };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frameKey, selectedWing]); // declared after the wing flight, so leaving a tower returns to the matches, not the overview
   // compass click: keep the target and distance, swing the camera due south of it so screen-up is north
   useEffect(() => {
     if (!northToken || mode === 'firstPerson' || !controls) return;
@@ -445,7 +461,7 @@ export function SiteScene(p: SiteSceneProps) {
             autoRotate={!!p.autoRotate}
             autoRotateSpeed={0.35}
           />
-          <CameraRig mode={p.mode} selectedWing={p.selectedWing} resetToken={p.resetToken} northToken={p.northToken} tourGoal={tourGoal} />
+          <CameraRig mode={p.mode} selectedWing={p.selectedWing} resetToken={p.resetToken} northToken={p.northToken} tourGoal={tourGoal} frameWings={p.frameWings} />
         </>
       )}
       <PosePublisher />

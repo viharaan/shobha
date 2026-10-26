@@ -13,14 +13,14 @@ export interface Crumb {
   onClick?: () => void;
 }
 
-export function ContextColumn({ crumbs, nav, card, hideCard = false }: { crumbs: Crumb[]; nav?: React.ReactNode; card: React.ReactNode; hideCard?: boolean }) {
+export function ContextColumn({ crumbs, nav, card, hideCard = false, tall = false }: { crumbs: Crumb[]; nav?: React.ReactNode; card: React.ReactNode; hideCard?: boolean; tall?: boolean }) {
   return (
-    <div className="pointer-events-none absolute inset-x-3 bottom-[4.25rem] top-[3.75rem] z-30 flex flex-col justify-between gap-2 lg:inset-x-auto lg:bottom-4 lg:left-3 lg:top-16 lg:w-[19rem]">
+    <div className={`pointer-events-none absolute inset-x-3 bottom-[4.25rem] top-[3.75rem] z-30 flex flex-col justify-between gap-2 lg:inset-x-auto lg:bottom-4 lg:left-3 lg:top-16 ${tall ? 'lg:w-[21rem] lg:justify-start' : 'lg:w-[19rem]'}`}>
       <nav aria-label="Places" className="pointer-events-auto flex min-h-0 flex-col gap-1.5 lg:rounded-xl lg:border lg:border-line lg:bg-black/55 lg:p-2 lg:backdrop-blur-md">
         <Crumbs items={crumbs} />
         {nav}
       </nav>
-      {!hideCard && <div className="pointer-events-auto max-h-[45%] shrink-0 overflow-y-auto scroll-thin rounded-xl max-lg:max-w-md lg:max-h-[60%]">{card}</div>}
+      {!hideCard && <div className={`pointer-events-auto shrink-0 overflow-y-auto scroll-thin rounded-xl max-lg:max-w-md ${tall ? 'max-h-[62%] lg:max-h-[calc(100%-2.75rem)]' : 'max-h-[45%] lg:max-h-[60%]'}`}>{card}</div>}
     </div>
   );
 }
