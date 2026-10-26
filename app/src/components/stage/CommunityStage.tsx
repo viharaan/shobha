@@ -9,7 +9,8 @@ import { PresentationBar } from '@/components/ui/PresentationBar';
 import { TourBar } from '@/components/ui/TourBar';
 import { GOOGLE_MAPS_KEY } from '@/components/three/GoogleTiles';
 import { placeStop, siteTour, siteTourHandoff } from '@/lib/tour';
-import { scrollToSection, useUrlState } from '@/lib/useUrlState';
+import { useUrlState } from '@/lib/useUrlState';
+import { UNLABELLED_WINGS } from '@/data/sobha/flats/directory';
 import { PLANS, SITE_IMAGE } from '@/data/manifest';
 import { FLOOR_TO_FLOOR_M, HOTSPOTS, PODIUM_HEIGHT_M, PROJECT, TOWERS, UNIT_TYPES } from '@/data/project';
 import { imageRingToLocal, ringAreaM2 } from '@/lib/geo';
@@ -20,6 +21,7 @@ import { istDay, istHoursNow, istTodayYmd, sunPosition, istDate, sunTimes } from
 import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, type Crumb } from './ContextUI';
 import { NavDriver } from './NavDriver';
 import { StageLoader } from './StageLoader';
+import { useFinder } from './Finder';
 import { HeadingProbe, siteBearing } from './HeadingProbe';
 
 /**
@@ -93,6 +95,7 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
   const selectPlace = (id: string | null) => { setIsolate(false); setHotspot(id); if (id && wing !== null) set({ wing: null, floor: null }); };
   const setFloor = (f: number | null) => { if (f === null) setIsolate(false); set({ floor: f }); };
 
+  const finder = useFinder({ selectWing });
   const tower = wing !== null ? TOWERS.find((t) => t.wing === wing) ?? null : null;
   const hs = hotspot ? HOTSPOTS.find((h) => h.id === hotspot) ?? null : null;
   const samplePlan = tower?.samplePlanId ? PLANS.find((p) => p.id === tower.samplePlanId) : null;
@@ -177,7 +180,7 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
       ]} />}
       actions={<>
         {stepInside && <button type="button" className="btn btn-primary" onClick={stepInside}>Step inside</button>}
-        <button type="button" className="btn" onClick={() => scrollToSection('find')}>Homes in Wing {tower.wing}</button>
+        <button type="button" className="btn" onClick={() => set({ find: 1 })}>Homes in Wing {tower.wing}</button>
       </>}
     />
   ) : hs ? (
@@ -198,8 +201,8 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
       badge={<StatusBadge status="source" title="Master plan and sales sheet" />}
       lead={`${PROJECT.siteAreaAcres} acres, ${PROJECT.totalWings} wings and ${PROJECT.totalUnits.toLocaleString('en-IN')} homes around a sunken stadium. Pick a place or a tower to go there.`}
       actions={<>
-        <button type="button" className="btn btn-primary" onClick={() => scrollToSection('find')}>Find a home</button>
-        <button type="button" className="btn" onClick={() => scrollToSection('location')}>Location</button>
+        <button type="button" className="btn btn-primary" onClick={() => set({ find: 1 })}>Find a home</button>
+        <button type="button" className="btn" onClick={() => set({ mode: 'map' })}>Location</button>
       </>}
     />
   );
@@ -210,16 +213,16 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
         <HeadingProbe toBearing={siteBearing} />
         <NavDriver />
         <Suspense fallback={null}>
-          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
+          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
           <Mounted onMount={onSceneMount} />
         </Suspense>
       </Canvas>
       {labels && !intro && (
         <LabelLayer>
           {TOWERS.filter((t) => !tourStop || tourStop.wing === t.wing).map((t) => (
-            <DomLabel key={t.wing} id={`wing-${t.wing}`} active={wing === t.wing} onClick={() => selectWing(wing === t.wing ? null : t.wing)}>Wing {t.wing}</DomLabel>
+            <DomLabel key={t.wing} id={`wing-${t.wing}`} active={wing === t.wing} onClick={() => selectWing(wing === t.wing ? null : t.wing)} className={finder.dimWings?.includes(t.wing) ? 'opacity-40' : ''}>Wing {t.wing}{finder.active && !UNLABELLED_WINGS.includes(t.wing) ? ` · ${finder.wingCount(t.wing)}` : ''}</DomLabel>
           ))}
-          {HOTSPOTS.filter((h) => !tourStop || tourStop.hotspot === h.id).map((h) => (
+          {HOTSPOTS.filter((h) => (!tourStop || tourStop.hotspot === h.id) && !finder.active).map((h) => (
             <DomLabel key={h.id} id={`hs-${h.id}`} active={hotspot === h.id} onClick={() => selectPlace(hotspot === h.id ? null : h.id)}>{h.label.split(' — ')[0]}</DomLabel>
           ))}
         </LabelLayer>
@@ -231,7 +234,9 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
         </div>
       )}
 
-      {chrome && <ContextColumn crumbs={crumbs} nav={nav} card={card} hideCard={showRail} />}
+      {chrome && (finder.active
+        ? <ContextColumn crumbs={finder.crumbs} nav={finder.nav} card={finder.card} hideCard={showRail} />
+        : <ContextColumn crumbs={crumbs} nav={nav} card={card} hideCard={showRail} />)}
 
       {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} current={null} target="explore" onExit={() => set({ present: null })} />}
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={handoff} />}

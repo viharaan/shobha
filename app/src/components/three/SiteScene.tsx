@@ -66,6 +66,8 @@ export interface SiteSceneProps {
   photorealOffset?: number;
   /** master-plan landscape: club, wall, roads, track, field, water, trees, amenity props (default on) */
   community?: boolean;
+  /** wings to ghost (the home finder lights only the towers with matching flats) */
+  dimWings?: readonly number[] | null;
   /** slow idle orbit for the first impression (stops as soon as the visitor takes the camera) */
   autoRotate?: boolean;
   /** terrain load progress for the page's status panel */
@@ -218,8 +220,9 @@ function TowerStack({ tower, selectedWing, selectedFloor, isolateFloor, explode,
       onClick={(e) => { e.stopPropagation(); onSelectWing(tower.wing); }}
     >
       {/* ExtrudeGeometry groups: 0 = slab top / bottom, 1 = facade walls (bronze fins, cream bands, dark glass from the elevation render) */}
-      <meshStandardMaterial attach="material-0" color="#d6cfc1" roughness={0.9} clippingPlanes={section ?? []} transparent={dim} opacity={dim ? 0.18 : 1} />
-      <meshStandardMaterial attach="material-1" map={getTowerFacadeTexture()} roughness={0.55} metalness={0.08} clippingPlanes={section ?? []} transparent={dim} opacity={dim ? 0.18 : 1} />
+      {/* keyed on dim: three only picks up a change of `transparent` on a fresh material */}
+      <meshStandardMaterial key={`s${+dim}`} attach="material-0" color="#d6cfc1" roughness={0.9} clippingPlanes={section ?? []} transparent={dim} opacity={dim ? 0.18 : 1} />
+      <meshStandardMaterial key={`f${+dim}`} attach="material-1" map={getTowerFacadeTexture()} roughness={0.55} metalness={0.08} clippingPlanes={section ?? []} transparent={dim} opacity={dim ? 0.18 : 1} />
     </instancedMesh>
   );
 }
@@ -409,11 +412,12 @@ export function SiteScene(p: SiteSceneProps) {
       {/* each tower stands on the terrain height at its footprint centroid */}
       {TOWERS.map((t) => {
         const [cx, , cz] = towerWorld(t);
+        const dim = (p.selectedWing !== null && p.isolateFloor && t.wing !== p.selectedWing) || !!p.dimWings?.includes(t.wing);
         return (
           <group key={t.wing} position-y={groundY(cx, cz)}>
             <Podium tower={t} section={section} />
-            <TowerStack tower={t} selectedWing={p.selectedWing} selectedFloor={p.selectedFloor} isolateFloor={p.isolateFloor} explode={p.explode} section={section} dim={p.selectedWing !== null && p.isolateFloor && t.wing !== p.selectedWing} onSelectWing={p.onSelectWing} />
-            {!(p.isolateFloor && p.selectedWing !== null) && <Crown tower={t} explode={p.explode} section={section} />}
+            <TowerStack tower={t} selectedWing={p.selectedWing} selectedFloor={p.selectedFloor} isolateFloor={p.isolateFloor} explode={p.explode} section={section} dim={dim} onSelectWing={p.onSelectWing} />
+            {!(p.isolateFloor && p.selectedWing !== null) && !dim && <Crown tower={t} explode={p.explode} section={section} />}
           </group>
         );
       })}

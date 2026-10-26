@@ -5,13 +5,19 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useShortlist } from '@/lib/shortlist';
 
-/** Sections of the single page, in order; the header highlights the one in view. Compare is reached through the shortlist chip. */
+/** Sections of the single page, in order, for the scroll-spy. Compare is reached through the shortlist chip. */
 const SECTIONS = [
   { id: 'explore', label: 'Explore' },
-  { id: 'find', label: 'Find a home' },
-  { id: 'compare', label: 'Compare', chip: true },
-  { id: 'location', label: 'Location' },
+  { id: 'compare', label: 'Compare' },
   { id: 'community', label: 'Community' },
+];
+
+/** Header links. Find a home and Location are stage modes now, so they open the stage in that mode. */
+const NAV: { href: string; label: string; section?: string }[] = [
+  { href: '/#explore', label: 'Explore', section: 'explore' },
+  { href: '/?find=1#explore', label: 'Find a home' },
+  { href: '/?mode=map#explore', label: 'Location' },
+  { href: '/#community', label: 'Community', section: 'community' },
 ];
 
 /** Which section is in view: the last one whose top has passed 40 % of the viewport. Only meaningful on `/`. */
@@ -77,9 +83,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <span className="label hidden whitespace-nowrap lg:inline">Spatial Explorer</span>
           </Link>
           <nav aria-label="Primary" className="scroll-thin flex min-w-0 items-center gap-0.5 overflow-x-auto max-lg:[scrollbar-width:none] sm:gap-1">
-            {SECTIONS.filter((s) => !s.chip).map((s) => {
-              const active = onHome && section === s.id;
-              return <Link key={s.id} href={`/#${s.id}`} aria-current={active ? 'location' : undefined} className={linkClass(active)}>{s.label}</Link>;
+            {NAV.map((n) => {
+              const active = onHome && !!n.section && section === n.section;
+              return <Link key={n.href} href={n.href} aria-current={active ? 'location' : undefined} className={linkClass(active)}>{n.label}</Link>;
             })}
             <Link href="/media" aria-current={path.startsWith('/media') ? 'page' : undefined} className={linkClass(path.startsWith('/media'))}>Media</Link>
             <ShortlistChip active={onHome && section === 'compare'} />

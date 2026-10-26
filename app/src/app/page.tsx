@@ -1,15 +1,10 @@
-import Link from 'next/link';
 import { Suspense } from 'react';
 import CompareSection from '@/components/sections/CompareSection';
-import FindHome from '@/components/sections/FindHome';
-import LocationSection from '@/components/sections/LocationSection';
 import Stage from '@/components/stage/Stage';
 import { Spinner, StatusBadge } from '@/components/ui/primitives';
-import { PLANS } from '@/data/manifest';
-import { FLOOR_TO_FLOOR_M, INFRASTRUCTURE, PHASES, PROJECT, UNIT_TYPES } from '@/data/project';
+import { FLOOR_TO_FLOOR_M, INFRASTRUCTURE, PHASES, PROJECT } from '@/data/project';
 import { amenities, realmColor } from '@/data/sobha/amenities';
 import { realms } from '@/data/sobha/realms';
-import { pageHref } from '@/lib/urlState';
 
 /** Server-rendered first paint of the stage: the poster frame the stage's own loader continues, so the hero is never black. */
 const StagePoster = () => (
@@ -24,9 +19,9 @@ const StagePoster = () => (
 const Loading = ({ label }: { label: string }) => <div className="grid min-h-40 place-items-center"><Spinner label={label} /></div>;
 
 /**
- * The whole experience on one page: the stage (community / home, VR, tour) as the hero, then
- * Find a home, Compare, Location and Community sections. Selection state lives in the query
- * string (see lib/urlState.ts); sections are anchors. Media stays its own page.
+ * The whole experience on one page. The stage is the one place to navigate: community, home, location map, the home
+ * finder, tours and VR all live in it (see components/stage). Below it only the shortlist (Compare) and the Community
+ * background. Selection state lives in the query string (see lib/urlState.ts). Media stays its own page.
  */
 export default function Home() {
   return (
@@ -36,47 +31,8 @@ export default function Home() {
       </Suspense>
 
       <div className="mx-auto w-full max-w-[1800px] px-4 md:px-6">
-        <section id="find" aria-label="Find a home" className="py-16 md:py-20">
-          <Suspense fallback={<Loading label="Loading homes…" />}><FindHome /></Suspense>
-
-          <div className="mt-14 flex flex-wrap items-end justify-between gap-2">
-            <div>
-              <h3 className="eyebrow">Configurations</h3>
-              <p className="display mt-1 text-2xl md:text-3xl">Seven plans, 734 to 2,416 sq ft</p>
-            </div>
-            <p className="max-w-md text-xs text-fg-muted">Average prices as printed on the sales sheet of 8 Aug 2026. Floor-rise and location charges apply on top of the basic rate of ₹{PROJECT.basicRatePerSqft.launch.toLocaleString('en-IN')} per sq ft.</p>
-          </div>
-          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {UNIT_TYPES.map((u) => {
-              const plan = PLANS.find((p) => p.id === u.planId);
-              const sba = Array.isArray(u.sbaSqft) ? `${u.sbaSqft[0].toLocaleString('en-IN')}–${u.sbaSqft[1].toLocaleString('en-IN')}` : Math.round(u.sbaSqft).toLocaleString('en-IN');
-              return (
-                <article key={u.code} className="flex flex-col gap-3 rounded-xl border border-line p-4">
-                  <div className="flex items-baseline justify-between">
-                    <h4 className="display text-xl">{u.name}</h4>
-                    <span className="kbd">{u.code}</span>
-                  </div>
-                  <dl className="grid grid-cols-3 gap-2 text-xs">
-                    <div><dt className="label">SBA</dt><dd className="tnum text-sm">{sba}</dd></div>
-                    <div><dt className="label">Carpet</dt><dd className="tnum text-sm">{u.carpetSqft ? Math.round(u.carpetSqft).toLocaleString('en-IN') : '—'}</dd></div>
-                    <div><dt className="label">Average</dt><dd className="tnum text-sm">₹{u.avgPriceCr} Cr</dd></div>
-                  </dl>
-                  <div className="mt-auto flex items-center justify-between gap-2">
-                    {plan ? <Link href={pageHref({ mode: 'home', plan: plan.id })} className="btn no-underline">Step inside</Link> : <span className="text-xs text-fg-muted">Plan not published</span>}
-                    <StatusBadge status="source" title="Sales sheet 08.08.26 and floor-plan PDF" />
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <section id="compare" aria-label="Compare homes" className="border-t border-line py-10 md:py-14">
+        <section id="compare" aria-label="Compare homes" className="py-10 md:py-14">
           <Suspense fallback={<Loading label="Loading shortlist…" />}><CompareSection /></Suspense>
-        </section>
-
-        <section id="location" aria-label="Location" className="border-t border-line py-16 md:py-20">
-          <Suspense fallback={<Loading label="Loading map…" />}><LocationSection /></Suspense>
         </section>
 
         <section id="community" aria-label="Community" className="border-t border-line py-16 md:py-20">

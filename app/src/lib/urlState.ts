@@ -1,15 +1,16 @@
 /**
  * The whole experience lives on `/`; selection state lives in its query string so every view is shareable.
  *
- *   mode=home            stage shows the unit viewer (absent = community)
+ *   mode=home | map      stage shows the unit viewer or the location map (absent = community)
+ *   find=1               the home finder runs in the stage (Community mode)
  *   wing, flat, floor    a home (numbers)
  *   plan=type-a          unit type when no flat is chosen
- *   config               finder filter
+ *   beds, finish, facing finder filters; legacy `config` still narrows
  *   view=2d|3d           home-mode layout (absent = split)
  *   tour=1 | rooms       guided tour running; `rooms` starts at the first room stop
  *   present=1            presentation mode
  *   homes=1-5-23,…       shared compare list
- *   #explore #find #compare #location #community   section
+ *   #explore #compare #community   section (find and location now live in the stage)
  *
  * Pure helpers here (safe in server components); the hook is in useUrlState.ts.
  */

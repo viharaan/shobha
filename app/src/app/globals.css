@@ -93,3 +93,8 @@ input[type="range"] { accent-color: var(--accent); }
 /* the render stills carry burned-in captions bottom-right: zoom toward the top-left so they stay off screen */
 @keyframes poster-drift { from { transform: scale(1.55); } to { transform: scale(1.68); } }
 .stage-poster { transform-origin: 25% 12%; filter: saturate(.9) brightness(.8) blur(1px); animation: poster-drift 45s ease-out both; }
+
+/* the location map inside the stage: keep MapLibre's own controls clear of the top bar, the legend and the context column */
+#explore .maplibregl-ctrl-top-right { top: 7rem; }
+@media (min-width: 1024px) { #explore .maplibregl-ctrl-top-right { top: 8.5rem; } #explore .maplibregl-ctrl-bottom-left { left: 20.25rem; } }
+@media (max-width: 1023px) { #explore .maplibregl-ctrl-bottom-left { display: none; } }

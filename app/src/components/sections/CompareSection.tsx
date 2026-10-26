@@ -45,9 +45,9 @@ export default function CompareSection() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="eyebrow">Compare</h2>
-          <p className="mt-1 text-sm text-fg-muted">Shortlist homes with ☆ in the stage or in Find a home, and they line up here side by side.</p>
+          <p className="mt-1 text-sm text-fg-muted">Shortlist homes with ☆ in the stage, and they line up here side by side.</p>
         </div>
-        <Link href="/#find" className="btn no-underline">Find a home</Link>
+        <Link href="/?find=1#explore" className="btn no-underline">Find a home</Link>
       </div>
     );
   }
@@ -64,7 +64,7 @@ export default function CompareSection() {
           {shared.length > 0 && <button type="button" className="btn btn-primary" onClick={() => addMany(shared)}>Add all to my shortlist</button>}
           {list.length > 0 && <button type="button" className="btn" onClick={share}>{copied ? 'Link copied' : 'Copy share link'}</button>}
           {shared.length === 0 && items.length > 0 && <button type="button" className="btn" onClick={clear}>Clear shortlist</button>}
-          <Link href="/#find" className="btn no-underline">Find more</Link>
+          <Link href="/?find=1#explore" className="btn no-underline">Find more</Link>
         </div>
       </header>
 

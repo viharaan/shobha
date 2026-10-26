@@ -18,11 +18,11 @@ export function legacyTarget(route: LegacyRoute, q: URLSearchParams): string {
       return `/${buildQuery(null, { mode: 'home', plan: g('plan'), wing: wing || null, flat: flat || null, floor: g('floor'), view: g('view') ?? 'split', tour: g('tour'), present: g('present') })}#explore`;
     }
     case 'homes':
-      return `/${buildQuery(null, { wing: g('wing'), config: g('config'), floor: g('floor'), flat: g('flat') })}#find`;
+      return `/${buildQuery(null, { wing: g('wing'), config: g('config'), floor: g('floor'), flat: g('flat'), find: 1 })}#explore`;
     case 'compare':
       return `/${buildQuery(null, { homes: g('homes') })}#compare`;
     case 'geo':
-      return '/#location';
+      return '/?mode=map#explore';
   }
 }
 

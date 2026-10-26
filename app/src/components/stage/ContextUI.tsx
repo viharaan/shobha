@@ -73,7 +73,7 @@ export function PlaceItem({ active, onClick, children, meta, title, dim = false,
 }
 
 /** The card for the current place: what it is, a few facts, the source badge and the one or two things to do next. */
-export function InfoCard({ eyebrow, title, badge, lead, details, actions }: { eyebrow: string; title: React.ReactNode; badge?: React.ReactNode; lead?: React.ReactNode; details?: React.ReactNode; actions?: React.ReactNode }) {
+export function InfoCard({ eyebrow, title, badge, lead, details, actions, detailsOpen = false }: { eyebrow: string; title: React.ReactNode; badge?: React.ReactNode; lead?: React.ReactNode; details?: React.ReactNode; actions?: React.ReactNode; detailsOpen?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <section className="ctx-enter rounded-xl border border-line bg-bg/80 p-3 shadow-2xl backdrop-blur-md" aria-label={typeof title === 'string' ? title : eyebrow}>
@@ -84,11 +84,11 @@ export function InfoCard({ eyebrow, title, badge, lead, details, actions }: { ey
         </div>
         {badge && <div className="shrink-0 pt-0.5">{badge}</div>}
       </div>
-      {lead && <p className="mt-1.5 text-xs text-fg-muted max-lg:line-clamp-2">{lead}</p>}
+      {lead && <div className="mt-1.5 text-xs text-fg-muted max-lg:line-clamp-2">{lead}</div>}
       {details && (
         <>
-          <div className={`mt-2 text-xs ${open ? '' : 'max-lg:hidden'}`}>{details}</div>
-          <button type="button" className="mt-1 text-[11px] text-fg-muted underline-offset-2 hover:text-accent hover:underline lg:hidden" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? 'Less' : 'Details'}</button>
+          <div className={`mt-2 text-xs ${open || detailsOpen ? '' : 'max-lg:hidden'}`}>{details}</div>
+          {!detailsOpen && <button type="button" className="mt-1 text-[11px] text-fg-muted underline-offset-2 hover:text-accent hover:underline lg:hidden" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? 'Less' : 'Details'}</button>}
         </>
       )}
       {actions && <div className="mt-2.5 flex flex-wrap gap-1">{actions}</div>}

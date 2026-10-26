@@ -19,7 +19,7 @@ export function PresentationBar({ label, current, target, onExit }: { label: str
     <div className="pointer-events-auto absolute inset-x-0 bottom-0 z-30 flex items-center gap-2 border-t border-line bg-bg/90 px-3 py-2 backdrop-blur">
       <span className="truncate text-sm text-fg">{label}</span>
       <div className="scroll-thin flex flex-1 items-center gap-1 overflow-x-auto">
-        {items.length === 0 && <span className="text-[11px] text-fg-muted">Shortlist is empty. Add homes from Find a home below.</span>}
+        {items.length === 0 && <span className="text-[11px] text-fg-muted">Shortlist is empty. Add homes with Find a home in the stage.</span>}
         {items.map((h) => {
           const active = current !== null && homeKey(h) === homeKey(current);
           return (

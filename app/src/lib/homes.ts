@@ -82,4 +82,4 @@ export function hrefForPlan(v: HomeView) {
 }
 
 export const hrefForSite = (h: HomeRef) => pageHref({ wing: h.wing, floor: h.floor });
-export const hrefForHome = (h: HomeRef) => pageHref({ wing: h.wing, flat: h.flat, floor: h.floor }, 'find');
+export const hrefForHome = (h: HomeRef) => pageHref({ wing: h.wing, flat: h.flat, floor: h.floor, find: 1 });
