@@ -66,7 +66,7 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 - The controller's ray and cursor drew before the head-locked map (render order 1–2 against the map's 200, no depth test), so the map hid the cursor; they now draw after it (299 / 300).
 - uikit draws plain boxes before images within one container, so the map image covered everything laid on it; the player marker, tower markers and the aim light now take zIndex 1.
 - No room boxes on the VR map any more (by request): the gold focus box and the blue hover box flickered under the ray. Where the ray meets the map there is just a plain light (soft halo, bright core) that holds for 200 ms through ray jitter; the trigger there moves you to that spot (site: not into a tower; home: the nearest free floor cell).
-- Desktop-checked with the HUD forced on; the pointer behaviour itself was tuned from headset videos.
+- Checked on a Meta Quest over the LAN (2026-10-27): the pointer light shows and holds steady on the map, with no flicker.
 
 ## Kept as it was
 
