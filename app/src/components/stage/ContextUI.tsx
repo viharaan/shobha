@@ -71,18 +71,28 @@ export function useStageKeys(keys: StageKeys, enabled: boolean) {
   }, [enabled]);
 }
 
+/**
+ * The trail over the card. It must fit on one line in the card's width: the first step reads "Site", steps between
+ * the second and the last two fold into "…" (its tooltip names them, a click goes to the nearest one) once the trail
+ * is deeper than four, and every label can shrink with an ellipsis, the current place last of all.
+ */
 export function Crumbs({ items }: { items: Crumb[] }) {
+  const shown: (Crumb & { folded?: Crumb[] })[] = items.length > 4
+    ? [items[0], { label: '…', folded: items.slice(1, -2), onClick: items[items.length - 3].onClick }, ...items.slice(-2)]
+    : items;
   return (
-    <ol className="flex w-fit max-w-full min-w-0 items-center gap-1 overflow-x-auto whitespace-nowrap rounded-full bg-black/55 px-2.5 py-1 text-[11px] backdrop-blur [scrollbar-width:none]" aria-label="You are here">
-      {items.map((c, i) => {
-        const last = i === items.length - 1;
+    <ol className="flex w-fit max-w-full min-w-0 items-center gap-1 overflow-hidden whitespace-nowrap rounded-full bg-black/55 px-2.5 py-1 text-[11px] backdrop-blur" aria-label="You are here">
+      {shown.map((c, i) => {
+        const last = i === shown.length - 1;
+        const label = i === 0 ? 'Site' : c.label;
+        const title = c.folded ? c.folded.map((f) => f.label).join(' › ') : i === 0 ? c.label : undefined;
         return (
-          <li key={i} className="flex items-center gap-1">
-            {i > 0 && <span className="text-fg-muted/60" aria-hidden>›</span>}
+          <li key={i} className={`flex min-w-0 items-center gap-1 ${last ? 'shrink' : 'shrink-[3]'}`}>
+            {i > 0 && <span className="shrink-0 text-fg-muted/60" aria-hidden>›</span>}
             {c.onClick && !last ? (
-              <button type="button" className="rounded px-0.5 text-fg-muted hover:text-accent" onClick={c.onClick}>{c.label}</button>
+              <button type="button" className="min-w-0 truncate rounded px-0.5 text-fg-muted hover:text-accent" onClick={c.onClick} title={title}>{label}</button>
             ) : (
-              <span className={last ? 'text-fg' : 'text-fg-muted'} aria-current={last ? 'location' : undefined}>{c.label}</span>
+              <span className={`min-w-0 truncate ${last ? 'text-fg' : 'text-fg-muted'}`} aria-current={last ? 'location' : undefined} title={title ?? c.label}>{label}</span>
             )}
           </li>
         );
