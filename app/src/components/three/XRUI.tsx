@@ -139,7 +139,9 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
   onPick?: (u: number, v: number) => void;
 }) {
   const height = width / aspect;
-  // where the controller ray meets the map: a ring follows it, so the player sees the spot a trigger press would pick
+  // where the controller ray meets the map: a ring follows it, so the player sees the spot a trigger press would pick.
+  // Tracked on the map itself (events from rooms and markers bubble up to it): a separate aim layer in the same plane
+  // as the rooms tied with them for the ray and flickered between the two every frame.
   const surface = useRef<ComponentRef<typeof Container>>(null);
   const [aim, setAim] = useState<[number, number] | null>(null);
   const uvOf = (e: { point: Vector3 }): [number, number] | null => {
@@ -152,24 +154,23 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
   // largest first so smaller rooms (bathrooms, closets) sit on top and stay tappable
   const ordered = [...regions].sort((a, b) => (b.u1 - b.u0) * (b.v1 - b.v0) - (a.u1 - a.u0) * (a.v1 - a.v0));
   return (
-    <Container positionType="relative" width={width} height={height} borderRadius={6} borderWidth={1} borderColor={LINE} overflow="hidden">
+    <Container
+      ref={surface}
+      positionType="relative"
+      width={width}
+      height={height}
+      borderRadius={6}
+      borderWidth={1}
+      borderColor={LINE}
+      backgroundColor="#000000"
+      overflow="hidden"
+      cursor={onPick ? 'pointer' : undefined}
+      onPointerMove={(e) => setAim(uvOf(e))}
+      onPointerLeave={() => setAim(null)}
+      onClick={onPick ? (e) => { const uv = uvOf(e); if (uv) onPick(uv[0], uv[1]); } : undefined}
+    >
       {/* eslint-disable-next-line jsx-a11y/alt-text -- uikit Image is a textured quad, not a DOM <img> */}
       <Image src={src} positionType="absolute" positionLeft={0} positionTop={0} width={width} height={height} pointerEvents="none" />
-      {/* the aim surface, under the rooms and markers so those keep their own hover and click */}
-      <Container
-        ref={surface}
-        zIndex={OVER_MAP}
-        positionType="absolute"
-        positionLeft={0}
-        positionTop={0}
-        width={width}
-        height={height}
-        backgroundColor="#00000001"
-        cursor={onPick ? 'pointer' : undefined}
-        onPointerMove={(e) => setAim(uvOf(e))}
-        onPointerLeave={() => setAim(null)}
-        onClick={onPick ? (e) => { e.stopPropagation?.(); const uv = uvOf(e); if (uv) onPick(uv[0], uv[1]); } : undefined}
-      />
       {ordered.map((r, i) => (
         <Container
           key={`r${i}`}
@@ -208,7 +209,9 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
         />
       ))}
       {aim && (
-        <Container zIndex={OVER_MAP} positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-11} transformTranslateY={-11} width={22} height={22} borderRadius={11} borderWidth={2} borderColor="#ffffff" backgroundColor="#3f6f9a99" pointerEvents="none" />
+        <Container zIndex={OVER_MAP + 1} positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-10} transformTranslateY={-10} width={20} height={20} borderRadius={10} borderWidth={2} borderColor="#ffffff" alignItems="center" justifyContent="center" pointerEvents="none">
+          <Container width={4} height={4} borderRadius={2} backgroundColor={ACCENT} pointerEvents="none" />
+        </Container>
       )}
       <PlayerMarker toUV={toUV} />
     </Container>
