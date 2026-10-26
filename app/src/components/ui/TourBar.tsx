@@ -21,6 +21,9 @@ export function TourBar({ stops, index, onIndex, onExit, handoff }: {
   handoff?: { label: string; onClick: () => void } | null;
 }) {
   const [playing, setPlaying] = useState(true);
+  const playingRef = useRef(playing);
+  useEffect(() => { playingRef.current = playing; }, [playing]);
+  const [replay, setReplay] = useState(0); // bumped on resume when the narration has to start over
   // voice defaults on; the stored 'off' preference is applied after mount so server and client HTML match
   const [voice, setVoice] = useState(true);
   useEffect(() => {
@@ -51,7 +54,7 @@ export function TourBar({ stops, index, onIndex, onExit, handoff }: {
     audio.current?.pause();
     audio.current = null;
     synth?.cancel();
-    if (!voice) return;
+    if (!voice || !playingRef.current) return; // paused: stay silent until Play
     if (clips.has(stop.audioId)) {
       const a = new Audio(`/narration/${stop.audioId}.mp3`);
       audio.current = a;
@@ -68,7 +71,7 @@ export function TourBar({ stops, index, onIndex, onExit, handoff }: {
       synth.speak(u);
       return () => synth.cancel();
     }
-  }, [voice, stop, clips, canSpeak]);
+  }, [voice, stop, clips, canSpeak, replay]);
 
   // auto-advance: after the narration ends (+ a beat), or after the dwell when there is no narration
   useEffect(() => {
@@ -82,16 +85,30 @@ export function TourBar({ stops, index, onIndex, onExit, handoff }: {
 
   useEffect(() => () => { audio.current?.pause(); if (canSpeak) window.speechSynthesis.cancel(); }, [canSpeak]);
 
+  // Pause silences the narration as well as the auto-advance; Play resumes a clip where it stopped, or restarts the line
+  const togglePlay = () => {
+    const next = !playing;
+    setPlaying(next);
+    if (!next) {
+      audio.current?.pause();
+      if (canSpeak) window.speechSynthesis.cancel();
+      return;
+    }
+    const a = audio.current;
+    if (a && !a.ended && a.currentTime > 0) a.play().catch(() => setBlocked(true));
+    else { setEnded(null); setReplay((r) => r + 1); }
+  };
+
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight' && !last) onIndex(index + 1);
       else if (e.key === 'ArrowLeft' && index > 0) onIndex(index - 1);
       else if (e.key === 'Escape') onExit();
-      else if (e.key === ' ') { e.preventDefault(); setPlaying((p) => !p); }
+      else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
     };
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
-  }, [index, last, onIndex, onExit]);
+  });
 
   const toggleVoice = () => {
     const n = !voice;
@@ -115,7 +132,7 @@ export function TourBar({ stops, index, onIndex, onExit, handoff }: {
         </div>
         <div className="flex shrink-0 flex-wrap items-center gap-1">
           <button type="button" className="btn" onClick={() => onIndex(index - 1)} disabled={index === 0} aria-label="Previous stop">‹ Prev</button>
-          <button type="button" className="btn" onClick={() => setPlaying((p) => !p)} aria-pressed={playing} title="Space">{playing ? '❚❚ Pause' : '▶ Play'}</button>
+          <button type="button" className="btn" onClick={togglePlay} aria-pressed={playing} title="Space">{playing ? '❚❚ Pause' : '▶ Play'}</button>
           <button type="button" className="btn" onClick={toggleVoice} aria-pressed={voice} title={clips?.has(stop.audioId) ? 'Narration (recorded)' : 'Narration (browser voice; run npm run narration for the recorded voice)'}>{voice ? '🔊 Voice' : '🔇 Voice'}</button>
           {!last && <button type="button" className="btn btn-primary" onClick={() => onIndex(index + 1)} aria-label="Next stop">Next ›</button>}
           {last && handoff && <button type="button" className="btn btn-primary" onClick={handoff.onClick}>{handoff.label} ›</button>}

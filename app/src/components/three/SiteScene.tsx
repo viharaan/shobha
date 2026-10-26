@@ -66,6 +66,8 @@ export interface SiteSceneProps {
   photorealOffset?: number;
   /** master-plan landscape: club, wall, roads, track, field, water, trees, amenity props (default on) */
   community?: boolean;
+  /** slow idle orbit for the first impression (stops as soon as the visitor takes the camera) */
+  autoRotate?: boolean;
   /** terrain load progress for the page's status panel */
   onTerrainStatus?: (s: SiteTerrainStatus) => void;
 }
@@ -436,6 +438,8 @@ export function SiteScene(p: SiteSceneProps) {
             maxPolarAngle={Math.PI / 2 - 0.03}
             minDistance={30}
             maxDistance={1800}
+            autoRotate={!!p.autoRotate}
+            autoRotateSpeed={0.35}
           />
           <CameraRig mode={p.mode} selectedWing={p.selectedWing} resetToken={p.resetToken} northToken={p.northToken} tourGoal={tourGoal} />
         </>

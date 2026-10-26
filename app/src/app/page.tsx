@@ -11,6 +11,16 @@ import { amenities, realmColor } from '@/data/sobha/amenities';
 import { realms } from '@/data/sobha/realms';
 import { pageHref } from '@/lib/urlState';
 
+/** Server-rendered first paint of the stage: the poster frame the stage's own loader continues, so the hero is never black. */
+const StagePoster = () => (
+  <div className="relative h-[calc(100svh-3.5rem)] min-h-[560px] overflow-hidden border-b border-line bg-bg">
+    {/* eslint-disable-next-line @next/next/no-img-element -- a static still, no optimisation needed */}
+    <img src="/media/video/clip-03.png" alt="" className="stage-poster absolute inset-0 h-full w-full object-cover" />
+    <div className="absolute inset-0 bg-gradient-to-tr from-bg/95 via-bg/40 to-bg/30" aria-hidden />
+    <div className="absolute left-1/2 top-[34%] -translate-x-1/2 rounded-xl bg-black/40 p-3 lg:top-[26%]"><Spinner label="Loading the stage…" /></div>
+  </div>
+);
+
 const Loading = ({ label }: { label: string }) => <div className="grid min-h-40 place-items-center"><Spinner label={label} /></div>;
 
 /**
@@ -21,7 +31,7 @@ const Loading = ({ label }: { label: string }) => <div className="grid min-h-40 
 export default function Home() {
   return (
     <>
-      <Suspense fallback={<div className="grid h-[calc(100svh-3.5rem)] place-items-center"><Spinner label="Loading the stage…" /></div>}>
+      <Suspense fallback={<StagePoster />}>
         <Stage />
       </Suspense>
 
@@ -61,7 +71,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="compare" aria-label="Compare homes" className="border-t border-line py-16 md:py-20">
+        <section id="compare" aria-label="Compare homes" className="border-t border-line py-10 md:py-14">
           <Suspense fallback={<Loading label="Loading shortlist…" />}><CompareSection /></Suspense>
         </section>
 
@@ -113,8 +123,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-14 rounded-xl border border-line p-5" aria-labelledby="badges">
-            <h3 id="badges" className="eyebrow">How to read the badges</h3>
+          <details className="group mt-14 rounded-xl border border-line p-5">
+            <summary className="eyebrow cursor-pointer list-none">How to read the badges <span className="text-fg-muted group-open:hidden">· show</span></summary>
             <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-xs text-fg-muted">
               <span><StatusBadge status="source-verified" /> cross-checked inside the document, e.g. plan scale from 12 room labels</span>
               <span><StatusBadge status="source" /> as printed in SOBHA documents</span>
@@ -124,7 +134,7 @@ export default function Home() {
               <span><StatusBadge status="unverified" /> conflicts with official documents</span>
             </div>
             <p className="mt-3 text-xs text-fg-muted">Tower shapes come from OpenStreetMap outlines and the traced master plan; heights are illustrative. Furniture and finishes in the home viewer are illustrative and not part of any sale.</p>
-          </div>
+          </details>
         </section>
       </div>
     </>

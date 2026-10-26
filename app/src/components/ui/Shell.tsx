@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useShortlist } from '@/lib/shortlist';
 
-/** Sections of the single page, in order; the header highlights the one in view. */
+/** Sections of the single page, in order; the header highlights the one in view. Compare is reached through the shortlist chip. */
 const SECTIONS = [
   { id: 'explore', label: 'Explore' },
   { id: 'find', label: 'Find a home' },
-  { id: 'compare', label: 'Compare' },
+  { id: 'compare', label: 'Compare', chip: true },
   { id: 'location', label: 'Location' },
   { id: 'community', label: 'Community' },
 ];
@@ -77,7 +77,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
             <span className="label hidden whitespace-nowrap lg:inline">Spatial Explorer</span>
           </Link>
           <nav aria-label="Primary" className="scroll-thin flex min-w-0 items-center gap-0.5 overflow-x-auto max-lg:[scrollbar-width:none] sm:gap-1">
-            {SECTIONS.map((s) => {
+            {SECTIONS.filter((s) => !s.chip).map((s) => {
               const active = onHome && section === s.id;
               return <Link key={s.id} href={`/#${s.id}`} aria-current={active ? 'location' : undefined} className={linkClass(active)}>{s.label}</Link>;
             })}

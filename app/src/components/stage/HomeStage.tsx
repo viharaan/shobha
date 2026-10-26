@@ -11,6 +11,8 @@ import { isRefugeFloor, maxBuildingFloor, midBuildingFloor } from '@/lib/unit/bu
 import { istHoursNow, istTodayYmd } from '@/lib/solar';
 import { bearingDeg, compassPoint } from '@/lib/unit/worldTiles';
 import { Panel, Spinner, StatusBadge } from '@/components/ui/primitives';
+import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, type Crumb } from './ContextUI';
+import { StageLoader } from './StageLoader';
 import { PresentationBar } from '@/components/ui/PresentationBar';
 import { TourBar } from '@/components/ui/TourBar';
 import { planTour, siteStopInUnitFrame, siteTour } from '@/lib/tour';
@@ -30,7 +32,9 @@ type Layout = 'map' | 'split' | '2d' | '3d';
 
 /**
  * Home mode of the stage: the 1:1 unit (2D plan + furnished 3D with the real surroundings). Shareable
- * state (plan, wing, flat, floor, view, tour, present) is read from the URL every render.
+ * state (plan, wing, flat, floor, view, tour, present) is read from the URL every render. The context chrome
+ * follows the visitor: the whole home (type, flat, floor, shortlist) or one room (size as printed, next room);
+ * layout, layers, imagery, sun and the scale tools sit behind View options.
  */
 export default function HomeStage({ rail, resetToken }: { rail: boolean; resetToken: number }) {
   const { params, set, num } = useUrlState();
@@ -165,6 +169,94 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
   const dM = (y1 - y0) * mPerUnit;
   const deviation = override ? ((override.mmPerPt / plan.calibration.mmPerPt - 1) * 100).toFixed(1) : null;
   const showRail = rail && !present && tourIndex === null;
+  const chrome = !present && tourIndex === null;
+
+  // where you are: site → wing → floor → this home → a room
+  const roomShown = focusRoomShown;
+  const roomIdx = roomShown ? roomStops.findIndex((r) => r.room === roomShown) : -1;
+  const goRoom = (r: PlanRoom | null) => { setFocusRoom(r); if (r) setLookDown((t) => t + 1); else overview(); };
+  const crumbs: Crumb[] = [{ label: 'SOBHA OneWorld', onClick: () => set({ mode: null, wing: null, floor: null, flat: null, tour: null }) }];
+  if (choice) {
+    crumbs.push({ label: `Wing ${wingN}`, onClick: () => set({ mode: null, wing: wingN, floor: null, tour: null }) });
+    crumbs.push({ label: `Floor ${floor}`, onClick: () => set({ mode: null, wing: wingN, floor, tour: null }) });
+    crumbs.push({ label: `Flat ${choice.flat}`, onClick: () => goRoom(null) });
+  } else {
+    crumbs.push({ label: `${plan.name} · printed plan`, onClick: () => goRoom(null) });
+  }
+  if (roomShown) crumbs.push({ label: roomShown.name });
+
+  const nav = (
+    <PlaceGroup title={`Rooms · ${plan.rooms.length}`} className="min-h-0">
+      {roomStops.map(({ room: r }) => (
+        <PlaceItem key={plan.rooms.indexOf(r)} active={roomShown === r} onClick={() => goRoom(roomShown === r ? null : r)} meta={`${(r.mm[0] / 1000).toFixed(2)} × ${(r.mm[1] / 1000).toFixed(2)} m`}>{r.name}</PlaceItem>
+      ))}
+    </PlaceGroup>
+  );
+
+  const roomCard = roomShown && roomIdx >= 0 ? (
+    <InfoCard
+      key={`room-${roomIdx}`}
+      eyebrow={`${plan.name}${choice ? ` · Flat ${choice.flat}` : ''}`}
+      title={roomShown.name}
+      badge={<StatusBadge status={calib.status} title="Room size as printed on the plan; the plan’s scale is cross-checked against its 12 room labels" />}
+      lead={roomStops[roomIdx].caption}
+      actions={<>
+        <button type="button" className="btn" onClick={() => goRoom(roomStops[(roomIdx - 1 + roomStops.length) % roomStops.length].room)} aria-label="Previous room">‹</button>
+        <button type="button" className="btn btn-primary" onClick={() => goRoom(roomStops[(roomIdx + 1) % roomStops.length].room)}>Next: {roomStops[(roomIdx + 1) % roomStops.length].room.name} ›</button>
+        <button type="button" className="btn" onClick={() => goRoom(null)}>Whole home</button>
+      </>}
+    />
+  ) : null;
+
+  const homeCard = (
+    <InfoCard
+      key={`home-${plan.id}-${choice ? `${choice.wing}-${choice.flat}` : 'plan'}`}
+      eyebrow={homeRef ? `Wing ${homeRef.wing} · Flat ${homeRef.flat} · Floor ${homeRef.floor}` : `Type ${plan.typeCode} · printed plan`}
+      title={plan.name}
+      badge={<StatusBadge status="source" title="Areas from the sales sheet and the floor-plan PDF" />}
+      lead={<>{plan.sbaSqft.toLocaleString('en-IN')} sq ft SBA · {plan.carpetSqft.toLocaleString('en-IN')} carpet{facing != null ? ` · balcony faces ${compassPoint(facing)}` : ''}{isRefugeFloor(wingN, floor) && choice ? <span className="text-warn"> · refuge floor</span> : null}</>}
+      details={
+        <div className="space-y-2">
+          <label className="block">
+            <span className="label !text-[10px]">Home type</span>
+            <select className="mt-0.5 w-full rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" value={plan.id} onChange={(e) => selectPlan(e.target.value)} aria-label="Choose unit type">
+              {PLANS.map((p) => <option key={p.id} value={p.id}>{p.name} · Type {p.typeCode}</option>)}
+            </select>
+          </label>
+          {realistic && (
+            <label className="block">
+              <span className="label !text-[10px]">Which flat</span>
+              <select className="mt-0.5 w-full rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" value={choice ? `${choice.wing}:${choice.flat}` : 'plan'} onChange={(e) => selectFlat(e.target.value)} aria-label="Choose which flat to show">
+                {choices.map((c) => (
+                  <option key={`${c.wing}:${c.flat}`} value={`${c.wing}:${c.flat}`}>Wing {c.wing} · Flat {c.flat}{c.placement?.mirrored ? ' · mirrored' : ''}{c.proxy ? ' · variant plan' : ''}{c.record?.facing ? ` · faces ${c.record.facing}` : ''}</option>
+                ))}
+                <option value="plan">Printed plan only (no surroundings)</option>
+              </select>
+            </label>
+          )}
+          {choice?.placement && (
+            <>
+              <label className="block">
+                <span className="label !text-[10px]">Floor {floor} of {maxBuildingFloor(wingN)} · eye ≈ {(4.5 + (floor - 2) * 3 + 1.6).toFixed(0)} m up</span>
+                <input type="range" min={2} max={maxBuildingFloor(wingN)} step={1} value={floor} onChange={(e) => setFloor(parseInt(e.target.value, 10))} className="w-full" aria-label="Building floor" />
+              </label>
+              <Facts rows={[
+                ['Balcony', facing != null ? `${compassPoint(facing)} (${Math.round(facing)}°)` : '—'],
+                ['Main door', `${door != null ? `${compassPoint(door)} (${Math.round(door)}°)` : '—'}${choice.record?.facing ? ` · sheet: ${choice.record.facing}` : ''}`],
+                ['Placement', <span key="p">{choice.placement.confidence} confidence · <StatusBadge status="approximate" title="Flat placement fitted from the key plan to the OpenStreetMap wing outline" /></span>],
+              ]} />
+            </>
+          )}
+        </div>
+      }
+      actions={<>
+        {homeRef && <button type="button" className="btn btn-primary" aria-pressed={shortlisted(homeRef)} onClick={() => toggleShortlist(homeRef)}>{shortlisted(homeRef) ? '★ Shortlisted' : '☆ Shortlist'}</button>}
+        <button type="button" className="btn" aria-pressed={firstPerson} onClick={() => { setFirstPerson(!firstPerson); setTopView(false); }} title="Walk through at eye height (WASD on a keyboard)">Walk inside</button>
+      </>}
+    />
+  );
+
+  const worldLoading = !!placement && layout !== '2d' && (!world || world.state === 'loading');
 
   return (
     <div className="absolute inset-0">
@@ -172,7 +264,6 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
         {(layout === 'split' || layout === '2d') && (
           <div className="relative min-h-0 border-b border-line md:border-b-0 md:border-r">
             <PlanViewer2D key={plan.id} plan={plan} mPerUnit={mPerUnit} tool={tool} points={points} onPointsChange={setPoints} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} showRooms={showLabels} northDeg={northPrinted} beacon={roomStop} onPick={pickRoom} />
-            <div className="pointer-events-none absolute left-3 top-16 rounded bg-black/60 px-2 py-1 text-[11px] text-fg-muted max-lg:hidden">2D · scroll to zoom · drag to pan · click a room to view it</div>
           </div>
         )}
         {layout !== '2d' && (
@@ -185,112 +276,62 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
             {showLabels && (
               <LabelLayer>
                 {plan.rooms.map((r, i) => (
-                  <DomLabel key={i} id={`room-${i}`} active={focusRoomShown === r} onClick={() => setFocusRoom(focusRoom === r ? null : r)}>
+                  <DomLabel key={i} id={`room-${i}`} active={focusRoomShown === r} onClick={() => goRoom(focusRoomShown === r ? null : r)}>
                     {r.name} · {(r.mm[0] / 1000).toFixed(2)} × {(r.mm[1] / 1000).toFixed(2)} m
                   </DomLabel>
                 ))}
                 {!realistic && <DomLabel id="ref-scale">1 m cube · 1.75 m figure</DomLabel>}
               </LabelLayer>
             )}
-            <div className="pointer-events-none absolute bottom-4 left-3 rounded bg-black/60 px-2 py-1 text-[11px] text-fg-muted max-lg:hidden">
-              3D · 1 unit = 1 m · {firstPerson ? 'click to look, WASD to walk, Esc to release · walls and furniture block' : topView ? 'top view · drag to pan · scroll / pinch to zoom · click a room' : 'drag to orbit · right-drag to pan · scroll to zoom · click a room to frame it'}
-            </div>
-            {/* the plan as a minimap: the red dot is the camera / walker; a click on a room moves the view there */}
-            {layout === 'map' && !present && (
-              <div className={`absolute left-3 z-20 overflow-hidden rounded-xl border border-line bg-black/85 shadow-2xl transition-[width,height] duration-200 ${mapBig ? 'bottom-[4.5rem] top-14 w-[min(64vw,780px)] max-sm:right-3 max-sm:w-auto lg:bottom-12' : 'bottom-[4.5rem] h-40 w-52 sm:h-56 sm:w-80 lg:bottom-12'}`} aria-label="Floor plan minimap">
-                <PlanViewer2D key={plan.id} plan={plan} mPerUnit={mPerUnit} tool={tool} points={points} onPointsChange={setPoints} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} showRooms northDeg={northPrinted} beacon={roomStop} onPick={pickRoom} />
-                <div className="pointer-events-none absolute left-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-fg-muted">Plan · click a room to go there</div>
-                <button type="button" className="btn absolute right-2 top-2 px-2 py-1 text-[11px]" onClick={() => setMapBig(!mapBig)} aria-expanded={mapBig}>{mapBig ? '⤡ Shrink' : '⤢ Expand'}</button>
+            {chrome && (
+              <div className="pointer-events-none absolute bottom-[4.4rem] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/50 px-2.5 py-1 text-[11px] text-fg-muted max-lg:hidden">
+                {firstPerson ? 'Click to look · WASD to walk · Esc to release · walls and furniture block' : topView ? 'Top view · drag to pan · scroll to zoom · click a room' : 'Drag to orbit · right-drag to pan · scroll to zoom · click a room'}
               </div>
             )}
           </div>
         )}
       </div>
 
+      {/* the plan as a minimap: the red dot is the camera / walker; a click on a room moves the view there */}
+      {layout === 'map' && !present && (
+        <div className={`absolute z-30 overflow-hidden rounded-xl border border-line bg-black/85 shadow-2xl transition-[width,height] duration-200 ${mapBig
+          ? 'left-3 right-3 top-[8rem] bottom-[4.25rem] lg:left-auto lg:right-[6.25rem] lg:top-16 lg:bottom-4 lg:w-[min(56vw,780px)]'
+          : `left-3 top-[8rem] h-28 w-40 sm:h-36 sm:w-52 lg:left-auto ${showRail ? 'lg:right-[21.5rem]' : 'lg:right-[6.25rem]'} lg:top-auto lg:h-56 lg:w-80 ${tourIndex !== null ? 'lg:bottom-28' : 'lg:bottom-4'}`}`} aria-label="Floor plan minimap">
+          <PlanViewer2D key={plan.id} plan={plan} mPerUnit={mPerUnit} tool={tool} points={points} onPointsChange={setPoints} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} showRooms northDeg={northPrinted} beacon={roomStop} onPick={pickRoom} />
+          <div className="pointer-events-none absolute left-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-fg-muted max-sm:hidden">Plan · click a room</div>
+          <button type="button" className="btn absolute right-1.5 top-1.5 min-h-0 px-2 py-1 text-[11px]" onClick={() => setMapBig(!mapBig)} aria-expanded={mapBig} aria-label={mapBig ? 'Shrink the plan' : 'Expand the plan'}>{mapBig ? '⤡' : '⤢'}</button>
+        </div>
+      )}
+
+      {layout !== '2d' && <StageLoader key={plan.id} ready={status.state !== 'loading' && !worldLoading} poster="/media/video/clip-01.png" caption="Developer’s render · OneWorld Plaza · illustrative" steps={[{ label: `Tracing the ${plan.name} walls from the plan`, done: status.state !== 'loading' }, ...(placement ? [{ label: `Loading the view from floor ${floor}`, done: !worldLoading }] : [])]} />}
+
+      {chrome && <ContextColumn crumbs={crumbs} nav={nav} card={roomCard ?? homeCard} hideCard={showRail} />}
+
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={{ label: 'Find this home', onClick: () => { set({ tour: null }); scrollToSection('find'); } }} />}
       {present && tourIndex === null && <PresentationBar label={homeRef ? `${plan.name} · Wing ${homeRef.wing} · Flat ${homeRef.flat} · Floor ${homeRef.floor}` : plan.name} current={homeRef} target="plans" onExit={() => set({ present: null })} />}
 
-      {showRail && <aside className="rail scroll-thin" aria-label="Home controls">
-        <Panel title="Unit type">
-          <select className="w-full rounded-md border border-line bg-bg-2 px-2 py-1.5 text-sm" value={plan.id} onChange={(e) => selectPlan(e.target.value)} aria-label="Choose unit type">
-            {PLANS.map((p) => (
-              <option key={p.id} value={p.id}>{p.name} · Type {p.typeCode} · Wing {p.wing}</option>
+      {showRail && <aside className="rail scroll-thin" aria-label="View options">
+        <Panel title="Layout">
+          <div className="flex flex-wrap gap-1">
+            {([['map', '3D + plan'], ['split', 'Split'], ['2d', '2D'], ['3d', '3D']] as [Layout, string][]).map(([l, label]) => (
+              <button key={l} type="button" className="btn" aria-pressed={layout === l} onClick={() => setLayout(l)}>{label}</button>
             ))}
-          </select>
+          </div>
           <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
             <dt className="label">SBA</dt><dd>{plan.sbaSqft.toLocaleString()} sq ft · {sqftToSqm(plan.sbaSqft).toFixed(1)} m²</dd>
             <dt className="label">Carpet</dt><dd>{plan.carpetSqft.toLocaleString()} sq ft · {sqftToSqm(plan.carpetSqft).toFixed(1)} m²</dd>
             <dt className="label">Plan extent</dt><dd>{wM.toFixed(2)} × {dM.toFixed(2)} m</dd>
             <dt className="label">Shown in</dt><dd>{towersWithType.length ? towersWithType.map((t) => `Wing ${t.wing}`).join(', ') : `Wing ${plan.wing}`}</dd>
           </dl>
-          <div className="mt-2 flex flex-wrap gap-1">
-            {([['map', '3D + plan'], ['split', 'Split'], ['2d', '2D'], ['3d', '3D']] as [Layout, string][]).map(([l, label]) => (
-              <button key={l} type="button" className="btn" aria-pressed={layout === l} onClick={() => setLayout(l)}>{label}</button>
-            ))}
-          </div>
         </Panel>
-
-        {realistic && (
-          <Panel title="Where this home is" right={<StatusBadge status="approximate" title="Flat placement fitted from the key plan to the OpenStreetMap wing outline; wing outlines are community-mapped, not a survey" />}>
-            <label className="block text-xs">
-              <span className="label">Flat</span>
-              <select className="mt-1 w-full rounded-md border border-line bg-bg-2 px-2 py-1.5 text-sm" value={choice ? `${choice.wing}:${choice.flat}` : 'plan'} onChange={(e) => selectFlat(e.target.value)} aria-label="Choose which flat to show">
-                {choices.map((c) => (
-                  <option key={`${c.wing}:${c.flat}`} value={`${c.wing}:${c.flat}`}>Wing {c.wing} · Flat {c.flat}{c.placement?.mirrored ? ' · mirrored' : ''}{c.proxy ? ' · variant plan' : ''}{c.record?.facing ? ` · faces ${c.record.facing}` : ''}</option>
-                ))}
-                <option value="plan">Printed plan only (no surroundings)</option>
-              </select>
-            </label>
-            {choice?.placement && (
-              <>
-                <label className="mt-3 block text-xs">
-                  <span className="label">Floor · {floor}{isRefugeFloor(wingN, floor) ? ' (refuge floor)' : ''} of {maxBuildingFloor(wingN)} · eye ≈ {(4.5 + (floor - 2) * 3 + 1.6).toFixed(0)} m above ground{elevation != null ? `, ≈ ${Math.round(elevation + 4.5 + (floor - 2) * 3)} m above sea level` : ''}</span>
-                  <input type="range" min={2} max={maxBuildingFloor(wingN)} step={1} value={floor} onChange={(e) => setFloor(parseInt(e.target.value, 10))} className="w-full" aria-label="Building floor" />
-                </label>
-                <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
-                  <dt className="label">Balcony faces</dt><dd>{facing != null ? `${compassPoint(facing)} (${Math.round(facing)}°)` : '—'}</dd>
-                  <dt className="label">Main door faces</dt><dd>{door != null ? `${compassPoint(door)} (${Math.round(door)}°)` : '—'}{choice.record?.facing ? ` · sheet says ${choice.record.facing}` : ''}</dd>
-                  <dt className="label">Fit</dt><dd>{choice.placement.confidence} confidence · {Math.round(choice.placement.insideWing * 100)}% inside the wing</dd>
-                </dl>
-                <label className="mt-3 block text-xs">
-                  <span className="label">Ground outside the site</span>
-                  <select className="mt-1 w-full rounded-md border border-line bg-bg-2 px-2 py-1.5 text-sm" value={ground} onChange={(e) => setGround(e.target.value as GroundMode)} aria-label="Ground imagery">
-                    <option value="vector">OpenStreetMap buildings, roads, water (vector)</option>
-                    <option value="osm">OpenStreetMap map tiles</option>
-                    <option value="sat">Satellite · Sentinel-2 cloudless 2016 (EOX, CC BY 4.0) + OSM buildings</option>
-                    <option value="esri">Satellite · Esri World Imagery (dev use) + OSM buildings</option>
-                  </select>
-                </label>
-                <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-2 text-xs">
-                  <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" aria-label="Date (IST)" />
-                  <label className="block">
-                    <span className="label">Sun · {String(Math.floor(hour)).padStart(2, '0')}:{hour % 1 ? '30' : '00'} IST</span>
-                    <input type="range" min={5} max={20} step={0.5} value={hour} onChange={(e) => setHour(parseFloat(e.target.value))} className="w-full" aria-label="Hour of day (IST)" />
-                  </label>
-                  <button type="button" className="btn col-span-2 justify-center" onClick={() => { setDate(istTodayYmd()); setHour(Math.min(20, Math.max(5, Math.round(istHoursNow() * 2) / 2))); }}>Now (IST)</button>
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1">
-                  <button type="button" className="btn" aria-pressed={worldOn} onClick={() => setWorldOn(!worldOn)}>Surroundings</button>
-                  <button type="button" className="btn" onClick={() => set({ mode: null, wing: wingN, floor })}>Show wing {wingN} in the community</button>
-                </div>
-                <div className="mt-2 text-[11px] text-fg-muted">
-                  {world?.state === 'loading' && <Spinner label="Loading surroundings…" />}
-                  {world?.state === 'error' && <span className="text-bad">Surroundings unavailable ({world.message ?? 'network'}); the home still works.</span>}
-                  {world?.state === 'ready' && (
-                    <span>
-                      {world.buildings != null ? `${world.buildings} OSM buildings · ` : ''}
-                      {world.terrain === 'failed' ? 'terrain unavailable (flat ground)' : world.terrain ? `terrain ${world.terrain.tiles} tiles · site ≈ ${Math.round(world.terrain.baseElev)} m ASL · ${Math.round(world.terrain.range[0])}–${Math.round(world.terrain.range[1])} m within 3 km` : ''}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-[11px] text-fg-muted">Towers are massing from the master plan and OpenStreetMap outlines, floor heights assumed (4.5 m podium + 3.0 m per floor). Sun direction is computed; shadows do not prove a view.</p>
-              </>
-            )}
-          </Panel>
-        )}
 
         <Panel title="3D view">
           <div className="flex flex-wrap gap-1">
+            <button type="button" className="btn" onClick={overview}>Overview</button>
+            <button type="button" className="btn" aria-pressed={topView && !firstPerson} onClick={() => { setFirstPerson(false); setTopView(!topView); }}>Top view</button>
+            <button type="button" className="btn" aria-pressed={firstPerson} onClick={() => { setFirstPerson(!firstPerson); setTopView(false); }}>Walk (WASD)</button>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-1">
             <button type="button" className="btn" aria-pressed={realistic} onClick={() => setRealistic(!realistic)}>Realistic interior</button>
             <button type="button" className="btn" aria-pressed={showLabels} onClick={() => setShowLabels(!showLabels)}>Labels</button>
             <button type="button" className="btn" aria-pressed={showFloorImage} onClick={() => setShowFloorImage(!showFloorImage)}>Plan on floor</button>
@@ -302,11 +343,6 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
               <input type="range" min={2.4} max={3.6} step={0.05} value={wallHeight} onChange={(e) => setWallHeight(parseFloat(e.target.value))} className="w-full" />
             </label>
           )}
-          <div className="mt-2 flex flex-wrap gap-1">
-            <button type="button" className="btn" onClick={overview}>Overview</button>
-            <button type="button" className="btn" aria-pressed={topView && !firstPerson} onClick={() => { setFirstPerson(false); setTopView(!topView); }}>Top view</button>
-            <button type="button" className="btn" aria-pressed={firstPerson} onClick={() => { setFirstPerson(!firstPerson); setTopView(false); }}>Walk (WASD)</button>
-          </div>
           <p className="mt-2 text-[11px] text-fg-muted">
             {realistic
               ? 'Walls, doors and windows follow the traced vector plan (positions and thicknesses are source; 2.85 m ceiling, 2.1 m heads and 0.9 m sills are assumed). Floors, finishes, furniture and décor are illustrative: the pieces the plan draws, rebuilt as PBR models with CC0 Poly Haven props. Not part of the sale.'
@@ -319,7 +355,45 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
           </div>
         </Panel>
 
-        <Panel title="Scale" right={<StatusBadge status={calib.status} />}>
+        {realistic && choice?.placement && (
+          <Panel title="Surroundings" right={<StatusBadge status="approximate" title="Flat placement fitted from the key plan to the OpenStreetMap wing outline; wing outlines are community-mapped, not a survey" />}>
+            <div className="flex flex-wrap gap-1">
+              <button type="button" className="btn" aria-pressed={worldOn} onClick={() => setWorldOn(!worldOn)}>Surroundings</button>
+            </div>
+            <label className="mt-2 block text-xs">
+              <span className="label">Ground outside the site</span>
+              <select className="mt-1 w-full rounded-md border border-line bg-bg-2 px-2 py-1.5 text-sm" value={ground} onChange={(e) => setGround(e.target.value as GroundMode)} aria-label="Ground imagery">
+                <option value="vector">OpenStreetMap buildings, roads, water (vector)</option>
+                <option value="osm">OpenStreetMap map tiles</option>
+                <option value="sat">Satellite · Sentinel-2 cloudless 2016 (EOX, CC BY 4.0) + OSM buildings</option>
+                <option value="esri">Satellite · Esri World Imagery (dev use) + OSM buildings</option>
+              </select>
+            </label>
+            <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-2 text-xs">
+              <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" aria-label="Date (IST)" />
+              <label className="block">
+                <span className="label">Sun · {String(Math.floor(hour)).padStart(2, '0')}:{hour % 1 ? '30' : '00'} IST</span>
+                <input type="range" min={5} max={20} step={0.5} value={hour} onChange={(e) => setHour(parseFloat(e.target.value))} className="w-full" aria-label="Hour of day (IST)" />
+              </label>
+              <button type="button" className="btn col-span-2 justify-center" onClick={() => { setDate(istTodayYmd()); setHour(Math.min(20, Math.max(5, Math.round(istHoursNow() * 2) / 2))); }}>Now (IST)</button>
+            </div>
+            <div className="mt-2 text-[11px] text-fg-muted">
+              {world?.state === 'loading' && <Spinner label="Loading surroundings…" />}
+              {world?.state === 'error' && <span className="text-bad">Surroundings unavailable ({world.message ?? 'network'}); the home still works.</span>}
+              {world?.state === 'ready' && (
+                <span>
+                  {world.buildings != null ? `${world.buildings} OSM buildings · ` : ''}
+                  {world.terrain === 'failed' ? 'terrain unavailable (flat ground)' : world.terrain ? `terrain ${world.terrain.tiles} tiles · site ≈ ${Math.round(world.terrain.baseElev)} m ASL · ${Math.round(world.terrain.range[0])}–${Math.round(world.terrain.range[1])} m within 3 km` : ''}
+                </span>
+              )}
+            </div>
+            <p className="mt-2 text-[11px] text-fg-muted">
+              Placement fit: {Math.round(choice.placement.insideWing * 100)}% inside the wing{elevation != null ? `; this floor is ≈ ${Math.round(elevation + 4.5 + (floor - 2) * 3)} m above sea level` : ''}. Towers are massing from the master plan and OpenStreetMap outlines, floor heights assumed (4.5 m podium + 3.0 m per floor). Sun direction is computed; shadows do not prove a view.
+            </p>
+          </Panel>
+        )}
+
+        <Panel title="Scale and measuring" right={<StatusBadge status={calib.status} />}>
           <div className="text-xs">
             <div className="font-mono">{calib.mmPerPt.toFixed(3)} mm / pt → 1 pt = {(mPerUnit * 1000).toFixed(2)} mm</div>
             <p className="mt-1 text-fg-muted">{calib.note}</p>
@@ -341,26 +415,6 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
           )}
           {override && <button type="button" className="btn mt-2" onClick={resetCalibration}>Reset to source scale</button>}
         </Panel>
-
-        <Panel title="Rooms">
-          <ul className="max-h-56 space-y-0.5 overflow-y-auto text-xs scroll-thin">
-            {plan.rooms.map((r, i) => (
-              <li key={i}>
-                <button type="button" className={`flex w-full items-center justify-between rounded px-1.5 py-1 text-left hover:bg-surface-2 ${focusRoom === r ? 'bg-surface-2 text-accent' : ''}`} onClick={() => setFocusRoom(focusRoom === r ? null : r)}>
-                  <span>{r.name}</span>
-                  <span className="font-mono text-fg-muted">{(r.mm[0] / 1000).toFixed(2)} × {(r.mm[1] / 1000).toFixed(2)} m</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-2 text-[11px] text-fg-muted">Dimensions as printed on the plan (mm). {plan.rooms.length} labelled spaces.</p>
-        </Panel>
-
-        {homeRef && (
-          <button type="button" className="btn btn-primary justify-center" aria-pressed={shortlisted(homeRef)} onClick={() => toggleShortlist(homeRef)}>
-            {shortlisted(homeRef) ? '★ Shortlisted' : '☆ Shortlist'} · Wing {homeRef.wing} · Flat {homeRef.flat} · Floor {homeRef.floor}
-          </button>
-        )}
       </aside>}
     </div>
   );

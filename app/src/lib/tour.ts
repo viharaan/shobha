@@ -125,6 +125,19 @@ export function siteTour(wing: number): SiteTourStop[] {
   ];
 }
 
+/**
+ * Camera pose for a place picked outside the tour (place list, label click): the tour's own stop when it has one,
+ * else a generic three-quarter view of the hotspot. Lets a click glide the camera there as the tour does.
+ */
+export function placeStop(hotspotId: string, wing = 1): SiteTourStop | null {
+  const own = siteTour(wing).find((s) => s.hotspot === hotspotId);
+  if (own) return { ...own, seconds: Math.max(own.seconds, 2.2) };
+  const h = HOTSPOTS.find((x) => x.id === hotspotId);
+  if (!h) return null;
+  const t = hs(hotspotId);
+  return stop(hotspotId, h.label.split(' — ')[0], h.description ?? '', '', [t[0], 4, t[2]], [-140, 150, 180], { hotspot: hotspotId, seconds: 2.4 });
+}
+
 /** Where the site tour hands off: the wing's drawn plan at a mid floor; the stage switches to home mode with tour=rooms. */
 export function siteTourHandoff(wing: number): { plan: string; floor: number; label: string } | null {
   const tower = TOWERS.find((t) => t.wing === wing);
