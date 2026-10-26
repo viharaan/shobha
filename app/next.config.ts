@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
   // one `next dev` per distDir: the Claude preview runs with NEXT_DIST_DIR=.next-preview so it can coexist with the HTTPS headset server
   distDir: process.env.NEXT_DIST_DIR || '.next',
   cacheComponents: true,
+  // the dev-only Next.js badge defaults to bottom-left, where the stage's ▶ next button lives
+  devIndicators: { position: 'bottom-right' },
   // LAN / headset testing: dev assets are refused from non-localhost origins unless listed here
   allowedDevOrigins: ['192.168.0.108', '192.168.0.105', '192.168.0.*', '192.168.255.*'], // Wi-Fi LAN + VPN tunnel
   outputFileTracingRoot: __dirname,

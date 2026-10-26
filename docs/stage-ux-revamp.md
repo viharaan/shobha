@@ -45,6 +45,10 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 **Look: liquid glass.** The dock, popups, cards, trail, mode switch, compass and full-screen button share an iOS-style glass surface (`.glass` for chrome, `.glass-strong` where text must read; tokens `--glass-*` in `globals.css`): a tinted, heavily blurred and saturated backdrop, a light edge with a top highlight and a soft shadow. Secondary text on glass is lifted and carries a faint shadow so it stays legible over the light ground of the model.
 
+**Card on demand.** The place card no longer sits on screen. A round gold ▶ at the bottom left goes to the next view (same as → and the dock's ›); hovering it (or keyboard focus) opens the card above it with "Next: …", and touch screens get a small ⓘ beside it. The small trail stays top left as the way back up. Picking a place, tower, floor, room or map topic in a dock popup closes the popup so the camera move is visible. Buttons are pills, tower numbers circles.
+
+**No source badges on cards and popups** (by request): they show the details only. The provenance stays in the accessible text of each card, in View → About this model, and in the badge legend of the Community section.
+
 ## Inside a home: eye level and sunlight
 
 - **Eye-level 360° room view** (default). Picking a room (list, ← →, minimap, room tour) now stands you in it at 1.6 m, at the same free spot walk mode and VR use, facing along the room; drag turns the view in place like a 360° photo (no pan or zoom). Ceiling and the floors above are on, so light comes in only through the openings; room labels and the red tour pin are off. The room card has an Eye level / Top switch; Top is the previous look-down framing.

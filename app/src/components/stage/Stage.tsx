@@ -37,6 +37,15 @@ export default function Stage() {
   const toggleFull = () => { if (document.fullscreenElement) void document.exitFullscreen(); else void stageRef.current?.requestFullscreen?.(); };
   const chrome = !present && !touring;
   const intro = chrome && !touched && mode === 'community' && num('wing') === null && params.get('find') !== '1';
+  // once the visitor has been anywhere in the stage (a tower or the finder in the URL, a stage key), the intro is done:
+  // picking a place clears the tower from the URL and must not bring the title card back
+  const visited = num('wing') !== null || params.get('find') === '1' || mode !== 'community';
+  useEffect(() => { if (visited) Promise.resolve().then(() => setTouched(true)); }, [visited]);
+  useEffect(() => {
+    const done = () => setTouched(true);
+    window.addEventListener('stage-key', done);
+    return () => window.removeEventListener('stage-key', done);
+  }, []);
   // the camera pad is opt-in (mouse, touch and the arrow keys cover it); Present lives in View options too
   const [pad, setPad] = useState(false);
   // the key legend shows once after the intro and fades after a while or the first stage key
@@ -106,7 +115,7 @@ export default function Stage() {
       )}
 
       {/* camera pad, opt-in from View options (walk / VR ignore it); phones use two-finger gestures instead */}
-      {chrome && !intro && is3d && pad && <NavPad className="absolute bottom-4 left-3 z-30 max-md:hidden max-lg:bottom-auto max-lg:left-auto max-lg:right-3 max-lg:top-[10.5rem]" />}
+      {chrome && !intro && is3d && pad && <NavPad className="absolute right-3 top-[7.5rem] z-30 max-md:hidden" />}
 
       {/* keyboard legend, wide screens only; fades after a while or the first key */}
       {chrome && !intro && (

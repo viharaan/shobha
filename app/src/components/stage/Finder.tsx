@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { StatusBadge } from '@/components/ui/primitives';
 import { PHASES, PLC_TIERS, PROJECT, TOWERS, UNIT_TYPES } from '@/data/project';
 import { FLATS } from '@/data/sobha/flats/directory';
-import { compass, homePrice, resolveHome, statusForKind } from '@/lib/homes';
+import { compass, homePrice, resolveHome } from '@/lib/homes';
 import { fmtCr, fmtInr } from '@/lib/scale';
 import { useShortlist } from '@/lib/shortlist';
 import { useUrlState } from '@/lib/useUrlState';
@@ -179,7 +178,6 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
               <div className="display text-2xl leading-none text-fg">{price ? fmtCr(price.total) : '—'}</div>
               <div className="mt-1 text-fg-muted">{chosen.record.config} · {chosen.record.sbaSft ? `${chosen.record.sbaSft.toLocaleString('en-IN')} sq ft` : 'SBA not printed'}</div>
             </div>
-            <StatusBadge status={statusForKind(chosen.record.kind)} />
           </div>
           <label className="block">
             <span className="label !text-[10px]">Floor {chosen.ref.floor} of {chosen.maxFloor}{chosen.refuge ? ' · refuge floor' : ''}</span>

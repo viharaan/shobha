@@ -11,7 +11,7 @@ import { isRefugeFloor, maxBuildingFloor, midBuildingFloor } from '@/lib/unit/bu
 import { istTodayYmd } from '@/lib/solar';
 import { bearingDeg, compassPoint } from '@/lib/unit/worldTiles';
 import { Panel, Spinner, StatusBadge } from '@/components/ui/primitives';
-import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { Facts, InfoCard, PeekNext, StageTrail, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { ChoiceList, Dock, type DockTab } from './Dock';
 import { VRButton } from '@/components/three/VRButton';
 import { StageLoader } from './StageLoader';
@@ -377,7 +377,7 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
     </div>
   );
   const roomsPanel = (
-    <ChoiceList items={roomStops.map(({ room: r }) => ({ key: plan.rooms.indexOf(r), label: r.name, meta: `${(r.mm[0] / 1000).toFixed(2)} × ${(r.mm[1] / 1000).toFixed(2)} m`, active: roomShown === r, onClick: () => goRoom(r) }))} />
+    <ChoiceList items={roomStops.map(({ room: r }) => ({ key: plan.rooms.indexOf(r), label: r.name, meta: `${(r.mm[0] / 1000).toFixed(2)} × ${(r.mm[1] / 1000).toFixed(2)} m`, active: roomShown === r, onClick: () => { goRoom(r); setTab(null); } }))} />
   );
   const tabs: DockTab[] = [
     { id: 'rooms', label: 'Rooms', panel: roomsPanel },
@@ -427,8 +427,8 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
       {/* the plan as a minimap: the red dot is the camera / walker; a click on a room moves the view there */}
       {layout === 'map' && !present && (
         <div className={`absolute z-30 overflow-hidden rounded-xl border border-line bg-black/85 shadow-2xl transition-[width,height] duration-200 ${mapBig
-          ? 'left-3 right-3 top-16 bottom-[4.75rem] lg:right-auto lg:bottom-4 lg:w-[min(56vw,780px)]'
-          : 'left-3 top-16 h-28 w-40 sm:h-36 sm:w-52 lg:bottom-4 lg:top-auto lg:h-52 lg:w-72'}`} aria-label="Floor plan minimap">
+          ? 'left-3 right-3 top-16 bottom-[4.75rem] lg:left-auto lg:bottom-4 lg:w-[min(56vw,780px)]'
+          : 'right-3 top-16 h-28 w-40 sm:h-36 sm:w-52 lg:bottom-4 lg:top-auto lg:h-52 lg:w-72'}`} aria-label="Floor plan minimap">
           <PlanViewer2D key={plan.id} plan={plan} mPerUnit={mPerUnit} tool={tool} points={points} onPointsChange={setPoints} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} showRooms northDeg={northPrinted} beacon={roomStop} onPick={pickRoom} />
           <div className="pointer-events-none absolute left-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] text-fg-muted max-sm:hidden">Plan · click a room</div>
           <button type="button" className="btn absolute right-1.5 top-1.5 min-h-0 px-2 py-1 text-[11px]" onClick={() => setMapBig(!mapBig)} aria-expanded={mapBig} aria-label={mapBig ? 'Shrink the plan' : 'Expand the plan'}>{mapBig ? '⤡' : '⤢'}</button>
@@ -437,7 +437,8 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
 
       {layout !== '2d' && <StageLoader key={plan.id} ready={status.state !== 'loading' && !worldLoading} poster="/media/video/clip-01.png" caption="Developer’s render · OneWorld Plaza · illustrative" steps={[{ label: `Tracing the ${plan.name} walls from the plan`, done: status.state !== 'loading' }, ...(placement ? [{ label: `Loading the view from floor ${floor}`, done: !worldLoading }] : [])]} />}
 
-      {chrome && <StageCard crumbs={crumbs}>{roomCard ?? homeCard}</StageCard>}
+      {chrome && <StageTrail crumbs={crumbs} />}
+      {chrome && <PeekNext next={{ label: roomStops[(roomIdx + 1) % roomStops.length]?.room.name ?? '', onClick: () => cycleRoom(1) }}>{roomCard ?? homeCard}</PeekNext>}
       {chrome && <Dock current={stepper} tabs={tabs} openTab={tab} onOpenTab={onOpenTab} extra={<VRButton compact />} />}
 
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={{ label: 'Find this home', onClick: () => set({ tour: null, mode: null, find: 1 }) }} />}

@@ -9,7 +9,7 @@ import { SITE_IMAGE } from '@/data/manifest';
 import { INFRASTRUCTURE, POI_DISTANCES } from '@/data/project';
 import { formatDistance, haversineM, type LonLat } from '@/lib/geo';
 import { useUrlState } from '@/lib/useUrlState';
-import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { Facts, InfoCard, PeekNext, StageTrail, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { ChoiceList, Dock, type DockTab } from './Dock';
 
 const GeoMap = dynamic(() => import('@/components/geo/GeoMap').then((m) => m.GeoMap), { ssr: false, loading: () => <div className="grid h-full place-items-center"><Spinner label="Loading map…" /></div> });
@@ -157,8 +157,9 @@ export default function LocationStage({ keys = true }: { keys?: boolean }) {
     </Panel>
     </div>
   );
+  const [tab, setTab] = useState<string | null>(null);
   const tabs: DockTab[] = [
-    { id: 'topics', label: 'Topics', panel: <ChoiceList items={TOPICS.map((x) => ({ key: x.id, label: x.name, meta: x.cats.length && x.cats !== ALL && pois.length ? within(x.cats, 7) || undefined : undefined, active: topic === x.id, onClick: () => pickTopic(x.id) }))} /> },
+    { id: 'topics', label: 'Topics', panel: <ChoiceList items={TOPICS.map((x) => ({ key: x.id, label: x.name, meta: x.cats.length && x.cats !== ALL && pois.length ? within(x.cats, 7) || undefined : undefined, active: topic === x.id, onClick: () => { pickTopic(x.id); setTab(null); } }))} /> },
     { id: 'layers', label: 'Layers', panel: layersPanel },
     { id: 'measure', label: measure ? (measured !== null ? formatDistance(measured) : 'Click two points') : 'Measure', pressed: measure, onClick: () => { setMeasure(!measure); setMeasurePts([]); } },
     { id: 'fly', label: 'Fly to site', onClick: () => setFlyToken((k) => k + 1) },
@@ -179,8 +180,9 @@ export default function LocationStage({ keys = true }: { keys?: boolean }) {
         </div>
       </div>
 
-      {keys && <StageCard crumbs={crumbs}>{card}</StageCard>}
-      {keys && <Dock current={stepper} tabs={tabs} />}
+      {keys && <StageTrail crumbs={crumbs} />}
+      {keys && <PeekNext next={{ label: TOPICS[(ti + 1) % TOPICS.length].name, onClick: () => cycleTopic(1) }}>{card}</PeekNext>}
+      {keys && <Dock current={stepper} tabs={tabs} openTab={tab} onOpenTab={setTab} />}
 
 
 

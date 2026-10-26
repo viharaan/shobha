@@ -17,7 +17,7 @@ import { imageRingToLocal, ringAreaM2 } from '@/lib/geo';
 import { indicativePrice } from '@/lib/pricing';
 import { fmtCr, fmtInr } from '@/lib/scale';
 import { istHoursNow, istTodayYmd } from '@/lib/solar';
-import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { Facts, InfoCard, PeekNext, StageTrail, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { ChoiceList, Dock, type DockTab } from './Dock';
 import { VRButton } from '@/components/three/VRButton';
 import { NavDriver } from './NavDriver';
@@ -129,6 +129,9 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
     const f0 = latestNum('floor');
     setFloor(f0 === null ? Math.round(t.typicalFloors / 2) : Math.min(t.typicalFloors, Math.max(1, f0 + d)));
   };
+  const nextView = tower
+    ? { label: `Wing ${TOWERS[(towerIdx + 1) % TOWERS.length].wing}`, onClick: () => cycleTower(1) }
+    : { label: PLACES[(placeIdx + 1) % PLACES.length].name, onClick: () => cyclePlace(1) };
   const stepper: Stepper = tower
     ? { label: floor !== null ? `Wing ${tower.wing} · Floor ${floor}` : `Wing ${tower.wing}`, pos: `${towerIdx + 1} / ${TOWERS.length}`, onPrev: () => cycleTower(-1), onNext: () => cycleTower(1) }
     : hs && placeIdx >= 0
@@ -188,7 +191,6 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
       title={PLACES.find((p) => p.id === hs.id)?.name ?? hs.label.split(' — ')[0]}
       badge={<StatusBadge status={hs.provenance.status} title={hs.provenance.source} />}
       lead={hs.description ?? hs.label.split(' — ')[1] ?? hs.label}
-      details={hs.provenance.source ? <p className="text-[11px] text-fg-muted"><span className="label !text-[10px]">Source</span> {hs.provenance.source}. Shapes in the model are standard-size stand-ins at the plan’s markers.</p> : undefined}
       actions={nextPlace ? <button type="button" className="btn btn-primary" onClick={() => selectPlace(nextPlace.id)}>Next: {nextPlace.name} ›</button> : undefined}
     />
   ) : null;
@@ -254,19 +256,19 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const timePanel = <SunPanel date={date} hour={hour} onDate={setDate} onHour={setHour} note="Sun direction computed for the site (NOAA). Towers are massing, so shadows are illustrative." />;
   const placesPanel = (
     <div className="flex flex-col gap-3">
-      <ChoiceList items={PLACES.map((p) => ({ key: p.id, label: p.name, active: hotspot === p.id, onClick: () => selectPlace(p.id) }))} />
+      <ChoiceList items={PLACES.map((p) => ({ key: p.id, label: p.name, active: hotspot === p.id, onClick: () => { selectPlace(p.id); setTab(null); } }))} />
       <div>
         <div className="label px-1 pb-1.5">Towers</div>
         <div className="grid grid-cols-7 gap-1">
           {TOWERS.map((t) => (
-            <button key={t.wing} type="button" className="btn justify-center px-0" aria-pressed={wing === t.wing} onClick={() => selectWing(t.wing)} title={`Wing ${t.wing} · Phase ${t.phase} · handover ${t.handover}`}>{t.wing}</button>
+            <button key={t.wing} type="button" className="btn h-9 w-9 justify-center justify-self-center p-0" aria-pressed={wing === t.wing} onClick={() => { selectWing(t.wing); setTab(null); }} title={`Wing ${t.wing} · Phase ${t.phase} · handover ${t.handover}`}>{t.wing}</button>
           ))}
         </div>
       </div>
     </div>
   );
   const floorsPanel = tower && (
-    <ChoiceList items={Array.from({ length: tower.typicalFloors }, (_, i) => tower.typicalFloors - i).map((f) => ({ key: f, label: `Floor ${f}`, meta: PROJECT.refugeFloors.includes(f) ? 'refuge' : undefined, active: floor === f, onClick: () => setFloor(f) }))} />
+    <ChoiceList items={Array.from({ length: tower.typicalFloors }, (_, i) => tower.typicalFloors - i).map((f) => ({ key: f, label: `Floor ${f}`, meta: PROJECT.refugeFloors.includes(f) ? 'refuge' : undefined, active: floor === f, onClick: () => { setFloor(f); setTab(null); } }))} />
   );
   const [tab, setTab] = useState<string | null>(null);
   const openTab = finder.active ? 'find' : tab;
@@ -311,7 +313,8 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
         </div>
       )}
 
-      {chrome && !finder.active && card && <StageCard crumbs={crumbs}>{card}</StageCard>}
+      {chrome && !finder.active && crumbs.length > 1 && <StageTrail crumbs={crumbs} />}
+      {chrome && !finder.active && <PeekNext next={nextView}>{card}</PeekNext>}
       {chrome && <Dock current={stepper} tabs={tabs} openTab={openTab} onOpenTab={onOpenTab} extra={<VRButton compact />} />}
 
       {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} current={null} target="explore" onExit={() => set({ present: null })} />}

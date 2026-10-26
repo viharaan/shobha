@@ -19,15 +19,49 @@ export interface Stepper {
   onNext?: () => void;
 }
 
-/**
- * The card for the current place, on its own: top-left under the mode switch on wide screens, above the dock below
- * 1024 px. Shown only once a place is picked, so the first view stays clear.
- */
-export function StageCard({ crumbs, children }: { crumbs?: Crumb[]; children: React.ReactNode }) {
+/** The trail on its own, top-left under the mode switch: where you are, and the way back up. */
+export function StageTrail({ crumbs }: { crumbs: Crumb[] }) {
   return (
-    <div className="pointer-events-none absolute inset-x-3 bottom-[4.6rem] z-30 flex max-h-[44%] flex-col gap-1.5 max-lg:mx-auto max-lg:max-w-md lg:inset-x-auto lg:bottom-auto lg:left-3 lg:top-16 lg:max-h-[calc(100%-10rem)] lg:w-[19rem]">
-      {crumbs && <div className="pointer-events-auto"><Crumbs items={crumbs} /></div>}
-      <div className="pointer-events-auto min-h-0 overflow-y-auto scroll-thin rounded-xl">{children}</div>
+    <div className="pointer-events-auto absolute left-3 top-16 z-30 max-w-[calc(100%-1.5rem)] lg:max-w-[22rem]">
+      <Crumbs items={crumbs} />
+    </div>
+  );
+}
+
+/**
+ * Bottom-left: a round ▶ that goes to the next view (the same move as → and the dock's ›). The card for the current
+ * place stays out of the way until asked for: hovering the button (or keyboard focus) opens it above, with "Next: …";
+ * touch screens, which have no hover, get a small ⓘ beside it instead.
+ */
+export function PeekNext({ next, children }: { next: { label: string; onClick: () => void } | null; children?: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  if (!next && !children) return null;
+  return (
+    <div className="group pointer-events-none absolute bottom-[4.75rem] left-3 z-30 flex max-w-[calc(100%-1.5rem)] flex-col items-start gap-2 lg:bottom-4">
+      {children && (
+        <div className={`pointer-events-auto max-h-[min(55svh,30rem)] w-[min(20rem,calc(100vw-1.5rem))] overflow-y-auto scroll-thin rounded-[1.4rem] transition-all duration-200 ${open ? 'translate-y-0 opacity-100' : 'invisible translate-y-1 opacity-0 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100'}`}>
+          {children}
+        </div>
+      )}
+      <div className="pointer-events-auto flex items-center gap-2">
+        {next && (
+          <button type="button" onClick={next.onClick} aria-label={`Next: ${next.label}`} title={`Next: ${next.label} (→)`}
+            className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent text-black shadow-[0_8px_24px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.45)] transition-transform hover:scale-105 active:scale-95">
+            <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5" fill="currentColor" aria-hidden><path d="M8 5.5v13l10.5-6.5z" /></svg>
+          </button>
+        )}
+        {next && (
+          <span className="glass pointer-events-none whitespace-nowrap rounded-full px-3 py-1.5 text-xs text-fg opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100">
+            Next: {next.label}
+          </span>
+        )}
+        {children && (
+          <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label={open ? 'Hide details' : 'Show details'}
+            className="glass grid h-9 w-9 place-items-center rounded-full text-sm text-fg [@media(hover:hover)]:hidden">
+            {open ? '×' : 'i'}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -111,7 +145,8 @@ export function InfoCard({ eyebrow, title, badge, lead, details, actions, detail
           <div className="eyebrow !text-[10px]">{eyebrow}</div>
           <h2 className="display mt-0.5 truncate text-xl leading-tight">{title}</h2>
         </div>
-        {badge && <div className="shrink-0 pt-0.5">{badge}</div>}
+        {/* the source badge is not shown on cards (details only, by request); it stays in the accessible text */}
+        {badge && <span className="sr-only">{badge}</span>}
       </div>
       {lead && <div className="mt-1.5 text-xs text-fg-muted max-lg:line-clamp-2">{lead}</div>}
       {details && (
