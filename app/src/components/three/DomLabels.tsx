@@ -52,7 +52,8 @@ const v = new Vector3();
 export function LabelProjector({ entries, maxDistance = Infinity }: { entries: LabelEntry[]; maxDistance?: number }) {
   const camera = useThree((s) => s.camera);
   const size = useThree((s) => s.size);
-  const last = useRef<Map<string, string>>(new Map());
+  // keyed by element, not id: a label that unmounts and mounts again (same id) is a new, hidden element and must be placed
+  const last = useRef<WeakMap<HTMLElement, string>>(new WeakMap());
   useFrame(() => {
     for (const e of entries) {
       const el = registry.get(e.id);
@@ -64,8 +65,8 @@ export function LabelProjector({ entries, maxDistance = Infinity }: { entries: L
       const x = ((v.x + 1) / 2) * size.width;
       const y = ((1 - v.y) / 2) * size.height;
       const next = visible ? `translate(-50%,-50%) translate(${x.toFixed(1)}px,${y.toFixed(1)}px)` : 'hidden';
-      if (last.current.get(e.id) === next) continue;
-      last.current.set(e.id, next);
+      if (last.current.get(el) === next) continue;
+      last.current.set(el, next);
       if (visible) {
         el.style.transform = next;
         el.style.visibility = 'visible';

@@ -49,7 +49,7 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 **No source badges on cards and popups** (by request): they show the details only. The provenance stays in the accessible text of each card, in View → About this model, and in the badge legend of the Community section.
 
-**One page.** The Community section below the stage is gone; its content moved to where it is used: the six **realms** are a Community dock tab (each glides to a high view over its traced legend markers, with its own card and ‹ › stepping); **phases and handover** (with the RERA and floor-count notes) open under the tower choice in Configure your home; **connectivity** is the second Location topic. The badge legend moved to View → How to read the data. The header reads Explore · Find a home · Location · Media · Shortlist; below the stage only the shortlist (Compare) remains.
+**One page.** The Community section below the stage is gone; its content moved to where it is used: the six **realms** are a Community dock tab: picking one turns the towers see-through (no shadows), labels each of its places on the ground, and fits the camera to those places from about 64° above; card and ‹ › stepping as for places; **phases and handover** (with the RERA and floor-count notes) open under the tower choice in Configure your home; **connectivity** is the second Location topic. The badge legend moved to View → How to read the data. The header reads Explore · Find a home · Location · Media · Shortlist; below the stage only the shortlist (Compare) remains.
 
 **The stage is the page.** No header: the stage fills the screen, with a small SOBHA OneWorld wordmark top centre on wide screens. **Media** is a fourth mode (Community · Home · Location · Media): the selected video or image fills the stage, the dock steps through all 41 items (7 videos, 4 plans and creatives, 30 brochure pages) and its Videos / Plans / Brochure tabs show thumbnail grids; `/media` forwards there. **Compare and the shortlist are removed** (the ☆ buttons, the overlay, the header chip); Present mode keeps a glass bar with what is on screen and Exit; old `/compare` links land on the stage.
 
@@ -60,6 +60,10 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 - **Eye-level 360° room view** (default). Picking a room (list, ← →, minimap, room tour) now stands you in it at 1.6 m, at the same free spot walk mode and VR use, facing along the room; drag turns the view in place like a 360° photo (no pan or zoom). Ceiling and the floors above are on, so light comes in only through the openings; room labels and the red tour pin are off. The room card has an Eye level / Top switch; Top is the previous look-down framing.
 - **Sunlight** (Home dock tab for placed flats; Community's "Time of day" became the same panel): time presets (sunrise, morning, noon, afternoon, sunset), 21 Jun / 22 Sep / 21 Dec, a slider, "Play the day" (sunrise → sunset in about 25 s), and a readout: sun altitude and direction, and whether direct sun is on the balcony side (from the flat's balcony bearing). The sun is the existing NOAA-computed one at the site, with shadows from the neighbouring towers.
 - **Fix:** the sky dome of the surroundings was a 4.4 km sphere outside the home camera's 500 m far plane, so from eye level (and in walk mode) the sky rendered black. It now rides with the camera at 400 m (direction-only shader, drawn first without depth).
+
+## VR minimap
+
+Pointing the controller ray anywhere on the head-locked minimap now shows a ring where it meets the map (rooms and tower markers keep their own highlight); the trigger there moves you to that spot (site: not into a tower; home: the nearest free floor cell, as a floor teleport does). Not yet tried on a headset.
 
 ## Kept as it was
 

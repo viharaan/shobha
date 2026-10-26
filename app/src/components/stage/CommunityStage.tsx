@@ -8,7 +8,7 @@ import { Panel, StatusBadge } from '@/components/ui/primitives';
 import { PresentationBar } from '@/components/ui/PresentationBar';
 import { TourBar } from '@/components/ui/TourBar';
 import { GOOGLE_MAPS_KEY } from '@/components/three/GoogleTiles';
-import { placeStop, realmStop, siteTour, siteTourHandoff } from '@/lib/tour';
+import { amenityPoint, placeStop, realmStop, siteTour, siteTourHandoff } from '@/lib/tour';
 import { realms } from '@/data/sobha/realms';
 import { amenities, realmColor } from '@/data/sobha/amenities';
 import { useUrlState } from '@/lib/useUrlState';
@@ -84,6 +84,10 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   // a place picked outside the tour glides the camera to the tour's pose for it
   const placeGoal = useMemo(() => (hotspot && tourIndex === null ? placeStop(hotspot, tourWing) : null), [hotspot, tourIndex, tourWing]);
   const realmGoal = useMemo(() => (realm && tourIndex === null ? realmStop(realm) : null), [realm, tourIndex]);
+  // a realm sits between 140 m towers: while one is picked the towers go see-through and its places get markers
+  const realmPlaces = useMemo(() => (realm ? amenities.filter((a) => a.realm === realm).map((a) => ({ a, p: amenityPoint(a.code) })).filter((x): x is { a: (typeof amenities)[number]; p: [number, number, number] } => !!x.p) : []), [realm]);
+  const realmLabels = useMemo(() => realmPlaces.map(({ a, p }) => ({ id: `am-${a.code}`, position: p })), [realmPlaces]);
+  const allWings = useMemo(() => TOWERS.map((t) => t.wing), []);
   const exitTour = () => set({ tour: null });
   const goTourStop = (i: number) => {
     const s = tour[Math.max(0, Math.min(i, tour.length - 1))];
@@ -340,16 +344,21 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
         <HeadingProbe toBearing={siteBearing} />
         <NavDriver />
         <Suspense fallback={null}>
-          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal ?? realmGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={finder.dimWings} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
+          <SiteScene mode={mode} onTerrainStatus={setTerrain} photoreal={photoreal} photorealMounted={photorealMounted} photorealOffset={photorealOffset} tourGoal={tourStop ?? placeGoal ?? realmGoal} date={date} hour={hour} selectedWing={wing} onSelectWing={selectWing} selectedHotspot={hotspot} onSelectHotspot={selectPlace} selectedFloor={floor} isolateFloor={isolate} explode={explode} dimWings={realm && !finder.active ? allWings : finder.dimWings} extraLabels={realmLabels} frameWings={finder.frameWings} sectionHeight={sectionOn ? sectionHeight : null} showLabels={labels} community={landscape} groundOpacity={groundOpacity} resetToken={resetToken} northToken={northToken} autoRotate={intro && tourIndex === null} />
           <Mounted onMount={onSceneMount} />
         </Suspense>
       </Canvas>
       {labels && !intro && (
         <LabelLayer>
           {TOWERS.filter((t) => !tourStop || tourStop.wing === t.wing).map((t) => (
-            <DomLabel key={t.wing} id={`wing-${t.wing}`} active={wing === t.wing} onClick={() => selectWing(wing === t.wing ? null : t.wing)} className={finder.dimWings?.includes(t.wing) ? 'opacity-40' : ''}>Wing {t.wing}{finder.active && !UNLABELLED_WINGS.includes(t.wing) ? ` · ${finder.wingCount(t.wing)}` : ''}</DomLabel>
+            <DomLabel key={t.wing} id={`wing-${t.wing}`} active={wing === t.wing} onClick={() => selectWing(wing === t.wing ? null : t.wing)} className={realm || finder.dimWings?.includes(t.wing) ? 'opacity-40' : ''}>Wing {t.wing}{finder.active && !UNLABELLED_WINGS.includes(t.wing) ? ` · ${finder.wingCount(t.wing)}` : ''}</DomLabel>
           ))}
-          {HOTSPOTS.filter((h) => (!tourStop || tourStop.hotspot === h.id) && !finder.active).map((h) => (
+          {realmPlaces.map(({ a }) => (
+            <DomLabel key={`am-${a.code}`} id={`am-${a.code}`}>
+              <span className="mr-1 inline-block h-2 w-2 rounded-full align-middle" style={{ background: realmColor[a.realm] }} aria-hidden />{a.name}
+            </DomLabel>
+          ))}
+          {HOTSPOTS.filter((h) => (!tourStop || tourStop.hotspot === h.id) && !finder.active && !realm).map((h) => (
             <DomLabel key={h.id} id={`hs-${h.id}`} active={hotspot === h.id} onClick={() => selectPlace(hotspot === h.id ? null : h.id)}>{h.label.split(' — ')[0]}</DomLabel>
           ))}
         </LabelLayer>

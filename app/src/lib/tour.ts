@@ -139,6 +139,9 @@ export function placeStop(hotspotId: string, wing = 1): SiteTourStop | null {
   return stop(hotspotId, h.label.split(' — ')[0], h.description ?? '', '', [t[0], 4, t[2]], [-140, 150, 180], { hotspot: hotspotId, seconds: 2.4 });
 }
 
+/** Explorer-frame ground point of an amenity's printed legend marker (null when not traced): for labels on the model. */
+export const amenityPoint = (code: string) => legend(code);
+
 /**
  * Camera pose for one of the six named realms: frames the realm's printed legend markers (traced master plan, fitted
  * into the explorer frame) from high in the south, far enough out to hold them all. Null when none of its codes is traced.
@@ -149,9 +152,10 @@ export function realmStop(realm: string): SiteTourStop | null {
   const cx = pts.reduce((a, p) => a + p[0], 0) / pts.length;
   const cz = pts.reduce((a, p) => a + p[2], 0) / pts.length;
   const r = Math.max(30, ...pts.map((p) => Math.hypot(p[0] - cx, p[2] - cz)));
-  // steep (≈ 64°) and well out: the realms sit between 140 m towers, which hide them from any low angle
-  const d = Math.min(560, Math.max(280, r * 2.6 + 80));
-  return stop(`realm-${realm}`, realm, '', '', [cx, 4, cz], [d * 0.2, d * 0.95, d * 0.42], { seconds: 2.4 });
+  // steep (≈ 64°) and fitted to the markers: the towers turn see-through while a realm is shown, so the camera can
+  // come in as close as the realm's own extent (about 2.3 × its radius fills the 45° view with a small margin)
+  const d = Math.min(480, Math.max(130, r * 2.3 + 25));
+  return stop(`realm-${realm}`, realm, '', '', [cx, 2, cz], [d * 0.2, d * 0.95, d * 0.42], { seconds: 2.4 });
 }
 
 /** Where the site tour hands off: the wing's drawn plan at a mid floor; the stage switches to home mode with tour=rooms. */

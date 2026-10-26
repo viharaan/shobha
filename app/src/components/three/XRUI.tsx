@@ -3,9 +3,9 @@
 import { Billboard } from '@react-three/drei';
 import { signal, type Signal } from '@preact/signals-core';
 import { Container, Image, Text } from '@react-three/uikit';
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ComponentRef, type ReactNode } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-import { Group, Quaternion, Vector3 } from 'three';
+import { Group, Quaternion, Vector3, type Object3D } from 'three';
 import type { Texture } from 'three';
 import { navPose, subscribeNavPose } from '@/lib/navPose';
 export { useInXR } from '@/lib/xr';
@@ -126,11 +126,22 @@ export interface MapRegion { u0: number; v0: number; u1: number; v1: number; act
  * (rooms) and markers (wings), plus the live red position marker. The image itself takes no clicks, so a
  * tap on empty map space selects nothing. `toUV` maps world x,z (metres) to image fractions.
  */
-export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], regions = [] }: {
+export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], regions = [], onPick }: {
   src: string | Texture; aspect: number; width?: number; toUV: (x: number, z: number) => [number, number];
   markers?: MapMarker[]; regions?: MapRegion[];
+  /** trigger on an empty part of the map: go there (map u, v in 0..1, v down) */
+  onPick?: (u: number, v: number) => void;
 }) {
   const height = width / aspect;
+  // where the controller ray meets the map: a ring follows it, so the player sees the spot a trigger press would pick
+  const surface = useRef<ComponentRef<typeof Container>>(null);
+  const [aim, setAim] = useState<[number, number] | null>(null);
+  const uvOf = (e: { point: Vector3 }): [number, number] | null => {
+    const o = surface.current as Object3D | null; // a uikit Container is a three.js Object3D
+    if (!o) return null;
+    const p = o.worldToLocal(e.point.clone()); // uikit local space: -0.5..0.5 across the container, y up
+    return [Math.min(1, Math.max(0, p.x + 0.5)), Math.min(1, Math.max(0, 0.5 - p.y))];
+  };
   const pct = (f: number) => `${Math.min(1, Math.max(0, f)) * 100}%` as const;
   // largest first so smaller rooms (bathrooms, closets) sit on top and stay tappable
   const ordered = [...regions].sort((a, b) => (b.u1 - b.u0) * (b.v1 - b.v0) - (a.u1 - a.u0) * (a.v1 - a.v0));
@@ -138,6 +149,20 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
     <Container positionType="relative" width={width} height={height} borderRadius={6} borderWidth={1} borderColor={LINE} overflow="hidden">
       {/* eslint-disable-next-line jsx-a11y/alt-text -- uikit Image is a textured quad, not a DOM <img> */}
       <Image src={src} positionType="absolute" positionLeft={0} positionTop={0} width={width} height={height} pointerEvents="none" />
+      {/* the aim surface, under the rooms and markers so those keep their own hover and click */}
+      <Container
+        ref={surface}
+        positionType="absolute"
+        positionLeft={0}
+        positionTop={0}
+        width={width}
+        height={height}
+        backgroundColor="#00000001"
+        cursor={onPick ? 'pointer' : undefined}
+        onPointerMove={(e) => setAim(uvOf(e))}
+        onPointerLeave={() => setAim(null)}
+        onClick={onPick ? (e) => { e.stopPropagation?.(); const uv = uvOf(e); if (uv) onPick(uv[0], uv[1]); } : undefined}
+      />
       {ordered.map((r, i) => (
         <Container
           key={`r${i}`}
@@ -173,6 +198,9 @@ export function XRMiniMap({ src, aspect, width = 150, toUV, markers = [], region
           onClick={m.onClick ? (e) => { e.stopPropagation?.(); m.onClick?.(); } : undefined}
         />
       ))}
+      {aim && (
+        <Container positionType="absolute" positionLeft={pct(aim[0])} positionTop={pct(aim[1])} transformTranslateX={-11} transformTranslateY={-11} width={22} height={22} borderRadius={11} borderWidth={2} borderColor="#ffffff" backgroundColor="#3f6f9a99" pointerEvents="none" />
+      )}
       <PlayerMarker toUV={toUV} />
     </Container>
   );

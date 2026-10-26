@@ -66,6 +66,8 @@ export interface SiteSceneProps {
   photorealOffset?: number;
   /** master-plan landscape: club, wall, roads, track, field, water, trees, amenity props (default on) */
   community?: boolean;
+  /** extra DOM-label anchors at ground level (e.g. a realm's places); lifted onto the terrain here */
+  extraLabels?: readonly LabelEntry[] | null;
   /** wings to frame with the orbit camera whenever the set changes (the home configurator zooms to its matches) */
   frameWings?: readonly number[] | null;
   /** wings to ghost (the home finder lights only the towers with matching flats) */
@@ -217,7 +219,7 @@ function TowerStack({ tower, selectedWing, selectedFloor, isolateFloor, explode,
       ref={ref}
       args={[geom, undefined, n]}
       frustumCulled={false}
-      castShadow
+      castShadow={!dim}
       receiveShadow
       onClick={(e) => { e.stopPropagation(); onSelectWing(tower.wing); }}
     >
@@ -380,7 +382,11 @@ export function SiteScene(p: SiteSceneProps) {
   const inXR = useInXR();
   const { hAt, done: terrainDone } = useSiteTerrain(p.onTerrainStatus);
   const groundY = useCallback((x: number, z: number) => (hAt ? hAt(x, z) : 0), [hAt]);
-  const labelEntries = useMemo(() => siteLabelEntries(p.explode, hAt), [p.explode, hAt]);
+  const labelEntries = useMemo(() => {
+    const base = siteLabelEntries(p.explode, hAt);
+    const extra = (p.extraLabels ?? []).map((e): LabelEntry => ({ id: e.id, position: [e.position[0], (hAt ? hAt(e.position[0], e.position[2]) : 0) + 5, e.position[2]] }));
+    return [...base, ...extra];
+  }, [p.explode, hAt, p.extraLabels]);
   // Sun for the chosen IST date/time at the site (NOAA algorithm). `day` ramps light through civil twilight.
   const sun = useMemo(() => {
     const sp = sunPosition(istDate(istDay(p.date), p.hour), SITE_ORIGIN.lat, SITE_ORIGIN.lng);
@@ -496,6 +502,13 @@ export function SiteScene(p: SiteSceneProps) {
             width={300}
             toUV={toUV}
             markers={TOWERS.map((t) => ({ u: t.imagePx[0] / SITE_IMAGE.widthPx, v: t.imagePx[1] / SITE_IMAGE.heightPx, active: t.wing === p.selectedWing, onClick: () => goWing(t) }))}
+            onPick={(u, v) => {
+              // inverse of toUV: map → site plan pixels → local metres (x east, z south); not into a tower
+              const l = imagePxToLocal(u * SITE_IMAGE.widthPx, v * SITE_IMAGE.heightPx);
+              if (blockedAt(l.east, -l.north)) return;
+              setRigMode('walk');
+              rig.current?.flyTo({ x: l.east, z: -l.north }, 0.6);
+            }}
           />
         </XRMapHud>
       )}

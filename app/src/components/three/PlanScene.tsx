@@ -469,7 +469,13 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
       </XRRig>
       {inXR && floorTex && (
         <XRMapHud>
-          <XRMiniMap src={floorTex} aspect={w / d} width={220} toUV={toUV} regions={regions} />
+          <XRMiniMap src={floorTex} aspect={w / d} width={220} toUV={toUV} regions={regions} onPick={(u, v) => {
+            // inverse of toUV, then the nearest free cell (as a floor teleport does)
+            const p = nav ? nearestFree(nav, (u * w - w / 2) * mx, v * d - d / 2) : [(u * w - w / 2) * mx, v * d - d / 2];
+            if (!p) return;
+            setMode('walk');
+            rig.current?.flyTo({ x: p[0] * mx, z: p[1] }, 0.4);
+          }} />
         </XRMapHud>
       )}
     </XR>
