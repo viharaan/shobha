@@ -51,7 +51,7 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 **One page.** The Community section below the stage is gone; its content moved to where it is used: the six **realms** are a Community dock tab: picking one hides the towers above their podiums (see-through glass still blocked the gardens), labels each of its places on the ground, and fits the camera to those places from about 64° above; card and ‹ › stepping as for places; **phases and handover** (with the RERA and floor-count notes) open under the tower choice in Configure your home; **connectivity** is the second Location topic. The badge legend moved to View → How to read the data. The header reads Explore · Find a home · Location · Media · Shortlist; below the stage only the shortlist (Compare) remains.
 
-**The stage is the page.** No header: the stage fills the screen, with a small SOBHA OneWorld wordmark top centre on wide screens. **Media** is a fourth mode (Community · Home · Location · Media): the selected video or image fills the stage, the dock steps through all 41 items (7 videos, 4 plans and creatives, 30 brochure pages) and its Videos / Plans / Brochure tabs show thumbnail grids; `/media` forwards there. **Compare and the shortlist are removed** (the ☆ buttons, the overlay, the header chip); Present mode keeps a glass bar with what is on screen and Exit; old `/compare` links land on the stage.
+**The stage is the page.** No header: the stage fills the screen, with a small SOBHA OneWorld wordmark top centre on wide screens. **Media** is a fourth mode (Community · Home · Location · Media): it opens on a gallery of all 41 items (7 videos, 4 plans and creatives, 30 brochure pages); picking one fills the stage with it, the dock steps through them, and All media (or Esc) returns to the gallery; `/media` forwards there. **Compare and the shortlist are removed** (the ☆ buttons, the overlay, the header chip); Present mode keeps a glass bar with what is on screen and Exit; old `/compare` links land on the stage.
 
 **Prices without the PLC picker.** The sheet does not publish which preferred-location (PLC) tier a flat carries, and the base tier is literally named "Select", which read like an empty dropdown. Prices now show as a range, from the base tier to the highest tier the flat's size allows (Prime+, Elite+ and Grande+ are 4 BHK only), e.g. "₹2.15 Cr – 2.22 Cr", with one plain line saying why.
 
@@ -63,7 +63,7 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 
 ## VR minimap
 
-Pointing the controller ray anywhere on the head-locked minimap now shows a ring where it meets the map (rooms and tower markers keep their own highlight); the trigger there moves you to that spot (site: not into a tower; home: the nearest free floor cell, as a floor teleport does). Not yet tried on a headset.
+The controller's own ray and cursor were drawn before the map HUD (render order 1–2 against the HUD's 200, no depth test), so the map painted over the cursor; they now draw after it (299 / 300, cursor more opaque). Pointing the controller ray anywhere on the head-locked minimap also shows a ring where it meets the map (rooms and tower markers keep their own highlight); the trigger there moves you to that spot (site: not into a tower; home: the nearest free floor cell, as a floor teleport does). Not yet tried on a headset.
 
 ## Kept as it was
 

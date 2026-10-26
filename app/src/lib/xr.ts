@@ -7,11 +7,17 @@ import { useEffect, useState, useSyncExternalStore } from 'react';
  * One XR store for the whole app. `emulate: false` keeps the dev-time headset emulator off so that
  * "Enter VR" reflects the real device. Set to 'metaQuest3' locally to drive the scene without hardware.
  */
+/** Ray and cursor drawn over the head-locked map HUD (see XRMapHud), cursor a little more opaque to read on the map. */
+const RAY = { rayModel: { renderOrder: 299 }, cursorModel: { renderOrder: 300, opacity: 0.85 } };
+
 export const xrStore = createXRStore({
   emulate: false,
   foveation: 0.5,
-  // right controller: ray pointer for UI + teleport pointer for the floor; left: ray only (left stick walks, see XRRig)
-  controller: { left: { teleportPointer: false }, right: { teleportPointer: true } },
+  // right controller: ray pointer for UI + teleport pointer for the floor; left: ray only (left stick walks, see XRRig).
+  // The map HUD draws at renderOrder 200 without depth test so walls never hide it; the ray and its cursor must draw
+  // after it (defaults are 1 and 2), or the cursor vanishes whenever it is on the map.
+  controller: { left: { teleportPointer: false, rayPointer: RAY }, right: { teleportPointer: true, rayPointer: RAY } },
+  hand: { rayPointer: RAY },
 });
 
 /** True while an immersive session is running. Works outside <XR> (the scenes own that wrapper), unlike useXR. */
