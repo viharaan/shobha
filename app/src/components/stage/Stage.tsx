@@ -39,10 +39,38 @@ export default function Stage() {
   const toggleFull = () => { if (document.fullscreenElement) void document.exitFullscreen(); else void stageRef.current?.requestFullscreen?.(); };
   const chrome = !present && !touring;
   const intro = chrome && !touched && mode === 'community' && num('wing') === null && params.get('find') !== '1';
+  // the camera pad is opt-in (mouse, touch and the arrow keys cover it); Present lives in View options too
+  const [pad, setPad] = useState(false);
+  // the key legend shows once after the intro and fades after a while or the first stage key
+  const [legend, setLegend] = useState(true);
+  useEffect(() => {
+    if (intro || !legend) return;
+    const off = () => setLegend(false);
+    const t = window.setTimeout(off, 14000);
+    window.addEventListener('stage-key', off);
+    return () => { window.clearTimeout(t); window.removeEventListener('stage-key', off); };
+  }, [intro, legend]);
+  // during the intro, Enter or → starts exploring
+  useEffect(() => {
+    if (!intro) return;
+    const onKey = (e: KeyboardEvent) => {
+      const stage = stageRef.current?.getBoundingClientRect();
+      if ((e.key === 'Enter' || e.key === 'ArrowRight') && stage && stage.bottom > window.innerHeight * 0.5 && !(e.target instanceof HTMLButtonElement)) { e.preventDefault(); setTouched(true); }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [intro]);
+  const railExtras = (
+    <div className="panel flex flex-wrap gap-1 p-3">
+      <button type="button" className="btn" onClick={() => { setRail(false); set({ present: 1 }); }} title="Hide the panels; keep a bottom bar with the shortlist">Present mode</button>
+      <button type="button" className="btn" aria-pressed={pad} onClick={() => setPad(!pad)} title="Rotate, tilt and zoom buttons for people new to 3D">Camera buttons</button>
+    </div>
+  );
+  const legendText = mode === 'home' ? '← → rooms · ↑ ↓ floor · esc back' : mode === 'map' ? '← → topics · esc back' : '← → places and towers · ↑ ↓ floors · ↵ step in · esc back';
 
   return (
     <section ref={stageRef} id="explore" aria-label="Interactive stage" className="relative h-[calc(100svh-3.5rem)] min-h-[560px] w-full overflow-hidden border-b border-line bg-bg" onPointerDownCapture={() => setTouched(true)}>
-      {mode === 'community' ? <CommunityStage key="community" rail={rail} resetToken={resetToken} intro={intro} /> : mode === 'home' ? <HomeStage key="home" rail={rail} resetToken={resetToken} /> : <LocationStage key="map" rail={rail && chrome} />}
+      {mode === 'community' ? <CommunityStage key="community" rail={rail} resetToken={resetToken} intro={intro} railExtras={railExtras} /> : mode === 'home' ? <HomeStage key="home" rail={rail} resetToken={resetToken} railExtras={railExtras} /> : <LocationStage key="map" rail={rail && chrome} keys={chrome} />}
 
       {/* top bar: mode switch left; compass, view options and full screen right */}
       <div className="absolute left-3 top-3 z-30 flex items-center gap-2">
@@ -85,15 +113,19 @@ export default function Stage() {
         </button>
       )}
 
-      {/* camera pad for people new to 3D maps (walk / VR ignore it); phones use two-finger gestures instead */}
-      {chrome && !intro && !rail && is3d && <NavPad className="absolute bottom-4 right-3 z-30 max-md:hidden max-lg:bottom-auto max-lg:top-[10.5rem]" />}
+      {/* camera pad, opt-in from View options (walk / VR ignore it); phones use two-finger gestures instead */}
+      {chrome && !intro && !rail && is3d && pad && <NavPad className="absolute bottom-4 right-3 z-30 max-md:hidden max-lg:bottom-auto max-lg:top-[10.5rem]" />}
 
-      {/* bottom-centre: the one place for the tour, VR and presentation */}
+      {/* keyboard legend, wide screens only; fades after a while or the first key */}
+      {chrome && !intro && !rail && (
+        <div className={`pointer-events-none absolute bottom-[4.1rem] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/50 px-3 py-1 text-[11px] tracking-wide text-fg-muted transition-opacity duration-700 max-lg:hidden ${legend ? 'opacity-100' : 'opacity-0'}`} aria-hidden>{legendText}</div>
+      )}
+
+      {/* bottom-centre: the tour and VR; presentation is in View options */}
       {chrome && !intro && is3d && (
         <div className="absolute bottom-4 left-1/2 z-30 flex max-w-[calc(100%-1.5rem)] -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-line bg-black/60 p-1 backdrop-blur [&_.btn]:whitespace-nowrap">
           <button type="button" className="btn" onClick={() => set({ tour: mode === 'home' ? 'rooms' : 1 })} title={mode === 'home' ? 'Room by room through this home' : 'Gate → club → stadium → courts → wing, then into a home'}>{mode === 'home' ? 'Room tour' : 'Guided tour'}</button>
           <VRButton compact />
-          <button type="button" className="btn" onClick={() => set({ present: 1 })} title="Hide the panels; keep a bottom bar with the shortlist">Present</button>
         </div>
       )}
     </section>

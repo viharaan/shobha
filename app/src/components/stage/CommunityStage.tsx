@@ -18,7 +18,7 @@ import { indicativePrice } from '@/lib/pricing';
 import { fmtCr, fmtInr } from '@/lib/scale';
 import { SITE_ORIGIN } from '@/data/sobha/siteFrame';
 import { istDay, istHoursNow, istTodayYmd, sunPosition, istDate, sunTimes } from '@/lib/solar';
-import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, type Crumb } from './ContextUI';
+import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { NavDriver } from './NavDriver';
 import { StageLoader } from './StageLoader';
 import { useFinder } from './Finder';
@@ -44,8 +44,8 @@ function Mounted({ onMount }: { onMount: () => void }) {
   useEffect(() => { Promise.resolve().then(onMount); }, [onMount]);
   return null;
 }
-export default function CommunityStage({ rail, resetToken: northToken, intro = false }: { rail: boolean; resetToken: number; intro?: boolean }) {
-  const { params, set, num } = useUrlState();
+export default function CommunityStage({ rail, resetToken: northToken, intro = false, railExtras }: { rail: boolean; resetToken: number; intro?: boolean; railExtras?: React.ReactNode }) {
+  const { params, set, num, latest } = useUrlState();
   const wing = num('wing');
   const floor = num('floor');
   const present = params.get('present') === '1';
@@ -113,6 +113,33 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
 
   const placeIdx = hs ? PLACES.findIndex((p) => p.id === hs.id) : -1;
   const nextPlace = placeIdx >= 0 ? PLACES[(placeIdx + 1) % PLACES.length] : null;
+
+  // one step at a time, on screen (the stepper) and on the keyboard: ← → siblings, ↑ ↓ floors, Enter in, Esc out
+  const towerIdx = tower ? TOWERS.indexOf(tower) : -1;
+  const cyclePlace = (d: number) => selectPlace(PLACES[((placeIdx < 0 ? (d > 0 ? -1 : 0) : placeIdx) + d + PLACES.length) % PLACES.length].id);
+  // read the latest query, not the rendered one, so quick repeated keys each count
+  const latestNum = (k: string) => { const v = Number(latest().get(k)); return Number.isInteger(v) && v > 0 ? v : null; };
+  const cycleTower = (d: number) => {
+    const i = TOWERS.findIndex((t) => t.wing === latestNum('wing'));
+    const t = TOWERS[(i + d + TOWERS.length) % TOWERS.length];
+    setHotspot(null);
+    set({ wing: t.wing, ...(latestNum('floor') !== null ? { floor: Math.min(t.typicalFloors, latestNum('floor')!) } : {}) });
+  };
+  const stepFloor = (d: number) => {
+    const t = TOWERS.find((x) => x.wing === latestNum('wing'));
+    if (!t) return;
+    const f0 = latestNum('floor');
+    setFloor(f0 === null ? Math.round(t.typicalFloors / 2) : Math.min(t.typicalFloors, Math.max(1, f0 + d)));
+  };
+  const stepper: Stepper = tower
+    ? { label: floor !== null ? `Wing ${tower.wing} · Floor ${floor}` : `Wing ${tower.wing}`, pos: `${towerIdx + 1} / ${TOWERS.length}`, onPrev: () => cycleTower(-1), onNext: () => cycleTower(1) }
+    : hs && placeIdx >= 0
+      ? { label: PLACES[placeIdx].name, pos: `${placeIdx + 1} / ${PLACES.length}`, onPrev: () => cyclePlace(-1), onNext: () => cyclePlace(1) }
+      : { label: 'Places to visit', pos: `${PLACES.length}`, onPrev: () => cyclePlace(-1), onNext: () => cyclePlace(1) };
+  useStageKeys(tower
+    ? { prev: () => cycleTower(-1), next: () => cycleTower(1), up: () => stepFloor(1), down: () => stepFloor(-1), enter: stepInside ?? undefined, back: () => (floor !== null ? setFloor(null) : selectWing(null)) }
+    : { prev: () => cyclePlace(-1), next: () => cyclePlace(1), enter: hs ? undefined : () => cyclePlace(1), back: hs ? () => selectPlace(null) : undefined },
+  chrome && !finder.active && mode !== 'firstPerson');
 
   const nav = tower ? (
     <PlaceGroup title={`Floors · ${tower.typicalFloors} typical`} className="min-h-0">
@@ -228,20 +255,21 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
         </LabelLayer>
       )}
       <StageLoader ready={sceneReady && terrain.state !== 'loading'} poster="/media/video/clip-03.png" caption="Developer’s elevation render · illustrative" steps={[{ label: 'Building the towers and the site plan', done: sceneReady }, { label: 'Reading the terrain', done: terrain.state !== 'loading' }]} />
-      {chrome && (
+      {chrome && mode === 'firstPerson' && (
         <div className="pointer-events-none absolute bottom-[4.4rem] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/50 px-2.5 py-1 text-[11px] text-fg-muted max-lg:hidden">
-          {mode === 'firstPerson' ? 'Click to look · WASD to walk · Shift to run · Esc to release' : 'Drag to orbit · right-drag to pan · scroll to zoom · click a tower or a place'}
+          Click to look · WASD to walk · Shift to run · Esc to release
         </div>
       )}
 
       {chrome && (finder.active
         ? <ContextColumn crumbs={finder.crumbs} card={finder.card} hideCard={showRail} tall />
-        : <ContextColumn crumbs={crumbs} nav={nav} card={card} hideCard={showRail} />)}
+        : <ContextColumn crumbs={crumbs} stepper={stepper} nav={nav} card={card} hideCard={showRail} />)}
 
       {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} current={null} target="explore" onExit={() => set({ present: null })} />}
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={handoff} />}
 
       {showRail && <aside className="rail scroll-thin" aria-label="View options">
+        {railExtras}
         <Panel title="View">
           <div className="flex flex-wrap gap-1">
             {([['exterior', 'Orbit'], ['top', 'Top-down'], ['firstPerson', 'Walk']] as [ViewMode, string][]).map(([m, l]) => (

@@ -9,7 +9,7 @@ import { SITE_IMAGE } from '@/data/manifest';
 import { INFRASTRUCTURE, POI_DISTANCES } from '@/data/project';
 import { formatDistance, haversineM, type LonLat } from '@/lib/geo';
 import { useUrlState } from '@/lib/useUrlState';
-import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, type Crumb } from './ContextUI';
+import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 
 const GeoMap = dynamic(() => import('@/components/geo/GeoMap').then((m) => m.GeoMap), { ssr: false, loading: () => <div className="grid h-full place-items-center"><Spinner label="Loading map…" /></div> });
 
@@ -38,7 +38,7 @@ const TOPICS: { id: string; name: string; cats: string[] }[] = [
  * nearest places with straight-line distances, the brochure's own distance ladder, the stated road projects).
  * Layers, categories and the measure tool sit behind View options; a tower clicked on the map opens it in the model.
  */
-export default function LocationStage({ rail }: { rail: boolean }) {
+export default function LocationStage({ rail, keys = true, railExtras }: { rail: boolean; keys?: boolean; railExtras?: React.ReactNode }) {
   const { set } = useUrlState();
   const [layers, setLayers] = useState<GeoLayers>({ boundary: true, towers: true, pois: true, heatmap: false, rings: true, siteplan: false, terrain: true, buildings: true, google: false, satellite: true, markers3d: true, poiLabels: true });
   const [credits, setCredits] = useState<string[]>([]);
@@ -73,6 +73,10 @@ export default function LocationStage({ rail }: { rail: boolean }) {
 
   const crumbs: Crumb[] = [{ label: 'SOBHA OneWorld', onClick: () => set({ mode: null }) }, { label: 'Location', onClick: () => pickTopic('overview') }];
   if (t.id !== 'overview') crumbs.push({ label: t.name });
+  const ti = TOPICS.indexOf(t);
+  const cycleTopic = (d: number) => pickTopic(TOPICS[(ti + d + TOPICS.length) % TOPICS.length].id);
+  const stepper: Stepper = { label: t.name, pos: `${ti + 1} / ${TOPICS.length}`, onPrev: () => cycleTopic(-1), onNext: () => cycleTopic(1) };
+  useStageKeys({ prev: () => cycleTopic(-1), next: () => cycleTopic(1), back: () => (t.id === 'overview' ? set({ mode: null }) : pickTopic('overview')) }, keys);
 
   const nav = (
     <PlaceGroup title="Around the site">
@@ -146,7 +150,7 @@ export default function LocationStage({ rail }: { rail: boolean }) {
         </div>
       </div>
 
-      <ContextColumn crumbs={crumbs} nav={nav} card={card} hideCard={rail} />
+      <ContextColumn crumbs={crumbs} stepper={stepper} nav={nav} card={card} hideCard={rail} />
 
       {/* bottom-centre: the map's own actions */}
       <div className="absolute bottom-4 left-1/2 z-30 flex max-w-[calc(100%-1.5rem)] -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-line bg-black/60 p-1 backdrop-blur">
@@ -156,6 +160,7 @@ export default function LocationStage({ rail }: { rail: boolean }) {
       </div>
 
       {rail && <aside className="rail scroll-thin" aria-label="View options">
+        {railExtras}
         <Panel title="Layers">
           <div className="grid grid-cols-2 gap-1 text-xs">
             {([['boundary', 'Site boundary'], ['towers', 'Towers (3D)'], ['buildings', 'OSM buildings'], ['terrain', 'Hillshade'], ['pois', 'Points of interest'], ['heatmap', 'Amenity density'], ['rings', 'Distance rings'], ['siteplan', 'Site plan overlay'], ['satellite', 'Satellite (Esri, dev use)'], ['markers3d', 'POI pins'], ['poiLabels', 'POI labels'], ['google', 'Photoreal 3D (Google)']] as [keyof GeoLayers, string][]).map(([k, l]) => (

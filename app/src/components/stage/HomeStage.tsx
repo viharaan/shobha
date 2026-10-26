@@ -11,7 +11,7 @@ import { isRefugeFloor, maxBuildingFloor, midBuildingFloor } from '@/lib/unit/bu
 import { istHoursNow, istTodayYmd } from '@/lib/solar';
 import { bearingDeg, compassPoint } from '@/lib/unit/worldTiles';
 import { Panel, Spinner, StatusBadge } from '@/components/ui/primitives';
-import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, type Crumb } from './ContextUI';
+import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { StageLoader } from './StageLoader';
 import { PresentationBar } from '@/components/ui/PresentationBar';
 import { TourBar } from '@/components/ui/TourBar';
@@ -36,8 +36,8 @@ type Layout = 'map' | 'split' | '2d' | '3d';
  * follows the visitor: the whole home (type, flat, floor, shortlist) or one room (size as printed, next room);
  * layout, layers, imagery, sun and the scale tools sit behind View options.
  */
-export default function HomeStage({ rail, resetToken }: { rail: boolean; resetToken: number }) {
-  const { params, set, num } = useUrlState();
+export default function HomeStage({ rail, resetToken, railExtras }: { rail: boolean; resetToken: number; railExtras?: React.ReactNode }) {
+  const { params, set, num, latest } = useUrlState();
   const wingP = num('wing');
   const flatP = num('flat');
   const floorP = num('floor');
@@ -185,6 +185,21 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
   }
   if (roomShown) crumbs.push({ label: roomShown.name });
 
+  // ← → rooms, ↑ ↓ floor (placed flats), Enter the first room, Esc out: the room → the home → the wing in the community
+  const cycleRoom = (d: number) => goRoom(roomStops[((roomIdx < 0 ? (d > 0 ? -1 : 0) : roomIdx) + d + roomStops.length) % roomStops.length].room);
+  const stepper: Stepper = roomShown && roomIdx >= 0
+    ? { label: roomShown.name, pos: `${roomIdx + 1} / ${roomStops.length}`, onPrev: () => cycleRoom(-1), onNext: () => cycleRoom(1) }
+    : { label: 'Whole home', pos: `${roomStops.length} rooms`, onPrev: () => cycleRoom(-1), onNext: () => cycleRoom(1) };
+  const canFloor = !!choice?.placement;
+  useStageKeys({
+    prev: () => cycleRoom(-1),
+    next: () => cycleRoom(1),
+    up: canFloor ? () => setFloor(Math.min(maxBuildingFloor(wingN), (Number(latest().get('floor')) || floor) + 1)) : undefined,
+    down: canFloor ? () => setFloor(Math.max(2, (Number(latest().get('floor')) || floor) - 1)) : undefined,
+    enter: roomShown ? undefined : () => cycleRoom(1),
+    back: roomShown ? () => goRoom(null) : () => set({ mode: null, wing: wingN, floor, tour: null }),
+  }, chrome && !firstPerson);
+
   const nav = (
     <PlaceGroup title={`Rooms · ${plan.rooms.length}`} className="min-h-0">
       {roomStops.map(({ room: r }) => (
@@ -283,9 +298,9 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
                 {!realistic && <DomLabel id="ref-scale">1 m cube · 1.75 m figure</DomLabel>}
               </LabelLayer>
             )}
-            {chrome && (
+            {chrome && firstPerson && (
               <div className="pointer-events-none absolute bottom-[4.4rem] left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/50 px-2.5 py-1 text-[11px] text-fg-muted max-lg:hidden">
-                {firstPerson ? 'Click to look · WASD to walk · Esc to release · walls and furniture block' : topView ? 'Top view · drag to pan · scroll to zoom · click a room' : 'Drag to orbit · right-drag to pan · scroll to zoom · click a room'}
+                Click to look · WASD to walk · Esc to release · walls and furniture block
               </div>
             )}
           </div>
@@ -305,12 +320,13 @@ export default function HomeStage({ rail, resetToken }: { rail: boolean; resetTo
 
       {layout !== '2d' && <StageLoader key={plan.id} ready={status.state !== 'loading' && !worldLoading} poster="/media/video/clip-01.png" caption="Developer’s render · OneWorld Plaza · illustrative" steps={[{ label: `Tracing the ${plan.name} walls from the plan`, done: status.state !== 'loading' }, ...(placement ? [{ label: `Loading the view from floor ${floor}`, done: !worldLoading }] : [])]} />}
 
-      {chrome && <ContextColumn crumbs={crumbs} nav={nav} card={roomCard ?? homeCard} hideCard={showRail} />}
+      {chrome && <ContextColumn crumbs={crumbs} stepper={stepper} nav={nav} card={roomCard ?? homeCard} hideCard={showRail} />}
 
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={{ label: 'Find this home', onClick: () => set({ tour: null, mode: null, find: 1 }) }} />}
       {present && tourIndex === null && <PresentationBar label={homeRef ? `${plan.name} · Wing ${homeRef.wing} · Flat ${homeRef.flat} · Floor ${homeRef.floor}` : plan.name} current={homeRef} target="plans" onExit={() => set({ present: null })} />}
 
       {showRail && <aside className="rail scroll-thin" aria-label="View options">
+        {railExtras}
         <Panel title="Layout">
           <div className="flex flex-wrap gap-1">
             {([['map', '3D + plan'], ['split', 'Split'], ['2d', '2D'], ['3d', '3D']] as [Layout, string][]).map(([l, label]) => (

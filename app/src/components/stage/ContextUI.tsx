@@ -1,28 +1,96 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
- * The stage's context chrome: where you are (breadcrumb + the places you can go from here) and a small card about the
- * current place. Each stage mode fills these from its own state, so only the options that matter at the current level
- * are on screen. Wide screens: one column on the left, list on top, card at the bottom. Below 1024 px: a chip strip
- * under the top bar and the card above the action bar.
+ * The stage's context chrome: where you are (breadcrumb + a "‹ place ›" stepper) and a small card about the current
+ * place. Each stage mode fills these from its own state, so only what matters at the current level is on screen. The
+ * full list of places at this level folds away behind the stepper's list button. The same moves are on the keyboard
+ * (useStageKeys). Wide screens: one column on the left, card at the bottom. Below 1024 px: stepper under the top bar,
+ * card above the action bar.
  */
 export interface Crumb {
   label: string;
   onClick?: () => void;
 }
 
-export function ContextColumn({ crumbs, nav, card, hideCard = false, tall = false }: { crumbs: Crumb[]; nav?: React.ReactNode; card: React.ReactNode; hideCard?: boolean; tall?: boolean }) {
+export interface Stepper {
+  label: string;
+  /** position at this level, e.g. "2 / 4" */
+  pos?: string;
+  onPrev?: () => void;
+  onNext?: () => void;
+}
+
+export function ContextColumn({ crumbs, stepper, nav, card, hideCard = false, tall = false }: { crumbs: Crumb[]; stepper?: Stepper; nav?: React.ReactNode; card: React.ReactNode; hideCard?: boolean; tall?: boolean }) {
+  const [listOpen, setListOpen] = useState(false);
+  const showList = !!nav && (!stepper || listOpen);
   return (
     <div className={`pointer-events-none absolute inset-x-3 bottom-[4.25rem] top-[3.75rem] z-30 flex flex-col justify-between gap-2 lg:inset-x-auto lg:bottom-4 lg:left-3 lg:top-16 ${tall ? 'lg:w-[21rem] lg:justify-start' : 'lg:w-[19rem]'}`}>
-      <nav aria-label="Places" className="pointer-events-auto flex min-h-0 flex-col gap-1.5 lg:rounded-xl lg:border lg:border-line lg:bg-black/55 lg:p-2 lg:backdrop-blur-md">
+      <nav aria-label="Places" className={`pointer-events-auto flex min-h-0 flex-col gap-1.5 ${showList ? 'lg:rounded-xl lg:border lg:border-line lg:bg-black/55 lg:p-2 lg:backdrop-blur-md' : ''}`}>
         <Crumbs items={crumbs} />
-        {nav}
+        {stepper && (
+          <div className="flex items-center gap-1 self-start rounded-full border border-line bg-black/60 p-1 backdrop-blur-md">
+            <StepBtn label="Previous" onClick={stepper.onPrev} kbd="←"><path d="m15 6-6 6 6 6" /></StepBtn>
+            <span key={stepper.label} className="ctx-enter min-w-0 max-w-[14rem] truncate px-1.5 text-sm text-fg">{stepper.label}</span>
+            {stepper.pos && <span className="tnum pr-1 text-[11px] text-fg-muted">{stepper.pos}</span>}
+            <StepBtn label="Next" onClick={stepper.onNext} kbd="→"><path d="m9 6 6 6-6 6" /></StepBtn>
+            {nav && <StepBtn label={listOpen ? 'Hide the list' : 'Show the list'} onClick={() => setListOpen(!listOpen)} pressed={listOpen}><path d="M5 7h14M5 12h14M5 17h14" /></StepBtn>}
+          </div>
+        )}
+        {showList && nav}
       </nav>
       {!hideCard && <div className={`pointer-events-auto shrink-0 overflow-y-auto scroll-thin rounded-xl max-lg:max-w-md ${tall ? 'max-h-[62%] lg:max-h-[calc(100%-2.75rem)]' : 'max-h-[45%] lg:max-h-[60%]'}`}>{card}</div>}
     </div>
   );
+}
+
+function StepBtn({ label, onClick, children, kbd, pressed }: { label: string; onClick?: () => void; children: React.ReactNode; kbd?: string; pressed?: boolean }) {
+  return (
+    <button type="button" disabled={!onClick} onClick={onClick} aria-label={label} aria-pressed={pressed} title={kbd ? `${label} (${kbd})` : label}
+      className={`grid h-7 w-7 shrink-0 place-items-center rounded-full transition-colors disabled:opacity-30 ${pressed ? 'bg-fg text-black' : 'text-fg hover:bg-surface-2'}`}>
+      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>{children}</svg>
+    </button>
+  );
+}
+
+/** Keyboard moves for the current level: ← → siblings, ↑ ↓ floors, Enter steps in, Esc steps back. */
+export interface StageKeys {
+  prev?: () => void;
+  next?: () => void;
+  up?: () => void;
+  down?: () => void;
+  enter?: () => void;
+  back?: () => void;
+}
+
+/**
+ * Listens on the window while `enabled` (off during tours, walk mode and VR, whose own keys use the arrows) and only
+ * while the stage fills most of the view, so arrows still scroll the page lower down. Typing in a field, a focused
+ * button's Enter, and modified keys are left alone.
+ */
+export function useStageKeys(keys: StageKeys, enabled: boolean) {
+  const ref = useRef(keys);
+  useEffect(() => { ref.current = keys; });
+  useEffect(() => {
+    if (!enabled) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || ['INPUT', 'SELECT', 'TEXTAREA'].includes(t.tagName))) return;
+      if (e.key === 'Enter' && t && ['BUTTON', 'A'].includes(t.tagName)) return;
+      const stage = document.getElementById('explore')?.getBoundingClientRect();
+      if (!stage || stage.bottom < window.innerHeight * 0.5) return;
+      const k = ref.current;
+      const fn = { ArrowLeft: k.prev, ArrowRight: k.next, ArrowUp: k.up, ArrowDown: k.down, Enter: k.enter, Escape: k.back }[e.key];
+      if (!fn) return;
+      e.preventDefault();
+      fn();
+      window.dispatchEvent(new Event('stage-key'));
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [enabled]);
 }
 
 export function Crumbs({ items }: { items: Crumb[] }) {
