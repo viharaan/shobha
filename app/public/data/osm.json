@@ -1,0 +1,7732 @@
+{
+ "fetchedAt": "2026-10-20",
+ "source": "OpenStreetMap contributors via Overpass API (ODbL)",
+ "centroid": [
+  77.77588,
+  13.06012
+ ],
+ "pois": [
+  {
+   "cat": "project_uc",
+   "name": "Sobha One World",
+   "lat": 13.060274,
+   "lng": 77.775969,
+   "distanceKm": 0.02
+  },
+  {
+   "cat": "hospital",
+   "name": "G E F Eye Hospital",
+   "lat": 13.067207,
+   "lng": 77.780271,
+   "distanceKm": 0.92
+  },
+  {
+   "cat": "project_uc",
+   "name": "United Dreamcity (u/c)",
+   "lat": 13.056975,
+   "lng": 77.766495,
+   "distanceKm": 1.08
+  },
+  {
+   "cat": "project_uc",
+   "name": "Amogaya Adorit (u/c)",
+   "lat": 13.055111,
+   "lng": 77.766786,
+   "distanceKm": 1.13
+  },
+  {
+   "cat": "project_uc",
+   "name": "Shubhrakrutha (u/c)",
+   "lat": 13.062391,
+   "lng": 77.78622,
+   "distanceKm": 1.15
+  },
+  {
+   "cat": "mall",
+   "name": "Orion Uptown Mall",
+   "lat": 13.055326,
+   "lng": 77.763763,
+   "distanceKm": 1.42
+  },
+  {
+   "cat": "project_uc",
+   "name": "Urban Nest (u/c)",
+   "lat": 13.0584,
+   "lng": 77.761375,
+   "distanceKm": 1.58
+  },
+  {
+   "cat": "school",
+   "name": "Government Boys High School",
+   "lat": 13.071653,
+   "lng": 77.78484,
+   "distanceKm": 1.61
+  },
+  {
+   "cat": "project_uc",
+   "name": "Godrej Parkshire (u/c)",
+   "lat": 13.04664,
+   "lng": 77.783291,
+   "distanceKm": 1.7
+  },
+  {
+   "cat": "school",
+   "name": "Government Girls High School",
+   "lat": 13.072546,
+   "lng": 77.785113,
+   "distanceKm": 1.71
+  },
+  {
+   "cat": "hospital",
+   "name": "Shreyas Maternity Home",
+   "lat": 13.074556,
+   "lng": 77.782148,
+   "distanceKm": 1.74
+  },
+  {
+   "cat": "hospital",
+   "name": "Mission Hospital, Bengaluru Rural",
+   "lat": 13.07441,
+   "lng": 77.783552,
+   "distanceKm": 1.79
+  },
+  {
+   "cat": "clinic",
+   "name": "Dhruva Nursing Home And Diagnostic Centre",
+   "lat": 13.072918,
+   "lng": 77.786595,
+   "distanceKm": 1.84
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Citrine (u/c)",
+   "lat": 13.053734,
+   "lng": 77.760147,
+   "distanceKm": 1.85
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Srinivasa Hospital, Bengaluru Rural",
+   "lat": 13.074057,
+   "lng": 77.785533,
+   "distanceKm": 1.87
+  },
+  {
+   "cat": "hospital",
+   "name": "Ashwini Hospital",
+   "lat": 13.074622,
+   "lng": 77.785408,
+   "distanceKm": 1.91
+  },
+  {
+   "cat": "clinic",
+   "name": "Kempanna Nursing Home",
+   "lat": 13.073668,
+   "lng": 77.786977,
+   "distanceKm": 1.93
+  },
+  {
+   "cat": "school",
+   "name": "One World International School",
+   "lat": 13.044156,
+   "lng": 77.76672,
+   "distanceKm": 2.03
+  },
+  {
+   "cat": "project_uc",
+   "name": "Aratt Avant Twilight",
+   "lat": 13.061131,
+   "lng": 77.757044,
+   "distanceKm": 2.04
+  },
+  {
+   "cat": "project_uc",
+   "name": "M1 Commercio (u/c)",
+   "lat": 13.052265,
+   "lng": 77.75867,
+   "distanceKm": 2.06
+  },
+  {
+   "cat": "school",
+   "name": "Vibgyor School Kadugodi",
+   "lat": 13.046573,
+   "lng": 77.761585,
+   "distanceKm": 2.16
+  },
+  {
+   "cat": "project_uc",
+   "name": "School",
+   "lat": 13.047346,
+   "lng": 77.75943,
+   "distanceKm": 2.28
+  },
+  {
+   "cat": "project_uc",
+   "name": "Hotel",
+   "lat": 13.046017,
+   "lng": 77.759739,
+   "distanceKm": 2.35
+  },
+  {
+   "cat": "school",
+   "name": "Narayana e-Techno School",
+   "lat": 13.041883,
+   "lng": 77.76498,
+   "distanceKm": 2.35
+  },
+  {
+   "cat": "project_uc",
+   "name": "Substation",
+   "lat": 13.048966,
+   "lng": 77.757235,
+   "distanceKm": 2.37
+  },
+  {
+   "cat": "project_uc",
+   "name": "Retail and F&B",
+   "lat": 13.045736,
+   "lng": 77.759567,
+   "distanceKm": 2.38
+  },
+  {
+   "cat": "project_uc",
+   "name": "VRK Ventures (u/c)",
+   "lat": 13.053339,
+   "lng": 77.755077,
+   "distanceKm": 2.38
+  },
+  {
+   "cat": "school",
+   "name": "National Public School ITPL",
+   "lat": 13.042175,
+   "lng": 77.763432,
+   "distanceKm": 2.41
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Granada (u/c)",
+   "lat": 13.046731,
+   "lng": 77.758041,
+   "distanceKm": 2.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Office",
+   "lat": 13.044994,
+   "lng": 77.759561,
+   "distanceKm": 2.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Hospital",
+   "lat": 13.045281,
+   "lng": 77.758906,
+   "distanceKm": 2.47
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mista Sri City (u/c)",
+   "lat": 13.048169,
+   "lng": 77.754905,
+   "distanceKm": 2.63
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ruchira (u/c)",
+   "lat": 13.047915,
+   "lng": 77.753973,
+   "distanceKm": 2.73
+  },
+  {
+   "cat": "project_uc",
+   "name": "Substation (u/c)",
+   "lat": 13.041499,
+   "lng": 77.759077,
+   "distanceKm": 2.76
+  },
+  {
+   "cat": "project_uc",
+   "name": "Retail 3",
+   "lat": 13.048784,
+   "lng": 77.752875,
+   "distanceKm": 2.79
+  },
+  {
+   "cat": "project_uc",
+   "name": "My Homes (u/c)",
+   "lat": 13.042134,
+   "lng": 77.7567,
+   "distanceKm": 2.88
+  },
+  {
+   "cat": "project_uc",
+   "name": "Godrej Woodscapes (u/c)",
+   "lat": 13.048892,
+   "lng": 77.751653,
+   "distanceKm": 2.91
+  },
+  {
+   "cat": "project_uc",
+   "name": "Retail 2",
+   "lat": 13.048074,
+   "lng": 77.751916,
+   "distanceKm": 2.92
+  },
+  {
+   "cat": "project_uc",
+   "name": "Konig Homes (u/c)",
+   "lat": 13.076049,
+   "lng": 77.753743,
+   "distanceKm": 2.98
+  },
+  {
+   "cat": "project_uc",
+   "name": "Retail 1",
+   "lat": 13.047341,
+   "lng": 77.750777,
+   "distanceKm": 3.07
+  },
+  {
+   "cat": "project_uc",
+   "name": "Skandagiri Apartments (u/c)",
+   "lat": 13.040006,
+   "lng": 77.756277,
+   "distanceKm": 3.08
+  },
+  {
+   "cat": "project_uc",
+   "name": "Aratt (u/c)",
+   "lat": 13.035169,
+   "lng": 77.760112,
+   "distanceKm": 3.26
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Belvedere (u/c)",
+   "lat": 13.047559,
+   "lng": 77.748043,
+   "distanceKm": 3.32
+  },
+  {
+   "cat": "hospital",
+   "name": "Hoskote Government Hospital",
+   "lat": 13.077021,
+   "lng": 77.801123,
+   "distanceKm": 3.32
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sattva Songbird (u/c)",
+   "lat": 13.049183,
+   "lng": 77.747312,
+   "distanceKm": 3.32
+  },
+  {
+   "cat": "project_uc",
+   "name": "Club House",
+   "lat": 13.050208,
+   "lng": 77.746913,
+   "distanceKm": 3.33
+  },
+  {
+   "cat": "project_uc",
+   "name": "Shriram WYTField",
+   "lat": 13.07025,
+   "lng": 77.746626,
+   "distanceKm": 3.36
+  },
+  {
+   "cat": "project_uc",
+   "name": "Neighbourhood Estates (u/c)",
+   "lat": 13.076965,
+   "lng": 77.749098,
+   "distanceKm": 3.45
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ankuraa (u/c)",
+   "lat": 13.06246,
+   "lng": 77.743892,
+   "distanceKm": 3.47
+  },
+  {
+   "cat": "hospital",
+   "name": "Kannamangala Primary Health Center",
+   "lat": 13.030885,
+   "lng": 77.759956,
+   "distanceKm": 3.68
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sattva East Crest Phase 2 (u/c)",
+   "lat": 13.041319,
+   "lng": 77.747263,
+   "distanceKm": 3.74
+  },
+  {
+   "cat": "project_uc",
+   "name": "Spectra (u/c)",
+   "lat": 13.03709,
+   "lng": 77.750697,
+   "distanceKm": 3.74
+  },
+  {
+   "cat": "college",
+   "name": "Kyati Degree College",
+   "lat": 13.080817,
+   "lng": 77.804371,
+   "distanceKm": 3.85
+  },
+  {
+   "cat": "project_uc",
+   "name": "Whitefield Tower (u/c)",
+   "lat": 13.027613,
+   "lng": 77.761737,
+   "distanceKm": 3.93
+  },
+  {
+   "cat": "school",
+   "name": "Auxillium School",
+   "lat": 13.040251,
+   "lng": 77.744601,
+   "distanceKm": 4.04
+  },
+  {
+   "cat": "project_uc",
+   "name": "Keerthi Estates (u/c)",
+   "lat": 13.04299,
+   "lng": 77.742963,
+   "distanceKm": 4.04
+  },
+  {
+   "cat": "project_uc",
+   "name": "Assetz Code Name Sublime (u/c)",
+   "lat": 13.07863,
+   "lng": 77.808113,
+   "distanceKm": 4.05
+  },
+  {
+   "cat": "college",
+   "name": "M V Jayaram Medical College",
+   "lat": 13.075646,
+   "lng": 77.809746,
+   "distanceKm": 4.05
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Calista",
+   "lat": 13.062562,
+   "lng": 77.738269,
+   "distanceKm": 4.08
+  },
+  {
+   "cat": "project_uc",
+   "name": "Gopalan (u/c)",
+   "lat": 13.038508,
+   "lng": 77.74546,
+   "distanceKm": 4.08
+  },
+  {
+   "cat": "school",
+   "name": "Chrysalis High School",
+   "lat": 13.024546,
+   "lng": 77.765441,
+   "distanceKm": 4.11
+  },
+  {
+   "cat": "project_uc",
+   "name": "Purva (u/c)",
+   "lat": 13.073657,
+   "lng": 77.739831,
+   "distanceKm": 4.18
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura Sarang (u/c)",
+   "lat": 13.030036,
+   "lng": 77.7521,
+   "distanceKm": 4.22
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sattva Aangane (u/c)",
+   "lat": 13.038963,
+   "lng": 77.742574,
+   "distanceKm": 4.31
+  },
+  {
+   "cat": "project_uc",
+   "name": "Disha",
+   "lat": 13.066554,
+   "lng": 77.736592,
+   "distanceKm": 4.32
+  },
+  {
+   "cat": "project_uc",
+   "name": "Amrutha Lake Vista (u/c)",
+   "lat": 13.031121,
+   "lng": 77.74888,
+   "distanceKm": 4.35
+  },
+  {
+   "cat": "hospital",
+   "name": "Mvj Hospital",
+   "lat": 13.077731,
+   "lng": 77.812137,
+   "distanceKm": 4.39
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sowparnika (u/c)",
+   "lat": 13.032948,
+   "lng": 77.805869,
+   "distanceKm": 4.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Chaithanya Sankhya",
+   "lat": 13.06859,
+   "lng": 77.735198,
+   "distanceKm": 4.51
+  },
+  {
+   "cat": "school",
+   "name": "New Baldwin International Residential School",
+   "lat": 13.072794,
+   "lng": 77.735806,
+   "distanceKm": 4.56
+  },
+  {
+   "cat": "college",
+   "name": "Swami Vivekananda College of Nursing",
+   "lat": 13.078786,
+   "lng": 77.734801,
+   "distanceKm": 4.91
+  },
+  {
+   "cat": "project_uc",
+   "name": "DSR Milestones (u/c)",
+   "lat": 13.016957,
+   "lng": 77.763069,
+   "distanceKm": 5
+  },
+  {
+   "cat": "hospital",
+   "name": "Geetha Hospital",
+   "lat": 13.035717,
+   "lng": 77.73517,
+   "distanceKm": 5.18
+  },
+  {
+   "cat": "hospital",
+   "name": "S.N. Hospital",
+   "lat": 13.03574,
+   "lng": 77.734706,
+   "distanceKm": 5.22
+  },
+  {
+   "cat": "project_uc",
+   "name": "Pavani Mirabellia (u/c)",
+   "lat": 13.014443,
+   "lng": 77.764236,
+   "distanceKm": 5.23
+  },
+  {
+   "cat": "project_uc",
+   "name": "Concorde Eleve (u/c)",
+   "lat": 13.034525,
+   "lng": 77.735218,
+   "distanceKm": 5.24
+  },
+  {
+   "cat": "school",
+   "name": "Delhi Public School",
+   "lat": 13.012153,
+   "lng": 77.781454,
+   "distanceKm": 5.37
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Park Grove (u/c)",
+   "lat": 13.015811,
+   "lng": 77.754182,
+   "distanceKm": 5.46
+  },
+  {
+   "cat": "project_uc",
+   "name": "Performance Centre",
+   "lat": 13.014926,
+   "lng": 77.755577,
+   "distanceKm": 5.49
+  },
+  {
+   "cat": "project_uc",
+   "name": "Central Clubhouse",
+   "lat": 13.015575,
+   "lng": 77.753891,
+   "distanceKm": 5.5
+  },
+  {
+   "cat": "project_uc",
+   "name": "Forum Park Grove (u/c)",
+   "lat": 13.012578,
+   "lng": 77.760026,
+   "distanceKm": 5.56
+  },
+  {
+   "cat": "hospital",
+   "name": "Mother and Child Hospital",
+   "lat": 13.064931,
+   "lng": 77.826969,
+   "distanceKm": 5.56
+  },
+  {
+   "cat": "project_uc",
+   "name": "Villas Clubhouse",
+   "lat": 13.013539,
+   "lng": 77.753222,
+   "distanceKm": 5.73
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sowparnika Green Meadows (u/c)",
+   "lat": 13.098191,
+   "lng": 77.81274,
+   "distanceKm": 5.82
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sowparnika Indradhanush (u/c)",
+   "lat": 13.100381,
+   "lng": 77.810163,
+   "distanceKm": 5.82
+  },
+  {
+   "cat": "hospital",
+   "name": "Miracle Hospital",
+   "lat": 13.00914,
+   "lng": 77.759071,
+   "distanceKm": 5.95
+  },
+  {
+   "cat": "school",
+   "name": "Chryalis High",
+   "lat": 13.00711,
+   "lng": 77.767771,
+   "distanceKm": 5.96
+  },
+  {
+   "cat": "project_uc",
+   "name": "Pashmina Brookwoods Apartments (u/c)",
+   "lat": 13.075662,
+   "lng": 77.723221,
+   "distanceKm": 5.96
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sharada Constructions (u/c)",
+   "lat": 13.100048,
+   "lng": 77.813656,
+   "distanceKm": 6.04
+  },
+  {
+   "cat": "school",
+   "name": "Government Higher Primary School",
+   "lat": 13.096894,
+   "lng": 77.817124,
+   "distanceKm": 6.06
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ankuraa Meridian",
+   "lat": 13.010605,
+   "lng": 77.75116,
+   "distanceKm": 6.12
+  },
+  {
+   "cat": "clinic",
+   "name": "Nationwide Kadugodi Clinic",
+   "lat": 13.008203,
+   "lng": 77.757255,
+   "distanceKm": 6.12
+  },
+  {
+   "cat": "school",
+   "name": "Valistus International School",
+   "lat": 13.007025,
+   "lng": 77.760293,
+   "distanceKm": 6.14
+  },
+  {
+   "cat": "project_uc",
+   "name": "Saranya Signature",
+   "lat": 13.00933,
+   "lng": 77.751702,
+   "distanceKm": 6.23
+  },
+  {
+   "cat": "project_uc",
+   "name": "Saranya Swarovski (u/c)",
+   "lat": 13.009947,
+   "lng": 77.750315,
+   "distanceKm": 6.23
+  },
+  {
+   "cat": "project_uc",
+   "name": "Godrej Splendour (u/c)",
+   "lat": 13.010676,
+   "lng": 77.746977,
+   "distanceKm": 6.33
+  },
+  {
+   "cat": "hospital",
+   "name": "East Point Hospital and Medical College",
+   "lat": 13.052933,
+   "lng": 77.71727,
+   "distanceKm": 6.4
+  },
+  {
+   "cat": "college",
+   "name": "East Point College of Engineering",
+   "lat": 13.049971,
+   "lng": 77.716881,
+   "distanceKm": 6.49
+  },
+  {
+   "cat": "project_uc",
+   "name": "Arsis (u/c)",
+   "lat": 13.014221,
+   "lng": 77.737516,
+   "distanceKm": 6.58
+  },
+  {
+   "cat": "project_uc",
+   "name": "Charishma Developers (u/c)",
+   "lat": 13.012382,
+   "lng": 77.73938,
+   "distanceKm": 6.62
+  },
+  {
+   "cat": "hospital",
+   "name": "Telerad RXDX Kadugodi",
+   "lat": 13.002864,
+   "lng": 77.756916,
+   "distanceKm": 6.69
+  },
+  {
+   "cat": "project_uc",
+   "name": "Disha (u/c)",
+   "lat": 13.000465,
+   "lng": 77.764678,
+   "distanceKm": 6.74
+  },
+  {
+   "cat": "college",
+   "name": "Sri Sathya Sai Institute of Higher Learning",
+   "lat": 13.001267,
+   "lng": 77.759596,
+   "distanceKm": 6.78
+  },
+  {
+   "cat": "project_uc",
+   "name": "United Maple City (u/c)",
+   "lat": 13.008397,
+   "lng": 77.741922,
+   "distanceKm": 6.83
+  },
+  {
+   "cat": "school",
+   "name": "Lake Montfort",
+   "lat": 13.015965,
+   "lng": 77.731458,
+   "distanceKm": 6.87
+  },
+  {
+   "cat": "school",
+   "name": "National Public School Whitefield",
+   "lat": 13.002451,
+   "lng": 77.748766,
+   "distanceKm": 7.05
+  },
+  {
+   "cat": "hospital",
+   "name": "Tele Rad RX DX Health care Pvt Ltd",
+   "lat": 12.999298,
+   "lng": 77.757564,
+   "distanceKm": 7.05
+  },
+  {
+   "cat": "college",
+   "name": "Centre For Research & Education in Science & Technology, Indian Institute of Astrophysics",
+   "lat": 13.112886,
+   "lng": 77.812588,
+   "distanceKm": 7.09
+  },
+  {
+   "cat": "school",
+   "name": "Pragathi School and PU College",
+   "lat": 12.997254,
+   "lng": 77.763586,
+   "distanceKm": 7.12
+  },
+  {
+   "cat": "project_uc",
+   "name": "Skylark Ithaca Apartments (u/c)",
+   "lat": 13.010374,
+   "lng": 77.733367,
+   "distanceKm": 7.2
+  },
+  {
+   "cat": "college",
+   "name": "Divine Grace Institute of Health Sciences",
+   "lat": 13.034318,
+   "lng": 77.714559,
+   "distanceKm": 7.24
+  },
+  {
+   "cat": "metro",
+   "name": "Whitefield",
+   "lat": 12.9964,
+   "lng": 77.761423,
+   "distanceKm": 7.26
+  },
+  {
+   "cat": "college",
+   "name": "Government High School & Junior College,Belatur Colony",
+   "lat": 12.998483,
+   "lng": 77.753119,
+   "distanceKm": 7.28
+  },
+  {
+   "cat": "hospital",
+   "name": "New Life Hospital bangalore",
+   "lat": 12.996761,
+   "lng": 77.759125,
+   "distanceKm": 7.28
+  },
+  {
+   "cat": "hospital",
+   "name": "Sky Diagnostic Centre kumbena agrahara",
+   "lat": 12.997771,
+   "lng": 77.754811,
+   "distanceKm": 7.3
+  },
+  {
+   "cat": "school",
+   "name": "St. Gaspar Vidyalaya",
+   "lat": 13.03324,
+   "lng": 77.714342,
+   "distanceKm": 7.31
+  },
+  {
+   "cat": "school",
+   "name": "Mount Litera Zee School",
+   "lat": 13.002782,
+   "lng": 77.74242,
+   "distanceKm": 7.33
+  },
+  {
+   "cat": "metro",
+   "name": "B: Whitefield Railway Station",
+   "lat": 12.995927,
+   "lng": 77.758079,
+   "distanceKm": 7.39
+  },
+  {
+   "cat": "metro",
+   "name": "Whitefield (Kadugodi)",
+   "lat": 12.995743,
+   "lng": 77.757949,
+   "distanceKm": 7.42
+  },
+  {
+   "cat": "project_uc",
+   "name": "Saranya (u/c)",
+   "lat": 12.994405,
+   "lng": 77.763083,
+   "distanceKm": 7.44
+  },
+  {
+   "cat": "metro",
+   "name": "A: Whitefield Traffic Police Station",
+   "lat": 12.995046,
+   "lng": 77.757834,
+   "distanceKm": 7.5
+  },
+  {
+   "cat": "school",
+   "name": "Ujjval World School",
+   "lat": 12.994617,
+   "lng": 77.75867,
+   "distanceKm": 7.52
+  },
+  {
+   "cat": "school",
+   "name": "Princeton Public School",
+   "lat": 13.027787,
+   "lng": 77.714677,
+   "distanceKm": 7.54
+  },
+  {
+   "cat": "school",
+   "name": "Gopalpur Primary School",
+   "lat": 13.002029,
+   "lng": 77.739542,
+   "distanceKm": 7.56
+  },
+  {
+   "cat": "project_uc",
+   "name": "Convention Center",
+   "lat": 12.993588,
+   "lng": 77.760051,
+   "distanceKm": 7.59
+  },
+  {
+   "cat": "project_uc",
+   "name": "Riviera Uno (u/c)",
+   "lat": 12.993635,
+   "lng": 77.792103,
+   "distanceKm": 7.6
+  },
+  {
+   "cat": "project_uc",
+   "name": "SM Developers (u/c)",
+   "lat": 13.000692,
+   "lng": 77.741048,
+   "distanceKm": 7.61
+  },
+  {
+   "cat": "clinic",
+   "name": "Soukya International Holistic Health Center",
+   "lat": 12.994344,
+   "lng": 77.796345,
+   "distanceKm": 7.64
+  },
+  {
+   "cat": "college",
+   "name": "SJES College",
+   "lat": 13.02497,
+   "lng": 77.715154,
+   "distanceKm": 7.65
+  },
+  {
+   "cat": "school",
+   "name": "GHPS Kanekal",
+   "lat": 13.023428,
+   "lng": 77.835738,
+   "distanceKm": 7.66
+  },
+  {
+   "cat": "project_uc",
+   "name": "RGHCL Bidarahalli",
+   "lat": 13.07095,
+   "lng": 77.705909,
+   "distanceKm": 7.67
+  },
+  {
+   "cat": "project_uc",
+   "name": "United (u/c)",
+   "lat": 12.991306,
+   "lng": 77.783789,
+   "distanceKm": 7.7
+  },
+  {
+   "cat": "project_uc",
+   "name": "Alembic City (u/c)",
+   "lat": 12.992613,
+   "lng": 77.75945,
+   "distanceKm": 7.71
+  },
+  {
+   "cat": "project_uc",
+   "name": "MLCP",
+   "lat": 12.992368,
+   "lng": 77.759354,
+   "distanceKm": 7.74
+  },
+  {
+   "cat": "college",
+   "name": "Moraji Desai Residential PU College",
+   "lat": 13.057414,
+   "lng": 77.847659,
+   "distanceKm": 7.78
+  },
+  {
+   "cat": "school",
+   "name": "Bangalore International Academy",
+   "lat": 12.993136,
+   "lng": 77.797175,
+   "distanceKm": 7.8
+  },
+  {
+   "cat": "project_uc",
+   "name": "Trendsquares World of Garden (u/c)",
+   "lat": 13.002636,
+   "lng": 77.734182,
+   "distanceKm": 7.83
+  },
+  {
+   "cat": "school",
+   "name": "Blossom International School",
+   "lat": 13.020144,
+   "lng": 77.715527,
+   "distanceKm": 7.91
+  },
+  {
+   "cat": "school",
+   "name": "Thakshashila Vidya Kendra",
+   "lat": 13.056799,
+   "lng": 77.849132,
+   "distanceKm": 7.94
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura (u/c)",
+   "lat": 12.994282,
+   "lng": 77.804427,
+   "distanceKm": 7.95
+  },
+  {
+   "cat": "hospital",
+   "name": "Seegehalli Government Hospital",
+   "lat": 13.016432,
+   "lng": 77.716989,
+   "distanceKm": 8.02
+  },
+  {
+   "cat": "hospital",
+   "name": "Satya Sai",
+   "lat": 13.021581,
+   "lng": 77.712805,
+   "distanceKm": 8.07
+  },
+  {
+   "cat": "project_uc",
+   "name": "Substation (u/c)",
+   "lat": 12.989706,
+   "lng": 77.757433,
+   "distanceKm": 8.08
+  },
+  {
+   "cat": "project_uc",
+   "name": "DSR Green Homes (u/c)",
+   "lat": 12.987924,
+   "lng": 77.76443,
+   "distanceKm": 8.12
+  },
+  {
+   "cat": "school",
+   "name": "Paramount Public School",
+   "lat": 13.058395,
+   "lng": 77.700443,
+   "distanceKm": 8.17
+  },
+  {
+   "cat": "university",
+   "name": "Rajiv Gandhi Institute of Petroleum Technology, Bangalore",
+   "lat": 13.125516,
+   "lng": 77.810867,
+   "distanceKm": 8.2
+  },
+  {
+   "cat": "project_uc",
+   "name": "Provident Capella (u/c)",
+   "lat": 12.990519,
+   "lng": 77.803356,
+   "distanceKm": 8.29
+  },
+  {
+   "cat": "school",
+   "name": "Christ International School",
+   "lat": 13.035795,
+   "lng": 77.703308,
+   "distanceKm": 8.31
+  },
+  {
+   "cat": "project_uc",
+   "name": "Fortius Silicon Forest (u/c)",
+   "lat": 12.990749,
+   "lng": 77.746797,
+   "distanceKm": 8.33
+  },
+  {
+   "cat": "project_uc",
+   "name": "Provident Botanico (u/c)",
+   "lat": 12.990548,
+   "lng": 77.806214,
+   "distanceKm": 8.41
+  },
+  {
+   "cat": "college",
+   "name": "Garden City University",
+   "lat": 13.025362,
+   "lng": 77.706862,
+   "distanceKm": 8.42
+  },
+  {
+   "cat": "school",
+   "name": "Mar Thoma School",
+   "lat": 13.009015,
+   "lng": 77.718359,
+   "distanceKm": 8.43
+  },
+  {
+   "cat": "metro",
+   "name": "A: Kadugodi Colony",
+   "lat": 12.987327,
+   "lng": 77.753704,
+   "distanceKm": 8.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Alembic Cloud Forest (u/c)",
+   "lat": 12.986289,
+   "lng": 77.757817,
+   "distanceKm": 8.44
+  },
+  {
+   "cat": "metro",
+   "name": "Hopefarm Channasandra",
+   "lat": 12.987297,
+   "lng": 77.753884,
+   "distanceKm": 8.44
+  },
+  {
+   "cat": "metro",
+   "name": "B: Kadugodi",
+   "lat": 12.987211,
+   "lng": 77.75405,
+   "distanceKm": 8.45
+  },
+  {
+   "cat": "college",
+   "name": "M V Jayaram College of Engineering",
+   "lat": 12.984917,
+   "lng": 77.76276,
+   "distanceKm": 8.48
+  },
+  {
+   "cat": "project_uc",
+   "name": "Lodha Whitefield (u/c)",
+   "lat": 12.98663,
+   "lng": 77.754761,
+   "distanceKm": 8.49
+  },
+  {
+   "cat": "project_uc",
+   "name": "Jai Kings Land",
+   "lat": 12.997668,
+   "lng": 77.730393,
+   "distanceKm": 8.52
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mahindra Blossom (u/c)",
+   "lat": 12.986601,
+   "lng": 77.752139,
+   "distanceKm": 8.57
+  },
+  {
+   "cat": "project_uc",
+   "name": "Club House",
+   "lat": 12.985721,
+   "lng": 77.75272,
+   "distanceKm": 8.64
+  },
+  {
+   "cat": "project_uc",
+   "name": "Embassy East Business Park (u/c)",
+   "lat": 12.991538,
+   "lng": 77.738459,
+   "distanceKm": 8.64
+  },
+  {
+   "cat": "college",
+   "name": "SEA College",
+   "lat": 13.00963,
+   "lng": 77.715169,
+   "distanceKm": 8.65
+  },
+  {
+   "cat": "project_uc",
+   "name": "V Rise (u/c)",
+   "lat": 12.983123,
+   "lng": 77.763199,
+   "distanceKm": 8.67
+  },
+  {
+   "cat": "project_uc",
+   "name": "Block Advisors",
+   "lat": 12.984033,
+   "lng": 77.758117,
+   "distanceKm": 8.68
+  },
+  {
+   "cat": "project_uc",
+   "name": "SBR One (u/c)",
+   "lat": 12.983888,
+   "lng": 77.757366,
+   "distanceKm": 8.71
+  },
+  {
+   "cat": "school",
+   "name": "Assisi School",
+   "lat": 13.026686,
+   "lng": 77.703079,
+   "distanceKm": 8.72
+  },
+  {
+   "cat": "school",
+   "name": "Divine Light Trust For The Blind",
+   "lat": 12.984593,
+   "lng": 77.75385,
+   "distanceKm": 8.73
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura Capitol Residences (u/c)",
+   "lat": 12.98567,
+   "lng": 77.750198,
+   "distanceKm": 8.73
+  },
+  {
+   "cat": "school",
+   "name": "Government Model Middle School",
+   "lat": 12.981878,
+   "lng": 77.768381,
+   "distanceKm": 8.74
+  },
+  {
+   "cat": "school",
+   "name": "Indus Valley School",
+   "lat": 13.020799,
+   "lng": 77.705609,
+   "distanceKm": 8.78
+  },
+  {
+   "cat": "school",
+   "name": "The Landmark School",
+   "lat": 13.051653,
+   "lng": 77.695237,
+   "distanceKm": 8.79
+  },
+  {
+   "cat": "school",
+   "name": "Birla Open Minds International School",
+   "lat": 13.034838,
+   "lng": 77.698782,
+   "distanceKm": 8.81
+  },
+  {
+   "cat": "college",
+   "name": "Diamond PU College",
+   "lat": 13.035804,
+   "lng": 77.698475,
+   "distanceKm": 8.81
+  },
+  {
+   "cat": "metro",
+   "name": "A: Kadugodi Tree Park Side",
+   "lat": 12.985803,
+   "lng": 77.747137,
+   "distanceKm": 8.83
+  },
+  {
+   "cat": "school",
+   "name": "Diya Academy of Learning",
+   "lat": 13.003633,
+   "lng": 77.718447,
+   "distanceKm": 8.84
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Techno School",
+   "lat": 13.051195,
+   "lng": 77.694826,
+   "distanceKm": 8.84
+  },
+  {
+   "cat": "metro",
+   "name": "Kadugodi Tree Park",
+   "lat": 12.98565,
+   "lng": 77.747012,
+   "distanceKm": 8.85
+  },
+  {
+   "cat": "metro",
+   "name": "B: Pattandur Agrahara Side",
+   "lat": 12.985465,
+   "lng": 77.747025,
+   "distanceKm": 8.87
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade (u/c)",
+   "lat": 12.98937,
+   "lng": 77.737457,
+   "distanceKm": 8.9
+  },
+  {
+   "cat": "hospital",
+   "name": "Jadigenahalli Hospital",
+   "lat": 13.046897,
+   "lng": 77.856923,
+   "distanceKm": 8.9
+  },
+  {
+   "cat": "clinic",
+   "name": "Saptagiri Health Care",
+   "lat": 13.004588,
+   "lng": 77.716705,
+   "distanceKm": 8.9
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ishtika (u/c)",
+   "lat": 12.981757,
+   "lng": 77.792878,
+   "distanceKm": 8.91
+  },
+  {
+   "cat": "project_uc",
+   "name": "Kingston (u/c)",
+   "lat": 13.016682,
+   "lng": 77.706626,
+   "distanceKm": 8.92
+  },
+  {
+   "cat": "clinic",
+   "name": "Whitefield Clinic of Nephro-Urology",
+   "lat": 12.983377,
+   "lng": 77.751948,
+   "distanceKm": 8.92
+  },
+  {
+   "cat": "college",
+   "name": "Visvadeep: Institute of Youth Ministry and Faith Education",
+   "lat": 13.020521,
+   "lng": 77.704168,
+   "distanceKm": 8.93
+  },
+  {
+   "cat": "college",
+   "name": "Kristu Jyoti College",
+   "lat": 13.021814,
+   "lng": 77.7032,
+   "distanceKm": 8.95
+  },
+  {
+   "cat": "college",
+   "name": "Don Bosco College",
+   "lat": 13.022936,
+   "lng": 77.702482,
+   "distanceKm": 8.96
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Manjunatha Clinic",
+   "lat": 13.01064,
+   "lng": 77.710585,
+   "distanceKm": 8.96
+  },
+  {
+   "cat": "college",
+   "name": "Indusridge PU College",
+   "lat": 13.029778,
+   "lng": 77.699197,
+   "distanceKm": 8.97
+  },
+  {
+   "cat": "school",
+   "name": "Whitefield Global School",
+   "lat": 12.981625,
+   "lng": 77.756906,
+   "distanceKm": 8.97
+  },
+  {
+   "cat": "school",
+   "name": "Indusridge College of Commerce",
+   "lat": 13.030141,
+   "lng": 77.698632,
+   "distanceKm": 9.01
+  },
+  {
+   "cat": "metro",
+   "name": "A: Thigalarapalya Side",
+   "lat": 12.987754,
+   "lng": 77.737917,
+   "distanceKm": 9.04
+  },
+  {
+   "cat": "college",
+   "name": "Government Polytechnic College",
+   "lat": 12.980577,
+   "lng": 77.75852,
+   "distanceKm": 9.04
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Eco Edge (u/c)",
+   "lat": 12.985884,
+   "lng": 77.741702,
+   "distanceKm": 9.05
+  },
+  {
+   "cat": "metro",
+   "name": "Pattandur Agrahara",
+   "lat": 12.987639,
+   "lng": 77.737772,
+   "distanceKm": 9.06
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Elm Park (u/c)",
+   "lat": 12.980082,
+   "lng": 77.760458,
+   "distanceKm": 9.06
+  },
+  {
+   "cat": "metro",
+   "name": "B: Pattandur Agrahara Side",
+   "lat": 12.987425,
+   "lng": 77.737892,
+   "distanceKm": 9.07
+  },
+  {
+   "cat": "clinic",
+   "name": "Swiss Medic Health Care",
+   "lat": 13.020731,
+   "lng": 77.70227,
+   "distanceKm": 9.1
+  },
+  {
+   "cat": "hospital",
+   "name": "Amrik Hospital",
+   "lat": 12.982899,
+   "lng": 77.747813,
+   "distanceKm": 9.11
+  },
+  {
+   "cat": "clinic",
+   "name": "Bhagwan Mahavir Jain Health Center",
+   "lat": 12.981467,
+   "lng": 77.752366,
+   "distanceKm": 9.11
+  },
+  {
+   "cat": "hospital",
+   "name": "Aster Whitefield Hospital",
+   "lat": 12.989003,
+   "lng": 77.733837,
+   "distanceKm": 9.13
+  },
+  {
+   "cat": "hospital",
+   "name": "Shanthinilaya Hospital",
+   "lat": 13.020759,
+   "lng": 77.701669,
+   "distanceKm": 9.15
+  },
+  {
+   "cat": "hospital",
+   "name": "Aster DM Healthcare",
+   "lat": 12.988687,
+   "lng": 77.733708,
+   "distanceKm": 9.16
+  },
+  {
+   "cat": "hospital",
+   "name": "Aster Women and Children Hospital",
+   "lat": 12.988344,
+   "lng": 77.733947,
+   "distanceKm": 9.18
+  },
+  {
+   "cat": "school",
+   "name": "St Anthony's Public School",
+   "lat": 13.022162,
+   "lng": 77.700599,
+   "distanceKm": 9.18
+  },
+  {
+   "cat": "project_uc",
+   "name": "ITPB Phase 2 (u/c)",
+   "lat": 12.985902,
+   "lng": 77.7385,
+   "distanceKm": 9.19
+  },
+  {
+   "cat": "mall",
+   "name": "Park Square Mall",
+   "lat": 12.986985,
+   "lng": 77.736415,
+   "distanceKm": 9.19
+  },
+  {
+   "cat": "project_uc",
+   "name": "Kingston (u/c)",
+   "lat": 13.007757,
+   "lng": 77.709975,
+   "distanceKm": 9.21
+  },
+  {
+   "cat": "clinic",
+   "name": "Tirumala Newborn Kids and Ortho Clinic",
+   "lat": 13.010207,
+   "lng": 77.707804,
+   "distanceKm": 9.23
+  },
+  {
+   "cat": "hospital",
+   "name": "Government Hospital, Budigere",
+   "lat": 13.137652,
+   "lng": 77.744809,
+   "distanceKm": 9.25
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Krishna Poly Clinic",
+   "lat": 13.004189,
+   "lng": 77.712593,
+   "distanceKm": 9.26
+  },
+  {
+   "cat": "hospital",
+   "name": "Thyrocare",
+   "lat": 13.015854,
+   "lng": 77.703317,
+   "distanceKm": 9.27
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr. Rao's Skin Clinic",
+   "lat": 13.004283,
+   "lng": 77.712077,
+   "distanceKm": 9.29
+  },
+  {
+   "cat": "college",
+   "name": "Garden City College",
+   "lat": 13.013034,
+   "lng": 77.70493,
+   "distanceKm": 9.3
+  },
+  {
+   "cat": "hospital",
+   "name": "Health Plus Multi Speciality Hospital",
+   "lat": 13.021952,
+   "lng": 77.699405,
+   "distanceKm": 9.31
+  },
+  {
+   "cat": "hospital",
+   "name": "Kids Health Link",
+   "lat": 13.003194,
+   "lng": 77.712876,
+   "distanceKm": 9.31
+  },
+  {
+   "cat": "project_uc",
+   "name": "CIGFIL (u/c)",
+   "lat": 12.986779,
+   "lng": 77.817495,
+   "distanceKm": 9.32
+  },
+  {
+   "cat": "college",
+   "name": "St. Anthony Composite P. U. College",
+   "lat": 13.020656,
+   "lng": 77.70001,
+   "distanceKm": 9.32
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr. Mohan Babu's Clinic",
+   "lat": 13.011299,
+   "lng": 77.705875,
+   "distanceKm": 9.33
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Sai Child Clinic",
+   "lat": 13.00509,
+   "lng": 77.710878,
+   "distanceKm": 9.33
+  },
+  {
+   "cat": "hospital",
+   "name": "Cloud Nine Hospital",
+   "lat": 12.987871,
+   "lng": 77.731977,
+   "distanceKm": 9.34
+  },
+  {
+   "cat": "clinic",
+   "name": "Shankar Nursing Home and Diagnostic Labratory",
+   "lat": 13.010382,
+   "lng": 77.706412,
+   "distanceKm": 9.34
+  },
+  {
+   "cat": "hospital",
+   "name": "Amrutha Healthcare",
+   "lat": 13.004262,
+   "lng": 77.711415,
+   "distanceKm": 9.35
+  },
+  {
+   "cat": "college",
+   "name": "Cambridge Institute of Technolgy",
+   "lat": 13.012526,
+   "lng": 77.704656,
+   "distanceKm": 9.36
+  },
+  {
+   "cat": "school",
+   "name": "Footprints Preschool and Daycare",
+   "lat": 12.979593,
+   "lng": 77.750699,
+   "distanceKm": 9.36
+  },
+  {
+   "cat": "project_uc",
+   "name": "Embassy Millenium (u/c)",
+   "lat": 12.98098,
+   "lng": 77.805915,
+   "distanceKm": 9.38
+  },
+  {
+   "cat": "mall",
+   "name": "Nexus Shantinekatan",
+   "lat": 12.98953,
+   "lng": 77.728074,
+   "distanceKm": 9.4
+  },
+  {
+   "cat": "metro",
+   "name": "Hoodi",
+   "lat": 12.995923,
+   "lng": 77.71928,
+   "distanceKm": 9.41
+  },
+  {
+   "cat": "school",
+   "name": "Cambridge School",
+   "lat": 13.011068,
+   "lng": 77.704802,
+   "distanceKm": 9.44
+  },
+  {
+   "cat": "hospital",
+   "name": "Healing Hands Clinic - Whitefield, Bengaluru",
+   "lat": 12.988063,
+   "lng": 77.729843,
+   "distanceKm": 9.44
+  },
+  {
+   "cat": "clinic",
+   "name": "Bharat Piles & Fistula Clinic",
+   "lat": 13.003726,
+   "lng": 77.710518,
+   "distanceKm": 9.46
+  },
+  {
+   "cat": "clinic",
+   "name": "Sandhya Clinic",
+   "lat": 13.004403,
+   "lng": 77.709487,
+   "distanceKm": 9.49
+  },
+  {
+   "cat": "school",
+   "name": "Hoodi Primary School",
+   "lat": 12.995366,
+   "lng": 77.718618,
+   "distanceKm": 9.5
+  },
+  {
+   "cat": "school",
+   "name": "L.B.S. School",
+   "lat": 13.051954,
+   "lng": 77.688554,
+   "distanceKm": 9.5
+  },
+  {
+   "cat": "school",
+   "name": "Holy Cross School & College",
+   "lat": 12.979058,
+   "lng": 77.748021,
+   "distanceKm": 9.51
+  },
+  {
+   "cat": "hospital",
+   "name": "Manipal Hospitals Whitefield",
+   "lat": 12.988071,
+   "lng": 77.728641,
+   "distanceKm": 9.51
+  },
+  {
+   "cat": "school",
+   "name": "Government PUC",
+   "lat": 12.995412,
+   "lng": 77.71827,
+   "distanceKm": 9.52
+  },
+  {
+   "cat": "school",
+   "name": "Guntur Oxford School",
+   "lat": 13.00894,
+   "lng": 77.705269,
+   "distanceKm": 9.53
+  },
+  {
+   "cat": "school",
+   "name": "Indus Valley College",
+   "lat": 13.008535,
+   "lng": 77.705592,
+   "distanceKm": 9.53
+  },
+  {
+   "cat": "university",
+   "name": "Jain University School of Allied Healthcare & Sciences",
+   "lat": 12.985245,
+   "lng": 77.733167,
+   "distanceKm": 9.53
+  },
+  {
+   "cat": "clinic",
+   "name": "Vijaya Lakshmi Clinic",
+   "lat": 13.022724,
+   "lng": 77.696752,
+   "distanceKm": 9.53
+  },
+  {
+   "cat": "project_uc",
+   "name": "CapitaLand Data Centre",
+   "lat": 12.984551,
+   "lng": 77.734211,
+   "distanceKm": 9.54
+  },
+  {
+   "cat": "project_uc",
+   "name": "Embassy East Avenue (u/c)",
+   "lat": 12.987351,
+   "lng": 77.728554,
+   "distanceKm": 9.58
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Krishna Physiotherapy Clinic",
+   "lat": 13.004589,
+   "lng": 77.708306,
+   "distanceKm": 9.58
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Manjunatha Clinic",
+   "lat": 13.004473,
+   "lng": 77.708245,
+   "distanceKm": 9.59
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mercado",
+   "lat": 12.988936,
+   "lng": 77.725763,
+   "distanceKm": 9.6
+  },
+  {
+   "cat": "project_uc",
+   "name": "The Grand Strand Address (u/c)",
+   "lat": 12.988834,
+   "lng": 77.725744,
+   "distanceKm": 9.61
+  },
+  {
+   "cat": "school",
+   "name": "Abhayadhama Human Development Center",
+   "lat": 12.977878,
+   "lng": 77.748115,
+   "distanceKm": 9.63
+  },
+  {
+   "cat": "project_uc",
+   "name": "Bren Nautilus (u/c)",
+   "lat": 12.993121,
+   "lng": 77.719387,
+   "distanceKm": 9.64
+  },
+  {
+   "cat": "project_uc",
+   "name": "White Haven",
+   "lat": 12.988531,
+   "lng": 77.725727,
+   "distanceKm": 9.64
+  },
+  {
+   "cat": "college",
+   "name": "Silicon City College",
+   "lat": 13.011162,
+   "lng": 77.701611,
+   "distanceKm": 9.71
+  },
+  {
+   "cat": "school",
+   "name": "St. Joseph's Convent High School",
+   "lat": 12.976672,
+   "lng": 77.749552,
+   "distanceKm": 9.71
+  },
+  {
+   "cat": "project_uc",
+   "name": "Lorven Cascade Garden (u/c)",
+   "lat": 12.973369,
+   "lng": 77.764073,
+   "distanceKm": 9.73
+  },
+  {
+   "cat": "school",
+   "name": "Chaitanya School",
+   "lat": 13.006263,
+   "lng": 77.704755,
+   "distanceKm": 9.76
+  },
+  {
+   "cat": "school",
+   "name": "Amar Jyothi Public School & Pre-University College",
+   "lat": 13.010149,
+   "lng": 77.701644,
+   "distanceKm": 9.77
+  },
+  {
+   "cat": "college",
+   "name": "Government First Grade College, KR Puram",
+   "lat": 13.014222,
+   "lng": 77.698698,
+   "distanceKm": 9.8
+  },
+  {
+   "cat": "school",
+   "name": "Hoodi High School",
+   "lat": 12.993422,
+   "lng": 77.716767,
+   "distanceKm": 9.8
+  },
+  {
+   "cat": "school",
+   "name": "Mother Theresa Memorial School",
+   "lat": 13.027977,
+   "lng": 77.691551,
+   "distanceKm": 9.81
+  },
+  {
+   "cat": "hospital",
+   "name": "Deepa Hospital",
+   "lat": 13.012051,
+   "lng": 77.699882,
+   "distanceKm": 9.82
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Techno School",
+   "lat": 12.99176,
+   "lng": 77.718263,
+   "distanceKm": 9.84
+  },
+  {
+   "cat": "clinic",
+   "name": "Indianova Heart Centre",
+   "lat": 13.012828,
+   "lng": 77.699044,
+   "distanceKm": 9.85
+  },
+  {
+   "cat": "hospital",
+   "name": "Vicky Family Life",
+   "lat": 13.003162,
+   "lng": 77.705953,
+   "distanceKm": 9.87
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 12.981274,
+   "lng": 77.733398,
+   "distanceKm": 9.9
+  },
+  {
+   "cat": "project_uc",
+   "name": "Total Environment - Pursuit Of A Radical Rhapsody",
+   "lat": 12.988751,
+   "lng": 77.721293,
+   "distanceKm": 9.9
+  },
+  {
+   "cat": "school",
+   "name": "Vision PU College",
+   "lat": 13.072983,
+   "lng": 77.685396,
+   "distanceKm": 9.9
+  },
+  {
+   "cat": "clinic",
+   "name": "Shree Srinivasa Homeo Clinic",
+   "lat": 13.004699,
+   "lng": 77.704279,
+   "distanceKm": 9.91
+  },
+  {
+   "cat": "clinic",
+   "name": "GSR Dental & Health Care",
+   "lat": 13.023966,
+   "lng": 77.691932,
+   "distanceKm": 9.94
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ankuraa (u/c)",
+   "lat": 12.971685,
+   "lng": 77.762003,
+   "distanceKm": 9.95
+  },
+  {
+   "cat": "hospital",
+   "name": "Maithri Nursing Home",
+   "lat": 13.00484,
+   "lng": 77.703643,
+   "distanceKm": 9.95
+  },
+  {
+   "cat": "clinic",
+   "name": "Maithri Nursing Home and Diagnostic centre",
+   "lat": 13.004942,
+   "lng": 77.703572,
+   "distanceKm": 9.95
+  },
+  {
+   "cat": "clinic",
+   "name": "Amma Poly Clinic",
+   "lat": 13.023934,
+   "lng": 77.691762,
+   "distanceKm": 9.96
+  },
+  {
+   "cat": "project_uc",
+   "name": "Vaswani Starlight (u/c)",
+   "lat": 12.978722,
+   "lng": 77.737506,
+   "distanceKm": 9.96
+  },
+  {
+   "cat": "clinic",
+   "name": "Deepa Clinic",
+   "lat": 13.005255,
+   "lng": 77.703108,
+   "distanceKm": 9.97
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Krishna Ayurvedic Clinic",
+   "lat": 13.024166,
+   "lng": 77.691574,
+   "distanceKm": 9.97
+  },
+  {
+   "cat": "clinic",
+   "name": "Shyam ENT clinic",
+   "lat": 13.012492,
+   "lng": 77.697752,
+   "distanceKm": 9.98
+  },
+  {
+   "cat": "project_uc",
+   "name": "Urbanrise (u/c)",
+   "lat": 12.97213,
+   "lng": 77.757784,
+   "distanceKm": 9.98
+  },
+  {
+   "cat": "school",
+   "name": "The Deen's Academy",
+   "lat": 12.976578,
+   "lng": 77.742023,
+   "distanceKm": 9.99
+  },
+  {
+   "cat": "project_uc",
+   "name": "Parimala Springfields (u/c)",
+   "lat": 12.973486,
+   "lng": 77.751174,
+   "distanceKm": 10
+  },
+  {
+   "cat": "clinic",
+   "name": "Physiotherapy Clinic",
+   "lat": 13.005267,
+   "lng": 77.70278,
+   "distanceKm": 10
+  },
+  {
+   "cat": "hospital",
+   "name": "Patil Hospital",
+   "lat": 13.011214,
+   "lng": 77.69796,
+   "distanceKm": 10.04
+  },
+  {
+   "cat": "school",
+   "name": "St George High School",
+   "lat": 13.066892,
+   "lng": 77.683353,
+   "distanceKm": 10.05
+  },
+  {
+   "cat": "school",
+   "name": "Cottolengo Special School",
+   "lat": 12.973741,
+   "lng": 77.748248,
+   "distanceKm": 10.06
+  },
+  {
+   "cat": "project_uc",
+   "name": "Assetz Shibui (u/c)",
+   "lat": 12.972821,
+   "lng": 77.751298,
+   "distanceKm": 10.07
+  },
+  {
+   "cat": "clinic",
+   "name": "Bhagya Sri Clinic",
+   "lat": 13.00669,
+   "lng": 77.700779,
+   "distanceKm": 10.07
+  },
+  {
+   "cat": "school",
+   "name": "Indus Early Learning Centre",
+   "lat": 12.974659,
+   "lng": 77.74526,
+   "distanceKm": 10.07
+  },
+  {
+   "cat": "school",
+   "name": "Sri Krishna High School and PU College",
+   "lat": 13.001433,
+   "lng": 77.705052,
+   "distanceKm": 10.07
+  },
+  {
+   "cat": "clinic",
+   "name": "Tata MD",
+   "lat": 12.972777,
+   "lng": 77.750639,
+   "distanceKm": 10.09
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Lakshmi Super Speciality Hospital",
+   "lat": 13.011115,
+   "lng": 77.697361,
+   "distanceKm": 10.1
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Sathya Sai Institute of Higher Medical Sciences",
+   "lat": 12.980881,
+   "lng": 77.730305,
+   "distanceKm": 10.1
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Vinayaka Child Care Clinic",
+   "lat": 13.023382,
+   "lng": 77.69059,
+   "distanceKm": 10.1
+  },
+  {
+   "cat": "school",
+   "name": "Bharathiya Vidhyaniketan High School",
+   "lat": 13.006798,
+   "lng": 77.700154,
+   "distanceKm": 10.12
+  },
+  {
+   "cat": "hospital",
+   "name": "NMPC Hospital",
+   "lat": 13.006205,
+   "lng": 77.700429,
+   "distanceKm": 10.14
+  },
+  {
+   "cat": "college",
+   "name": "Sree Venkateshwara P U College",
+   "lat": 13.012425,
+   "lng": 77.696017,
+   "distanceKm": 10.15
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Ramakrishna Hospital, Bengaluru Urban",
+   "lat": 13.012171,
+   "lng": 77.69618,
+   "distanceKm": 10.15
+  },
+  {
+   "cat": "project_uc",
+   "name": "Coevolved East End",
+   "lat": 12.976712,
+   "lng": 77.737693,
+   "distanceKm": 10.16
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura Hive (u/c)",
+   "lat": 12.991188,
+   "lng": 77.71428,
+   "distanceKm": 10.16
+  },
+  {
+   "cat": "hospital",
+   "name": "Sad Bydya Shala Ayurvedic Hospital",
+   "lat": 13.010654,
+   "lng": 77.696946,
+   "distanceKm": 10.17
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Ragavendra Homeo Clinic",
+   "lat": 13.010692,
+   "lng": 77.696937,
+   "distanceKm": 10.17
+  },
+  {
+   "cat": "clinic",
+   "name": "Curewell Clinic",
+   "lat": 13.006578,
+   "lng": 77.699696,
+   "distanceKm": 10.18
+  },
+  {
+   "cat": "clinic",
+   "name": "Bhavani Skin & Cosmetology Clinic",
+   "lat": 13.010092,
+   "lng": 77.697061,
+   "distanceKm": 10.19
+  },
+  {
+   "cat": "project_uc",
+   "name": "SKAV Grande (u/c)",
+   "lat": 12.972066,
+   "lng": 77.749874,
+   "distanceKm": 10.19
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Pine Forest (u/c)",
+   "lat": 12.974656,
+   "lng": 77.741758,
+   "distanceKm": 10.2
+  },
+  {
+   "cat": "clinic",
+   "name": "Rama Krishna Poly Clinic",
+   "lat": 13.007676,
+   "lng": 77.698662,
+   "distanceKm": 10.2
+  },
+  {
+   "cat": "clinic",
+   "name": "Vishwa Health Care Centre",
+   "lat": 13.006151,
+   "lng": 77.699797,
+   "distanceKm": 10.2
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura (u/c)",
+   "lat": 12.991183,
+   "lng": 77.713628,
+   "distanceKm": 10.21
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura Nexus (u/c)",
+   "lat": 12.991151,
+   "lng": 77.71364,
+   "distanceKm": 10.21
+  },
+  {
+   "cat": "metro",
+   "name": "B: Sri Sathya Sai Hospital Side",
+   "lat": 12.981101,
+   "lng": 77.727697,
+   "distanceKm": 10.22
+  },
+  {
+   "cat": "metro",
+   "name": "Sri Sathya Sai Hospital",
+   "lat": 12.981195,
+   "lng": 77.727536,
+   "distanceKm": 10.22
+  },
+  {
+   "cat": "metro",
+   "name": "A: KIADB Industrial Area Side",
+   "lat": 12.981165,
+   "lng": 77.72744,
+   "distanceKm": 10.23
+  },
+  {
+   "cat": "project_uc",
+   "name": "Godrej (u/c)",
+   "lat": 12.970937,
+   "lng": 77.799122,
+   "distanceKm": 10.23
+  },
+  {
+   "cat": "project_uc",
+   "name": "Club House",
+   "lat": 12.974492,
+   "lng": 77.741204,
+   "distanceKm": 10.24
+  },
+  {
+   "cat": "hospital",
+   "name": "Patil Hospital, Bengaluru Urban",
+   "lat": 13.009085,
+   "lng": 77.696957,
+   "distanceKm": 10.26
+  },
+  {
+   "cat": "metro",
+   "name": "Devangonthi",
+   "lat": 12.985148,
+   "lng": 77.831295,
+   "distanceKm": 10.27
+  },
+  {
+   "cat": "hospital",
+   "name": "R R Hospital",
+   "lat": 13.008203,
+   "lng": 77.697197,
+   "distanceKm": 10.29
+  },
+  {
+   "cat": "hospital",
+   "name": "Suresh Hospital, Bengaluru Urban",
+   "lat": 13.00804,
+   "lng": 77.697109,
+   "distanceKm": 10.31
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 12.969801,
+   "lng": 77.753316,
+   "distanceKm": 10.34
+  },
+  {
+   "cat": "school",
+   "name": "Sisa Indo-Swiss Academy",
+   "lat": 12.970481,
+   "lng": 77.750453,
+   "distanceKm": 10.34
+  },
+  {
+   "cat": "college",
+   "name": "GCEM-Gopalan College of Engineering and Management",
+   "lat": 12.986472,
+   "lng": 77.717112,
+   "distanceKm": 10.37
+  },
+  {
+   "cat": "hospital",
+   "name": "Dr. Batra Clinic",
+   "lat": 12.979729,
+   "lng": 77.727109,
+   "distanceKm": 10.38
+  },
+  {
+   "cat": "clinic",
+   "name": "Maithri Nursing Maternity Home",
+   "lat": 13.007869,
+   "lng": 77.696498,
+   "distanceKm": 10.38
+  },
+  {
+   "cat": "clinic",
+   "name": "MS Clinic, Diagnostic & Scan Center",
+   "lat": 12.970139,
+   "lng": 77.750248,
+   "distanceKm": 10.38
+  },
+  {
+   "cat": "school",
+   "name": "Gopalan International Schoool",
+   "lat": 12.985314,
+   "lng": 77.718376,
+   "distanceKm": 10.39
+  },
+  {
+   "cat": "college",
+   "name": "GSAP-Gopalan College Of Architecture",
+   "lat": 12.986424,
+   "lng": 77.716933,
+   "distanceKm": 10.39
+  },
+  {
+   "cat": "project_uc",
+   "name": "Bricks & Milestones (u/c)",
+   "lat": 13.053808,
+   "lng": 77.680044,
+   "distanceKm": 10.4
+  },
+  {
+   "cat": "college",
+   "name": "GCC-Gopalan College of Commerce",
+   "lat": 12.98652,
+   "lng": 77.716657,
+   "distanceKm": 10.4
+  },
+  {
+   "cat": "college",
+   "name": "GPUC-Gopalan PU College",
+   "lat": 12.986428,
+   "lng": 77.716663,
+   "distanceKm": 10.41
+  },
+  {
+   "cat": "school",
+   "name": "St. Thomas School",
+   "lat": 12.970672,
+   "lng": 77.747563,
+   "distanceKm": 10.41
+  },
+  {
+   "cat": "school",
+   "name": "The Brigade School @ Mahadevapura",
+   "lat": 12.998964,
+   "lng": 77.703091,
+   "distanceKm": 10.41
+  },
+  {
+   "cat": "clinic",
+   "name": "Cure N Care Homoeopathic clinic",
+   "lat": 12.969668,
+   "lng": 77.750731,
+   "distanceKm": 10.42
+  },
+  {
+   "cat": "hospital",
+   "name": "Ayurvedagram Heritage Wellness Centre",
+   "lat": 12.968954,
+   "lng": 77.799476,
+   "distanceKm": 10.45
+  },
+  {
+   "cat": "hospital",
+   "name": "K R Puram Super Speciality Hospital",
+   "lat": 13.011012,
+   "lng": 77.693598,
+   "distanceKm": 10.45
+  },
+  {
+   "cat": "college",
+   "name": "Gopalan International School",
+   "lat": 12.98527,
+   "lng": 77.717435,
+   "distanceKm": 10.46
+  },
+  {
+   "cat": "school",
+   "name": "SM English School",
+   "lat": 12.984595,
+   "lng": 77.718146,
+   "distanceKm": 10.47
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Ram Netralaya and Surgical Centre",
+   "lat": 13.008807,
+   "lng": 77.694866,
+   "distanceKm": 10.47
+  },
+  {
+   "cat": "school",
+   "name": "Government Primary School",
+   "lat": 12.983861,
+   "lng": 77.719074,
+   "distanceKm": 10.48
+  },
+  {
+   "cat": "college",
+   "name": "Vydehi Institute of Medical Science and Research Center",
+   "lat": 12.976723,
+   "lng": 77.730372,
+   "distanceKm": 10.5
+  },
+  {
+   "cat": "clinic",
+   "name": "Sai Dental Clinic",
+   "lat": 12.969029,
+   "lng": 77.750026,
+   "distanceKm": 10.51
+  },
+  {
+   "cat": "school",
+   "name": "Kuvempu Smaraka Vidya Kendra School",
+   "lat": 12.967847,
+   "lng": 77.754364,
+   "distanceKm": 10.52
+  },
+  {
+   "cat": "hospital",
+   "name": "Pushpa Nursing Home",
+   "lat": 12.9689,
+   "lng": 77.749495,
+   "distanceKm": 10.54
+  },
+  {
+   "cat": "hospital",
+   "name": "Sriram Hospital, Bangalore",
+   "lat": 13.00875,
+   "lng": 77.693981,
+   "distanceKm": 10.55
+  },
+  {
+   "cat": "metro",
+   "name": "Hoodi",
+   "lat": 12.988803,
+   "lng": 77.711326,
+   "distanceKm": 10.57
+  },
+  {
+   "cat": "project_uc",
+   "name": "The Hub by MFAR",
+   "lat": 12.991979,
+   "lng": 77.707839,
+   "distanceKm": 10.57
+  },
+  {
+   "cat": "clinic",
+   "name": "Srinivasa Clinic",
+   "lat": 12.968535,
+   "lng": 77.749518,
+   "distanceKm": 10.58
+  },
+  {
+   "cat": "clinic",
+   "name": "Vasan Eye Care",
+   "lat": 12.968523,
+   "lng": 77.749477,
+   "distanceKm": 10.58
+  },
+  {
+   "cat": "project_uc",
+   "name": "ELV Ivory Terraces",
+   "lat": 12.969152,
+   "lng": 77.747015,
+   "distanceKm": 10.59
+  },
+  {
+   "cat": "school",
+   "name": "SLS International Gurukul",
+   "lat": 13.041629,
+   "lng": 77.679996,
+   "distanceKm": 10.59
+  },
+  {
+   "cat": "project_uc",
+   "name": "ELV High Garden",
+   "lat": 12.968787,
+   "lng": 77.747423,
+   "distanceKm": 10.61
+  },
+  {
+   "cat": "college",
+   "name": "Vydehi Medical College Building",
+   "lat": 12.975337,
+   "lng": 77.730753,
+   "distanceKm": 10.62
+  },
+  {
+   "cat": "hospital",
+   "name": "Dr. Agarwal's Eye Hospital",
+   "lat": 12.967875,
+   "lng": 77.750048,
+   "distanceKm": 10.63
+  },
+  {
+   "cat": "school",
+   "name": "EuroSchool Whitefield",
+   "lat": 12.985786,
+   "lng": 77.714021,
+   "distanceKm": 10.64
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Ram Hospital",
+   "lat": 13.009623,
+   "lng": 77.692471,
+   "distanceKm": 10.64
+  },
+  {
+   "cat": "hospital",
+   "name": "ESI Dispensary",
+   "lat": 12.992488,
+   "lng": 77.706222,
+   "distanceKm": 10.65
+  },
+  {
+   "cat": "school",
+   "name": "Jetking Computer Hardware and Networking",
+   "lat": 12.978158,
+   "lng": 77.725055,
+   "distanceKm": 10.65
+  },
+  {
+   "cat": "hospital",
+   "name": "Kinder Women's Hospital & Fertility Center",
+   "lat": 12.992052,
+   "lng": 77.706475,
+   "distanceKm": 10.67
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Glenbrook (u/c)",
+   "lat": 12.970847,
+   "lng": 77.739876,
+   "distanceKm": 10.67
+  },
+  {
+   "cat": "clinic",
+   "name": "Shree Clinic",
+   "lat": 13.030194,
+   "lng": 77.682325,
+   "distanceKm": 10.67
+  },
+  {
+   "cat": "hospital",
+   "name": "Vydehi Institute Of Medical Sciences And Research Centre",
+   "lat": 12.975493,
+   "lng": 77.729354,
+   "distanceKm": 10.68
+  },
+  {
+   "cat": "project_uc",
+   "name": "Assetz Codename Twin Lake City (u/c)",
+   "lat": 13.047116,
+   "lng": 77.67813,
+   "distanceKm": 10.69
+  },
+  {
+   "cat": "project_uc",
+   "name": "Clubhouse",
+   "lat": 13.058027,
+   "lng": 77.677181,
+   "distanceKm": 10.69
+  },
+  {
+   "cat": "school",
+   "name": "Vydehi School of Excellence",
+   "lat": 12.974461,
+   "lng": 77.73098,
+   "distanceKm": 10.7
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade United (u/c)",
+   "lat": 12.993769,
+   "lng": 77.704144,
+   "distanceKm": 10.72
+  },
+  {
+   "cat": "school",
+   "name": "Eurokids",
+   "lat": 12.9684,
+   "lng": 77.744669,
+   "distanceKm": 10.74
+  },
+  {
+   "cat": "metro",
+   "name": "A: Kaveri Nagara Side",
+   "lat": 12.99355,
+   "lng": 77.703886,
+   "distanceKm": 10.75
+  },
+  {
+   "cat": "hospital",
+   "name": "ESi Hospital",
+   "lat": 13.007794,
+   "lng": 77.69231,
+   "distanceKm": 10.76
+  },
+  {
+   "cat": "project_uc",
+   "name": "The Church of Jesus Christ of Latter-day Saints",
+   "lat": 12.992436,
+   "lng": 77.704753,
+   "distanceKm": 10.77
+  },
+  {
+   "cat": "metro",
+   "name": "Garudacharpalya",
+   "lat": 12.993451,
+   "lng": 77.703677,
+   "distanceKm": 10.78
+  },
+  {
+   "cat": "metro",
+   "name": "B: Garudacharpalya Side",
+   "lat": 12.993212,
+   "lng": 77.703761,
+   "distanceKm": 10.79
+  },
+  {
+   "cat": "metro",
+   "name": "BMTC Depot Side",
+   "lat": 12.976819,
+   "lng": 77.724851,
+   "distanceKm": 10.79
+  },
+  {
+   "cat": "metro",
+   "name": "Nallurahalli",
+   "lat": 12.976641,
+   "lng": 77.724885,
+   "distanceKm": 10.8
+  },
+  {
+   "cat": "clinic",
+   "name": "Sai Kripa Nursing Home",
+   "lat": 12.993824,
+   "lng": 77.7029,
+   "distanceKm": 10.81
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 12.964039,
+   "lng": 77.758753,
+   "distanceKm": 10.84
+  },
+  {
+   "cat": "school",
+   "name": "Narayana School",
+   "lat": 12.96847,
+   "lng": 77.741648,
+   "distanceKm": 10.84
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sandhya Techno Park",
+   "lat": 12.976022,
+   "lng": 77.725182,
+   "distanceKm": 10.84
+  },
+  {
+   "cat": "clinic",
+   "name": "Niswaras Homeopathy Clinic",
+   "lat": 13.028101,
+   "lng": 77.681255,
+   "distanceKm": 10.85
+  },
+  {
+   "cat": "hospital",
+   "name": "Svastha Hospital",
+   "lat": 12.965917,
+   "lng": 77.749386,
+   "distanceKm": 10.86
+  },
+  {
+   "cat": "project_uc",
+   "name": "Godrej Hoodi (u/c)",
+   "lat": 12.986861,
+   "lng": 77.709406,
+   "distanceKm": 10.87
+  },
+  {
+   "cat": "college",
+   "name": "ITI Bhavan",
+   "lat": 13.007176,
+   "lng": 77.691094,
+   "distanceKm": 10.91
+  },
+  {
+   "cat": "clinic",
+   "name": "Chirayu Health care centre",
+   "lat": 12.993689,
+   "lng": 77.70168,
+   "distanceKm": 10.92
+  },
+  {
+   "cat": "clinic",
+   "name": "Tata Health Clinic",
+   "lat": 12.992441,
+   "lng": 77.702756,
+   "distanceKm": 10.93
+  },
+  {
+   "cat": "project_uc",
+   "name": "DNA Ariston Apartments",
+   "lat": 12.967775,
+   "lng": 77.740741,
+   "distanceKm": 10.95
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade (u/c)",
+   "lat": 12.965379,
+   "lng": 77.747811,
+   "distanceKm": 10.96
+  },
+  {
+   "cat": "project_uc",
+   "name": "Desai Empire",
+   "lat": 12.968288,
+   "lng": 77.738897,
+   "distanceKm": 10.97
+  },
+  {
+   "cat": "project_uc",
+   "name": "Phoenix Market City Expansion (u/c)",
+   "lat": 12.998688,
+   "lng": 77.696379,
+   "distanceKm": 10.99
+  },
+  {
+   "cat": "project_uc",
+   "name": "Club House",
+   "lat": 12.965014,
+   "lng": 77.74786,
+   "distanceKm": 11
+  },
+  {
+   "cat": "hospital",
+   "name": "Presidency Hospital",
+   "lat": 12.995163,
+   "lng": 77.69923,
+   "distanceKm": 11.01
+  },
+  {
+   "cat": "school",
+   "name": "HPCL Gurukul",
+   "lat": 12.990073,
+   "lng": 77.847879,
+   "distanceKm": 11.02
+  },
+  {
+   "cat": "clinic",
+   "name": "Namma Clinic",
+   "lat": 12.964551,
+   "lng": 77.748775,
+   "distanceKm": 11.03
+  },
+  {
+   "cat": "school",
+   "name": "BNR Memorial School",
+   "lat": 13.015086,
+   "lng": 77.685063,
+   "distanceKm": 11.04
+  },
+  {
+   "cat": "school",
+   "name": "Chrysalis Kids",
+   "lat": 12.96407,
+   "lng": 77.749541,
+   "distanceKm": 11.05
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Balaji Polyclinic and Diagnostic Centr",
+   "lat": 13.018066,
+   "lng": 77.683181,
+   "distanceKm": 11.08
+  },
+  {
+   "cat": "school",
+   "name": "Gopalan National School",
+   "lat": 12.98638,
+   "lng": 77.706888,
+   "distanceKm": 11.09
+  },
+  {
+   "cat": "clinic",
+   "name": "Kaya Skin Clinic",
+   "lat": 12.996956,
+   "lng": 77.696641,
+   "distanceKm": 11.09
+  },
+  {
+   "cat": "clinic",
+   "name": "Aswitha Poly Clinic",
+   "lat": 12.969691,
+   "lng": 77.732559,
+   "distanceKm": 11.1
+  },
+  {
+   "cat": "mall",
+   "name": "Phoenix Market City",
+   "lat": 12.996975,
+   "lng": 77.696469,
+   "distanceKm": 11.1
+  },
+  {
+   "cat": "school",
+   "name": "Kowdenahalli Government School",
+   "lat": 13.019098,
+   "lng": 77.681501,
+   "distanceKm": 11.2
+  },
+  {
+   "cat": "school",
+   "name": "Nalanda Group of Institutions",
+   "lat": 13.15841,
+   "lng": 77.751756,
+   "distanceKm": 11.24
+  },
+  {
+   "cat": "mall",
+   "name": "VR Bengaluru",
+   "lat": 12.996344,
+   "lng": 77.695345,
+   "distanceKm": 11.24
+  },
+  {
+   "cat": "school",
+   "name": "Carmel Teresa School",
+   "lat": 12.962268,
+   "lng": 77.749668,
+   "distanceKm": 11.25
+  },
+  {
+   "cat": "metro",
+   "name": "KTPO Side",
+   "lat": 12.977745,
+   "lng": 77.715662,
+   "distanceKm": 11.25
+  },
+  {
+   "cat": "metro",
+   "name": "Kundalahalli",
+   "lat": 12.977594,
+   "lng": 77.715559,
+   "distanceKm": 11.27
+  },
+  {
+   "cat": "school",
+   "name": "Neev School",
+   "lat": 12.962572,
+   "lng": 77.747691,
+   "distanceKm": 11.27
+  },
+  {
+   "cat": "metro",
+   "name": "Kundalahalli Side",
+   "lat": 12.977392,
+   "lng": 77.715665,
+   "distanceKm": 11.28
+  },
+  {
+   "cat": "project_uc",
+   "name": "Roma Epicurean (u/c)",
+   "lat": 12.966779,
+   "lng": 77.735026,
+   "distanceKm": 11.28
+  },
+  {
+   "cat": "clinic",
+   "name": "Harsha Poly Clinic & Maternity Home",
+   "lat": 12.994662,
+   "lng": 77.696129,
+   "distanceKm": 11.3
+  },
+  {
+   "cat": "clinic",
+   "name": "Bhagat Dental Clinic",
+   "lat": 13.033633,
+   "lng": 77.674957,
+   "distanceKm": 11.32
+  },
+  {
+   "cat": "school",
+   "name": "Nallurahalli Government School",
+   "lat": 12.969958,
+   "lng": 77.727358,
+   "distanceKm": 11.32
+  },
+  {
+   "cat": "hospital",
+   "name": "Eshawar HospItal",
+   "lat": 13.033219,
+   "lng": 77.674769,
+   "distanceKm": 11.35
+  },
+  {
+   "cat": "project_uc",
+   "name": "Living Stone",
+   "lat": 12.962106,
+   "lng": 77.746698,
+   "distanceKm": 11.35
+  },
+  {
+   "cat": "clinic",
+   "name": "R K Polyclinic",
+   "lat": 13.032921,
+   "lng": 77.674777,
+   "distanceKm": 11.36
+  },
+  {
+   "cat": "school",
+   "name": "Christ the King School",
+   "lat": 13.016371,
+   "lng": 77.680979,
+   "distanceKm": 11.37
+  },
+  {
+   "cat": "school",
+   "name": "Glentree Academy School",
+   "lat": 12.965633,
+   "lng": 77.735116,
+   "distanceKm": 11.4
+  },
+  {
+   "cat": "metro",
+   "name": "A: Seetharampalya",
+   "lat": 12.980889,
+   "lng": 77.708987,
+   "distanceKm": 11.41
+  },
+  {
+   "cat": "hospital",
+   "name": "Narayana Nethralaya",
+   "lat": 12.980602,
+   "lng": 77.70921,
+   "distanceKm": 11.42
+  },
+  {
+   "cat": "metro",
+   "name": "Seetharampalya",
+   "lat": 12.980856,
+   "lng": 77.708785,
+   "distanceKm": 11.42
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr.Chandar Clinic",
+   "lat": 12.99608,
+   "lng": 77.693379,
+   "distanceKm": 11.43
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ozone WF48",
+   "lat": 12.994712,
+   "lng": 77.69451,
+   "distanceKm": 11.43
+  },
+  {
+   "cat": "metro",
+   "name": "B: Doddanekkundi",
+   "lat": 12.98072,
+   "lng": 77.708656,
+   "distanceKm": 11.44
+  },
+  {
+   "cat": "school",
+   "name": "ITI Central School",
+   "lat": 13.008062,
+   "lng": 77.684815,
+   "distanceKm": 11.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Tech Zone (u/c)",
+   "lat": 12.970905,
+   "lng": 77.723211,
+   "distanceKm": 11.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Shravanee Technovate",
+   "lat": 12.979885,
+   "lng": 77.709797,
+   "distanceKm": 11.44
+  },
+  {
+   "cat": "clinic",
+   "name": "Veterinary Hospital",
+   "lat": 13.033172,
+   "lng": 77.673934,
+   "distanceKm": 11.44
+  },
+  {
+   "cat": "metro",
+   "name": "A: Singayyanapalya Side",
+   "lat": 12.996749,
+   "lng": 77.692558,
+   "distanceKm": 11.45
+  },
+  {
+   "cat": "metro",
+   "name": "Singayyanapalya",
+   "lat": 12.996545,
+   "lng": 77.692718,
+   "distanceKm": 11.45
+  },
+  {
+   "cat": "school",
+   "name": "ITI Vidya Mandir School",
+   "lat": 13.007606,
+   "lng": 77.684673,
+   "distanceKm": 11.48
+  },
+  {
+   "cat": "school",
+   "name": "Government Higher Primary School",
+   "lat": 13.011461,
+   "lng": 77.682349,
+   "distanceKm": 11.49
+  },
+  {
+   "cat": "school",
+   "name": "Kalkere Government High School",
+   "lat": 13.032974,
+   "lng": 77.673574,
+   "distanceKm": 11.49
+  },
+  {
+   "cat": "clinic",
+   "name": "Lyfas Digital Health Clinic",
+   "lat": 12.992777,
+   "lng": 77.694674,
+   "distanceKm": 11.55
+  },
+  {
+   "cat": "college",
+   "name": "Shri Vidya Niketan School and College",
+   "lat": 13.063974,
+   "lng": 77.6693,
+   "distanceKm": 11.55
+  },
+  {
+   "cat": "mall",
+   "name": "Nexus Whitefield",
+   "lat": 12.959697,
+   "lng": 77.747946,
+   "distanceKm": 11.57
+  },
+  {
+   "cat": "project_uc",
+   "name": "RGHCL",
+   "lat": 13.150026,
+   "lng": 77.722124,
+   "distanceKm": 11.57
+  },
+  {
+   "cat": "project_uc",
+   "name": "Damascus 1",
+   "lat": 12.984449,
+   "lng": 77.702083,
+   "distanceKm": 11.61
+  },
+  {
+   "cat": "project_uc",
+   "name": "Royal Residency (u/c)",
+   "lat": 13.090319,
+   "lng": 77.672783,
+   "distanceKm": 11.66
+  },
+  {
+   "cat": "hospital",
+   "name": "Wellness Ever",
+   "lat": 12.959358,
+   "lng": 77.746168,
+   "distanceKm": 11.66
+  },
+  {
+   "cat": "project_uc",
+   "name": "Damascus 2",
+   "lat": 12.983862,
+   "lng": 77.701857,
+   "distanceKm": 11.67
+  },
+  {
+   "cat": "clinic",
+   "name": "Heart Clinic & Pharmacy",
+   "lat": 12.95923,
+   "lng": 77.746231,
+   "distanceKm": 11.67
+  },
+  {
+   "cat": "hospital",
+   "name": "Koshys Hospital",
+   "lat": 13.020703,
+   "lng": 77.676059,
+   "distanceKm": 11.67
+  },
+  {
+   "cat": "school",
+   "name": "National Public School Kalkere",
+   "lat": 13.037857,
+   "lng": 77.670625,
+   "distanceKm": 11.67
+  },
+  {
+   "cat": "hospital",
+   "name": "Telerad Rx Dx Health Care Whitefield",
+   "lat": 12.976842,
+   "lng": 77.710375,
+   "distanceKm": 11.67
+  },
+  {
+   "cat": "hospital",
+   "name": "Motherhood Whitefield",
+   "lat": 12.958966,
+   "lng": 77.746719,
+   "distanceKm": 11.68
+  },
+  {
+   "cat": "school",
+   "name": "St. Anthony's Primary, Middle and Girls High School",
+   "lat": 13.01249,
+   "lng": 77.679759,
+   "distanceKm": 11.68
+  },
+  {
+   "cat": "clinic",
+   "name": "Sai Medical",
+   "lat": 12.96307,
+   "lng": 77.733801,
+   "distanceKm": 11.71
+  },
+  {
+   "cat": "project_uc",
+   "name": "Tata Intellion (u/c)",
+   "lat": 12.977574,
+   "lng": 77.708712,
+   "distanceKm": 11.71
+  },
+  {
+   "cat": "project_uc",
+   "name": "Damascus 3",
+   "lat": 12.983275,
+   "lng": 77.701657,
+   "distanceKm": 11.73
+  },
+  {
+   "cat": "clinic",
+   "name": "K M Gastro Center",
+   "lat": 12.963466,
+   "lng": 77.732548,
+   "distanceKm": 11.73
+  },
+  {
+   "cat": "college",
+   "name": "St. Anne's Pre-University College For Girls",
+   "lat": 13.012313,
+   "lng": 77.679314,
+   "distanceKm": 11.73
+  },
+  {
+   "cat": "school",
+   "name": "MTB School",
+   "lat": 12.99068,
+   "lng": 77.69389,
+   "distanceKm": 11.77
+  },
+  {
+   "cat": "school",
+   "name": "The Dunmore House Preschool",
+   "lat": 12.963507,
+   "lng": 77.731528,
+   "distanceKm": 11.77
+  },
+  {
+   "cat": "project_uc",
+   "name": "Bagmane Capital South",
+   "lat": 12.98085,
+   "lng": 77.70358,
+   "distanceKm": 11.79
+  },
+  {
+   "cat": "hospital",
+   "name": "Manipal Hospitals",
+   "lat": 12.958337,
+   "lng": 77.745445,
+   "distanceKm": 11.79
+  },
+  {
+   "cat": "project_uc",
+   "name": "Vasistha",
+   "lat": 12.953643,
+   "lng": 77.776132,
+   "distanceKm": 11.84
+  },
+  {
+   "cat": "hospital",
+   "name": "ITI General Hospital",
+   "lat": 13.004636,
+   "lng": 77.682357,
+   "distanceKm": 11.86
+  },
+  {
+   "cat": "clinic",
+   "name": "Step Care",
+   "lat": 12.961833,
+   "lng": 77.73276,
+   "distanceKm": 11.89
+  },
+  {
+   "cat": "project_uc",
+   "name": "Abhinav Projects (u/c)",
+   "lat": 12.972551,
+   "lng": 77.712765,
+   "distanceKm": 11.9
+  },
+  {
+   "cat": "clinic",
+   "name": "Amma Poly Clinic and Materinity Home",
+   "lat": 13.020414,
+   "lng": 77.67351,
+   "distanceKm": 11.94
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Rosewood (u/c)",
+   "lat": 12.955266,
+   "lng": 77.751633,
+   "distanceKm": 11.95
+  },
+  {
+   "cat": "college",
+   "name": "Saint John's Academy of Management Studies",
+   "lat": 13.03125,
+   "lng": 77.669602,
+   "distanceKm": 11.95
+  },
+  {
+   "cat": "school",
+   "name": "St. Peter's School",
+   "lat": 12.999869,
+   "lng": 77.684302,
+   "distanceKm": 11.97
+  },
+  {
+   "cat": "school",
+   "name": "Chaitanya E-Techno School",
+   "lat": 13.019716,
+   "lng": 77.673317,
+   "distanceKm": 11.98
+  },
+  {
+   "cat": "hospital",
+   "name": "Little Flower Hospital",
+   "lat": 13.01132,
+   "lng": 77.677197,
+   "distanceKm": 11.99
+  },
+  {
+   "cat": "college",
+   "name": "Vijaya Vittala Institute of Technology",
+   "lat": 13.076936,
+   "lng": 77.666508,
+   "distanceKm": 11.99
+  },
+  {
+   "cat": "school",
+   "name": "Ryan International School",
+   "lat": 12.964652,
+   "lng": 77.72429,
+   "distanceKm": 12
+  },
+  {
+   "cat": "school",
+   "name": "St George High School",
+   "lat": 13.031143,
+   "lng": 77.669185,
+   "distanceKm": 12
+  },
+  {
+   "cat": "project_uc",
+   "name": "BCM (u/c)",
+   "lat": 13.073478,
+   "lng": 77.665741,
+   "distanceKm": 12.02
+  },
+  {
+   "cat": "school",
+   "name": "Higher Primary School",
+   "lat": 13.136541,
+   "lng": 77.854467,
+   "distanceKm": 12.03
+  },
+  {
+   "cat": "project_uc",
+   "name": "Aratt Alchemy Essence (u/c)",
+   "lat": 13.0681,
+   "lng": 77.664959,
+   "distanceKm": 12.05
+  },
+  {
+   "cat": "school",
+   "name": "Sunshine School",
+   "lat": 13.031367,
+   "lng": 77.668569,
+   "distanceKm": 12.06
+  },
+  {
+   "cat": "clinic",
+   "name": "Urban Kids Clinic",
+   "lat": 13.030845,
+   "lng": 77.668666,
+   "distanceKm": 12.06
+  },
+  {
+   "cat": "school",
+   "name": "Brighton School",
+   "lat": 13.066962,
+   "lng": 77.664628,
+   "distanceKm": 12.07
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura Edition (u/c)",
+   "lat": 12.961834,
+   "lng": 77.728606,
+   "distanceKm": 12.07
+  },
+  {
+   "cat": "school",
+   "name": "The Alternative Learning Community",
+   "lat": 12.973691,
+   "lng": 77.70845,
+   "distanceKm": 12.07
+  },
+  {
+   "cat": "hospital",
+   "name": "Hair Loss Treatment in Bangalore - Hairline International",
+   "lat": 12.956686,
+   "lng": 77.741928,
+   "distanceKm": 12.08
+  },
+  {
+   "cat": "clinic",
+   "name": "Revive Aesthetic Clinic Skin Hair And Laser Center",
+   "lat": 12.956788,
+   "lng": 77.74136,
+   "distanceKm": 12.08
+  },
+  {
+   "cat": "college",
+   "name": "Alpha College of Engineering",
+   "lat": 13.07633,
+   "lng": 77.665499,
+   "distanceKm": 12.09
+  },
+  {
+   "cat": "hospital",
+   "name": "Cloud Nine",
+   "lat": 12.956683,
+   "lng": 77.741428,
+   "distanceKm": 12.09
+  },
+  {
+   "cat": "project_uc",
+   "name": "Skylark Dasos (u/c)",
+   "lat": 13.061535,
+   "lng": 77.664242,
+   "distanceKm": 12.09
+  },
+  {
+   "cat": "hospital",
+   "name": "Mahanandi",
+   "lat": 12.967036,
+   "lng": 77.717977,
+   "distanceKm": 12.1
+  },
+  {
+   "cat": "clinic",
+   "name": "Niyamh Health",
+   "lat": 12.956825,
+   "lng": 77.740844,
+   "distanceKm": 12.1
+  },
+  {
+   "cat": "hospital",
+   "name": "Public Health Center",
+   "lat": 12.958379,
+   "lng": 77.815523,
+   "distanceKm": 12.1
+  },
+  {
+   "cat": "project_uc",
+   "name": "Spectra Parijatha (u/c)",
+   "lat": 12.960165,
+   "lng": 77.731762,
+   "distanceKm": 12.1
+  },
+  {
+   "cat": "school",
+   "name": "Sunshine Childrens Home and School",
+   "lat": 13.030981,
+   "lng": 77.668221,
+   "distanceKm": 12.1
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Evergreen",
+   "lat": 12.954274,
+   "lng": 77.74906,
+   "distanceKm": 12.12
+  },
+  {
+   "cat": "clinic",
+   "name": "RK Multispeciality center",
+   "lat": 12.956847,
+   "lng": 77.740226,
+   "distanceKm": 12.12
+  },
+  {
+   "cat": "school",
+   "name": "Moraji Desai Residential School",
+   "lat": 13.169186,
+   "lng": 77.778972,
+   "distanceKm": 12.13
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Raintree Park (u/c)",
+   "lat": 12.954267,
+   "lng": 77.748887,
+   "distanceKm": 12.13
+  },
+  {
+   "cat": "school",
+   "name": "St. Theresa School",
+   "lat": 12.994481,
+   "lng": 77.6861,
+   "distanceKm": 12.16
+  },
+  {
+   "cat": "hospital",
+   "name": "Apollo Cradle",
+   "lat": 12.966747,
+   "lng": 77.717278,
+   "distanceKm": 12.17
+  },
+  {
+   "cat": "hospital",
+   "name": "Brookefield Hospital(A Unit Of Sanjeevani Hospital)",
+   "lat": 12.966821,
+   "lng": 77.716889,
+   "distanceKm": 12.18
+  },
+  {
+   "cat": "school",
+   "name": "Government High-Tech Kannada and English Medium Higher Primary School",
+   "lat": 12.992335,
+   "lng": 77.687584,
+   "distanceKm": 12.18
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Techno School",
+   "lat": 13.025207,
+   "lng": 77.669288,
+   "distanceKm": 12.18
+  },
+  {
+   "cat": "mall",
+   "name": "Brookfield Mall",
+   "lat": 12.966135,
+   "lng": 77.717887,
+   "distanceKm": 12.19
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 12.970181,
+   "lng": 77.711586,
+   "distanceKm": 12.19
+  },
+  {
+   "cat": "hospital",
+   "name": "Bright Children's Clinic",
+   "lat": 12.989182,
+   "lng": 77.689783,
+   "distanceKm": 12.22
+  },
+  {
+   "cat": "clinic",
+   "name": "Maruthi Clinic",
+   "lat": 12.991299,
+   "lng": 77.687891,
+   "distanceKm": 12.22
+  },
+  {
+   "cat": "project_uc",
+   "name": "Durga (u/c)",
+   "lat": 12.975788,
+   "lng": 77.703444,
+   "distanceKm": 12.23
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 12.956555,
+   "lng": 77.737953,
+   "distanceKm": 12.23
+  },
+  {
+   "cat": "school",
+   "name": "Meraki School Of Art",
+   "lat": 12.966996,
+   "lng": 77.715851,
+   "distanceKm": 12.23
+  },
+  {
+   "cat": "clinic",
+   "name": "Bright Children's Clinic",
+   "lat": 12.989392,
+   "lng": 77.689308,
+   "distanceKm": 12.24
+  },
+  {
+   "cat": "clinic",
+   "name": "Image",
+   "lat": 12.958593,
+   "lng": 77.732016,
+   "distanceKm": 12.25
+  },
+  {
+   "cat": "school",
+   "name": "St. Norbert School",
+   "lat": 13.073365,
+   "lng": 77.663645,
+   "distanceKm": 12.25
+  },
+  {
+   "cat": "project_uc",
+   "name": "Block 2 (u/c)",
+   "lat": 12.985139,
+   "lng": 77.692879,
+   "distanceKm": 12.26
+  },
+  {
+   "cat": "project_uc",
+   "name": "Grandus (u/c)",
+   "lat": 12.9759,
+   "lng": 77.702873,
+   "distanceKm": 12.26
+  },
+  {
+   "cat": "project_uc",
+   "name": "Amenity Block",
+   "lat": 12.954714,
+   "lng": 77.742268,
+   "distanceKm": 12.27
+  },
+  {
+   "cat": "hospital",
+   "name": "Spandana Hospital And Medical Centre",
+   "lat": 13.011217,
+   "lng": 77.674394,
+   "distanceKm": 12.27
+  },
+  {
+   "cat": "school",
+   "name": "New Horizon School",
+   "lat": 13.136497,
+   "lng": 77.857751,
+   "distanceKm": 12.28
+  },
+  {
+   "cat": "project_uc",
+   "name": "Block 1 (u/c)",
+   "lat": 12.985903,
+   "lng": 77.691776,
+   "distanceKm": 12.29
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Somerville (u/c)",
+   "lat": 12.954414,
+   "lng": 77.742654,
+   "distanceKm": 12.29
+  },
+  {
+   "cat": "clinic",
+   "name": "Vita Life clinic",
+   "lat": 12.964894,
+   "lng": 77.718056,
+   "distanceKm": 12.3
+  },
+  {
+   "cat": "project_uc",
+   "name": "Amenity Block",
+   "lat": 12.953252,
+   "lng": 77.746061,
+   "distanceKm": 12.31
+  },
+  {
+   "cat": "project_uc",
+   "name": "Miraya Woods",
+   "lat": 12.957422,
+   "lng": 77.732143,
+   "distanceKm": 12.36
+  },
+  {
+   "cat": "clinic",
+   "name": "Apollo Clinic",
+   "lat": 12.987439,
+   "lng": 77.689377,
+   "distanceKm": 12.37
+  },
+  {
+   "cat": "school",
+   "name": "Oasis International School",
+   "lat": 13.090526,
+   "lng": 77.665579,
+   "distanceKm": 12.42
+  },
+  {
+   "cat": "hospital",
+   "name": "Aayug Multi Speciality Hospital",
+   "lat": 12.965159,
+   "lng": 77.715051,
+   "distanceKm": 12.45
+  },
+  {
+   "cat": "clinic",
+   "name": "Manipal Clinics",
+   "lat": 12.965892,
+   "lng": 77.713846,
+   "distanceKm": 12.45
+  },
+  {
+   "cat": "school",
+   "name": "Vidyan Earth School",
+   "lat": 13.14273,
+   "lng": 77.698255,
+   "distanceKm": 12.45
+  },
+  {
+   "cat": "project_uc",
+   "name": "Adithya (u/c)",
+   "lat": 12.949604,
+   "lng": 77.756807,
+   "distanceKm": 12.46
+  },
+  {
+   "cat": "college",
+   "name": "CMR Institute of Technology",
+   "lat": 12.966566,
+   "lng": 77.712364,
+   "distanceKm": 12.47
+  },
+  {
+   "cat": "clinic",
+   "name": "Nova IVF",
+   "lat": 12.964435,
+   "lng": 77.715833,
+   "distanceKm": 12.47
+  },
+  {
+   "cat": "clinic",
+   "name": "Ojus Healthcare (Nirmaya Clinic)",
+   "lat": 12.963001,
+   "lng": 77.717987,
+   "distanceKm": 12.49
+  },
+  {
+   "cat": "project_uc",
+   "name": "Allure Business Park (u/c)",
+   "lat": 12.972555,
+   "lng": 77.703413,
+   "distanceKm": 12.51
+  },
+  {
+   "cat": "metro",
+   "name": "B: Whitefield Main Road Side",
+   "lat": 12.999911,
+   "lng": 77.678198,
+   "distanceKm": 12.52
+  },
+  {
+   "cat": "school",
+   "name": "Jubilee School",
+   "lat": 13.005313,
+   "lng": 77.674934,
+   "distanceKm": 12.52
+  },
+  {
+   "cat": "college",
+   "name": "Lowry Memorial College",
+   "lat": 12.997739,
+   "lng": 77.679654,
+   "distanceKm": 12.52
+  },
+  {
+   "cat": "school",
+   "name": "School Of Athens",
+   "lat": 12.965245,
+   "lng": 77.71344,
+   "distanceKm": 12.53
+  },
+  {
+   "cat": "project_uc",
+   "name": "Markon Homes (u/c)",
+   "lat": 12.947915,
+   "lng": 77.764618,
+   "distanceKm": 12.54
+  },
+  {
+   "cat": "hospital",
+   "name": "Siddanth Hospital",
+   "lat": 12.956332,
+   "lng": 77.730578,
+   "distanceKm": 12.54
+  },
+  {
+   "cat": "clinic",
+   "name": "Venkateshwara Clinic",
+   "lat": 12.991679,
+   "lng": 77.683904,
+   "distanceKm": 12.54
+  },
+  {
+   "cat": "school",
+   "name": "Ekya School",
+   "lat": 12.971503,
+   "lng": 77.704095,
+   "distanceKm": 12.55
+  },
+  {
+   "cat": "school",
+   "name": "Global/Art",
+   "lat": 12.96517,
+   "lng": 77.713227,
+   "distanceKm": 12.55
+  },
+  {
+   "cat": "school",
+   "name": "Siddapura Government Primary School",
+   "lat": 12.955805,
+   "lng": 77.731588,
+   "distanceKm": 12.55
+  },
+  {
+   "cat": "project_uc",
+   "name": "CKPC Brickell (u/c)",
+   "lat": 12.97787,
+   "lng": 77.696357,
+   "distanceKm": 12.56
+  },
+  {
+   "cat": "clinic",
+   "name": "Trinity Homeopathy Clinic",
+   "lat": 12.994998,
+   "lng": 77.681134,
+   "distanceKm": 12.56
+  },
+  {
+   "cat": "metro",
+   "name": "Krishnarajapura",
+   "lat": 12.999902,
+   "lng": 77.67767,
+   "distanceKm": 12.57
+  },
+  {
+   "cat": "school",
+   "name": "B M International School",
+   "lat": 13.106602,
+   "lng": 77.669939,
+   "distanceKm": 12.58
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Padmini Tech Valley",
+   "lat": 12.957179,
+   "lng": 77.727695,
+   "distanceKm": 12.58
+  },
+  {
+   "cat": "clinic",
+   "name": "IMS Clinic",
+   "lat": 12.99151,
+   "lng": 77.683596,
+   "distanceKm": 12.58
+  },
+  {
+   "cat": "clinic",
+   "name": "Sattva Fertility",
+   "lat": 12.964161,
+   "lng": 77.714223,
+   "distanceKm": 12.59
+  },
+  {
+   "cat": "school",
+   "name": "Sri Kumaran's English School",
+   "lat": 13.009063,
+   "lng": 77.672066,
+   "distanceKm": 12.6
+  },
+  {
+   "cat": "school",
+   "name": "Karnataka Rehabilitation Center",
+   "lat": 13.069463,
+   "lng": 77.659876,
+   "distanceKm": 12.61
+  },
+  {
+   "cat": "project_uc",
+   "name": "KIMS Hospital (u/c)",
+   "lat": 12.979782,
+   "lng": 77.693547,
+   "distanceKm": 12.62
+  },
+  {
+   "cat": "clinic",
+   "name": "Sharada Poly Clinic",
+   "lat": 13.002988,
+   "lng": 77.675265,
+   "distanceKm": 12.62
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sobha Victoria Park (u/c)",
+   "lat": 13.055031,
+   "lng": 77.659504,
+   "distanceKm": 12.62
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sri Dira (u/c)",
+   "lat": 13.03709,
+   "lng": 77.66181,
+   "distanceKm": 12.62
+  },
+  {
+   "cat": "clinic",
+   "name": "Baby Sciences IVF Clinic Pvt Ltd",
+   "lat": 12.956349,
+   "lng": 77.728487,
+   "distanceKm": 12.63
+  },
+  {
+   "cat": "school",
+   "name": "TALC - The Alternative Learning Community",
+   "lat": 12.964344,
+   "lng": 77.713137,
+   "distanceKm": 12.63
+  },
+  {
+   "cat": "metro",
+   "name": "A: KR Puram Railway Station Side",
+   "lat": 12.999868,
+   "lng": 77.676897,
+   "distanceKm": 12.64
+  },
+  {
+   "cat": "project_uc",
+   "name": "Greenwood High School Hennur (u/c)",
+   "lat": 13.087387,
+   "lng": 77.662554,
+   "distanceKm": 12.64
+  },
+  {
+   "cat": "clinic",
+   "name": "SBF Health, Bengaluru Urban",
+   "lat": 12.97743,
+   "lng": 77.695531,
+   "distanceKm": 12.66
+  },
+  {
+   "cat": "college",
+   "name": "Lowry Adventist College And Group Of Institutions",
+   "lat": 12.999419,
+   "lng": 77.676909,
+   "distanceKm": 12.67
+  },
+  {
+   "cat": "clinic",
+   "name": "Manipal Poly Clinic And Nursing Home",
+   "lat": 13.011562,
+   "lng": 77.670059,
+   "distanceKm": 12.67
+  },
+  {
+   "cat": "clinic",
+   "name": "Manipal Polyclinic and Nursing Home",
+   "lat": 13.011526,
+   "lng": 77.670058,
+   "distanceKm": 12.67
+  },
+  {
+   "cat": "hospital",
+   "name": "Rainbow Children's Hospital",
+   "lat": 12.975308,
+   "lng": 77.697834,
+   "distanceKm": 12.67
+  },
+  {
+   "cat": "school",
+   "name": "Orchids The International School - Horamavu",
+   "lat": 13.038888,
+   "lng": 77.660853,
+   "distanceKm": 12.68
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sky Sampoorna (u/c)",
+   "lat": 12.946069,
+   "lng": 77.77463,
+   "distanceKm": 12.68
+  },
+  {
+   "cat": "school",
+   "name": "Narayana",
+   "lat": 12.961213,
+   "lng": 77.717401,
+   "distanceKm": 12.69
+  },
+  {
+   "cat": "clinic",
+   "name": "Sreenivasa Poly Clinic",
+   "lat": 12.988732,
+   "lng": 77.684528,
+   "distanceKm": 12.69
+  },
+  {
+   "cat": "project_uc",
+   "name": "IDEB Grand Mall (u/c)",
+   "lat": 12.977597,
+   "lng": 77.694827,
+   "distanceKm": 12.7
+  },
+  {
+   "cat": "hospital",
+   "name": "Dr. Roshni's Tooth Planet Dental Clinic",
+   "lat": 12.987634,
+   "lng": 77.68516,
+   "distanceKm": 12.71
+  },
+  {
+   "cat": "clinic",
+   "name": "Health Bloom Poly Clinic",
+   "lat": 12.960334,
+   "lng": 77.718737,
+   "distanceKm": 12.71
+  },
+  {
+   "cat": "school",
+   "name": "Little Explorers Academy",
+   "lat": 12.959595,
+   "lng": 77.719834,
+   "distanceKm": 12.72
+  },
+  {
+   "cat": "metro",
+   "name": "Krishnarajapuram",
+   "lat": 13.000546,
+   "lng": 77.675456,
+   "distanceKm": 12.74
+  },
+  {
+   "cat": "clinic",
+   "name": "Partha Dental Clinic",
+   "lat": 12.975434,
+   "lng": 77.696718,
+   "distanceKm": 12.74
+  },
+  {
+   "cat": "project_uc",
+   "name": "RGHCL",
+   "lat": 13.11871,
+   "lng": 77.674839,
+   "distanceKm": 12.74
+  },
+  {
+   "cat": "project_uc",
+   "name": "SJ Constructions (u/c)",
+   "lat": 12.945582,
+   "lng": 77.771983,
+   "distanceKm": 12.74
+  },
+  {
+   "cat": "school",
+   "name": "Chrysalis High Horamavu",
+   "lat": 13.039914,
+   "lng": 77.659987,
+   "distanceKm": 12.75
+  },
+  {
+   "cat": "school",
+   "name": "Jaigopal Garodia Rashtrotthana Vidya Kendra",
+   "lat": 13.010457,
+   "lng": 77.669658,
+   "distanceKm": 12.76
+  },
+  {
+   "cat": "project_uc",
+   "name": "Radiance Gardenia (u/c)",
+   "lat": 13.07921,
+   "lng": 77.659699,
+   "distanceKm": 12.76
+  },
+  {
+   "cat": "mall",
+   "name": "Reliance Smartpoint",
+   "lat": 13.030068,
+   "lng": 77.662177,
+   "distanceKm": 12.76
+  },
+  {
+   "cat": "clinic",
+   "name": "Femlife",
+   "lat": 12.961009,
+   "lng": 77.716221,
+   "distanceKm": 12.78
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Venkateshwara Clinic",
+   "lat": 13.02816,
+   "lng": 77.662583,
+   "distanceKm": 12.78
+  },
+  {
+   "cat": "clinic",
+   "name": "G. S. Clinic",
+   "lat": 12.959469,
+   "lng": 77.71846,
+   "distanceKm": 12.8
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sobha (u/c)",
+   "lat": 13.084825,
+   "lng": 77.660365,
+   "distanceKm": 12.81
+  },
+  {
+   "cat": "project_uc",
+   "name": "Zonasha Corner (u/c)",
+   "lat": 12.97526,
+   "lng": 77.695879,
+   "distanceKm": 12.81
+  },
+  {
+   "cat": "project_uc",
+   "name": "Jayalakshmi Tech Park",
+   "lat": 13.157448,
+   "lng": 77.712321,
+   "distanceKm": 12.83
+  },
+  {
+   "cat": "school",
+   "name": "Tom & Jerry Creche",
+   "lat": 12.961734,
+   "lng": 77.713353,
+   "distanceKm": 12.87
+  },
+  {
+   "cat": "school",
+   "name": "Narayana PU College",
+   "lat": 13.012834,
+   "lng": 77.667368,
+   "distanceKm": 12.88
+  },
+  {
+   "cat": "school",
+   "name": "Vibgyor Roots And Rise School",
+   "lat": 12.978053,
+   "lng": 77.691957,
+   "distanceKm": 12.88
+  },
+  {
+   "cat": "school",
+   "name": "Innovative School of Excellence",
+   "lat": 13.039174,
+   "lng": 77.658826,
+   "distanceKm": 12.89
+  },
+  {
+   "cat": "hospital",
+   "name": "SRL Diagnostics",
+   "lat": 12.959931,
+   "lng": 77.716045,
+   "distanceKm": 12.89
+  },
+  {
+   "cat": "college",
+   "name": "Visthar",
+   "lat": 13.072277,
+   "lng": 77.657461,
+   "distanceKm": 12.9
+  },
+  {
+   "cat": "college",
+   "name": "Bangalore Management Academy",
+   "lat": 12.976572,
+   "lng": 77.693136,
+   "distanceKm": 12.91
+  },
+  {
+   "cat": "school",
+   "name": "Center For Children With Autism And Other Developmental Disabilities",
+   "lat": 12.970857,
+   "lng": 77.699686,
+   "distanceKm": 12.91
+  },
+  {
+   "cat": "hospital",
+   "name": "Dr. Sailaja's Super Speciality Eye Hospital",
+   "lat": 13.027674,
+   "lng": 77.661419,
+   "distanceKm": 12.91
+  },
+  {
+   "cat": "college",
+   "name": "Gateway Community College",
+   "lat": 13.061924,
+   "lng": 77.656624,
+   "distanceKm": 12.92
+  },
+  {
+   "cat": "clinic",
+   "name": "Jyothi Eye Care Center",
+   "lat": 12.970552,
+   "lng": 77.699903,
+   "distanceKm": 12.92
+  },
+  {
+   "cat": "hospital",
+   "name": "Hema Poly Clinic",
+   "lat": 12.960765,
+   "lng": 77.713796,
+   "distanceKm": 12.93
+  },
+  {
+   "cat": "university",
+   "name": "Maseehul Uloom University",
+   "lat": 13.105034,
+   "lng": 77.665785,
+   "distanceKm": 12.93
+  },
+  {
+   "cat": "project_uc",
+   "name": "Bagmane South Solarium (u/c)",
+   "lat": 12.965691,
+   "lng": 77.705724,
+   "distanceKm": 12.96
+  },
+  {
+   "cat": "college",
+   "name": "Koshys Group Of Institutions",
+   "lat": 13.10629,
+   "lng": 77.665957,
+   "distanceKm": 12.97
+  },
+  {
+   "cat": "college",
+   "name": "Srushti Degree College",
+   "lat": 12.969235,
+   "lng": 77.700674,
+   "distanceKm": 12.98
+  },
+  {
+   "cat": "hospital",
+   "name": "Ayur Vaid Hospital",
+   "lat": 13.014819,
+   "lng": 77.66537,
+   "distanceKm": 12.99
+  },
+  {
+   "cat": "project_uc",
+   "name": "Tru Aquapolis (u/c)",
+   "lat": 12.946469,
+   "lng": 77.748282,
+   "distanceKm": 12.99
+  },
+  {
+   "cat": "project_uc",
+   "name": "ABT Park Lane (u/c)",
+   "lat": 12.958119,
+   "lng": 77.717273,
+   "distanceKm": 13
+  },
+  {
+   "cat": "hospital",
+   "name": "Charan Homeopathy, Ramamurthy Nagar",
+   "lat": 13.010041,
+   "lng": 77.667467,
+   "distanceKm": 13
+  },
+  {
+   "cat": "project_uc",
+   "name": "NCC Hennur BMRCL Casting Yard",
+   "lat": 13.08529,
+   "lng": 77.65855,
+   "distanceKm": 13.01
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sify Data Centre (u/c)",
+   "lat": 13.151858,
+   "lng": 77.70131,
+   "distanceKm": 13.01
+  },
+  {
+   "cat": "hospital",
+   "name": "Devi Eye Hospital",
+   "lat": 12.955607,
+   "lng": 77.721663,
+   "distanceKm": 13.02
+  },
+  {
+   "cat": "school",
+   "name": "Government School Sorahunase",
+   "lat": 12.945104,
+   "lng": 77.753333,
+   "distanceKm": 13.02
+  },
+  {
+   "cat": "clinic",
+   "name": "Clove Dental",
+   "lat": 12.955581,
+   "lng": 77.721481,
+   "distanceKm": 13.03
+  },
+  {
+   "cat": "project_uc",
+   "name": "Kalyani Tech Park (u/c)",
+   "lat": 13.171986,
+   "lng": 77.740131,
+   "distanceKm": 13.03
+  },
+  {
+   "cat": "clinic",
+   "name": "Kosmoderma dermatologist",
+   "lat": 12.955583,
+   "lng": 77.721571,
+   "distanceKm": 13.03
+  },
+  {
+   "cat": "school",
+   "name": "Manu Kannada School",
+   "lat": 13.007688,
+   "lng": 77.668312,
+   "distanceKm": 13.03
+  },
+  {
+   "cat": "hospital",
+   "name": "Geriatric Hospitals",
+   "lat": 13.028398,
+   "lng": 77.659958,
+   "distanceKm": 13.04
+  },
+  {
+   "cat": "clinic",
+   "name": "Garbha Gudi",
+   "lat": 12.967009,
+   "lng": 77.702622,
+   "distanceKm": 13.05
+  },
+  {
+   "cat": "school",
+   "name": "Government Lower Primary School, Thubarahalli",
+   "lat": 12.955517,
+   "lng": 77.721182,
+   "distanceKm": 13.05
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Sai Eye Hospital",
+   "lat": 13.011968,
+   "lng": 77.665917,
+   "distanceKm": 13.06
+  },
+  {
+   "cat": "clinic",
+   "name": "Arjun's Child Care Clinic",
+   "lat": 13.025825,
+   "lng": 77.660492,
+   "distanceKm": 13.07
+  },
+  {
+   "cat": "project_uc",
+   "name": "Kristu Jayanti College, Airport Road (u/c)",
+   "lat": 13.118557,
+   "lng": 77.671175,
+   "distanceKm": 13.07
+  },
+  {
+   "cat": "college",
+   "name": "AP Securitas Training Academy",
+   "lat": 13.113095,
+   "lng": 77.668047,
+   "distanceKm": 13.08
+  },
+  {
+   "cat": "clinic",
+   "name": "Ashwini Clinic",
+   "lat": 12.955344,
+   "lng": 77.720901,
+   "distanceKm": 13.08
+  },
+  {
+   "cat": "mall",
+   "name": "Big Bazaar",
+   "lat": 12.957882,
+   "lng": 77.716079,
+   "distanceKm": 13.08
+  },
+  {
+   "cat": "college",
+   "name": "Havnur College of Law",
+   "lat": 13.016078,
+   "lng": 77.663878,
+   "distanceKm": 13.08
+  },
+  {
+   "cat": "hospital",
+   "name": "Ways2Guide Speech Therapy Center",
+   "lat": 12.959962,
+   "lng": 77.71263,
+   "distanceKm": 13.08
+  },
+  {
+   "cat": "school",
+   "name": "The School of Raya",
+   "lat": 13.117868,
+   "lng": 77.670455,
+   "distanceKm": 13.1
+  },
+  {
+   "cat": "school",
+   "name": "Geetanjali Vidyalaya",
+   "lat": 12.981221,
+   "lng": 77.685936,
+   "distanceKm": 13.11
+  },
+  {
+   "cat": "clinic",
+   "name": "Cosmo Clinic and Diagnostic Centre",
+   "lat": 12.95491,
+   "lng": 77.721061,
+   "distanceKm": 13.12
+  },
+  {
+   "cat": "clinic",
+   "name": "Hear2Speak Clinic",
+   "lat": 12.955589,
+   "lng": 77.719616,
+   "distanceKm": 13.12
+  },
+  {
+   "cat": "clinic",
+   "name": "Whitefield Spine Clinic",
+   "lat": 12.955579,
+   "lng": 77.719767,
+   "distanceKm": 13.12
+  },
+  {
+   "cat": "clinic",
+   "name": "Nava Chaithanya Clinic",
+   "lat": 13.025572,
+   "lng": 77.659954,
+   "distanceKm": 13.13
+  },
+  {
+   "cat": "clinic",
+   "name": "Sofiyacare Skin And Hair Clinic",
+   "lat": 12.955617,
+   "lng": 77.719368,
+   "distanceKm": 13.13
+  },
+  {
+   "cat": "project_uc",
+   "name": "Green Edge Signature (u/c)",
+   "lat": 12.944551,
+   "lng": 77.750618,
+   "distanceKm": 13.14
+  },
+  {
+   "cat": "hospital",
+   "name": "Jeevika Hospital",
+   "lat": 12.965907,
+   "lng": 77.702553,
+   "distanceKm": 13.15
+  },
+  {
+   "cat": "hospital",
+   "name": "Ayurseva Hospital",
+   "lat": 13.013925,
+   "lng": 77.664078,
+   "distanceKm": 13.16
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumadhura Solace (u/c)",
+   "lat": 12.953233,
+   "lng": 77.723542,
+   "distanceKm": 13.17
+  },
+  {
+   "cat": "clinic",
+   "name": "Apollo Medical Center",
+   "lat": 12.956024,
+   "lng": 77.717073,
+   "distanceKm": 13.21
+  },
+  {
+   "cat": "school",
+   "name": "Aadya Academy",
+   "lat": 13.08836,
+   "lng": 77.65735,
+   "distanceKm": 13.22
+  },
+  {
+   "cat": "project_uc",
+   "name": "Avadhani Infotech",
+   "lat": 13.160243,
+   "lng": 77.709999,
+   "distanceKm": 13.22
+  },
+  {
+   "cat": "college",
+   "name": "South Asia Institute of Advanced Christian Studies",
+   "lat": 13.06181,
+   "lng": 77.653857,
+   "distanceKm": 13.22
+  },
+  {
+   "cat": "school",
+   "name": "Government Lower Primary School",
+   "lat": 12.965151,
+   "lng": 77.702368,
+   "distanceKm": 13.23
+  },
+  {
+   "cat": "school",
+   "name": "Narayana e-techno School",
+   "lat": 12.954399,
+   "lng": 77.719852,
+   "distanceKm": 13.23
+  },
+  {
+   "cat": "school",
+   "name": "GJR International School",
+   "lat": 12.961481,
+   "lng": 77.70721,
+   "distanceKm": 13.25
+  },
+  {
+   "cat": "hospital",
+   "name": "Government Primary Health Centre",
+   "lat": 12.971812,
+   "lng": 77.693776,
+   "distanceKm": 13.25
+  },
+  {
+   "cat": "clinic",
+   "name": "Mahayogam Clinic",
+   "lat": 12.9961,
+   "lng": 77.672702,
+   "distanceKm": 13.25
+  },
+  {
+   "cat": "hospital",
+   "name": "Prakruti Hospital",
+   "lat": 12.991561,
+   "lng": 77.675783,
+   "distanceKm": 13.26
+  },
+  {
+   "cat": "clinic",
+   "name": "Iswarya Fertility",
+   "lat": 12.965142,
+   "lng": 77.701707,
+   "distanceKm": 13.27
+  },
+  {
+   "cat": "hospital",
+   "name": "Karunashraya",
+   "lat": 12.95741,
+   "lng": 77.713488,
+   "distanceKm": 13.27
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mall",
+   "lat": 13.087197,
+   "lng": 77.65658,
+   "distanceKm": 13.27
+  },
+  {
+   "cat": "clinic",
+   "name": "Medicure Poly Clinic & Daycare Centre",
+   "lat": 12.996961,
+   "lng": 77.671941,
+   "distanceKm": 13.27
+  },
+  {
+   "cat": "clinic",
+   "name": "Suma Clinic",
+   "lat": 12.997098,
+   "lng": 77.671853,
+   "distanceKm": 13.27
+  },
+  {
+   "cat": "project_uc",
+   "name": "Shilpa Rathna (u/c)",
+   "lat": 13.005365,
+   "lng": 77.666928,
+   "distanceKm": 13.28
+  },
+  {
+   "cat": "clinic",
+   "name": "Shubham Ayurvedic Clinic",
+   "lat": 13.021902,
+   "lng": 77.65971,
+   "distanceKm": 13.28
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Radha Krishna Clinic",
+   "lat": 12.971093,
+   "lng": 77.694229,
+   "distanceKm": 13.28
+  },
+  {
+   "cat": "hospital",
+   "name": "Cure N Care Hospital",
+   "lat": 12.989869,
+   "lng": 77.676589,
+   "distanceKm": 13.29
+  },
+  {
+   "cat": "college",
+   "name": "Narayana PU College",
+   "lat": 13.054136,
+   "lng": 77.653323,
+   "distanceKm": 13.29
+  },
+  {
+   "cat": "clinic",
+   "name": "People's Clinic",
+   "lat": 13.024278,
+   "lng": 77.65873,
+   "distanceKm": 13.3
+  },
+  {
+   "cat": "hospital",
+   "name": "Pragathi Piles Hospital",
+   "lat": 12.996631,
+   "lng": 77.671863,
+   "distanceKm": 13.3
+  },
+  {
+   "cat": "project_uc",
+   "name": "DNR Parklink (u/c)",
+   "lat": 13.08057,
+   "lng": 77.654798,
+   "distanceKm": 13.31
+  },
+  {
+   "cat": "clinic",
+   "name": "Heal & Comfort Homeopathic Clinic",
+   "lat": 12.995442,
+   "lng": 77.672479,
+   "distanceKm": 13.31
+  },
+  {
+   "cat": "school",
+   "name": "United International",
+   "lat": 13.082948,
+   "lng": 77.655156,
+   "distanceKm": 13.32
+  },
+  {
+   "cat": "clinic",
+   "name": "Lifespan Diabetic Clinic",
+   "lat": 13.02346,
+   "lng": 77.658734,
+   "distanceKm": 13.33
+  },
+  {
+   "cat": "hospital",
+   "name": "Sankara Eye Hospital",
+   "lat": 12.957144,
+   "lng": 77.712822,
+   "distanceKm": 13.33
+  },
+  {
+   "cat": "hospital",
+   "name": "Stroke Treatment Paralysis",
+   "lat": 13.024,
+   "lng": 77.65853,
+   "distanceKm": 13.33
+  },
+  {
+   "cat": "clinic",
+   "name": "The Children's Clinic",
+   "lat": 13.023668,
+   "lng": 77.658701,
+   "distanceKm": 13.33
+  },
+  {
+   "cat": "clinic",
+   "name": "Women's Speciality Polyclinic",
+   "lat": 13.023615,
+   "lng": 77.658663,
+   "distanceKm": 13.33
+  },
+  {
+   "cat": "hospital",
+   "name": "Aria",
+   "lat": 12.943391,
+   "lng": 77.747527,
+   "distanceKm": 13.34
+  },
+  {
+   "cat": "project_uc",
+   "name": "Office",
+   "lat": 13.087223,
+   "lng": 77.655682,
+   "distanceKm": 13.36
+  },
+  {
+   "cat": "metro",
+   "name": "Channasandra",
+   "lat": 13.011857,
+   "lng": 77.662814,
+   "distanceKm": 13.37
+  },
+  {
+   "cat": "school",
+   "name": "Legacy School",
+   "lat": 13.062707,
+   "lng": 77.652418,
+   "distanceKm": 13.38
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prime Ease (u/c)",
+   "lat": 13.176277,
+   "lng": 77.743539,
+   "distanceKm": 13.38
+  },
+  {
+   "cat": "hospital",
+   "name": "Sree Lakshmi Hospital",
+   "lat": 12.982594,
+   "lng": 77.681474,
+   "distanceKm": 13.38
+  },
+  {
+   "cat": "school",
+   "name": "Mother Montessori House of Children Pre-school",
+   "lat": 12.985118,
+   "lng": 77.679021,
+   "distanceKm": 13.4
+  },
+  {
+   "cat": "clinic",
+   "name": "Motherhoodclinic",
+   "lat": 13.022726,
+   "lng": 77.658252,
+   "distanceKm": 13.4
+  },
+  {
+   "cat": "college",
+   "name": "Sri Chaitanya PU College, Horamavu",
+   "lat": 13.026996,
+   "lng": 77.656934,
+   "distanceKm": 13.4
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Vishveshathirtha Memorial Hospital",
+   "lat": 12.956684,
+   "lng": 77.712382,
+   "distanceKm": 13.4
+  },
+  {
+   "cat": "project_uc",
+   "name": "LivingWalls True North (u/c)",
+   "lat": 13.07555,
+   "lng": 77.653065,
+   "distanceKm": 13.41
+  },
+  {
+   "cat": "hospital",
+   "name": "Super Specialty Eye Hospital",
+   "lat": 13.016688,
+   "lng": 77.660405,
+   "distanceKm": 13.41
+  },
+  {
+   "cat": "clinic",
+   "name": "Smile Dental Clinic",
+   "lat": 12.98304,
+   "lng": 77.680594,
+   "distanceKm": 13.42
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Vinayaka Clinic",
+   "lat": 12.993014,
+   "lng": 77.672878,
+   "distanceKm": 13.42
+  },
+  {
+   "cat": "school",
+   "name": "Varthur Government High School",
+   "lat": 12.942722,
+   "lng": 77.746593,
+   "distanceKm": 13.43
+  },
+  {
+   "cat": "hospital",
+   "name": "Little Flower Hospital",
+   "lat": 12.980726,
+   "lng": 77.682373,
+   "distanceKm": 13.44
+  },
+  {
+   "cat": "hospital",
+   "name": "Nmpc Hospital",
+   "lat": 13.022416,
+   "lng": 77.65804,
+   "distanceKm": 13.44
+  },
+  {
+   "cat": "school",
+   "name": "New Horizon International School",
+   "lat": 13.072819,
+   "lng": 77.652429,
+   "distanceKm": 13.45
+  },
+  {
+   "cat": "clinic",
+   "name": "Matrusree Clinic",
+   "lat": 12.992589,
+   "lng": 77.672821,
+   "distanceKm": 13.46
+  },
+  {
+   "cat": "hospital",
+   "name": "Medi Derma Hospital",
+   "lat": 13.055556,
+   "lng": 77.651715,
+   "distanceKm": 13.46
+  },
+  {
+   "cat": "school",
+   "name": "Navaprajna Public School",
+   "lat": 12.956642,
+   "lng": 77.71146,
+   "distanceKm": 13.46
+  },
+  {
+   "cat": "clinic",
+   "name": "Aitone Diagnostics & Clinics",
+   "lat": 12.942259,
+   "lng": 77.747321,
+   "distanceKm": 13.47
+  },
+  {
+   "cat": "clinic",
+   "name": "Aria Multispeciality Clinic",
+   "lat": 12.94218,
+   "lng": 77.747312,
+   "distanceKm": 13.47
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya School",
+   "lat": 13.026163,
+   "lng": 77.656465,
+   "distanceKm": 13.48
+  },
+  {
+   "cat": "college",
+   "name": "Faran Group of Institutions",
+   "lat": 13.083686,
+   "lng": 77.653682,
+   "distanceKm": 13.49
+  },
+  {
+   "cat": "clinic",
+   "name": "Maya Clinic",
+   "lat": 12.968995,
+   "lng": 77.693623,
+   "distanceKm": 13.49
+  },
+  {
+   "cat": "hospital",
+   "name": "Vedam Ayurveda Multi Speciality Hospital",
+   "lat": 12.994679,
+   "lng": 77.670999,
+   "distanceKm": 13.49
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr. Murthy Ayurved Clinic",
+   "lat": 13.013821,
+   "lng": 77.660555,
+   "distanceKm": 13.51
+  },
+  {
+   "cat": "clinic",
+   "name": "Asha Nursing Home",
+   "lat": 13.013466,
+   "lng": 77.660586,
+   "distanceKm": 13.52
+  },
+  {
+   "cat": "school",
+   "name": "Devamata Central School",
+   "lat": 13.026328,
+   "lng": 77.655993,
+   "distanceKm": 13.52
+  },
+  {
+   "cat": "metro",
+   "name": "A: KR Pura/Mahadevapura Side",
+   "lat": 12.997278,
+   "lng": 77.6689,
+   "distanceKm": 13.53
+  },
+  {
+   "cat": "hospital",
+   "name": "Mahaveer Hospitals",
+   "lat": 12.989505,
+   "lng": 77.674144,
+   "distanceKm": 13.53
+  },
+  {
+   "cat": "project_uc",
+   "name": "Amenities",
+   "lat": 12.954363,
+   "lng": 77.71401,
+   "distanceKm": 13.54
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr Priyas Skin And Hair Clinic",
+   "lat": 12.956668,
+   "lng": 77.709923,
+   "distanceKm": 13.54
+  },
+  {
+   "cat": "hospital",
+   "name": "Yashomathi Hospitals",
+   "lat": 12.95593,
+   "lng": 77.711269,
+   "distanceKm": 13.54
+  },
+  {
+   "cat": "school",
+   "name": "New Learning Ladders International School",
+   "lat": 13.011162,
+   "lng": 77.661371,
+   "distanceKm": 13.55
+  },
+  {
+   "cat": "clinic",
+   "name": "Shakthikrupa Nursing Home",
+   "lat": 12.984079,
+   "lng": 77.678132,
+   "distanceKm": 13.55
+  },
+  {
+   "cat": "hospital",
+   "name": "Tenet diagnostics",
+   "lat": 12.957307,
+   "lng": 77.708704,
+   "distanceKm": 13.55
+  },
+  {
+   "cat": "hospital",
+   "name": "Comfort multispeciality hospital",
+   "lat": 12.981717,
+   "lng": 77.680041,
+   "distanceKm": 13.56
+  },
+  {
+   "cat": "clinic",
+   "name": "Maneet Poly Clinic",
+   "lat": 13.020974,
+   "lng": 77.657301,
+   "distanceKm": 13.56
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sattva Jodhani (u/c)",
+   "lat": 13.144634,
+   "lng": 77.685585,
+   "distanceKm": 13.56
+  },
+  {
+   "cat": "school",
+   "name": "New Millenium School",
+   "lat": 13.036087,
+   "lng": 77.653098,
+   "distanceKm": 13.57
+  },
+  {
+   "cat": "project_uc",
+   "name": "Vaswani (u/c)",
+   "lat": 13.154853,
+   "lng": 77.696919,
+   "distanceKm": 13.57
+  },
+  {
+   "cat": "clinic",
+   "name": "Vidyaratnam oeshadhalaya",
+   "lat": 12.981692,
+   "lng": 77.679903,
+   "distanceKm": 13.57
+  },
+  {
+   "cat": "clinic",
+   "name": "M J Child Clinic",
+   "lat": 13.013655,
+   "lng": 77.659992,
+   "distanceKm": 13.58
+  },
+  {
+   "cat": "school",
+   "name": "Mount Blue High School",
+   "lat": 12.941211,
+   "lng": 77.746976,
+   "distanceKm": 13.59
+  },
+  {
+   "cat": "school",
+   "name": "Sarah Montessori",
+   "lat": 12.953324,
+   "lng": 77.714945,
+   "distanceKm": 13.59
+  },
+  {
+   "cat": "project_uc",
+   "name": "Century Mirai (u/c)",
+   "lat": 12.953718,
+   "lng": 77.71398,
+   "distanceKm": 13.6
+  },
+  {
+   "cat": "metro",
+   "name": "Benniganahalli",
+   "lat": 12.996496,
+   "lng": 77.668479,
+   "distanceKm": 13.62
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr. Pranjali Srivastava's Clinic",
+   "lat": 12.980709,
+   "lng": 77.680126,
+   "distanceKm": 13.62
+  },
+  {
+   "cat": "clinic",
+   "name": "Grihi's Diabetes Centre",
+   "lat": 12.98074,
+   "lng": 77.680094,
+   "distanceKm": 13.62
+  },
+  {
+   "cat": "project_uc",
+   "name": "Radisson Hotel (u/c)",
+   "lat": 13.153495,
+   "lng": 77.694441,
+   "distanceKm": 13.62
+  },
+  {
+   "cat": "school",
+   "name": "Saraswati Vidya Mandir",
+   "lat": 12.984111,
+   "lng": 77.677254,
+   "distanceKm": 13.62
+  },
+  {
+   "cat": "metro",
+   "name": "B:  Hebbal/Baiyappanahalli Side",
+   "lat": 12.996125,
+   "lng": 77.668614,
+   "distanceKm": 13.63
+  },
+  {
+   "cat": "school",
+   "name": "Poornaprajna School",
+   "lat": 13.074786,
+   "lng": 77.650978,
+   "distanceKm": 13.63
+  },
+  {
+   "cat": "hospital",
+   "name": "Karunya Homoeopathy Centre",
+   "lat": 13.03079,
+   "lng": 77.653594,
+   "distanceKm": 13.64
+  },
+  {
+   "cat": "college",
+   "name": "Southern Asia Bible College",
+   "lat": 13.07154,
+   "lng": 77.650397,
+   "distanceKm": 13.65
+  },
+  {
+   "cat": "clinic",
+   "name": "Spectrum Physio Centre",
+   "lat": 12.985189,
+   "lng": 77.676051,
+   "distanceKm": 13.65
+  },
+  {
+   "cat": "project_uc",
+   "name": "Goyal & Co (u/c)",
+   "lat": 13.088897,
+   "lng": 77.653044,
+   "distanceKm": 13.68
+  },
+  {
+   "cat": "project_uc",
+   "name": "North Grid (u/c)",
+   "lat": 13.16743,
+   "lng": 77.714097,
+   "distanceKm": 13.68
+  },
+  {
+   "cat": "clinic",
+   "name": "Deepam Eye Clinic",
+   "lat": 12.985024,
+   "lng": 77.675447,
+   "distanceKm": 13.72
+  },
+  {
+   "cat": "clinic",
+   "name": "Siddanth Health Care",
+   "lat": 12.939984,
+   "lng": 77.746977,
+   "distanceKm": 13.72
+  },
+  {
+   "cat": "hospital",
+   "name": "Suraksha Hospitsls",
+   "lat": 12.939978,
+   "lng": 77.746741,
+   "distanceKm": 13.73
+  },
+  {
+   "cat": "school",
+   "name": "Government Primary School",
+   "lat": 12.982577,
+   "lng": 77.677126,
+   "distanceKm": 13.74
+  },
+  {
+   "cat": "hospital",
+   "name": "Jeevan Hospital",
+   "lat": 12.990131,
+   "lng": 77.671332,
+   "distanceKm": 13.74
+  },
+  {
+   "cat": "clinic",
+   "name": "Shifa Piles Hospital",
+   "lat": 12.939598,
+   "lng": 77.747823,
+   "distanceKm": 13.74
+  },
+  {
+   "cat": "school",
+   "name": "Vijaya School",
+   "lat": 13.130613,
+   "lng": 77.671732,
+   "distanceKm": 13.74
+  },
+  {
+   "cat": "project_uc",
+   "name": "Marriott Hotel (u/c)",
+   "lat": 13.153591,
+   "lng": 77.692815,
+   "distanceKm": 13.75
+  },
+  {
+   "cat": "school",
+   "name": "Maruthi School",
+   "lat": 13.028806,
+   "lng": 77.653075,
+   "distanceKm": 13.75
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sattva La Vita (u/c)",
+   "lat": 13.080565,
+   "lng": 77.650682,
+   "distanceKm": 13.75
+  },
+  {
+   "cat": "clinic",
+   "name": "Anand Diagnostic Laboratory",
+   "lat": 13.003443,
+   "lng": 77.662939,
+   "distanceKm": 13.76
+  },
+  {
+   "cat": "school",
+   "name": "Mary Immaculate School",
+   "lat": 13.126417,
+   "lng": 77.668608,
+   "distanceKm": 13.76
+  },
+  {
+   "cat": "clinic",
+   "name": "Aashraya ENT Healthcare",
+   "lat": 12.985028,
+   "lng": 77.674772,
+   "distanceKm": 13.77
+  },
+  {
+   "cat": "clinic",
+   "name": "Health Point",
+   "lat": 12.939425,
+   "lng": 77.747351,
+   "distanceKm": 13.77
+  },
+  {
+   "cat": "clinic",
+   "name": "Shishu clinic",
+   "lat": 12.985093,
+   "lng": 77.674801,
+   "distanceKm": 13.77
+  },
+  {
+   "cat": "clinic",
+   "name": "Tvacha Skin and Cosmetology Clinic",
+   "lat": 12.984734,
+   "lng": 77.675016,
+   "distanceKm": 13.77
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 12.939233,
+   "lng": 77.747735,
+   "distanceKm": 13.78
+  },
+  {
+   "cat": "college",
+   "name": "HAL Management Academy",
+   "lat": 12.965775,
+   "lng": 77.693273,
+   "distanceKm": 13.79
+  },
+  {
+   "cat": "school",
+   "name": "New Baldwins School",
+   "lat": 13.014164,
+   "lng": 77.657512,
+   "distanceKm": 13.8
+  },
+  {
+   "cat": "school",
+   "name": "Shri Shri Ravishankar Vidya Mandir",
+   "lat": 12.974092,
+   "lng": 77.684041,
+   "distanceKm": 13.8
+  },
+  {
+   "cat": "hospital",
+   "name": "Sunshine Hospital",
+   "lat": 13.059585,
+   "lng": 77.648516,
+   "distanceKm": 13.8
+  },
+  {
+   "cat": "school",
+   "name": "St Vincent Palloti School",
+   "lat": 13.033071,
+   "lng": 77.651466,
+   "distanceKm": 13.81
+  },
+  {
+   "cat": "clinic",
+   "name": "Garden City Polyclinic",
+   "lat": 12.985228,
+   "lng": 77.674086,
+   "distanceKm": 13.82
+  },
+  {
+   "cat": "hospital",
+   "name": "Srivijaya Speciality Hospital",
+   "lat": 13.012435,
+   "lng": 77.658027,
+   "distanceKm": 13.82
+  },
+  {
+   "cat": "project_uc",
+   "name": "Emerald",
+   "lat": 13.143942,
+   "lng": 77.681365,
+   "distanceKm": 13.84
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mantri (u/c)",
+   "lat": 13.148992,
+   "lng": 77.68635,
+   "distanceKm": 13.84
+  },
+  {
+   "cat": "hospital",
+   "name": "Sree Venkateshwara Hospital",
+   "lat": 12.93885,
+   "lng": 77.74721,
+   "distanceKm": 13.84
+  },
+  {
+   "cat": "clinic",
+   "name": "Nakkshatra Clinic",
+   "lat": 12.946976,
+   "lng": 77.722384,
+   "distanceKm": 13.85
+  },
+  {
+   "cat": "school",
+   "name": "Presidency School",
+   "lat": 13.005244,
+   "lng": 77.66115,
+   "distanceKm": 13.85
+  },
+  {
+   "cat": "school",
+   "name": "St. Mary's School",
+   "lat": 13.050768,
+   "lng": 77.648367,
+   "distanceKm": 13.85
+  },
+  {
+   "cat": "project_uc",
+   "name": "Yuva Infinity Blue Meadows",
+   "lat": 12.94191,
+   "lng": 77.735649,
+   "distanceKm": 13.85
+  },
+  {
+   "cat": "college",
+   "name": "New Horizon College",
+   "lat": 13.005486,
+   "lng": 77.660886,
+   "distanceKm": 13.86
+  },
+  {
+   "cat": "school",
+   "name": "Vibgyor High School",
+   "lat": 12.948657,
+   "lng": 77.718715,
+   "distanceKm": 13.86
+  },
+  {
+   "cat": "clinic",
+   "name": "Winter Mist Clinic",
+   "lat": 12.984108,
+   "lng": 77.674417,
+   "distanceKm": 13.87
+  },
+  {
+   "cat": "hospital",
+   "name": "Columbiaa Hospital",
+   "lat": 13.010434,
+   "lng": 77.658324,
+   "distanceKm": 13.88
+  },
+  {
+   "cat": "school",
+   "name": "St. Joseph School",
+   "lat": 13.061997,
+   "lng": 77.647727,
+   "distanceKm": 13.88
+  },
+  {
+   "cat": "project_uc",
+   "name": "LivingTree by Kalyani (u/c)",
+   "lat": 13.141919,
+   "lng": 77.678912,
+   "distanceKm": 13.89
+  },
+  {
+   "cat": "project_uc",
+   "name": "Provident Ecopolitan (u/c)",
+   "lat": 13.146623,
+   "lng": 77.683184,
+   "distanceKm": 13.9
+  },
+  {
+   "cat": "school",
+   "name": "Teresa Bacq School",
+   "lat": 13.054055,
+   "lng": 77.647701,
+   "distanceKm": 13.9
+  },
+  {
+   "cat": "school",
+   "name": "LR International School",
+   "lat": 12.977267,
+   "lng": 77.679729,
+   "distanceKm": 13.91
+  },
+  {
+   "cat": "clinic",
+   "name": "Ashwini Clinic",
+   "lat": 13.010217,
+   "lng": 77.658037,
+   "distanceKm": 13.92
+  },
+  {
+   "cat": "school",
+   "name": "Government Urdu High School",
+   "lat": 12.938147,
+   "lng": 77.74707,
+   "distanceKm": 13.92
+  },
+  {
+   "cat": "hospital",
+   "name": "Lions Seva Hospital",
+   "lat": 12.955502,
+   "lng": 77.70532,
+   "distanceKm": 13.92
+  },
+  {
+   "cat": "clinic",
+   "name": "Premji Occupational Therapy & Rehabilitation Centre",
+   "lat": 13.01514,
+   "lng": 77.655968,
+   "distanceKm": 13.92
+  },
+  {
+   "cat": "hospital",
+   "name": "Cloudnine Hospital",
+   "lat": 13.020084,
+   "lng": 77.654053,
+   "distanceKm": 13.93
+  },
+  {
+   "cat": "project_uc",
+   "name": "Hema Vijaya",
+   "lat": 12.937679,
+   "lng": 77.748687,
+   "distanceKm": 13.93
+  },
+  {
+   "cat": "hospital",
+   "name": "Dr.Zamindar Microsurgical Eye Centre",
+   "lat": 13.017859,
+   "lng": 77.654758,
+   "distanceKm": 13.94
+  },
+  {
+   "cat": "clinic",
+   "name": "Shanthi Women's Healthcare Centre",
+   "lat": 13.011292,
+   "lng": 77.657356,
+   "distanceKm": 13.94
+  },
+  {
+   "cat": "clinic",
+   "name": "JJ Poly Clinic & Diagnostic Center",
+   "lat": 12.937647,
+   "lng": 77.747911,
+   "distanceKm": 13.95
+  },
+  {
+   "cat": "project_uc",
+   "name": "Luminaire",
+   "lat": 13.145339,
+   "lng": 77.681303,
+   "distanceKm": 13.95
+  },
+  {
+   "cat": "hospital",
+   "name": "NASA Hospitals",
+   "lat": 13.005833,
+   "lng": 77.659739,
+   "distanceKm": 13.95
+  },
+  {
+   "cat": "hospital",
+   "name": "Lions Airport City Hospital",
+   "lat": 12.95515,
+   "lng": 77.705164,
+   "distanceKm": 13.96
+  },
+  {
+   "cat": "clinic",
+   "name": "Manjunath Clinic",
+   "lat": 12.937791,
+   "lng": 77.746978,
+   "distanceKm": 13.96
+  },
+  {
+   "cat": "clinic",
+   "name": "SR Clinic",
+   "lat": 12.937105,
+   "lng": 77.74956,
+   "distanceKm": 13.97
+  },
+  {
+   "cat": "school",
+   "name": "Vidyashilp School",
+   "lat": 13.11637,
+   "lng": 77.660522,
+   "distanceKm": 13.97
+  },
+  {
+   "cat": "clinic",
+   "name": "Dr. Batra's Clinic",
+   "lat": 12.957711,
+   "lng": 77.700959,
+   "distanceKm": 13.98
+  },
+  {
+   "cat": "clinic",
+   "name": "Pranav Diabetes Centre",
+   "lat": 13.014881,
+   "lng": 77.65552,
+   "distanceKm": 13.98
+  },
+  {
+   "cat": "hospital",
+   "name": "Skin Remediez",
+   "lat": 13.00911,
+   "lng": 77.657949,
+   "distanceKm": 13.98
+  },
+  {
+   "cat": "clinic",
+   "name": "Dezy",
+   "lat": 13.005494,
+   "lng": 77.659597,
+   "distanceKm": 13.99
+  },
+  {
+   "cat": "project_uc",
+   "name": "United Highlands",
+   "lat": 12.945795,
+   "lng": 77.721901,
+   "distanceKm": 13.99
+  },
+  {
+   "cat": "school",
+   "name": "Karnataka Public School",
+   "lat": 13.016132,
+   "lng": 77.654819,
+   "distanceKm": 14
+  },
+  {
+   "cat": "hospital",
+   "name": "Shishuka Children's Speciality Hospital",
+   "lat": 13.01938,
+   "lng": 77.653535,
+   "distanceKm": 14.01
+  },
+  {
+   "cat": "school",
+   "name": "New Baldwin School",
+   "lat": 13.052625,
+   "lng": 77.646625,
+   "distanceKm": 14.03
+  },
+  {
+   "cat": "clinic",
+   "name": "Sri Vinayaka Homeopathic Clinic",
+   "lat": 12.985164,
+   "lng": 77.671732,
+   "distanceKm": 14.03
+  },
+  {
+   "cat": "college",
+   "name": "VBR College",
+   "lat": 13.125014,
+   "lng": 77.664817,
+   "distanceKm": 14.03
+  },
+  {
+   "cat": "clinic",
+   "name": "Kottakkal Aryavaidyasala",
+   "lat": 12.986154,
+   "lng": 77.670855,
+   "distanceKm": 14.04
+  },
+  {
+   "cat": "project_uc",
+   "name": "MJR Developers (u/c)",
+   "lat": 13.148373,
+   "lng": 77.683212,
+   "distanceKm": 14.04
+  },
+  {
+   "cat": "school",
+   "name": "Government Lower Primary School, Geddalahalli",
+   "lat": 13.049734,
+   "lng": 77.646616,
+   "distanceKm": 14.05
+  },
+  {
+   "cat": "school",
+   "name": "Bangalore International School",
+   "lat": 13.047324,
+   "lng": 77.646757,
+   "distanceKm": 14.06
+  },
+  {
+   "cat": "clinic",
+   "name": "Sneha Clinic",
+   "lat": 13.00975,
+   "lng": 77.6568,
+   "distanceKm": 14.06
+  },
+  {
+   "cat": "clinic",
+   "name": "IMAX Clinic",
+   "lat": 13.018728,
+   "lng": 77.653139,
+   "distanceKm": 14.07
+  },
+  {
+   "cat": "mall",
+   "name": "KLM Fashion Mall",
+   "lat": 12.956771,
+   "lng": 77.700771,
+   "distanceKm": 14.08
+  },
+  {
+   "cat": "hospital",
+   "name": "MGA Hospital",
+   "lat": 12.956855,
+   "lng": 77.700226,
+   "distanceKm": 14.11
+  },
+  {
+   "cat": "school",
+   "name": "Vimanapura East Extension Primary School",
+   "lat": 12.960792,
+   "lng": 77.694779,
+   "distanceKm": 14.11
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mantri Webcity (u/c)",
+   "lat": 13.071887,
+   "lng": 77.645928,
+   "distanceKm": 14.14
+  },
+  {
+   "cat": "hospital",
+   "name": "Subramanium Medicine Store",
+   "lat": 13.009091,
+   "lng": 77.656317,
+   "distanceKm": 14.14
+  },
+  {
+   "cat": "clinic",
+   "name": "Family Care Homeopathy Clinic & Pharmacy",
+   "lat": 12.952505,
+   "lng": 77.706195,
+   "distanceKm": 14.15
+  },
+  {
+   "cat": "clinic",
+   "name": "Family Dental care",
+   "lat": 12.952552,
+   "lng": 77.705985,
+   "distanceKm": 14.16
+  },
+  {
+   "cat": "project_uc",
+   "name": "Maithri Developers (u/c)",
+   "lat": 12.94472,
+   "lng": 77.720521,
+   "distanceKm": 14.16
+  },
+  {
+   "cat": "project_uc",
+   "name": "MVG Rakshak (u/c)",
+   "lat": 13.146721,
+   "lng": 77.680015,
+   "distanceKm": 14.16
+  },
+  {
+   "cat": "project_uc",
+   "name": "Assetz Sora & Saki (u/c)",
+   "lat": 13.147943,
+   "lng": 77.68102,
+   "distanceKm": 14.17
+  },
+  {
+   "cat": "school",
+   "name": "Government School Munekolala",
+   "lat": 12.951874,
+   "lng": 77.706789,
+   "distanceKm": 14.17
+  },
+  {
+   "cat": "clinic",
+   "name": "Janani Women & Kids Clinic",
+   "lat": 13.008907,
+   "lng": 77.656123,
+   "distanceKm": 14.17
+  },
+  {
+   "cat": "school",
+   "name": "Kannada Government School",
+   "lat": 12.994993,
+   "lng": 77.663503,
+   "distanceKm": 14.17
+  },
+  {
+   "cat": "hospital",
+   "name": "Motherhood",
+   "lat": 13.020242,
+   "lng": 77.651619,
+   "distanceKm": 14.17
+  },
+  {
+   "cat": "hospital",
+   "name": "Ovum Birthing Centre",
+   "lat": 13.020149,
+   "lng": 77.651663,
+   "distanceKm": 14.17
+  },
+  {
+   "cat": "project_uc",
+   "name": "Aparna Cypress (u/c)",
+   "lat": 13.064891,
+   "lng": 77.645034,
+   "distanceKm": 14.18
+  },
+  {
+   "cat": "hospital",
+   "name": "New Akshay Mallya Hospital",
+   "lat": 12.956853,
+   "lng": 77.699047,
+   "distanceKm": 14.18
+  },
+  {
+   "cat": "clinic",
+   "name": "Raja Rama's Homeopathy & Ayurvedic Centre",
+   "lat": 13.009622,
+   "lng": 77.655699,
+   "distanceKm": 14.18
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya School",
+   "lat": 12.956007,
+   "lng": 77.700367,
+   "distanceKm": 14.18
+  },
+  {
+   "cat": "school",
+   "name": "St Michael's High School",
+   "lat": 13.051602,
+   "lng": 77.645183,
+   "distanceKm": 14.19
+  },
+  {
+   "cat": "mall",
+   "name": "Gopalan Grand Mall",
+   "lat": 12.993442,
+   "lng": 77.664039,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "school",
+   "name": "Indo-German School",
+   "lat": 13.004255,
+   "lng": 77.658041,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "school",
+   "name": "Little Angels Modern High School",
+   "lat": 12.998588,
+   "lng": 77.661047,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "hospital",
+   "name": "Procare Hospital",
+   "lat": 13.020394,
+   "lng": 77.651268,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "project_uc",
+   "name": "Purva Sky (u/c)",
+   "lat": 13.047143,
+   "lng": 77.645467,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Future Pathways Global School",
+   "lat": 12.970701,
+   "lng": 77.682283,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Future Pathways Global Schools Hennur",
+   "lat": 13.080707,
+   "lng": 77.646503,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "hospital",
+   "name": "Venus MultiSpeciality Hospital",
+   "lat": 12.972178,
+   "lng": 77.680787,
+   "distanceKm": 14.2
+  },
+  {
+   "cat": "clinic",
+   "name": "Priya Health Care",
+   "lat": 12.972726,
+   "lng": 77.680124,
+   "distanceKm": 14.21
+  },
+  {
+   "cat": "clinic",
+   "name": "Cure Multi Speciality Clinic",
+   "lat": 12.972239,
+   "lng": 77.680492,
+   "distanceKm": 14.22
+  },
+  {
+   "cat": "clinic",
+   "name": "Easwari Clinic",
+   "lat": 12.974213,
+   "lng": 77.678669,
+   "distanceKm": 14.22
+  },
+  {
+   "cat": "hospital",
+   "name": "Banasawadi Hospital",
+   "lat": 13.020508,
+   "lng": 77.650968,
+   "distanceKm": 14.23
+  },
+  {
+   "cat": "project_uc",
+   "name": "MSR Tech Zone",
+   "lat": 12.95492,
+   "lng": 77.701132,
+   "distanceKm": 14.23
+  },
+  {
+   "cat": "clinic",
+   "name": "Baptist Express Healthcare",
+   "lat": 13.057028,
+   "lng": 77.644436,
+   "distanceKm": 14.24
+  },
+  {
+   "cat": "project_uc",
+   "name": "Brigade Aero Park (u/c)",
+   "lat": 13.16777,
+   "lng": 77.704704,
+   "distanceKm": 14.24
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Techno School",
+   "lat": 12.938049,
+   "lng": 77.736215,
+   "distanceKm": 14.24
+  },
+  {
+   "cat": "university",
+   "name": "CMR University Campus (Lakeside)",
+   "lat": 13.118624,
+   "lng": 77.658857,
+   "distanceKm": 14.25
+  },
+  {
+   "cat": "project_uc",
+   "name": "ISR Constructions (u/c)",
+   "lat": 12.94065,
+   "lng": 77.728178,
+   "distanceKm": 14.25
+  },
+  {
+   "cat": "school",
+   "name": "NCFE School",
+   "lat": 12.979051,
+   "lng": 77.673988,
+   "distanceKm": 14.25
+  },
+  {
+   "cat": "project_uc",
+   "name": "Puravankara (u/c)",
+   "lat": 13.1422,
+   "lng": 77.674785,
+   "distanceKm": 14.25
+  },
+  {
+   "cat": "school",
+   "name": "Lady Vailankanni School",
+   "lat": 12.93527,
+   "lng": 77.745953,
+   "distanceKm": 14.26
+  },
+  {
+   "cat": "project_uc",
+   "name": "RGHCL Horamavu Agara",
+   "lat": 13.034264,
+   "lng": 77.646911,
+   "distanceKm": 14.26
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Future Pathways Global School Varthur",
+   "lat": 12.937972,
+   "lng": 77.735902,
+   "distanceKm": 14.26
+  },
+  {
+   "cat": "clinic",
+   "name": "Ashwin Clinic",
+   "lat": 12.972472,
+   "lng": 77.679706,
+   "distanceKm": 14.27
+  },
+  {
+   "cat": "project_uc",
+   "name": "Clubhouse",
+   "lat": 13.142634,
+   "lng": 77.674979,
+   "distanceKm": 14.27
+  },
+  {
+   "cat": "school",
+   "name": "Don Bosco High School",
+   "lat": 13.065547,
+   "lng": 77.644284,
+   "distanceKm": 14.27
+  },
+  {
+   "cat": "project_uc",
+   "name": "Poetry of Earth (u/c)",
+   "lat": 12.936048,
+   "lng": 77.742321,
+   "distanceKm": 14.27
+  },
+  {
+   "cat": "project_uc",
+   "name": "Assetz (u/c)",
+   "lat": 13.147919,
+   "lng": 77.679706,
+   "distanceKm": 14.28
+  },
+  {
+   "cat": "project_uc",
+   "name": "Gokul R16 (u/c)",
+   "lat": 13.174151,
+   "lng": 77.715146,
+   "distanceKm": 14.28
+  },
+  {
+   "cat": "project_uc",
+   "name": "MJR North Park (u/c)",
+   "lat": 13.146726,
+   "lng": 77.678566,
+   "distanceKm": 14.28
+  },
+  {
+   "cat": "hospital",
+   "name": "Government Hospita Sulibele",
+   "lat": 13.186185,
+   "lng": 77.801411,
+   "distanceKm": 14.29
+  },
+  {
+   "cat": "mall",
+   "name": "Brand Factory",
+   "lat": 12.95652,
+   "lng": 77.697688,
+   "distanceKm": 14.3
+  },
+  {
+   "cat": "clinic",
+   "name": "Lotus Medical Centre",
+   "lat": 12.973393,
+   "lng": 77.678383,
+   "distanceKm": 14.3
+  },
+  {
+   "cat": "project_uc",
+   "name": "NCC (u/c)",
+   "lat": 12.953897,
+   "lng": 77.701168,
+   "distanceKm": 14.32
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaithanya PU college Banasawadi",
+   "lat": 13.007459,
+   "lng": 77.655219,
+   "distanceKm": 14.32
+  },
+  {
+   "cat": "school",
+   "name": "Chaitanya E-Techno Scool",
+   "lat": 12.976496,
+   "lng": 77.675112,
+   "distanceKm": 14.34
+  },
+  {
+   "cat": "project_uc",
+   "name": "Disha (u/c)",
+   "lat": 12.936885,
+   "lng": 77.736981,
+   "distanceKm": 14.34
+  },
+  {
+   "cat": "school",
+   "name": "Genius Global School",
+   "lat": 12.954845,
+   "lng": 77.699485,
+   "distanceKm": 14.34
+  },
+  {
+   "cat": "school",
+   "name": "Hayagriva Girls' School",
+   "lat": 12.973441,
+   "lng": 77.677847,
+   "distanceKm": 14.34
+  },
+  {
+   "cat": "project_uc",
+   "name": "Mahindra Electric GEVTeC",
+   "lat": 13.165001,
+   "lng": 77.69882,
+   "distanceKm": 14.34
+  },
+  {
+   "cat": "project_uc",
+   "name": "Manyata Kannur (u/c)",
+   "lat": 13.089992,
+   "lng": 77.64699,
+   "distanceKm": 14.35
+  },
+  {
+   "cat": "clinic",
+   "name": "unknown clinic",
+   "lat": 12.94893,
+   "lng": 77.708573,
+   "distanceKm": 14.35
+  },
+  {
+   "cat": "school",
+   "name": "NPS Marathahalli",
+   "lat": 12.937216,
+   "lng": 77.73478,
+   "distanceKm": 14.37
+  },
+  {
+   "cat": "project_uc",
+   "name": "Technology Innovation International Park",
+   "lat": 13.170822,
+   "lng": 77.707464,
+   "distanceKm": 14.37
+  },
+  {
+   "cat": "hospital",
+   "name": "Srinivasa Eye Hospital",
+   "lat": 13.014722,
+   "lng": 77.651562,
+   "distanceKm": 14.38
+  },
+  {
+   "cat": "project_uc",
+   "name": "Udbhav Gokulam (u/c)",
+   "lat": 12.940295,
+   "lng": 77.726042,
+   "distanceKm": 14.38
+  },
+  {
+   "cat": "school",
+   "name": "Blessed Care Nivas",
+   "lat": 13.046065,
+   "lng": 77.643708,
+   "distanceKm": 14.4
+  },
+  {
+   "cat": "school",
+   "name": "Bishop Sargent High School",
+   "lat": 13.06433,
+   "lng": 77.642885,
+   "distanceKm": 14.41
+  },
+  {
+   "cat": "project_uc",
+   "name": "NSL (u/c)",
+   "lat": 13.159208,
+   "lng": 77.690161,
+   "distanceKm": 14.41
+  },
+  {
+   "cat": "clinic",
+   "name": "Sanjeevini Clinic",
+   "lat": 12.94861,
+   "lng": 77.707873,
+   "distanceKm": 14.42
+  },
+  {
+   "cat": "school",
+   "name": "St. Norbert School",
+   "lat": 13.04548,
+   "lng": 77.64354,
+   "distanceKm": 14.43
+  },
+  {
+   "cat": "school",
+   "name": "Government Kannada Primary School",
+   "lat": 12.990236,
+   "lng": 77.663579,
+   "distanceKm": 14.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Kotle Patil Lakeside 24",
+   "lat": 13.096372,
+   "lng": 77.64784,
+   "distanceKm": 14.44
+  },
+  {
+   "cat": "project_uc",
+   "name": "Poulomi Florique (u/c)",
+   "lat": 13.087422,
+   "lng": 77.645528,
+   "distanceKm": 14.44
+  },
+  {
+   "cat": "school",
+   "name": "Vagdevi Vilas School",
+   "lat": 12.93108,
+   "lng": 77.75989,
+   "distanceKm": 14.45
+  },
+  {
+   "cat": "clinic",
+   "name": "Apple Clinic",
+   "lat": 12.973117,
+   "lng": 77.676722,
+   "distanceKm": 14.46
+  },
+  {
+   "cat": "school",
+   "name": "Government School",
+   "lat": 13.062777,
+   "lng": 77.642405,
+   "distanceKm": 14.46
+  },
+  {
+   "cat": "university",
+   "name": "Kristu Jayanti University",
+   "lat": 13.058229,
+   "lng": 77.642435,
+   "distanceKm": 14.46
+  },
+  {
+   "cat": "hospital",
+   "name": "Motherhood Women & Children Hospital",
+   "lat": 13.01027,
+   "lng": 77.652591,
+   "distanceKm": 14.46
+  },
+  {
+   "cat": "school",
+   "name": "Vels Global School",
+   "lat": 12.953687,
+   "lng": 77.699206,
+   "distanceKm": 14.46
+  },
+  {
+   "cat": "school",
+   "name": "BBMP School",
+   "lat": 13.061685,
+   "lng": 77.642326,
+   "distanceKm": 14.47
+  },
+  {
+   "cat": "mall",
+   "name": "Gopalan Signature Mall",
+   "lat": 12.992943,
+   "lng": 77.661511,
+   "distanceKm": 14.47
+  },
+  {
+   "cat": "clinic",
+   "name": "K Narayanapura Urban Primary Health Centre",
+   "lat": 13.063192,
+   "lng": 77.642348,
+   "distanceKm": 14.47
+  },
+  {
+   "cat": "clinic",
+   "name": "Life line clinic",
+   "lat": 12.989196,
+   "lng": 77.663856,
+   "distanceKm": 14.47
+  },
+  {
+   "cat": "clinic",
+   "name": "Supriya Diagnostic Center",
+   "lat": 12.989564,
+   "lng": 77.663608,
+   "distanceKm": 14.47
+  },
+  {
+   "cat": "hospital",
+   "name": "Vikrant Hospital",
+   "lat": 13.142831,
+   "lng": 77.672736,
+   "distanceKm": 14.47
+  },
+  {
+   "cat": "hospital",
+   "name": "Government Primary Health Centre",
+   "lat": 13.097274,
+   "lng": 77.647752,
+   "distanceKm": 14.48
+  },
+  {
+   "cat": "hospital",
+   "name": "Sahasra Hospital",
+   "lat": 12.933775,
+   "lng": 77.743323,
+   "distanceKm": 14.48
+  },
+  {
+   "cat": "mall",
+   "name": "Arcadia",
+   "lat": 12.933307,
+   "lng": 77.745232,
+   "distanceKm": 14.49
+  },
+  {
+   "cat": "college",
+   "name": "New Shores International College",
+   "lat": 13.009782,
+   "lng": 77.652488,
+   "distanceKm": 14.49
+  },
+  {
+   "cat": "school",
+   "name": "Carmel School",
+   "lat": 13.046542,
+   "lng": 77.642725,
+   "distanceKm": 14.5
+  },
+  {
+   "cat": "clinic",
+   "name": "Derma Solutions",
+   "lat": 12.952315,
+   "lng": 77.700293,
+   "distanceKm": 14.52
+  },
+  {
+   "cat": "college",
+   "name": "National Institute of Creative Communication - NICC",
+   "lat": 13.037215,
+   "lng": 77.643864,
+   "distanceKm": 14.53
+  },
+  {
+   "cat": "clinic",
+   "name": "SLV Poly Clinic",
+   "lat": 13.141895,
+   "lng": 77.671183,
+   "distanceKm": 14.53
+  },
+  {
+   "cat": "hospital",
+   "name": "Medihope Super Specialty Hospital",
+   "lat": 12.973637,
+   "lng": 77.675186,
+   "distanceKm": 14.54
+  },
+  {
+   "cat": "school",
+   "name": "Sishu Griha Junior School",
+   "lat": 12.976338,
+   "lng": 77.672884,
+   "distanceKm": 14.54
+  },
+  {
+   "cat": "school",
+   "name": "Vagdevi Vilas super school",
+   "lat": 12.945806,
+   "lng": 77.710759,
+   "distanceKm": 14.54
+  },
+  {
+   "cat": "project_uc",
+   "name": "Bhartiya (u/c)",
+   "lat": 13.155814,
+   "lng": 77.684211,
+   "distanceKm": 14.55
+  },
+  {
+   "cat": "mall",
+   "name": "Bhartiya Mall",
+   "lat": 13.083442,
+   "lng": 77.643625,
+   "distanceKm": 14.56
+  },
+  {
+   "cat": "project_uc",
+   "name": "Ceres",
+   "lat": 12.98171,
+   "lng": 77.668273,
+   "distanceKm": 14.56
+  },
+  {
+   "cat": "project_uc",
+   "name": "Garuda Kingsford (u/c)",
+   "lat": 12.96588,
+   "lng": 77.682624,
+   "distanceKm": 14.56
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sakra World Hospital (u/c)",
+   "lat": 13.024122,
+   "lng": 77.64662,
+   "distanceKm": 14.56
+  },
+  {
+   "cat": "school",
+   "name": "Kendriya Vidhyalaya DRDO",
+   "lat": 12.986842,
+   "lng": 77.664356,
+   "distanceKm": 14.57
+  },
+  {
+   "cat": "project_uc",
+   "name": "Orchid Bloomsberry - Goyal & Co",
+   "lat": 12.940336,
+   "lng": 77.721404,
+   "distanceKm": 14.57
+  },
+  {
+   "cat": "clinic",
+   "name": "Government Health Center",
+   "lat": 12.984816,
+   "lng": 77.665673,
+   "distanceKm": 14.58
+  },
+  {
+   "cat": "school",
+   "name": "Global City International School",
+   "lat": 12.977426,
+   "lng": 77.671335,
+   "distanceKm": 14.59
+  },
+  {
+   "cat": "clinic",
+   "name": "Shubham",
+   "lat": 12.939687,
+   "lng": 77.722405,
+   "distanceKm": 14.59
+  },
+  {
+   "cat": "project_uc",
+   "name": "Godrej Ananda Phase 2 (u/c)",
+   "lat": 13.148545,
+   "lng": 77.676241,
+   "distanceKm": 14.6
+  },
+  {
+   "cat": "hospital",
+   "name": "Lokhande S Hospital",
+   "lat": 13.018605,
+   "lng": 77.647943,
+   "distanceKm": 14.61
+  },
+  {
+   "cat": "clinic",
+   "name": "Bangalore Baptist Clinic",
+   "lat": 13.066427,
+   "lng": 77.641042,
+   "distanceKm": 14.62
+  },
+  {
+   "cat": "school",
+   "name": "Mariam Nilaya High School",
+   "lat": 13.011528,
+   "lng": 77.650488,
+   "distanceKm": 14.62
+  },
+  {
+   "cat": "clinic",
+   "name": "Piles and Fistula Clinic",
+   "lat": 12.955999,
+   "lng": 77.693541,
+   "distanceKm": 14.62
+  },
+  {
+   "cat": "hospital",
+   "name": "Sanghi Medical Centre (P) Ltd",
+   "lat": 12.95174,
+   "lng": 77.699483,
+   "distanceKm": 14.62
+  },
+  {
+   "cat": "school",
+   "name": "Sri Chaitanya Techno School, Kalyan Nagar",
+   "lat": 13.034291,
+   "lng": 77.64353,
+   "distanceKm": 14.62
+  },
+  {
+   "cat": "clinic",
+   "name": "Twinkle Kids Child Care Speciality Clinic",
+   "lat": 13.019512,
+   "lng": 77.647521,
+   "distanceKm": 14.62
+  },
+  {
+   "cat": "school",
+   "name": "VJR High School",
+   "lat": 13.031248,
+   "lng": 77.644155,
+   "distanceKm": 14.63
+  },
+  {
+   "cat": "college",
+   "name": "Dr. Shyamala Reddy Dental College",
+   "lat": 12.949466,
+   "lng": 77.702646,
+   "distanceKm": 14.64
+  },
+  {
+   "cat": "school",
+   "name": "KK English High School",
+   "lat": 12.932725,
+   "lng": 77.741723,
+   "distanceKm": 14.64
+  },
+  {
+   "cat": "project_uc",
+   "name": "Nikoo Homes V (u/c)",
+   "lat": 13.078693,
+   "lng": 77.642098,
+   "distanceKm": 14.64
+  },
+  {
+   "cat": "project_uc",
+   "name": "RGHCL",
+   "lat": 13.115026,
+   "lng": 77.652875,
+   "distanceKm": 14.65
+  },
+  {
+   "cat": "school",
+   "name": "Sinclairs High School",
+   "lat": 13.03175,
+   "lng": 77.643778,
+   "distanceKm": 14.65
+  },
+  {
+   "cat": "school",
+   "name": "Yuvalok School",
+   "lat": 13.037115,
+   "lng": 77.64273,
+   "distanceKm": 14.65
+  },
+  {
+   "cat": "clinic",
+   "name": "Mannat Fertility Clinic",
+   "lat": 12.951252,
+   "lng": 77.699375,
+   "distanceKm": 14.67
+  },
+  {
+   "cat": "hospital",
+   "name": "Anjani Women's Day Care Hospital",
+   "lat": 13.018812,
+   "lng": 77.647187,
+   "distanceKm": 14.68
+  },
+  {
+   "cat": "school",
+   "name": "Chaman Bharatiya School",
+   "lat": 13.080823,
+   "lng": 77.642066,
+   "distanceKm": 14.68
+  },
+  {
+   "cat": "project_uc",
+   "name": "Block 14 and 15 (u/c)",
+   "lat": 13.085813,
+   "lng": 77.642881,
+   "distanceKm": 14.69
+  },
+  {
+   "cat": "project_uc",
+   "name": "National Public School Vibuthipura (u/c)",
+   "lat": 12.965724,
+   "lng": 77.681023,
+   "distanceKm": 14.69
+  },
+  {
+   "cat": "project_uc",
+   "name": "Air India MRO (u/c)",
+   "lat": 13.185585,
+   "lng": 77.732972,
+   "distanceKm": 14.7
+  },
+  {
+   "cat": "project_uc",
+   "name": "Kumar Prospera",
+   "lat": 13.043311,
+   "lng": 77.641291,
+   "distanceKm": 14.7
+  },
+  {
+   "cat": "college",
+   "name": "SASI PU College",
+   "lat": 13.029434,
+   "lng": 77.643856,
+   "distanceKm": 14.7
+  },
+  {
+   "cat": "school",
+   "name": "St. George College of Management, Science & Nursing",
+   "lat": 13.008567,
+   "lng": 77.650975,
+   "distanceKm": 14.7
+  },
+  {
+   "cat": "clinic",
+   "name": "Health Care Medi Clinic",
+   "lat": 12.974236,
+   "lng": 77.672637,
+   "distanceKm": 14.71
+  },
+  {
+   "cat": "school",
+   "name": "Vagdevi Vilas School",
+   "lat": 12.944378,
+   "lng": 77.710088,
+   "distanceKm": 14.71
+  },
+  {
+   "cat": "hospital",
+   "name": "Endocrine Speciality Centre",
+   "lat": 13.013761,
+   "lng": 77.648529,
+   "distanceKm": 14.73
+  },
+  {
+   "cat": "project_uc",
+   "name": "Myhna (u/c)",
+   "lat": 12.931617,
+   "lng": 77.742591,
+   "distanceKm": 14.74
+  },
+  {
+   "cat": "project_uc",
+   "name": "Bhartiya City Block 4 (u/c)",
+   "lat": 13.082789,
+   "lng": 77.641489,
+   "distanceKm": 14.77
+  },
+  {
+   "cat": "clinic",
+   "name": "CGHS Dispensary No.10",
+   "lat": 12.987104,
+   "lng": 77.662021,
+   "distanceKm": 14.77
+  },
+  {
+   "cat": "school",
+   "name": "Government Primary School",
+   "lat": 12.981418,
+   "lng": 77.665956,
+   "distanceKm": 14.78
+  },
+  {
+   "cat": "clinic",
+   "name": "Homeopathic Self Reliance Forum",
+   "lat": 12.98621,
+   "lng": 77.662394,
+   "distanceKm": 14.79
+  },
+  {
+   "cat": "clinic",
+   "name": "The Eye Foundation",
+   "lat": 12.931301,
+   "lng": 77.741827,
+   "distanceKm": 14.79
+  },
+  {
+   "cat": "school",
+   "name": "Government High School",
+   "lat": 13.146504,
+   "lng": 77.671926,
+   "distanceKm": 14.8
+  },
+  {
+   "cat": "hospital",
+   "name": "Shirdi Sai Hospital",
+   "lat": 13.066849,
+   "lng": 77.639416,
+   "distanceKm": 14.8
+  },
+  {
+   "cat": "project_uc",
+   "name": "Sumukha Earthen Crest (u/c)",
+   "lat": 13.045245,
+   "lng": 77.640143,
+   "distanceKm": 14.8
+  },
+  {
+   "cat": "hospital",
+   "name": "Sparsh Hospital, Hennur",
+   "lat": 13.040171,
+   "lng": 77.640685,
+   "distanceKm": 14.81
+  },
+  {
+   "cat": "school",
+   "name": "Suvarnashree Gurukul",
+   "lat": 12.964497,
+   "lng": 77.680704,
+   "distanceKm": 14.81
+  },
+  {
+   "cat": "clinic",
+   "name": "Vivekananda Health Global - Ayurveda, Naturopathy & Yoga",
+   "lat": 13.017856,
+   "lng": 77.646249,
+   "distanceKm": 14.81
+  },
+  {
+   "cat": "college",
+   "name": "CMR College",
+   "lat": 13.006159,
+   "lng": 77.650735,
+   "distanceKm": 14.83
+  },
+  {
+   "cat": "hospital",
+   "name": "Bangalore Prime Hospital",
+   "lat": 13.066842,
+   "lng": 77.639055,
+   "distanceKm": 14.84
+  },
+  {
+   "cat": "school",
+   "name": "Jawahar Navodaya Vidyalaya",
+   "lat": 13.148615,
+   "lng": 77.673329,
+   "distanceKm": 14.84
+  },
+  {
+   "cat": "hospital",
+   "name": "Shree Vijayalakshmi Hospital and Trauma Centre",
+   "lat": 13.037357,
+   "lng": 77.640906,
+   "distanceKm": 14.84
+  },
+  {
+   "cat": "hospital",
+   "name": "Sri Vijayalakshmi Pragathi Hospital",
+   "lat": 13.037173,
+   "lng": 77.640954,
+   "distanceKm": 14.84
+  },
+  {
+   "cat": "school",
+   "name": "St. Paul High School",
+   "lat": 13.03141,
+   "lng": 77.64209,
+   "distanceKm": 14.84
+  },
+  {
+   "cat": "clinic",
+   "name": "City Clinic",
+   "lat": 12.930945,
+   "lng": 77.740974,
+   "distanceKm": 14.85
+  },
+  {
+   "cat": "clinic",
+   "name": "Vardhan Fertility",
+   "lat": 13.01213,
+   "lng": 77.647984,
+   "distanceKm": 14.85
+  },
+  {
+   "cat": "project_uc",
+   "name": "Aratt (u/c)",
+   "lat": 13.159479,
+   "lng": 77.684115,
+   "distanceKm": 14.86
+  },
+  {
+   "cat": "school",
+   "name": "Narayana e-Techno School",
+   "lat": 13.026601,
+   "lng": 77.643127,
+   "distanceKm": 14.86
+  },
+  {
+   "cat": "hospital",
+   "name": "Sharada Medicals",
+   "lat": 13.015264,
+   "lng": 77.646711,
+   "distanceKm": 14.86
+  },
+  {
+   "cat": "school",
+   "name": "Vishwa Vidyapeeth School Varthur",
+   "lat": 12.926563,
+   "lng": 77.772015,
+   "distanceKm": 14.86
+  },
+  {
+   "cat": "project_uc",
+   "name": "Divyasree Avance (u/c)",
+   "lat": 13.042247,
+   "lng": 77.639833,
+   "distanceKm": 14.87
+  },
+  {
+   "cat": "clinic",
+   "name": "Health and hijama clinic",
+   "lat": 13.010392,
+   "lng": 77.64841,
+   "distanceKm": 14.87
+  },
+  {
+   "cat": "clinic",
+   "name": "Nainda Advanced Eye Care Centre",
+   "lat": 13.012027,
+   "lng": 77.647755,
+   "distanceKm": 14.87
+  },
+  {
+   "cat": "clinic",
+   "name": "Poorna Heart and Women's Clinic",
+   "lat": 13.012005,
+   "lng": 77.647777,
+   "distanceKm": 14.87
+  },
+  {
+   "cat": "project_uc",
+   "name": "Baldota Summit",
+   "lat": 13.060896,
+   "lng": 77.638468,
+   "distanceKm": 14.88
+  },
+  {
+   "cat": "college",
+   "name": "Sadupadesa College",
+   "lat": 13.038901,
+   "lng": 77.640295,
+   "distanceKm": 14.88
+  },
+  {
+   "cat": "hospital",
+   "name": "Rajbal Skin Clinic",
+   "lat": 13.020606,
+   "lng": 77.644536,
+   "distanceKm": 14.89
+  },
+  {
+   "cat": "clinic",
+   "name": "Krupa Homeopathic Clinic",
+   "lat": 13.013776,
+   "lng": 77.646793,
+   "distanceKm": 14.9
+  },
+  {
+   "cat": "hospital",
+   "name": "Indicus",
+   "lat": 13.014609,
+   "lng": 77.646456,
+   "distanceKm": 14.91
+  },
+  {
+   "cat": "hospital",
+   "name": "Milaan Hospital",
+   "lat": 13.010954,
+   "lng": 77.647642,
+   "distanceKm": 14.93
+  },
+  {
+   "cat": "project_uc",
+   "name": "T3B",
+   "lat": 13.04224,
+   "lng": 77.639271,
+   "distanceKm": 14.93
+  },
+  {
+   "cat": "clinic",
+   "name": "Amrik Nethralaya",
+   "lat": 13.019553,
+   "lng": 77.644381,
+   "distanceKm": 14.94
+  },
+  {
+   "cat": "school",
+   "name": "Chaintanya School",
+   "lat": 12.947038,
+   "lng": 77.701453,
+   "distanceKm": 14.94
+  },
+  {
+   "cat": "college",
+   "name": "St Vincent Pallotti College",
+   "lat": 13.029748,
+   "lng": 77.641527,
+   "distanceKm": 14.94
+  },
+  {
+   "cat": "hospital",
+   "name": "Herbocare Hospital Pvt",
+   "lat": 13.020442,
+   "lng": 77.644061,
+   "distanceKm": 14.95
+  },
+  {
+   "cat": "school",
+   "name": "Royale Concorde International School",
+   "lat": 13.025364,
+   "lng": 77.642521,
+   "distanceKm": 14.95
+  },
+  {
+   "cat": "college",
+   "name": "Yenepoya College",
+   "lat": 13.084978,
+   "lng": 77.640279,
+   "distanceKm": 14.95
+  },
+  {
+   "cat": "clinic",
+   "name": "Roots Skin Clinic",
+   "lat": 13.011679,
+   "lng": 77.647029,
+   "distanceKm": 14.96
+  },
+  {
+   "cat": "school",
+   "name": "Chrysalis High",
+   "lat": 12.929682,
+   "lng": 77.741799,
+   "distanceKm": 14.97
+  },
+  {
+   "cat": "project_uc",
+   "name": "SNN (u/c)",
+   "lat": 13.097784,
+   "lng": 77.643161,
+   "distanceKm": 14.97
+  },
+  {
+   "cat": "clinic",
+   "name": "Oliva Skin and Hair Clinic",
+   "lat": 13.021007,
+   "lng": 77.643428,
+   "distanceKm": 14.99
+  },
+  {
+   "cat": "hospital",
+   "name": "Miracle Hospital",
+   "lat": 12.929803,
+   "lng": 77.739873,
+   "distanceKm": 15.01
+  },
+  {
+   "cat": "project_uc",
+   "name": "Thanisandra Vande Bharat Depot (u/c)",
+   "lat": 13.053808,
+   "lng": 77.637251,
+   "distanceKm": 15.03
+  },
+  {
+   "cat": "college",
+   "name": "Bible College and Ministry Training Center",
+   "lat": 13.065121,
+   "lng": 77.637166,
+   "distanceKm": 15.04
+  },
+  {
+   "cat": "college",
+   "name": "Asanath College",
+   "lat": 13.036406,
+   "lng": 77.638875,
+   "distanceKm": 15.07
+  },
+  {
+   "cat": "project_uc",
+   "name": "Casagrand Keatsway (u/c)",
+   "lat": 13.048824,
+   "lng": 77.63726,
+   "distanceKm": 15.07
+  },
+  {
+   "cat": "project_uc",
+   "name": "Prestige Serenity Shores",
+   "lat": 12.930196,
+   "lng": 77.735895,
+   "distanceKm": 15.08
+  },
+  {
+   "cat": "school",
+   "name": "Kittur Rani Chennamma Residential School",
+   "lat": 13.196258,
+   "lng": 77.775444,
+   "distanceKm": 15.14
+  },
+  {
+   "cat": "project_uc",
+   "name": "Warehouse (u/c)",
+   "lat": 13.031616,
+   "lng": 77.913876,
+   "distanceKm": 15.28
+  }
+ ],
+ "buildings": [
+  {
+   "lat": 13.059647,
+   "lng": 77.775626
+  },
+  {
+   "lat": 13.06002,
+   "lng": 77.776543
+  },
+  {
+   "lat": 13.060177,
+   "lng": 77.775198
+  },
+  {
+   "lat": 13.059729,
+   "lng": 77.775233
+  },
+  {
+   "lat": 13.059594,
+   "lng": 77.776479
+  },
+  {
+   "lat": 13.060704,
+   "lng": 77.776456
+  },
+  {
+   "lat": 13.059322,
+   "lng": 77.775631
+  },
+  {
+   "lat": 13.059185,
+   "lng": 77.775908
+  },
+  {
+   "lat": 13.060259,
+   "lng": 77.774872
+  },
+  {
+   "lat": 13.061127,
+   "lng": 77.77634
+  },
+  {
+   "lat": 13.061123,
+   "lng": 77.775369
+  },
+  {
+   "lat": 13.060549,
+   "lng": 77.7748
+  },
+  {
+   "lat": 13.05962,
+   "lng": 77.777021
+  },
+  {
+   "lat": 13.061552,
+   "lng": 77.775239
+  },
+  {
+   "lat": 13.061742,
+   "lng": 77.77628
+  },
+  {
+   "lat": 13.060204,
+   "lng": 77.777647
+  },
+  {
+   "lat": 13.062035,
+   "lng": 77.77611
+  },
+  {
+   "lat": 13.058188,
+   "lng": 77.77668
+  },
+  {
+   "lat": 13.06221,
+   "lng": 77.774961
+  },
+  {
+   "lat": 13.062545,
+   "lng": 77.775854
+  },
+  {
+   "lat": 13.062594,
+   "lng": 77.77489
+  },
+  {
+   "lat": 13.062799,
+   "lng": 77.775625
+  },
+  {
+   "lat": 13.060182,
+   "lng": 77.779449
+  },
+  {
+   "lat": 13.060107,
+   "lng": 77.77956
+  },
+  {
+   "lat": 13.062129,
+   "lng": 77.772285
+  },
+  {
+   "lat": 13.060492,
+   "lng": 77.78001
+  },
+  {
+   "lat": 13.060505,
+   "lng": 77.780169
+  },
+  {
+   "lat": 13.06037,
+   "lng": 77.780212
+  },
+  {
+   "lat": 13.061638,
+   "lng": 77.771822
+  },
+  {
+   "lat": 13.060802,
+   "lng": 77.780244
+  },
+  {
+   "lat": 13.06163,
+   "lng": 77.780071
+  },
+  {
+   "lat": 13.063649,
+   "lng": 77.778516
+  },
+  {
+   "lat": 13.05998,
+   "lng": 77.780472
+  },
+  {
+   "lat": 13.063642,
+   "lng": 77.778717
+  },
+  {
+   "lat": 13.063802,
+   "lng": 77.778649
+  },
+  {
+   "lat": 13.061646,
+   "lng": 77.771426
+  },
+  {
+   "lat": 13.06134,
+   "lng": 77.780432
+  },
+  {
+   "lat": 13.060653,
+   "lng": 77.771124
+  },
+  {
+   "lat": 13.059071,
+   "lng": 77.771147
+  },
+  {
+   "lat": 13.061059,
+   "lng": 77.771109
+  },
+  {
+   "lat": 13.060877,
+   "lng": 77.771074
+  },
+  {
+   "lat": 13.060971,
+   "lng": 77.780771
+  },
+  {
+   "lat": 13.061665,
+   "lng": 77.771147
+  },
+  {
+   "lat": 13.061381,
+   "lng": 77.78074
+  },
+  {
+   "lat": 13.058016,
+   "lng": 77.771313
+  },
+  {
+   "lat": 13.060664,
+   "lng": 77.780912
+  },
+  {
+   "lat": 13.057847,
+   "lng": 77.771325
+  },
+  {
+   "lat": 13.061077,
+   "lng": 77.780937
+  },
+  {
+   "lat": 13.060274,
+   "lng": 77.770722
+  },
+  {
+   "lat": 13.05942,
+   "lng": 77.770748
+  },
+  {
+   "lat": 13.05769,
+   "lng": 77.771332
+  },
+  {
+   "lat": 13.061686,
+   "lng": 77.77087
+  },
+  {
+   "lat": 13.058161,
+   "lng": 77.771011
+  },
+  {
+   "lat": 13.060592,
+   "lng": 77.781135
+  },
+  {
+   "lat": 13.057993,
+   "lng": 77.771028
+  },
+  {
+   "lat": 13.061432,
+   "lng": 77.781033
+  },
+  {
+   "lat": 13.060911,
+   "lng": 77.781185
+  },
+  {
+   "lat": 13.060323,
+   "lng": 77.781244
+  },
+  {
+   "lat": 13.057828,
+   "lng": 77.771042
+  },
+  {
+   "lat": 13.058538,
+   "lng": 77.770701
+  },
+  {
+   "lat": 13.061593,
+   "lng": 77.7811
+  },
+  {
+   "lat": 13.057665,
+   "lng": 77.771056
+  },
+  {
+   "lat": 13.061225,
+   "lng": 77.78132
+  },
+  {
+   "lat": 13.060382,
+   "lng": 77.78144
+  },
+  {
+   "lat": 13.061582,
+   "lng": 77.781288
+  },
+  {
+   "lat": 13.057595,
+   "lng": 77.770824
+  },
+  {
+   "lat": 13.060622,
+   "lng": 77.781579
+  },
+  {
+   "lat": 13.060709,
+   "lng": 77.78158
+  },
+  {
+   "lat": 13.060797,
+   "lng": 77.781588
+  },
+  {
+   "lat": 13.060238,
+   "lng": 77.770125
+  },
+  {
+   "lat": 13.058019,
+   "lng": 77.77048
+  },
+  {
+   "lat": 13.061032,
+   "lng": 77.78162
+  },
+  {
+   "lat": 13.061553,
+   "lng": 77.781535
+  },
+  {
+   "lat": 13.061364,
+   "lng": 77.781616
+  },
+  {
+   "lat": 13.058442,
+   "lng": 77.770243
+  },
+  {
+   "lat": 13.060521,
+   "lng": 77.781778
+  },
+  {
+   "lat": 13.060611,
+   "lng": 77.781787
+  },
+  {
+   "lat": 13.060849,
+   "lng": 77.781821
+  },
+  {
+   "lat": 13.061542,
+   "lng": 77.7817
+  },
+  {
+   "lat": 13.061012,
+   "lng": 77.78182
+  },
+  {
+   "lat": 13.059657,
+   "lng": 77.769823
+  },
+  {
+   "lat": 13.060196,
+   "lng": 77.769784
+  },
+  {
+   "lat": 13.059628,
+   "lng": 77.769779
+  },
+  {
+   "lat": 13.061083,
+   "lng": 77.781982
+  },
+  {
+   "lat": 13.06117,
+   "lng": 77.781984
+  },
+  {
+   "lat": 13.061331,
+   "lng": 77.782001
+  },
+  {
+   "lat": 13.066228,
+   "lng": 77.775895
+  },
+  {
+   "lat": 13.061508,
+   "lng": 77.782048
+  },
+  {
+   "lat": 13.056423,
+   "lng": 77.770787
+  },
+  {
+   "lat": 13.066339,
+   "lng": 77.776126
+  },
+  {
+   "lat": 13.060736,
+   "lng": 77.782295
+  },
+  {
+   "lat": 13.066468,
+   "lng": 77.776299
+  },
+  {
+   "lat": 13.058599,
+   "lng": 77.769469
+  },
+  {
+   "lat": 13.059538,
+   "lng": 77.782782
+  },
+  {
+   "lat": 13.058234,
+   "lng": 77.769193
+  },
+  {
+   "lat": 13.059474,
+   "lng": 77.78309
+  },
+  {
+   "lat": 13.063621,
+   "lng": 77.782223
+  },
+  {
+   "lat": 13.057921,
+   "lng": 77.768877
+  },
+  {
+   "lat": 13.05771,
+   "lng": 77.768713
+  },
+  {
+   "lat": 13.067829,
+   "lng": 77.776805
+  },
+  {
+   "lat": 13.067639,
+   "lng": 77.777917
+  },
+  {
+   "lat": 13.067748,
+   "lng": 77.778119
+  },
+  {
+   "lat": 13.068008,
+   "lng": 77.777654
+  },
+  {
+   "lat": 13.06754,
+   "lng": 77.779538
+  },
+  {
+   "lat": 13.055646,
+   "lng": 77.783066
+  },
+  {
+   "lat": 13.066687,
+   "lng": 77.781163
+  },
+  {
+   "lat": 13.067282,
+   "lng": 77.780283
+  },
+  {
+   "lat": 13.05963,
+   "lng": 77.784571
+  },
+  {
+   "lat": 13.059956,
+   "lng": 77.784661
+  },
+  {
+   "lat": 13.056037,
+   "lng": 77.768117
+  },
+  {
+   "lat": 13.056799,
+   "lng": 77.767586
+  },
+  {
+   "lat": 13.067066,
+   "lng": 77.781527
+  },
+  {
+   "lat": 13.055408,
+   "lng": 77.783638
+  },
+  {
+   "lat": 13.055968,
+   "lng": 77.76775
+  },
+  {
+   "lat": 13.059441,
+   "lng": 77.785118
+  },
+  {
+   "lat": 13.056714,
+   "lng": 77.767243
+  },
+  {
+   "lat": 13.057966,
+   "lng": 77.766485
+  },
+  {
+   "lat": 13.058047,
+   "lng": 77.766457
+  },
+  {
+   "lat": 13.058124,
+   "lng": 77.766431
+  },
+  {
+   "lat": 13.058204,
+   "lng": 77.766403
+  },
+  {
+   "lat": 13.05828,
+   "lng": 77.766374
+  },
+  {
+   "lat": 13.058361,
+   "lng": 77.766346
+  },
+  {
+   "lat": 13.058438,
+   "lng": 77.76632
+  },
+  {
+   "lat": 13.058518,
+   "lng": 77.766292
+  },
+  {
+   "lat": 13.057898,
+   "lng": 77.766264
+  },
+  {
+   "lat": 13.057979,
+   "lng": 77.766236
+  },
+  {
+   "lat": 13.058055,
+   "lng": 77.766209
+  },
+  {
+   "lat": 13.058136,
+   "lng": 77.766182
+  },
+  {
+   "lat": 13.058212,
+   "lng": 77.766153
+  },
+  {
+   "lat": 13.058293,
+   "lng": 77.766125
+  },
+  {
+   "lat": 13.058369,
+   "lng": 77.766099
+  },
+  {
+   "lat": 13.05845,
+   "lng": 77.766071
+  },
+  {
+   "lat": 13.054372,
+   "lng": 77.783951
+  },
+  {
+   "lat": 13.057871,
+   "lng": 77.766112
+  },
+  {
+   "lat": 13.057951,
+   "lng": 77.766084
+  },
+  {
+   "lat": 13.058028,
+   "lng": 77.766058
+  },
+  {
+   "lat": 13.058108,
+   "lng": 77.76603
+  },
+  {
+   "lat": 13.058185,
+   "lng": 77.766001
+  },
+  {
+   "lat": 13.058265,
+   "lng": 77.765973
+  },
+  {
+   "lat": 13.058342,
+   "lng": 77.765947
+  },
+  {
+   "lat": 13.058422,
+   "lng": 77.765919
+  },
+  {
+   "lat": 13.056275,
+   "lng": 77.76656
+  },
+  {
+   "lat": 13.066819,
+   "lng": 77.783553
+  },
+  {
+   "lat": 13.057799,
+   "lng": 77.765839
+  },
+  {
+   "lat": 13.053432,
+   "lng": 77.783593
+  },
+  {
+   "lat": 13.057903,
+   "lng": 77.765803
+  },
+  {
+   "lat": 13.058004,
+   "lng": 77.765767
+  },
+  {
+   "lat": 13.058108,
+   "lng": 77.765732
+  },
+  {
+   "lat": 13.058214,
+   "lng": 77.765701
+  },
+  {
+   "lat": 13.058319,
+   "lng": 77.765666
+  },
+  {
+   "lat": 13.057751,
+   "lng": 77.765694
+  },
+  {
+   "lat": 13.057856,
+   "lng": 77.765659
+  },
+  {
+   "lat": 13.052412,
+   "lng": 77.782766
+  },
+  {
+   "lat": 13.057956,
+   "lng": 77.765623
+  },
+  {
+   "lat": 13.058061,
+   "lng": 77.765588
+  },
+  {
+   "lat": 13.058167,
+   "lng": 77.765557
+  },
+  {
+   "lat": 13.058271,
+   "lng": 77.765522
+  },
+  {
+   "lat": 13.058372,
+   "lng": 77.765484
+  },
+  {
+   "lat": 13.069354,
+   "lng": 77.780858
+  },
+  {
+   "lat": 13.069408,
+   "lng": 77.780958
+  },
+  {
+   "lat": 13.069465,
+   "lng": 77.78106
+  },
+  {
+   "lat": 13.057705,
+   "lng": 77.765195
+  },
+  {
+   "lat": 13.057785,
+   "lng": 77.765167
+  },
+  {
+   "lat": 13.057862,
+   "lng": 77.765141
+  },
+  {
+   "lat": 13.069514,
+   "lng": 77.781158
+  },
+  {
+   "lat": 13.057942,
+   "lng": 77.765113
+  },
+  {
+   "lat": 13.058019,
+   "lng": 77.765084
+  },
+  {
+   "lat": 13.058099,
+   "lng": 77.765056
+  },
+  {
+   "lat": 13.058176,
+   "lng": 77.76503
+  },
+  {
+   "lat": 13.058257,
+   "lng": 77.765002
+  },
+  {
+   "lat": 13.053404,
+   "lng": 77.76719
+  },
+  {
+   "lat": 13.057489,
+   "lng": 77.765047
+  },
+  {
+   "lat": 13.057559,
+   "lng": 77.765024
+  },
+  {
+   "lat": 13.057636,
+   "lng": 77.764998
+  },
+  {
+   "lat": 13.057711,
+   "lng": 77.764974
+  },
+  {
+   "lat": 13.057786,
+   "lng": 77.764947
+  },
+  {
+   "lat": 13.057862,
+   "lng": 77.764923
+  },
+  {
+   "lat": 13.057948,
+   "lng": 77.764893
+  },
+  {
+   "lat": 13.058023,
+   "lng": 77.764869
+  },
+  {
+   "lat": 13.057458,
+   "lng": 77.764949
+  },
+  {
+   "lat": 13.057528,
+   "lng": 77.764925
+  },
+  {
+   "lat": 13.057605,
+   "lng": 77.764899
+  },
+  {
+   "lat": 13.05768,
+   "lng": 77.764875
+  },
+  {
+   "lat": 13.057755,
+   "lng": 77.764849
+  },
+  {
+   "lat": 13.057831,
+   "lng": 77.764824
+  },
+  {
+   "lat": 13.057917,
+   "lng": 77.764795
+  },
+  {
+   "lat": 13.057992,
+   "lng": 77.76477
+  },
+  {
+   "lat": 13.069716,
+   "lng": 77.781534
+  },
+  {
+   "lat": 13.069762,
+   "lng": 77.781633
+  },
+  {
+   "lat": 13.055068,
+   "lng": 77.765651
+  },
+  {
+   "lat": 13.053353,
+   "lng": 77.766754
+  },
+  {
+   "lat": 13.051734,
+   "lng": 77.783468
+  },
+  {
+   "lat": 13.051466,
+   "lng": 77.783151
+  },
+  {
+   "lat": 13.069813,
+   "lng": 77.781738
+  },
+  {
+   "lat": 13.069871,
+   "lng": 77.781842
+  },
+  {
+   "lat": 13.054692,
+   "lng": 77.765428
+  },
+  {
+   "lat": 13.070016,
+   "lng": 77.782139
+  },
+  {
+   "lat": 13.054832,
+   "lng": 77.765218
+  },
+  {
+   "lat": 13.055907,
+   "lng": 77.764703
+  },
+  {
+   "lat": 13.051398,
+   "lng": 77.783909
+  },
+  {
+   "lat": 13.050284,
+   "lng": 77.782507
+  },
+  {
+   "lat": 13.05028,
+   "lng": 77.782675
+  },
+  {
+   "lat": 13.050394,
+   "lng": 77.783051
+  },
+  {
+   "lat": 13.051045,
+   "lng": 77.784094
+  },
+  {
+   "lat": 13.054354,
+   "lng": 77.764922
+  },
+  {
+   "lat": 13.050637,
+   "lng": 77.783746
+  },
+  {
+   "lat": 13.050083,
+   "lng": 77.78315
+  },
+  {
+   "lat": 13.072339,
+   "lng": 77.777986
+  },
+  {
+   "lat": 13.054107,
+   "lng": 77.76473
+  },
+  {
+   "lat": 13.072408,
+   "lng": 77.777697
+  },
+  {
+   "lat": 13.050386,
+   "lng": 77.783887
+  },
+  {
+   "lat": 13.054257,
+   "lng": 77.764536
+  },
+  {
+   "lat": 13.049747,
+   "lng": 77.783135
+  },
+  {
+   "lat": 13.050056,
+   "lng": 77.783713
+  },
+  {
+   "lat": 13.049592,
+   "lng": 77.783121
+  },
+  {
+   "lat": 13.052153,
+   "lng": 77.765723
+  },
+  {
+   "lat": 13.072828,
+   "lng": 77.775584
+  },
+  {
+   "lat": 13.058894,
+   "lng": 77.762873
+  },
+  {
+   "lat": 13.058817,
+   "lng": 77.788901
+  },
+  {
+   "lat": 13.049495,
+   "lng": 77.783131
+  },
+  {
+   "lat": 13.055284,
+   "lng": 77.763747
+  },
+  {
+   "lat": 13.049964,
+   "lng": 77.783867
+  },
+  {
+   "lat": 13.04977,
+   "lng": 77.783868
+  },
+  {
+   "lat": 13.0522,
+   "lng": 77.765282
+  },
+  {
+   "lat": 13.071418,
+   "lng": 77.782699
+  },
+  {
+   "lat": 13.049745,
+   "lng": 77.78426
+  },
+  {
+   "lat": 13.070256,
+   "lng": 77.784628
+  },
+  {
+   "lat": 13.052116,
+   "lng": 77.764845
+  },
+  {
+   "lat": 13.055836,
+   "lng": 77.76203
+  }
+ ]
+}

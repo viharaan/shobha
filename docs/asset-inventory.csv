@@ -1,0 +1,66 @@
+path,asset_type,format,size,dimensions,relevance,recommended_use
+"SOBHA One Residences at ONE WORLD - Project Snapshot, Unit Numbering, Flat Facing, PLC & FRC_Updated on 08.08.26.pdf",sales-sheet,pdf,9.9 MB,"1 pages, 2011.5 x 1592.25 pt",authoritative,"Pricing (basic rate, FRC, PLC), phases/handover, per-tower unit numbers + facing labels. Seeds project data model"
+SOBHA OneWorld_Mobile Brochure.pdf,brochure,pdf,22.6 MB,"30 pages, 1081 x 1921 pt",supporting,"Marketing copy, location map, distance ladder, zone/interior renders. Media gallery + POI distance list"
+SOBHA_ONEWORLD_Floor plans.pdf,floor-plan,pdf,399 KB,"9 pages, 595.276 x 841.89 pt",authoritative,"Vector source for 1:1 plans; 7 unit types, all room dims in mm. Converted to SVG (source-assets/plans) and served at app/public/plans"
+SOBHA_OneWorld_Masterplan.pdf,site-plan,pdf,985 KB,"3 pages, 4200 x 2100 pt",authoritative,Raster site plan (JPEG embedded) + text legend/tables. Ground texture + tower placement reference; needs georeferencing (approximate)
+WhatsApp Image 2026-10-17 at 11.55.56.jpeg,infographic,jpeg,608 KB,1024x1536 px,supporting (conflicting),"""Why buy"" creative; claims 53-54 floors and 75k sq ft club, contradicting official PDFs. Display only, flagged"
+WhatsApp Image 2026-10-17 at 11.55.58.jpeg,creative,jpeg,386 KB,867x1600 px,supporting,Six Realms zone-2 creative. Media gallery
+WhatsApp Video 2026-10-17 at 11.54.31.mp4,render-video,mp4,17.9 MB,"1280x720 px, 23 s",supporting,"OneWorld Plaza aerial flythrough. Media gallery, linked to amenity A"
+WhatsApp Video 2026-10-17 at 11.54.45.mp4,render-video,mp4,17.8 MB,"1280x720 px, 24 s",supporting,Amenity render clip. Media gallery
+WhatsApp Video 2026-10-17 at 11.55.13.mp4,render-video,mp4,18.0 MB,"1280x720 px, 24 s",supporting,Amenity render clip. Media gallery
+WhatsApp Video 2026-10-17 at 11.55.20 (1).mp4,social-reel,mp4,9.4 MB,"474x848 px, 50 s",duplicate,Byte-identical to 11.55.20.mp4 (same MD5). Not copied
+WhatsApp Video 2026-10-17 at 11.55.20.mp4,social-reel,mp4,9.4 MB,"474x848 px, 50 s",supporting,"EOI reel (vertical), ""3,4 BHK from 2.04 Cr"". Media gallery"
+WhatsApp Video 2026-10-17 at 11.55.32.mp4,drone-footage,mp4,12.8 MB,"1024x576 px, 76 s",supporting,Real drone footage of NH-75 / Old Madras Road near Hoskote toll. Location context
+WhatsApp Video 2026-10-17 at 11.55.36.mp4,brand-teaser,mp4,4.8 MB,"576x576 px, 32 s",supporting,"Brand teaser, no geometry"
+WhatsApp Video 2026-10-17 at 11.56.06.mp4,mood-clip,mp4,10.8 MB,"848x478 px, 53 s",supporting,"Foliage mood clip, no geometry"
+source-assets/plans/page2.bbox.html,floor-plan-svg,html,25 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page2.svg,floor-plan-svg,svg,650 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page3.bbox.html,floor-plan-svg,html,22 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page3.svg,floor-plan-svg,svg,649 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page4.bbox.html,floor-plan-svg,html,21 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page4.svg,floor-plan-svg,svg,586 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page5.bbox.html,floor-plan-svg,html,17 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page5.svg,floor-plan-svg,svg,521 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page6.bbox.html,floor-plan-svg,html,17 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page6.svg,floor-plan-svg,svg,505 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page7.bbox.html,floor-plan-svg,html,14 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page7.svg,floor-plan-svg,svg,469 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page8.bbox.html,floor-plan-svg,html,11 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/page8.svg,floor-plan-svg,svg,385 KB,viewBox 0 0 595.276 841.89 pt,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/scale-analysis.json,floor-plan-svg,json,16 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/plans/scale-analysis.txt,floor-plan-svg,txt,6 KB,,derived,pdftocairo -svg per page; wall polygon is the largest white filled path; mm/pt in scale-analysis.json
+source-assets/site/masterplan-page-2.jpg,site-raster,jpg,591 KB,2917x1459 px,derived,pdfimages/pdftoppm exports used as textures and gallery images
+source-assets/site/masterplan.jpg,site-raster,jpg,783 KB,2682x2123 px,derived,pdfimages/pdftoppm exports used as textures and gallery images
+source-assets/site/sales-sheet-1.jpg,site-raster,jpg,492 KB,1677x1327 px,derived,pdfimages/pdftoppm exports used as textures and gallery images
+source-assets/brochure/page-01.jpg,brochure-page,jpg,61 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-02.jpg,brochure-page,jpg,146 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-03.jpg,brochure-page,jpg,83 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-04.jpg,brochure-page,jpg,106 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-05.jpg,brochure-page,jpg,81 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-06.jpg,brochure-page,jpg,75 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-07.jpg,brochure-page,jpg,165 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-08.jpg,brochure-page,jpg,93 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-09.jpg,brochure-page,jpg,82 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-10.jpg,brochure-page,jpg,93 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-11.jpg,brochure-page,jpg,46 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-12.jpg,brochure-page,jpg,148 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-13.jpg,brochure-page,jpg,146 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-14.jpg,brochure-page,jpg,85 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-15.jpg,brochure-page,jpg,119 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-16.jpg,brochure-page,jpg,173 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-17.jpg,brochure-page,jpg,41 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-18.jpg,brochure-page,jpg,258 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-19.jpg,brochure-page,jpg,140 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-20.jpg,brochure-page,jpg,142 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-21.jpg,brochure-page,jpg,144 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-22.jpg,brochure-page,jpg,148 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-23.jpg,brochure-page,jpg,152 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-24.jpg,brochure-page,jpg,154 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-25.jpg,brochure-page,jpg,39 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-26.jpg,brochure-page,jpg,117 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-27.jpg,brochure-page,jpg,147 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-28.jpg,brochure-page,jpg,125 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-29.jpg,brochure-page,jpg,150 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+source-assets/brochure/page-30.jpg,brochure-page,jpg,75 KB,751x1335 px,derived,pdftoppm 50 dpi JPEG per brochure page for gallery
+app/public/data/osm-pois.geojson,geodata,geojson,29 KB,119 point features,"external (OpenStreetMap, ODbL)","Schools, hospitals, clinics, colleges, malls, metro/rail stations, toll booths, named construction sites within 7-15 km. Fetched 2026-10-18 via Overpass"
+app/public/data/site-boundary.geojson,geodata,geojson,,"104-node polygon, 49.5 acres","external (OpenStreetMap way 1427347113, ODbL)","Site boundary ""Sobha One World"" landuse=construction; source tag cites parivesh.nic.in EC proposal 135717602. Authoritative for location, approximate for exact boundary"

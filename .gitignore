@@ -1,0 +1,7 @@
+# Allow-list: only the app and its docs are versioned.
+# Everything else here is supplied SOBHA collateral (PDFs, WhatsApp media, zips) or derived
+# conversion products (source-assets/) that are regenerated from those PDFs.
+/*
+!/.gitignore
+!/app/
+!/docs/
