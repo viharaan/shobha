@@ -43,6 +43,9 @@ const PLACES: { id: string; name: string }[] = [
   { id: 'courts', name: 'Continental Grounds' },
 ];
 
+/** Realm → the site place that stands for it, for realms without traced legend markers (and their label). */
+const REALM_HOTSPOT: Record<string, string> = { 'One Club': 'club', 'World Stadium': 'ground', 'Continental Grounds': 'courts' };
+
 /** Mounts once the scene's Suspense boundary has resolved (siblings in one boundary appear together). */
 function Mounted({ onMount }: { onMount: () => void }) {
   useEffect(() => { Promise.resolve().then(onMount); }, [onMount]);
@@ -83,7 +86,9 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const tourStop = tourIndex !== null ? tour[Math.min(tourIndex, tour.length - 1)] : null;
   // a place picked outside the tour glides the camera to the tour's pose for it
   const placeGoal = useMemo(() => (hotspot && tourIndex === null ? placeStop(hotspot, tourWing) : null), [hotspot, tourIndex, tourWing]);
-  const realmGoal = useMemo(() => (realm && tourIndex === null ? realmStop(realm) : null), [realm, tourIndex]);
+  // a realm with no traced legend markers (One Club is one building) falls back to the matching place's view
+  const realmHotspot = realm ? REALM_HOTSPOT[realm] ?? null : null;
+  const realmGoal = useMemo(() => (realm && tourIndex === null ? realmStop(realm) ?? (realmHotspot ? placeStop(realmHotspot, tourWing) : null) : null), [realm, tourIndex, realmHotspot, tourWing]);
   // a realm sits between 140 m towers: while one is picked the towers are hidden above their podiums and its places get markers
   const realmPlaces = useMemo(() => (realm ? amenities.filter((a) => a.realm === realm).map((a) => ({ a, p: amenityPoint(a.code) })).filter((x): x is { a: (typeof amenities)[number]; p: [number, number, number] } => !!x.p) : []), [realm]);
   const realmLabels = useMemo(() => realmPlaces.map(({ a, p }) => ({ id: `am-${a.code}`, position: p })), [realmPlaces]);
@@ -358,7 +363,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
               <span className="mr-1 inline-block h-2 w-2 rounded-full align-middle" style={{ background: realmColor[a.realm] }} aria-hidden />{a.name}
             </DomLabel>
           ))}
-          {HOTSPOTS.filter((h) => (!tourStop || tourStop.hotspot === h.id) && !finder.active && !realm).map((h) => (
+          {HOTSPOTS.filter((h) => (!tourStop || tourStop.hotspot === h.id) && !finder.active && (!realm || (!realmPlaces.length && h.id === realmHotspot))).map((h) => (
             <DomLabel key={h.id} id={`hs-${h.id}`} active={hotspot === h.id} onClick={() => selectPlace(hotspot === h.id ? null : h.id)}>{h.label.split(' — ')[0]}</DomLabel>
           ))}
         </LabelLayer>
