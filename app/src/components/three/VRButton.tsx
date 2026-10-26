@@ -3,6 +3,10 @@
 import { XR_SUPPORT_TEXT, useXRSupport, xrStore } from '@/lib/xr';
 import { useState } from 'react';
 
+/**
+ * Enter VR. The compact form (the stage dock) appears only when the browser reports an immersive-VR device, so
+ * laptops and phones never see a dead button; the full form keeps the explanation of why VR is unavailable.
+ */
 export function VRButton({ compact = false }: { compact?: boolean }) {
   const support = useXRSupport();
   const [err, setErr] = useState<string | null>(null);
@@ -14,6 +18,7 @@ export function VRButton({ compact = false }: { compact?: boolean }) {
       setErr(e instanceof Error ? e.message : 'Could not start the VR session.');
     }
   };
+  if (compact && support !== 'supported') return null;
   return (
     <div className="flex flex-col gap-1">
       <button
