@@ -18,7 +18,9 @@ import { indicativePrice } from '@/lib/pricing';
 import { fmtCr, fmtInr } from '@/lib/scale';
 import { SITE_ORIGIN } from '@/data/sobha/siteFrame';
 import { istDay, istHoursNow, istTodayYmd, sunPosition, istDate, sunTimes } from '@/lib/solar';
-import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { ChoiceList, Dock, type DockTab } from './Dock';
+import { VRButton } from '@/components/three/VRButton';
 import { NavDriver } from './NavDriver';
 import { StageLoader } from './StageLoader';
 import { useFinder } from './Finder';
@@ -44,7 +46,7 @@ function Mounted({ onMount }: { onMount: () => void }) {
   useEffect(() => { Promise.resolve().then(onMount); }, [onMount]);
   return null;
 }
-export default function CommunityStage({ rail, resetToken: northToken, intro = false, railExtras }: { rail: boolean; resetToken: number; intro?: boolean; railExtras?: React.ReactNode }) {
+export default function CommunityStage({ resetToken: northToken, intro = false, railExtras }: { resetToken: number; intro?: boolean; railExtras?: React.ReactNode }) {
   const { params, set, num, latest } = useUrlState();
   const wing = num('wing');
   const floor = num('floor');
@@ -101,11 +103,10 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
   const samplePlan = tower?.samplePlanId ? PLANS.find((p) => p.id === tower.samplePlanId) : null;
   const sampleType = samplePlan ? UNIT_TYPES.find((u) => u.code === samplePlan.typeCode) : null;
   const price = samplePlan && floor ? indicativePrice(samplePlan.sbaSqft, floor + 1, plc) : null; // floor 1 typical ≈ 2nd storey band
-  const showRail = rail && !present && tourIndex === null;
   const chrome = !present && tourIndex === null && !intro;
   const stepInside = samplePlan && tower ? () => set({ mode: 'home', plan: samplePlan.id, wing: tower.wing, flat: null, floor }) : null;
 
-  // where you are: site → a place, or site → tower → floor
+  // where you are, as a small trail over the card: site → a place, or site → tower → floor
   const crumbs: Crumb[] = [{ label: 'SOBHA OneWorld', onClick: () => { selectPlace(null); selectWing(null); } }];
   if (hs) crumbs.push({ label: PLACES.find((p) => p.id === hs.id)?.name ?? hs.label.split(' — ')[0] });
   if (tower) crumbs.push({ label: `Wing ${tower.wing}`, onClick: () => setFloor(null) });
@@ -140,33 +141,6 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
     ? { prev: () => cycleTower(-1), next: () => cycleTower(1), up: () => stepFloor(1), down: () => stepFloor(-1), enter: stepInside ?? undefined, back: () => (floor !== null ? setFloor(null) : selectWing(null)) }
     : { prev: () => cyclePlace(-1), next: () => cyclePlace(1), enter: hs ? undefined : () => cyclePlace(1), back: hs ? () => selectPlace(null) : undefined },
   chrome && !finder.active && mode !== 'firstPerson');
-
-  const nav = tower ? (
-    <PlaceGroup title={`Floors · ${tower.typicalFloors} typical`} className="min-h-0">
-      {Array.from({ length: tower.typicalFloors }, (_, i) => tower.typicalFloors - i).map((f) => (
-        <PlaceItem key={f} active={floor === f} onClick={() => setFloor(floor === f ? null : f)} meta={PROJECT.refugeFloors.includes(f) ? 'refuge' : undefined}>Floor {f}</PlaceItem>
-      ))}
-    </PlaceGroup>
-  ) : (
-    <>
-      <PlaceGroup title="Places">
-        {PLACES.map((p) => (
-          <PlaceItem key={p.id} active={hotspot === p.id} onClick={() => selectPlace(hotspot === p.id ? null : p.id)}>{p.name}</PlaceItem>
-        ))}
-        {TOWERS.map((t) => (
-          <PlaceItem key={t.wing} className="lg:hidden" onClick={() => selectWing(t.wing)}>Wing {t.wing}</PlaceItem>
-        ))}
-      </PlaceGroup>
-      <div className="max-lg:hidden">
-        <div className="label px-1 pb-1 pt-1.5">Towers</div>
-        <div className="grid grid-cols-7 gap-1">
-          {TOWERS.map((t) => (
-            <button key={t.wing} type="button" className="btn justify-center px-0" onClick={() => selectWing(t.wing)} title={`Wing ${t.wing} · Phase ${t.phase} · handover ${t.handover}`}>{t.wing}</button>
-          ))}
-        </div>
-      </div>
-    </>
-  );
 
   const card = tower && floor !== null ? (
     <InfoCard
@@ -220,19 +194,115 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
       details={hs.provenance.source ? <p className="text-[11px] text-fg-muted"><span className="label !text-[10px]">Source</span> {hs.provenance.source}. Shapes in the model are standard-size stand-ins at the plan’s markers.</p> : undefined}
       actions={nextPlace ? <button type="button" className="btn btn-primary" onClick={() => selectPlace(nextPlace.id)}>Next: {nextPlace.name} ›</button> : undefined}
     />
-  ) : (
-    <InfoCard
-      key="site"
-      eyebrow="Greater Whitefield · Old Madras Road"
-      title="SOBHA OneWorld"
-      badge={<StatusBadge status="source" title="Master plan and sales sheet" />}
-      lead={`${PROJECT.siteAreaAcres} acres, ${PROJECT.totalWings} wings and ${PROJECT.totalUnits.toLocaleString('en-IN')} homes around a sunken stadium. Pick a place or a tower to go there.`}
-      actions={<>
-        <button type="button" className="btn btn-primary" onClick={() => set({ find: 1 })}>Find a home</button>
-        <button type="button" className="btn" onClick={() => set({ mode: 'map' })}>Location</button>
-      </>}
-    />
+  ) : null;
+
+
+  // the dock's popups: broader choices live here, out of the way until asked for
+  const viewPanel = (
+    <div className="flex flex-col gap-3">
+      {railExtras}
+    <Panel title="View">
+      <div className="flex flex-wrap gap-1">
+        {([['exterior', 'Orbit'], ['top', 'Top-down'], ['firstPerson', 'Walk']] as [ViewMode, string][]).map(([m, l]) => (
+          <button key={m} type="button" className="btn" aria-pressed={mode === m} onClick={() => setMode(m)}>{l}</button>
+        ))}
+        <button type="button" className="btn" onClick={() => { setResetToken((t) => t + 1); setMode('exterior'); }}>Reset camera</button>
+      </div>
+      <div className="mt-2 flex flex-wrap gap-1">
+        <button type="button" className="btn" aria-pressed={labels} onClick={() => setLabels(!labels)}>Labels</button>
+        <button type="button" className="btn" aria-pressed={landscape} onClick={() => setLandscape(!landscape)} title="Club, roads, track, field, water, trees and the amenity props from the master plan">Landscape</button>
+        <button type="button" className="btn" aria-pressed={sectionOn} onClick={() => setSectionOn(!sectionOn)}>Section cut</button>
+        <button type="button" className="btn" aria-pressed={photoreal} disabled={!GOOGLE_MAPS_KEY} title={GOOGLE_MAPS_KEY ? 'Google Photorealistic 3D Tiles around the site (desktop)' : 'Set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to enable'} onClick={() => setPhotoreal(!photoreal)}>Photoreal (Google)</button>
+      </div>
+      {sectionOn && (
+        <label className="mt-2 block text-xs">
+          <span className="label">Cut height · {sectionHeight} m (≈ floor {Math.max(0, Math.floor((sectionHeight - PODIUM_HEIGHT_M) / FLOOR_TO_FLOOR_M) + 1)})</span>
+          <input type="range" min={2} max={160} step={1} value={sectionHeight} onChange={(e) => setSectionHeight(+e.target.value)} className="w-full" />
+        </label>
+      )}
+      <label className="mt-2 block text-xs">
+        <span className="label">Exploded floors · {Math.round(explode * 100)}%</span>
+        <input type="range" min={0} max={1} step={0.05} value={explode} onChange={(e) => setExplode(+e.target.value)} className="w-full" />
+      </label>
+      {photoreal && (
+        <label className="mt-2 block text-xs">
+          <span className="label">Photoreal ground offset · {photorealOffset > 0 ? '+' : ''}{photorealOffset} m</span>
+          <input type="range" min={-60} max={60} step={1} value={photorealOffset} onChange={(e) => setPhotorealOffset(+e.target.value)} className="w-full" />
+          <span className="text-[11px] text-fg-muted">Google imagery is © Google and its data providers; the site shows as it was captured (under construction). Lower the site plan opacity to compare.</span>
+        </label>
+      )}
+      <label className="mt-2 block text-xs">
+        <span className="label">Site plan opacity · {Math.round(groundOpacity * 100)}%</span>
+        <input type="range" min={0} max={1} step={0.05} value={groundOpacity} onChange={(e) => setGroundOpacity(+e.target.value)} className="w-full" />
+      </label>
+    </Panel>
+
+    <details className="panel p-3">
+      <summary className="label cursor-pointer">About this model</summary>
+      <ul className="mt-2 space-y-1 text-[11px] text-fg-muted">
+        <li><StatusBadge status="approximate" /> Site plan raster scaled from the 90 m ground ({SITE_IMAGE.pxPerMetre} px/m), rotated {SITE_IMAGE.upBearingDeg}° to match OSM.</li>
+        <li><StatusBadge status="assumed" /> Floor height {FLOOR_TO_FLOOR_M} m, podium {PODIUM_HEIGHT_M} m, box footprints. No CAD/BIM was supplied.</li>
+        <li><StatusBadge status="assumed" /> Landscape: roads, track, field and water are traced from the master plan; One Club mass, the entrance canopy, courts, amphitheatre and rink are standard-size stand-ins at the plan’s legend markers.</li>
+        <li><StatusBadge status="source" /> Floor counts, phases, RERA, unit mix from the master plan and sales sheet.</li>
+        <li>
+          <StatusBadge status={terrain.state === 'ready' ? 'external' : 'unverified'} />{' '}
+          {terrain.state === 'loading' && 'Terrain loading (AWS Terrarium DEM)…'}
+          {terrain.state === 'failed' && `Terrain unavailable (${terrain.message ?? 'network'}); ground shown flat.`}
+          {terrain.state === 'ready' && `Terrain: ${terrain.tiles} DEM tiles, site ≈ ${Math.round(terrain.baseElev ?? 0)} m ASL, ${Math.round(terrain.range?.[0] ?? 0)} to +${Math.round(terrain.range?.[1] ?? 0)} m within 1.8 km. Towers stand on the ground height at their footprint.`}
+        </li>
+      </ul>
+    </details>
+    </div>
   );
+  const timePanel = (
+    <div className="flex flex-col gap-3">
+    <Panel title="Sun and time">
+      <div className="grid grid-cols-[auto_1fr] items-center gap-2 text-xs">
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" aria-label="Date (IST)" />
+        <label className="block">
+          <span className="label">Sun · {hhmm(hour)} IST</span>
+          <input type="range" min={5} max={20} step={0.5} value={hour} onChange={(e) => setHour(parseFloat(e.target.value))} className="w-full" aria-label="Hour of day (IST)" />
+        </label>
+        <button type="button" className="btn col-span-2 justify-center" onClick={() => { setDate(istTodayYmd()); setHour(Math.min(20, Math.max(5, Math.round(istHoursNow() * 2) / 2))); }}>Now (IST)</button>
+      </div>
+      <p className="mt-1 text-[11px] text-fg-muted">
+        Sun {sunNow.altitudeDeg < 0 ? 'below the horizon' : `${Math.round(sunNow.altitudeDeg)}° up, bearing ${Math.round(sunNow.azimuthDeg)}°`} · sunrise {hhmm(times.sunrise)} · sunset {hhmm(times.sunset)}.
+        Direction is computed for the site (NOAA); towers are massing, so shadows are illustrative.
+      </p>
+    </Panel>
+    </div>
+  );
+  const placesPanel = (
+    <div className="flex flex-col gap-3">
+      <ChoiceList items={PLACES.map((p) => ({ key: p.id, label: p.name, active: hotspot === p.id, onClick: () => selectPlace(p.id) }))} />
+      <div>
+        <div className="label px-1 pb-1.5">Towers</div>
+        <div className="grid grid-cols-7 gap-1">
+          {TOWERS.map((t) => (
+            <button key={t.wing} type="button" className="btn justify-center px-0" aria-pressed={wing === t.wing} onClick={() => selectWing(t.wing)} title={`Wing ${t.wing} · Phase ${t.phase} · handover ${t.handover}`}>{t.wing}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+  const floorsPanel = tower && (
+    <ChoiceList items={Array.from({ length: tower.typicalFloors }, (_, i) => tower.typicalFloors - i).map((f) => ({ key: f, label: `Floor ${f}`, meta: PROJECT.refugeFloors.includes(f) ? 'refuge' : undefined, active: floor === f, onClick: () => setFloor(f) }))} />
+  );
+  const [tab, setTab] = useState<string | null>(null);
+  const openTab = finder.active ? 'find' : tab;
+  const onOpenTab = (id: string | null) => {
+    if (id === 'find') set({ find: 1 });
+    else if (finder.active) set({ find: null, flat: null });
+    setTab(id === 'find' ? null : id);
+  };
+  const tabs: DockTab[] = [
+    { id: 'places', label: 'Places', panel: placesPanel },
+    ...(floorsPanel ? [{ id: 'floors', label: 'Floors', panel: floorsPanel }] : []),
+    { id: 'find', label: 'Find a home', panel: finder.card },
+    { id: 'tour', label: 'Guided tour', onClick: () => set({ tour: 1 }), title: 'Gate → club → stadium → courts → wing, then into a home' },
+    { id: 'time', label: 'Time of day', panel: timePanel },
+    { id: 'view', label: 'View', panel: viewPanel },
+  ];
 
   return (
     <div className="absolute inset-0">
@@ -261,82 +331,13 @@ export default function CommunityStage({ rail, resetToken: northToken, intro = f
         </div>
       )}
 
-      {chrome && (finder.active
-        ? <ContextColumn crumbs={finder.crumbs} card={finder.card} hideCard={showRail} tall />
-        : <ContextColumn crumbs={crumbs} stepper={stepper} nav={nav} card={card} hideCard={showRail} />)}
+      {chrome && !finder.active && card && <StageCard crumbs={crumbs}>{card}</StageCard>}
+      {chrome && <Dock current={stepper} tabs={tabs} openTab={openTab} onOpenTab={onOpenTab} extra={<VRButton compact />} />}
 
       {present && tourIndex === null && <PresentationBar label={tower ? `Wing ${tower.wing}${floor ? ` · Floor ${floor}` : ''}` : 'SOBHA OneWorld · site'} current={null} target="explore" onExit={() => set({ present: null })} />}
       {tourIndex !== null && <TourBar stops={tour} index={Math.min(tourIndex, tour.length - 1)} onIndex={goTourStop} onExit={exitTour} handoff={handoff} />}
 
-      {showRail && <aside className="rail scroll-thin" aria-label="View options">
-        {railExtras}
-        <Panel title="View">
-          <div className="flex flex-wrap gap-1">
-            {([['exterior', 'Orbit'], ['top', 'Top-down'], ['firstPerson', 'Walk']] as [ViewMode, string][]).map(([m, l]) => (
-              <button key={m} type="button" className="btn" aria-pressed={mode === m} onClick={() => setMode(m)}>{l}</button>
-            ))}
-            <button type="button" className="btn" onClick={() => { setResetToken((t) => t + 1); setMode('exterior'); }}>Reset camera</button>
-          </div>
-          <div className="mt-2 flex flex-wrap gap-1">
-            <button type="button" className="btn" aria-pressed={labels} onClick={() => setLabels(!labels)}>Labels</button>
-            <button type="button" className="btn" aria-pressed={landscape} onClick={() => setLandscape(!landscape)} title="Club, roads, track, field, water, trees and the amenity props from the master plan">Landscape</button>
-            <button type="button" className="btn" aria-pressed={sectionOn} onClick={() => setSectionOn(!sectionOn)}>Section cut</button>
-            <button type="button" className="btn" aria-pressed={photoreal} disabled={!GOOGLE_MAPS_KEY} title={GOOGLE_MAPS_KEY ? 'Google Photorealistic 3D Tiles around the site (desktop)' : 'Set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to enable'} onClick={() => setPhotoreal(!photoreal)}>Photoreal (Google)</button>
-          </div>
-          {sectionOn && (
-            <label className="mt-2 block text-xs">
-              <span className="label">Cut height · {sectionHeight} m (≈ floor {Math.max(0, Math.floor((sectionHeight - PODIUM_HEIGHT_M) / FLOOR_TO_FLOOR_M) + 1)})</span>
-              <input type="range" min={2} max={160} step={1} value={sectionHeight} onChange={(e) => setSectionHeight(+e.target.value)} className="w-full" />
-            </label>
-          )}
-          <label className="mt-2 block text-xs">
-            <span className="label">Exploded floors · {Math.round(explode * 100)}%</span>
-            <input type="range" min={0} max={1} step={0.05} value={explode} onChange={(e) => setExplode(+e.target.value)} className="w-full" />
-          </label>
-          {photoreal && (
-            <label className="mt-2 block text-xs">
-              <span className="label">Photoreal ground offset · {photorealOffset > 0 ? '+' : ''}{photorealOffset} m</span>
-              <input type="range" min={-60} max={60} step={1} value={photorealOffset} onChange={(e) => setPhotorealOffset(+e.target.value)} className="w-full" />
-              <span className="text-[11px] text-fg-muted">Google imagery is © Google and its data providers; the site shows as it was captured (under construction). Lower the site plan opacity to compare.</span>
-            </label>
-          )}
-          <label className="mt-2 block text-xs">
-            <span className="label">Site plan opacity · {Math.round(groundOpacity * 100)}%</span>
-            <input type="range" min={0} max={1} step={0.05} value={groundOpacity} onChange={(e) => setGroundOpacity(+e.target.value)} className="w-full" />
-          </label>
-        </Panel>
 
-        <Panel title="Sun and time">
-          <div className="grid grid-cols-[auto_1fr] items-center gap-2 text-xs">
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" aria-label="Date (IST)" />
-            <label className="block">
-              <span className="label">Sun · {hhmm(hour)} IST</span>
-              <input type="range" min={5} max={20} step={0.5} value={hour} onChange={(e) => setHour(parseFloat(e.target.value))} className="w-full" aria-label="Hour of day (IST)" />
-            </label>
-            <button type="button" className="btn col-span-2 justify-center" onClick={() => { setDate(istTodayYmd()); setHour(Math.min(20, Math.max(5, Math.round(istHoursNow() * 2) / 2))); }}>Now (IST)</button>
-          </div>
-          <p className="mt-1 text-[11px] text-fg-muted">
-            Sun {sunNow.altitudeDeg < 0 ? 'below the horizon' : `${Math.round(sunNow.altitudeDeg)}° up, bearing ${Math.round(sunNow.azimuthDeg)}°`} · sunrise {hhmm(times.sunrise)} · sunset {hhmm(times.sunset)}.
-            Direction is computed for the site (NOAA); towers are massing, so shadows are illustrative.
-          </p>
-        </Panel>
-
-        <details className="panel p-3">
-          <summary className="label cursor-pointer">About this model</summary>
-          <ul className="mt-2 space-y-1 text-[11px] text-fg-muted">
-            <li><StatusBadge status="approximate" /> Site plan raster scaled from the 90 m ground ({SITE_IMAGE.pxPerMetre} px/m), rotated {SITE_IMAGE.upBearingDeg}° to match OSM.</li>
-            <li><StatusBadge status="assumed" /> Floor height {FLOOR_TO_FLOOR_M} m, podium {PODIUM_HEIGHT_M} m, box footprints. No CAD/BIM was supplied.</li>
-            <li><StatusBadge status="assumed" /> Landscape: roads, track, field and water are traced from the master plan; One Club mass, the entrance canopy, courts, amphitheatre and rink are standard-size stand-ins at the plan’s legend markers.</li>
-            <li><StatusBadge status="source" /> Floor counts, phases, RERA, unit mix from the master plan and sales sheet.</li>
-            <li>
-              <StatusBadge status={terrain.state === 'ready' ? 'external' : 'unverified'} />{' '}
-              {terrain.state === 'loading' && 'Terrain loading (AWS Terrarium DEM)…'}
-              {terrain.state === 'failed' && `Terrain unavailable (${terrain.message ?? 'network'}); ground shown flat.`}
-              {terrain.state === 'ready' && `Terrain: ${terrain.tiles} DEM tiles, site ≈ ${Math.round(terrain.baseElev ?? 0)} m ASL, ${Math.round(terrain.range?.[0] ?? 0)} to +${Math.round(terrain.range?.[1] ?? 0)} m within 1.8 km. Towers stand on the ground height at their footprint.`}
-            </li>
-          </ul>
-        </details>
-      </aside>}
     </div>
   );
 }

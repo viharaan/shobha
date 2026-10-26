@@ -8,7 +8,7 @@ import { compass, homePrice, resolveHome, statusForKind } from '@/lib/homes';
 import { fmtCr, fmtInr } from '@/lib/scale';
 import { useShortlist } from '@/lib/shortlist';
 import { useUrlState } from '@/lib/useUrlState';
-import { Facts, type Crumb } from './ContextUI';
+import { Facts } from './ContextUI';
 
 const FACING_ORDER = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
 const FACING_NAME: Record<string, string> = { N: 'North', E: 'East', S: 'South', W: 'West', NE: 'North-east', NW: 'North-west', SE: 'South-east', SW: 'South-west' };
@@ -100,9 +100,6 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
   };
   const startOver = () => { setSkipped({}); set({ beds: null, finish: null, facing: null, config: null, wing: null, flat: null, floor: null }); };
   const skip = (s: Step) => setSkipped((k) => ({ ...k, [s]: true }));
-  const exit = () => set({ find: null, flat: null });
-
-  const crumbs: Crumb[] = [{ label: 'SOBHA OneWorld', onClick: exit }, { label: 'Configure your home', onClick: startOver }];
 
   const answers: { step: Step; label: string; value: string }[] = [];
   if (done.beds) answers.push({ step: 'beds', label: 'Bedrooms', value: config ?? (beds !== null ? `${beds} BHK` : 'Any') });
@@ -206,7 +203,7 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
   );
 
   const card = (
-    <section className="ctx-enter flex flex-col gap-3 rounded-xl border border-line bg-bg/85 p-3 shadow-2xl backdrop-blur-md" aria-label="Configure your home">
+    <section className="flex flex-col gap-3" aria-label="Configure your home">
       <header>
         <div className="flex items-center justify-between gap-2">
           <span className="eyebrow !text-[10px]">Configure your home{step !== 'done' ? ` · ${stepNo + 1} of ${STEPS.length}` : ''}</span>
@@ -240,5 +237,5 @@ export function useFinder({ selectWing }: { selectWing: (w: number | null) => vo
     </section>
   );
 
-  return { active, crumbs, card, dimWings, frameWings, wingCount };
+  return { active, card, dimWings, frameWings, wingCount };
 }

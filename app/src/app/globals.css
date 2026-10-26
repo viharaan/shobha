@@ -72,9 +72,7 @@ input[type="range"] { accent-color: var(--accent); }
 .maplibregl-ctrl-group { background: var(--surface) !important; border: 1px solid var(--line); }
 .maplibregl-ctrl-group button { filter: invert(1) hue-rotate(180deg); }
 
-/* stage chrome: floating control rail (bottom sheet on small screens), segmented mode switch */
-.rail { position: absolute; z-index: 20; display: flex; flex-direction: column; gap: .75rem; overflow-y: auto; padding: .5rem; left: .5rem; right: .5rem; bottom: 4.5rem; max-height: 45svh; border: 1px solid var(--line); border-radius: 14px; background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(14px); }
-@media (min-width: 1024px) { .rail { left: auto; right: .75rem; top: 4rem; bottom: 4.5rem; width: 20rem; max-height: none; } }
+/* stage chrome: segmented mode switch */
 .seg { display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.6); backdrop-filter: blur(12px); }
 .seg > button { border: 0; border-radius: 999px; padding: .4rem .9rem; font-size: .8rem; line-height: 1; color: var(--fg-muted); background: transparent; cursor: pointer; transition: background .15s, color .15s; }
 .seg > button[aria-selected="true"] { background: var(--fg); color: #141008; }

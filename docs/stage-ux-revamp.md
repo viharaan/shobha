@@ -33,6 +33,16 @@ A breadcrumb (`SOBHA OneWorld › Wing 8 › Floor 23 › Flat 5 › Living`) si
 
 **7. Tour pause.** Pause used to stop only the auto-advance, so the narration kept talking. Now it also pauses the recorded clip (or cancels browser speech). Play resumes the clip where it stopped, or restarts the line. Space does the same.
 
+## The dock (latest pass)
+
+After two more reference reels (the ICG Gallery walk-through and an Unreal interactive-map demo with one bottom tab strip), every control moved into **one dock at the bottom centre** (`components/stage/Dock.tsx`):
+
+- **Collapsed** it is a stepper, `‹ One Club 2 / 4 ›`: the arrows step through the places at this level (places, towers, rooms, map topics). Tap the middle to open the tabs.
+- **Tabs by mode.** Community: Places · Floors (at a tower) · Find a home · Guided tour · Time of day · View · Enter VR. Home: Rooms · This home · Room tour · Walk · View · Enter VR. Location: Topics · Layers · Measure · Fly to site · 3D site.
+- **Broader choices open as a popup above the dock** (configure your home, this home's type / flat / floor, view options, map layers); direct actions (tour, walk, VR, measure) just run. Esc closes the popup first.
+- **Keyboard:** ← → siblings, ↑ ↓ floors, Enter steps in, Esc steps back (off during tours, walk mode and VR). A one-line legend shows once and fades.
+- **On screen otherwise:** the mode switch, compass and full screen; a small card with a trail over it once a place is picked (none on the site overview); the plan minimap in Home. The left column, the separate View button, the bottom action bar and the camera pad are gone (the pad is an opt-in in View; Present mode moved there too).
+
 ## Kept as it was
 
 URL keys and shareable links (plus `find=1` and `mode=map`), both tours and the hand-off, VR (one canvas / one XR tree per mode), provenance badges (every card carries one), finder logic, shortlist and compare, every map layer and the measure tool, present mode, the plan minimap (now bottom-right on desktop, next to the camera pad; top-left on phones), touch rules (`touch-action: pan-y`), legacy redirects.

@@ -3,11 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * The stage's context chrome: where you are (breadcrumb + a "‹ place ›" stepper) and a small card about the current
- * place. Each stage mode fills these from its own state, so only what matters at the current level is on screen. The
- * full list of places at this level folds away behind the stepper's list button. The same moves are on the keyboard
- * (useStageKeys). Wide screens: one column on the left, card at the bottom. Below 1024 px: stepper under the top bar,
- * card above the action bar.
+ * Context pieces shared by the stage modes: the card for the current place (with a small trail over it), the keyboard
+ * moves for the current level, and the card's building blocks. The controls themselves live in the dock (Dock.tsx).
  */
 export interface Crumb {
   label: string;
@@ -22,35 +19,16 @@ export interface Stepper {
   onNext?: () => void;
 }
 
-export function ContextColumn({ crumbs, stepper, nav, card, hideCard = false, tall = false }: { crumbs: Crumb[]; stepper?: Stepper; nav?: React.ReactNode; card: React.ReactNode; hideCard?: boolean; tall?: boolean }) {
-  const [listOpen, setListOpen] = useState(false);
-  const showList = !!nav && (!stepper || listOpen);
+/**
+ * The card for the current place, on its own: top-left under the mode switch on wide screens, above the dock below
+ * 1024 px. Shown only once a place is picked, so the first view stays clear.
+ */
+export function StageCard({ crumbs, children }: { crumbs?: Crumb[]; children: React.ReactNode }) {
   return (
-    <div className={`pointer-events-none absolute inset-x-3 bottom-[4.25rem] top-[3.75rem] z-30 flex flex-col justify-between gap-2 lg:inset-x-auto lg:bottom-4 lg:left-3 lg:top-16 ${tall ? 'lg:w-[21rem] lg:justify-start' : 'lg:w-[19rem]'}`}>
-      <nav aria-label="Places" className={`pointer-events-auto flex min-h-0 flex-col gap-1.5 ${showList ? 'lg:rounded-xl lg:border lg:border-line lg:bg-black/55 lg:p-2 lg:backdrop-blur-md' : ''}`}>
-        <Crumbs items={crumbs} />
-        {stepper && (
-          <div className="flex items-center gap-1 self-start rounded-full border border-line bg-black/60 p-1 backdrop-blur-md">
-            <StepBtn label="Previous" onClick={stepper.onPrev} kbd="←"><path d="m15 6-6 6 6 6" /></StepBtn>
-            <span key={stepper.label} className="ctx-enter min-w-0 max-w-[14rem] truncate px-1.5 text-sm text-fg">{stepper.label}</span>
-            {stepper.pos && <span className="tnum pr-1 text-[11px] text-fg-muted">{stepper.pos}</span>}
-            <StepBtn label="Next" onClick={stepper.onNext} kbd="→"><path d="m9 6 6 6-6 6" /></StepBtn>
-            {nav && <StepBtn label={listOpen ? 'Hide the list' : 'Show the list'} onClick={() => setListOpen(!listOpen)} pressed={listOpen}><path d="M5 7h14M5 12h14M5 17h14" /></StepBtn>}
-          </div>
-        )}
-        {showList && nav}
-      </nav>
-      {!hideCard && <div className={`pointer-events-auto shrink-0 overflow-y-auto scroll-thin rounded-xl max-lg:max-w-md ${tall ? 'max-h-[62%] lg:max-h-[calc(100%-2.75rem)]' : 'max-h-[45%] lg:max-h-[60%]'}`}>{card}</div>}
+    <div className="pointer-events-none absolute inset-x-3 bottom-[4.6rem] z-30 flex max-h-[44%] flex-col gap-1.5 max-lg:mx-auto max-lg:max-w-md lg:inset-x-auto lg:bottom-auto lg:left-3 lg:top-16 lg:max-h-[calc(100%-10rem)] lg:w-[19rem]">
+      {crumbs && <div className="pointer-events-auto"><Crumbs items={crumbs} /></div>}
+      <div className="pointer-events-auto min-h-0 overflow-y-auto scroll-thin rounded-xl">{children}</div>
     </div>
-  );
-}
-
-function StepBtn({ label, onClick, children, kbd, pressed }: { label: string; onClick?: () => void; children: React.ReactNode; kbd?: string; pressed?: boolean }) {
-  return (
-    <button type="button" disabled={!onClick} onClick={onClick} aria-label={label} aria-pressed={pressed} title={kbd ? `${label} (${kbd})` : label}
-      className={`grid h-7 w-7 shrink-0 place-items-center rounded-full transition-colors disabled:opacity-30 ${pressed ? 'bg-fg text-black' : 'text-fg hover:bg-surface-2'}`}>
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>{children}</svg>
-    </button>
   );
 }
 
@@ -95,7 +73,7 @@ export function useStageKeys(keys: StageKeys, enabled: boolean) {
 
 export function Crumbs({ items }: { items: Crumb[] }) {
   return (
-    <ol className="flex min-w-0 items-center gap-1 overflow-x-auto whitespace-nowrap text-[11px] [scrollbar-width:none] max-lg:self-start max-lg:rounded-full max-lg:bg-black/60 max-lg:px-2.5 max-lg:py-1 max-lg:backdrop-blur" aria-label="You are here">
+    <ol className="flex w-fit max-w-full min-w-0 items-center gap-1 overflow-x-auto whitespace-nowrap rounded-full bg-black/55 px-2.5 py-1 text-[11px] backdrop-blur [scrollbar-width:none]" aria-label="You are here">
       {items.map((c, i) => {
         const last = i === items.length - 1;
         return (
@@ -110,33 +88,6 @@ export function Crumbs({ items }: { items: Crumb[] }) {
         );
       })}
     </ol>
-  );
-}
-
-/** A group of places. Vertical rows on wide screens, a sideways-scrolling chip row below 1024 px. */
-export function PlaceGroup({ title, children, className = '' }: { title?: string; children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`flex min-h-0 flex-col gap-1 ${className}`}>
-      {title && <div className="label px-1 max-lg:hidden">{title}</div>}
-      <ul className="flex min-h-0 gap-1 overflow-x-auto pb-0.5 [scrollbar-width:none] lg:flex-col lg:gap-0 lg:overflow-y-auto lg:overflow-x-visible lg:pb-0 lg:[scrollbar-width:thin]">{children}</ul>
-    </div>
-  );
-}
-
-export function PlaceItem({ active, onClick, children, meta, title, dim = false, className = '' }: { active?: boolean; onClick: () => void; children: React.ReactNode; meta?: React.ReactNode; title?: string; dim?: boolean; className?: string }) {
-  return (
-    <li className={`shrink-0 ${className}`}>
-      <button
-        type="button"
-        title={title}
-        aria-current={active ? 'true' : undefined}
-        onClick={onClick}
-        className={`flex w-full items-center justify-between gap-3 whitespace-nowrap text-left text-xs transition-colors max-lg:rounded-full max-lg:border max-lg:px-3 max-lg:py-1.5 max-lg:backdrop-blur lg:rounded-md lg:px-2 lg:py-1.5 ${active ? 'max-lg:border-accent bg-accent/90 text-black lg:bg-accent/15 lg:text-accent' : `max-lg:border-line max-lg:bg-black/60 text-fg hover:bg-surface-2 ${dim ? 'opacity-50' : ''}`}`}
-      >
-        <span>{children}</span>
-        {meta && <span className={`text-[10px] max-lg:hidden ${active ? 'text-accent/80' : 'text-fg-muted'}`}>{meta}</span>}
-      </button>
-    </li>
   );
 }
 

@@ -9,7 +9,8 @@ import { SITE_IMAGE } from '@/data/manifest';
 import { INFRASTRUCTURE, POI_DISTANCES } from '@/data/project';
 import { formatDistance, haversineM, type LonLat } from '@/lib/geo';
 import { useUrlState } from '@/lib/useUrlState';
-import { ContextColumn, Facts, InfoCard, PlaceGroup, PlaceItem, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
+import { ChoiceList, Dock, type DockTab } from './Dock';
 
 const GeoMap = dynamic(() => import('@/components/geo/GeoMap').then((m) => m.GeoMap), { ssr: false, loading: () => <div className="grid h-full place-items-center"><Spinner label="Loading map…" /></div> });
 
@@ -38,7 +39,7 @@ const TOPICS: { id: string; name: string; cats: string[] }[] = [
  * nearest places with straight-line distances, the brochure's own distance ladder, the stated road projects).
  * Layers, categories and the measure tool sit behind View options; a tower clicked on the map opens it in the model.
  */
-export default function LocationStage({ rail, keys = true, railExtras }: { rail: boolean; keys?: boolean; railExtras?: React.ReactNode }) {
+export default function LocationStage({ keys = true }: { keys?: boolean }) {
   const { set } = useUrlState();
   const [layers, setLayers] = useState<GeoLayers>({ boundary: true, towers: true, pois: true, heatmap: false, rings: true, siteplan: false, terrain: true, buildings: true, google: false, satellite: true, markers3d: true, poiLabels: true });
   const [credits, setCredits] = useState<string[]>([]);
@@ -78,13 +79,6 @@ export default function LocationStage({ rail, keys = true, railExtras }: { rail:
   const stepper: Stepper = { label: t.name, pos: `${ti + 1} / ${TOPICS.length}`, onPrev: () => cycleTopic(-1), onNext: () => cycleTopic(1) };
   useStageKeys({ prev: () => cycleTopic(-1), next: () => cycleTopic(1), back: () => (t.id === 'overview' ? set({ mode: null }) : pickTopic('overview')) }, keys);
 
-  const nav = (
-    <PlaceGroup title="Around the site">
-      {TOPICS.map((x) => (
-        <PlaceItem key={x.id} active={topic === x.id} onClick={() => pickTopic(x.id)} meta={x.cats.length && x.cats !== ALL && pois.length ? within(x.cats, 7) || undefined : undefined}>{x.name}</PlaceItem>
-      ))}
-    </PlaceGroup>
-  );
 
   const ladder = (rows: { name: string; d: string }[]) => (
     <ul className="space-y-0.5">{rows.map((r, i) => <li key={`${r.name}-${i}`} className="flex justify-between gap-3"><span className="min-w-0 truncate">{r.name}</span><span className="tnum shrink-0 font-mono text-fg-muted">{r.d}</span></li>)}</ul>
@@ -136,10 +130,45 @@ export default function LocationStage({ rail, keys = true, railExtras }: { rail:
     );
   }
 
+  const layersPanel = (
+    <div className="flex flex-col gap-3">
+    <Panel title="Layers">
+      <div className="grid grid-cols-2 gap-1 text-xs">
+        {([['boundary', 'Site boundary'], ['towers', 'Towers (3D)'], ['buildings', 'OSM buildings'], ['terrain', 'Hillshade'], ['pois', 'Points of interest'], ['heatmap', 'Amenity density'], ['rings', 'Distance rings'], ['siteplan', 'Site plan overlay'], ['satellite', 'Satellite (Esri, dev use)'], ['markers3d', 'POI pins'], ['poiLabels', 'POI labels'], ['google', 'Photoreal 3D (Google)']] as [keyof GeoLayers, string][]).map(([k, l]) => (
+          <label key={k} className={`flex items-center gap-1.5 ${k === 'google' && !GOOGLE_MAPS_KEY ? 'opacity-50' : ''}`} title={k === 'google' && !GOOGLE_MAPS_KEY ? 'Set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to enable' : undefined}><input type="checkbox" checked={layers[k]} disabled={k === 'google' && !GOOGLE_MAPS_KEY} onChange={() => toggle(k)} />{l}</label>
+        ))}
+      </div>
+      {layers.google && <p className="mt-2 text-[11px] text-fg-muted">Google Photorealistic 3D Tiles. Imagery © Google{credits.length ? `, ${credits.join(', ')}` : ''}. Shown without OSM buildings, terrain or tower massing.</p>}
+      {layers.siteplan && (
+        <label className="mt-2 block text-xs">
+          <span className="label">Overlay opacity · {Math.round(opacity * 100)}%</span>
+          <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={(e) => setOpacity(+e.target.value)} className="w-full" />
+          <p className="mt-1 text-[11px] text-fg-muted">Overlay uses {SITE_IMAGE.pxPerMetre} px/m, up-bearing {SITE_IMAGE.upBearingDeg}°, anchored at the OSM centroid. Compare with the boundary to judge the fit. <StatusBadge status="approximate" /></p>
+        </label>
+      )}
+    </Panel>
+    <Panel title="Points of interest" right={osmBadge}>
+      <div className="grid grid-cols-2 gap-1 text-xs">
+        {CATEGORIES.map((c) => (
+          <label key={c.key} className="flex items-center gap-1.5"><input type="checkbox" checked={cats.has(c.key)} onChange={() => toggleCat(c.key)} />{c.label}</label>
+        ))}
+      </div>
+      <p className="mt-2 text-[11px] text-fg-muted">{pois.length} features from OpenStreetMap (ODbL). Completeness depends on OSM coverage.</p>
+    </Panel>
+    </div>
+  );
+  const tabs: DockTab[] = [
+    { id: 'topics', label: 'Topics', panel: <ChoiceList items={TOPICS.map((x) => ({ key: x.id, label: x.name, meta: x.cats.length && x.cats !== ALL && pois.length ? within(x.cats, 7) || undefined : undefined, active: topic === x.id, onClick: () => pickTopic(x.id) }))} /> },
+    { id: 'layers', label: 'Layers', panel: layersPanel },
+    { id: 'measure', label: measure ? (measured !== null ? formatDistance(measured) : 'Click two points') : 'Measure', pressed: measure, onClick: () => { setMeasure(!measure); setMeasurePts([]); } },
+    { id: 'fly', label: 'Fly to site', onClick: () => setFlyToken((k) => k + 1) },
+    { id: '3d', label: '3D site', onClick: () => set({ mode: null }), title: 'Back to the 3D site model' },
+  ];
+
   return (
     <div className="absolute inset-0">
       <GeoMap layers={layers} siteplanOpacity={opacity} poiCategories={cats} measureMode={measure} measurePoints={measurePts} onMeasurePointsChange={setMeasurePts} onPoiData={setPois} onCredits={setCredits} onTowerClick={(w) => set({ mode: null, wing: w })} flyToken={flyToken} onStatus={setStatus} />
-      {status && <div className="pointer-events-none absolute left-1/2 top-3 z-30 -translate-x-1/2 rounded bg-black/70 px-2 py-1 text-[11px] text-warn max-lg:top-[6.75rem]">{status}</div>}
+      {status && <div className="pointer-events-none absolute left-1/2 top-3 z-30 -translate-x-1/2 rounded bg-black/70 px-2 py-1 text-[11px] text-warn max-lg:top-14">{status}</div>}
 
       {/* legend under the top bar on wide screens (the map's attribution owns the bottom corners) */}
       <div className="pointer-events-none absolute right-3 top-16 z-20 rounded-lg bg-black/70 p-2 text-[11px] max-lg:hidden">
@@ -150,41 +179,11 @@ export default function LocationStage({ rail, keys = true, railExtras }: { rail:
         </div>
       </div>
 
-      <ContextColumn crumbs={crumbs} stepper={stepper} nav={nav} card={card} hideCard={rail} />
+      {keys && <StageCard crumbs={crumbs}>{card}</StageCard>}
+      {keys && <Dock current={stepper} tabs={tabs} />}
 
-      {/* bottom-centre: the map's own actions */}
-      <div className="absolute bottom-4 left-1/2 z-30 flex max-w-[calc(100%-1.5rem)] -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full border border-line bg-black/60 p-1 backdrop-blur">
-        <button type="button" className="btn" onClick={() => setFlyToken((k) => k + 1)}>Fly to site</button>
-        <button type="button" className="btn" aria-pressed={measure} onClick={() => { setMeasure(!measure); setMeasurePts([]); }}>{measure ? (measured !== null ? formatDistance(measured) : 'Click two points') : 'Measure'}</button>
-        <button type="button" className="btn" onClick={() => set({ mode: null })} title="Back to the 3D site model">3D site</button>
-      </div>
 
-      {rail && <aside className="rail scroll-thin" aria-label="View options">
-        {railExtras}
-        <Panel title="Layers">
-          <div className="grid grid-cols-2 gap-1 text-xs">
-            {([['boundary', 'Site boundary'], ['towers', 'Towers (3D)'], ['buildings', 'OSM buildings'], ['terrain', 'Hillshade'], ['pois', 'Points of interest'], ['heatmap', 'Amenity density'], ['rings', 'Distance rings'], ['siteplan', 'Site plan overlay'], ['satellite', 'Satellite (Esri, dev use)'], ['markers3d', 'POI pins'], ['poiLabels', 'POI labels'], ['google', 'Photoreal 3D (Google)']] as [keyof GeoLayers, string][]).map(([k, l]) => (
-              <label key={k} className={`flex items-center gap-1.5 ${k === 'google' && !GOOGLE_MAPS_KEY ? 'opacity-50' : ''}`} title={k === 'google' && !GOOGLE_MAPS_KEY ? 'Set NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to enable' : undefined}><input type="checkbox" checked={layers[k]} disabled={k === 'google' && !GOOGLE_MAPS_KEY} onChange={() => toggle(k)} />{l}</label>
-            ))}
-          </div>
-          {layers.google && <p className="mt-2 text-[11px] text-fg-muted">Google Photorealistic 3D Tiles. Imagery © Google{credits.length ? `, ${credits.join(', ')}` : ''}. Shown without OSM buildings, terrain or tower massing.</p>}
-          {layers.siteplan && (
-            <label className="mt-2 block text-xs">
-              <span className="label">Overlay opacity · {Math.round(opacity * 100)}%</span>
-              <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={(e) => setOpacity(+e.target.value)} className="w-full" />
-              <p className="mt-1 text-[11px] text-fg-muted">Overlay uses {SITE_IMAGE.pxPerMetre} px/m, up-bearing {SITE_IMAGE.upBearingDeg}°, anchored at the OSM centroid. Compare with the boundary to judge the fit. <StatusBadge status="approximate" /></p>
-            </label>
-          )}
-        </Panel>
-        <Panel title="Points of interest" right={osmBadge}>
-          <div className="grid grid-cols-2 gap-1 text-xs">
-            {CATEGORIES.map((c) => (
-              <label key={c.key} className="flex items-center gap-1.5"><input type="checkbox" checked={cats.has(c.key)} onChange={() => toggleCat(c.key)} />{c.label}</label>
-            ))}
-          </div>
-          <p className="mt-2 text-[11px] text-fg-muted">{pois.length} features from OpenStreetMap (ODbL). Completeness depends on OSM coverage.</p>
-        </Panel>
-      </aside>}
+
     </div>
   );
 }
