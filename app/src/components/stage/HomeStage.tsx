@@ -8,13 +8,14 @@ import { PlanScene } from '@/components/three/PlanScene';
 import type { GroundMode, WorldStatus } from '@/components/three/RealisticUnit';
 import { flatsForType, representativeFlat, unitPlacementFromFlat } from '@/data/sobha/flats/loader';
 import { isRefugeFloor, maxBuildingFloor, midBuildingFloor } from '@/lib/unit/buildingFloor';
-import { istHoursNow, istTodayYmd } from '@/lib/solar';
+import { istTodayYmd } from '@/lib/solar';
 import { bearingDeg, compassPoint } from '@/lib/unit/worldTiles';
 import { Panel, Spinner, StatusBadge } from '@/components/ui/primitives';
 import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { ChoiceList, Dock, type DockTab } from './Dock';
 import { VRButton } from '@/components/three/VRButton';
 import { StageLoader } from './StageLoader';
+import { SunPanel } from './SunPanel';
 import { PresentationBar } from '@/components/ui/PresentationBar';
 import { TourBar } from '@/components/ui/TourBar';
 import { planTour, siteStopInUnitFrame, siteTour } from '@/lib/tour';
@@ -70,6 +71,8 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
   const [ground, setGround] = useState<GroundMode>('esri'); // satellite under the OSM 3-D buildings by default (VR and desktop)
   const [date, setDate] = useState(() => istTodayYmd());
   const [hour, setHour] = useState(10.5); // fixed daylight start; the headset's clock is not trusted for the first view
+  // a picked room (list, keys, minimap, room tour) is seen from eye level by default: stand in it and look around
+  const [roomView, setRoomView] = useState<'eye' | 'top'>('eye');
   const [world, setWorld] = useState<WorldStatus | null>(null);
   const [worldOn, setWorldOn] = useState(true);
   const choices = useMemo(() => flatsForType(plan.typeCode), [plan.typeCode]);
@@ -174,6 +177,7 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
 
   // where you are: site → wing → floor → this home → a room
   const roomShown = focusRoomShown;
+  const eyeLevel = roomView === 'eye' && !!focusRoomShown && !firstPerson && !topView;
   const roomIdx = roomShown ? roomStops.findIndex((r) => r.room === roomShown) : -1;
   const goRoom = (r: PlanRoom | null) => { setFocusRoom(r); if (r) setLookDown((t) => t + 1); else overview(); };
   const crumbs: Crumb[] = [{ label: 'SOBHA OneWorld', onClick: () => set({ mode: null, wing: null, floor: null, flat: null, tour: null }) }];
@@ -210,10 +214,14 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
       eyebrow={`${plan.name}${choice ? ` · Flat ${choice.flat}` : ''}`}
       title={roomShown.name}
       badge={<StatusBadge status={calib.status} title="Room size as printed on the plan; the plan’s scale is cross-checked against its 12 room labels" />}
-      lead={roomStops[roomIdx].caption}
+      lead={<>{roomStops[roomIdx].caption}{roomView === 'eye' && !firstPerson ? <span className="mt-1 block text-fg/70">Drag to look around.</span> : null}</>}
       actions={<>
         <button type="button" className="btn" onClick={() => goRoom(roomStops[(roomIdx - 1 + roomStops.length) % roomStops.length].room)} aria-label="Previous room">‹</button>
         <button type="button" className="btn btn-primary" onClick={() => goRoom(roomStops[(roomIdx + 1) % roomStops.length].room)}>Next: {roomStops[(roomIdx + 1) % roomStops.length].room.name} ›</button>
+        <span className="seg !bg-transparent" role="tablist" aria-label="Room view">
+          <button type="button" role="tab" aria-selected={roomView === 'eye'} onClick={() => setRoomView('eye')} title="Stand in the room at eye height and look around">Eye level</button>
+          <button type="button" role="tab" aria-selected={roomView === 'top'} onClick={() => setRoomView('top')} title="Look down into the room from above">Top</button>
+        </span>
         <button type="button" className="btn" onClick={() => goRoom(null)}>Whole home</button>
       </>}
     />
@@ -328,14 +336,6 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
             <option value="esri">Satellite · Esri World Imagery (dev use) + OSM buildings</option>
           </select>
         </label>
-        <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-2 text-xs">
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" aria-label="Date (IST)" />
-          <label className="block">
-            <span className="label">Sun · {String(Math.floor(hour)).padStart(2, '0')}:{hour % 1 ? '30' : '00'} IST</span>
-            <input type="range" min={5} max={20} step={0.5} value={hour} onChange={(e) => setHour(parseFloat(e.target.value))} className="w-full" aria-label="Hour of day (IST)" />
-          </label>
-          <button type="button" className="btn col-span-2 justify-center" onClick={() => { setDate(istTodayYmd()); setHour(Math.min(20, Math.max(5, Math.round(istHoursNow() * 2) / 2))); }}>Now (IST)</button>
-        </div>
         <div className="mt-2 text-[11px] text-fg-muted">
           {world?.state === 'loading' && <Spinner label="Loading surroundings…" />}
           {world?.state === 'error' && <span className="text-bad">Surroundings unavailable ({world.message ?? 'network'}); the home still works.</span>}
@@ -384,6 +384,7 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
     { id: 'home', label: 'This home', panel: homePanel },
     { id: 'tour', label: 'Room tour', onClick: () => set({ tour: 'rooms' }), title: 'Room by room through this home' },
     { id: 'walk', label: 'Walk', pressed: firstPerson, onClick: () => { setFirstPerson(!firstPerson); setTopView(false); }, title: 'Walk through at eye height (WASD on a keyboard)' },
+    ...(placement ? [{ id: 'sun', label: 'Sunlight', panel: <SunPanel date={date} hour={hour} onDate={setDate} onHour={setHour} facing={facing} /> }] : []),
     { id: 'view', label: 'View', panel: viewPanel },
   ];
 
@@ -402,9 +403,9 @@ export default function HomeStage({ resetToken, railExtras }: { resetToken: numb
             <Canvas shadows camera={{ position: [0, 14, 16], fov: 50, near: 0.05, far: 500 }} dpr={[1, 1.75]} gl={{ antialias: true, localClippingEnabled: true, toneMappingExposure: 0.92 }}>
               <HeadingProbe toBearing={toBearing} />
               <NavDriver />
-              <PlanScene plan={plan} mPerUnit={mPerUnit} wallHeight={wallHeight} showLabels={showLabels} showFloorImage={showFloorImage} showFurniture={showFurniture} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} firstPerson={firstPerson} topView={topView || roomStop} beacon={roomStop} overviewToken={overviewToken + resetToken} lookDownToken={lookDown} realistic={realistic} placement={placement} floor={floor} ground={ground} date={date} hour={hour} tourGoal={tourGoal} onWorldStatus={(w) => setWorld((prev) => ({ ...(prev ?? {}), ...w }))} onStatus={setStatus} />
+              <PlanScene plan={plan} mPerUnit={mPerUnit} wallHeight={wallHeight} showLabels={showLabels} showFloorImage={showFloorImage} showFurniture={showFurniture} focusRoom={focusRoomShown} onFocusRoom={setFocusRoom} firstPerson={firstPerson} topView={topView || (roomStop && !eyeLevel)} eyeLevel={eyeLevel} beacon={roomStop && !eyeLevel} overviewToken={overviewToken + resetToken} lookDownToken={lookDown} realistic={realistic} placement={placement} floor={floor} ground={ground} date={date} hour={hour} tourGoal={tourGoal} onWorldStatus={(w) => setWorld((prev) => ({ ...(prev ?? {}), ...w }))} onStatus={setStatus} />
             </Canvas>
-            {showLabels && (
+            {showLabels && !eyeLevel && (
               <LabelLayer>
                 {plan.rooms.map((r, i) => (
                   <DomLabel key={i} id={`room-${i}`} active={focusRoomShown === r} onClick={() => goRoom(focusRoomShown === r ? null : r)}>

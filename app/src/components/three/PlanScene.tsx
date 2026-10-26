@@ -36,6 +36,8 @@ export interface PlanSceneProps {
   overviewToken?: number;
   /** bump with a focus change to frame that room from straight above once, leaving orbit rotation on */
   lookDownToken?: number;
+  /** eye-level 360°: stand in the focused room at 1.6 m and drag to look around (ceiling and floors above shown) */
+  eyeLevel?: boolean;
   /** guided tour: pulse a red beacon over the focused room (the room being explained) */
   beacon?: boolean;
   /** guided site tour: fly the orbit camera to this unit-frame pose whenever it changes */
@@ -173,7 +175,7 @@ function RoomBeacon({ r }: { r: RoomRect }) {
   );
 }
 
-function DesktopCamera({ top, w, d, focus, overviewToken, lookDownToken = 0, far = 70, tourGoal }: { top: boolean; w: number; d: number; focus: RoomRect | null; overviewToken: number; lookDownToken?: number; far?: number; tourGoal?: PlanSceneProps['tourGoal'] }) {
+function DesktopCamera({ top, w, d, focus, overviewToken, lookDownToken = 0, far = 70, tourGoal, eye = null }: { top: boolean; w: number; d: number; focus: RoomRect | null; overviewToken: number; lookDownToken?: number; far?: number; tourGoal?: PlanSceneProps['tourGoal']; eye?: NavSpot | null }) {
   const controls = useThree((s) => s.controls) as unknown as OrbitControlsImpl | null;
   const camera = useThree((s) => s.camera) as PerspectiveCamera;
   const goal = useRef<{ p0: Vector3; p1: Vector3; t0: Vector3; t1: Vector3; t: number; dur: number } | null>(null);
@@ -210,15 +212,28 @@ function DesktopCamera({ top, w, d, focus, overviewToken, lookDownToken = 0, far
   }, [controls]);
 
 
+  // eye level: glide to a free spot in the room at 1.6 m, facing along the room; the orbit target sits a few
+  // centimetres ahead, so dragging turns the view in place like a 360° photo
+  const eyeKey = eye ? `${eye.x.toFixed(2)},${eye.z.toFixed(2)}` : '';
+  useEffect(() => {
+    if (!eye || tourGoal || !controls || typeof controls.target?.clone !== 'function') return;
+    const yaw = eye.yaw ?? 0;
+    const p1 = new Vector3(eye.x, 1.6, eye.z);
+    const t1 = p1.clone().add(new Vector3(-Math.sin(yaw), -0.02, -Math.cos(yaw)).multiplyScalar(0.08));
+    goal.current = { p0: camera.position.clone(), p1, t0: controls.target.clone(), t1, t: 0, dur: 1.1 };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eyeKey, tourGoal, controls]);
+
   // a minimap pick asks for one top-down framing of the next focus (orbit stays unlocked afterwards)
   const lookDown = useRef(false);
   useEffect(() => { if (lookDownToken) lookDown.current = true; }, [lookDownToken]);
   // focus a room (or keep the current focus) when it or the mode changes
   useEffect(() => {
-    if (tourGoal) return;
+    if (tourGoal || eye) return;
     if (focus) frame((focus.x0 + focus.x1) / 2, (focus.z0 + focus.z1) / 2, focus.x1 - focus.x0, focus.z1 - focus.z0, top || lookDown.current);
     lookDown.current = false;
-  }, [focus, top, frame, tourGoal, lookDownToken]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focus, top, frame, tourGoal, lookDownToken, eyeKey]);
   // whole unit on mount, on Overview, and when toggling top view with nothing focused
   useEffect(() => {
     if (!focus && !tourGoal) frame(0, 0, w, d, top);
@@ -236,6 +251,25 @@ function DesktopCamera({ top, w, d, focus, overviewToken, lookDownToken = 0, far
     if (g.t >= 1) goal.current = null;
   });
 
+  // eye level: turn in place only (no pan, no zoom), drag direction reversed so the view follows the hand
+  if (eye && !tourGoal) {
+    return (
+      <OrbitControls
+        makeDefault
+        enableDamping
+        dampingFactor={0.1}
+        enablePan={false}
+        enableZoom={false}
+        rotateSpeed={-0.35}
+        minDistance={0.02}
+        maxDistance={0.2}
+        minPolarAngle={0.3}
+        maxPolarAngle={Math.PI - 0.3}
+        mouseButtons={{ LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.ROTATE, RIGHT: MOUSE.ROTATE }}
+        touches={{ ONE: TOUCH.ROTATE, TWO: TOUCH.ROTATE }}
+      />
+    );
+  }
   // top view: rotation off, left drag pans, wheel / pinch zoom toward the cursor
   return (
     <OrbitControls
@@ -270,7 +304,7 @@ export function planLabelEntries(plan: PlanRecord, mPerUnit: number): LabelEntry
 /** The wrist panel is hidden for now (client request): sticks, teleport and the map HUD cover navigation. */
 const XR_PANEL = false;
 
-export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorImage, showFurniture, focusRoom, onFocusRoom, firstPerson, topView = false, overviewToken = 0, lookDownToken = 0, realistic = true, placement = null, floor = 24, ground = 'vector', date, hour, tourGoal = null, beacon = false, onWorldStatus, onStatus }: PlanSceneProps) {
+export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorImage, showFurniture, focusRoom, onFocusRoom, firstPerson, topView = false, eyeLevel = false, overviewToken = 0, lookDownToken = 0, realistic = true, placement = null, floor = 24, ground = 'vector', date, hour, tourGoal = null, beacon = false, onWorldStatus, onStatus }: PlanSceneProps) {
   const walls = useWalls(plan.svg, onStatus);
   const furniture = useFurniture(plan, mPerUnit);
   const inXR = useInXR();
@@ -294,6 +328,8 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
   const rects = useMemo(() => rectsU.map(mirrorRect), [rectsU, mirrorRect]); // shown frame
   const entry = useMemo(() => mirrorSpot(entrySpot(nav, plan, mPerUnit, rectsU)), [nav, plan, mPerUnit, rectsU, mirrorSpot]);
   const focusRect = useMemo(() => rects.find((r) => r.room === focusRoom) ?? null, [rects, focusRoom]);
+  // where the eye-level view stands: the same free spot in the room that walk mode and VR use
+  const eyeSpot = useMemo(() => (eyeLevel && focusRect && !firstPerson ? mirrorSpot(roomSpot(nav, mirrorRect(focusRect))) : null), [eyeLevel, focusRect, firstPerson, nav, mirrorRect, mirrorSpot]);
   const collide = useCallback((fx: number, fz: number, tx: number, tz: number): [number, number] => {
     if (!nav) return [tx, tz];
     const [rx, rz] = slide(nav, fx * mx, fz, tx * mx, tz);
@@ -379,7 +415,7 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
       />
 
       {realistic ? (
-        <RealisticUnit plan={plan} furnished={showFurniture} interior={(firstPerson || inXR) && !(inXR && mode === 'top')} quality={inXR ? 'vr' : 'high'} placement={placement} floor={floor} ground={ground} date={date} hour={hour} amenityLabels={!!placement && (topView || (inXR && mode === 'top'))} topView={topView || (inXR && mode === 'top')} onWorldStatus={onWorldStatus} />
+        <RealisticUnit plan={plan} furnished={showFurniture} interior={(firstPerson || inXR || !!eyeSpot) && !(inXR && mode === 'top')} quality={inXR ? 'vr' : 'high'} placement={placement} floor={floor} ground={ground} date={date} hour={hour} amenityLabels={!!placement && (topView || (inXR && mode === 'top'))} topView={topView || (inXR && mode === 'top')} onWorldStatus={onWorldStatus} />
       ) : (
         <>
           {walls && <Walls walls={walls} plan={plan} mPerUnit={mPerUnit} wallHeight={wallHeight} />}
@@ -387,7 +423,7 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
         </>
       )}
       {focusRect && <RoomOutline r={focusRect} />}
-      {focusRect && beacon && <RoomBeacon r={focusRect} />}
+      {focusRect && beacon && !eyeSpot && <RoomBeacon r={focusRect} />}
 
       {/* scale references: 1 m cube and a 1.75 m figure outside the entry side (plan-extrusion mode only) */}
       <group position={[-w / 2 - 1.5, 0, d / 2 - 1]} visible={!realistic}>
@@ -396,7 +432,7 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
       </group>
 
       {/* desktop: DOM labels (page renders <DomLabel id="room-i">); in XR: 3D text panels, since DOM is invisible there */}
-      {showLabels && !inXR && <LabelProjector entries={labelEntries} maxDistance={60} />}
+      {showLabels && !inXR && !eyeSpot && <LabelProjector entries={labelEntries} maxDistance={60} />}
       {showLabels && inXR && plan.rooms.map((r, i) => {
         const [px, mz] = ptToPlanMetres(plan, mPerUnit, r.labelPt[0], r.labelPt[1]);
         const mxp = px * mx;
@@ -407,7 +443,7 @@ export function PlanScene({ plan, mPerUnit, wallHeight, showLabels, showFloorIma
       <PosePublisher />
       {!inXR && (firstPerson
         ? <FirstPersonRig spot={walkSpot} collide={collide} />
-        : <DesktopCamera top={topView} w={w} d={d} focus={focusRect} overviewToken={overviewToken} lookDownToken={lookDownToken} far={realistic && placement ? 900 : 70} tourGoal={tourGoal} />)}
+        : <DesktopCamera top={topView} w={w} d={d} focus={focusRect} overviewToken={overviewToken} lookDownToken={lookDownToken} far={realistic && placement ? 900 : 70} tourGoal={tourGoal} eye={eyeSpot} />)}
       <XRRig ref={rig} start={entry} mode={mode} walkSpeed={1.5} topRange={[3, realistic && placement ? 600 : 40]} collide={collide}>
         {inXR && XR_PANEL && (
           <XRPanelAnchor>

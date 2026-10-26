@@ -43,6 +43,12 @@ After two more reference reels (the ICG Gallery walk-through and an Unreal inter
 - **Keyboard:** ← → siblings, ↑ ↓ floors, Enter steps in, Esc steps back (off during tours, walk mode and VR). A one-line legend shows once and fades.
 - **On screen otherwise:** the mode switch, compass and full screen; a small card with a trail over it once a place is picked (none on the site overview); the plan minimap in Home. The left column, the separate View button, the bottom action bar and the camera pad are gone (the pad is an opt-in in View; Present mode moved there too).
 
+## Inside a home: eye level and sunlight
+
+- **Eye-level 360° room view** (default). Picking a room (list, ← →, minimap, room tour) now stands you in it at 1.6 m, at the same free spot walk mode and VR use, facing along the room; drag turns the view in place like a 360° photo (no pan or zoom). Ceiling and the floors above are on, so light comes in only through the openings; room labels and the red tour pin are off. The room card has an Eye level / Top switch; Top is the previous look-down framing.
+- **Sunlight** (Home dock tab for placed flats; Community's "Time of day" became the same panel): time presets (sunrise, morning, noon, afternoon, sunset), 21 Jun / 22 Sep / 21 Dec, a slider, "Play the day" (sunrise → sunset in about 25 s), and a readout: sun altitude and direction, and whether direct sun is on the balcony side (from the flat's balcony bearing). The sun is the existing NOAA-computed one at the site, with shadows from the neighbouring towers.
+- **Fix:** the sky dome of the surroundings was a 4.4 km sphere outside the home camera's 500 m far plane, so from eye level (and in walk mode) the sky rendered black. It now rides with the camera at 400 m (direction-only shader, drawn first without depth).
+
 ## Kept as it was
 
 URL keys and shareable links (plus `find=1` and `mode=map`), both tours and the hand-off, VR (one canvas / one XR tree per mode), provenance badges (every card carries one), finder logic, shortlist and compare, every map layer and the measure tool, present mode, the plan minimap (now bottom-right on desktop, next to the camera pad; top-left on phones), touch rules (`touch-action: pan-y`), legacy redirects.

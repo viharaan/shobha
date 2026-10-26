@@ -305,9 +305,20 @@ function SkyDome({ sunDir, day, center }: { sunDir: THREE.Vector3; day: number; 
     mat.uniforms.uHorizon.value.set('#c6d0d9').lerp(new THREE.Color('#e8b48a'), low * 0.6).lerp(new THREE.Color('#2a3140'), 1 - Math.max(k, 0.15));
     mat.uniforms.uGlow.value.set('#fff1d6').lerp(new THREE.Color('#ff9a4d'), low);
   }, [mat, sunDir, day]);
+  // the dome rides with the camera at 400 m, inside the home camera's 500 m far plane: a fixed 4.4 km dome was clipped
+  // away from eye level (the walk and 360° views saw a black sky). It is drawn first without writing depth, so
+  // everything else still draws over it; the shader only uses the view direction.
+  const ref = useRef<THREE.Mesh>(null);
+  const camPos = useMemo(() => new THREE.Vector3(), []);
+  useFrame(({ camera }) => {
+    const m = ref.current;
+    if (!m?.parent) return;
+    camera.getWorldPosition(camPos);
+    m.position.copy(m.parent.worldToLocal(camPos));
+  });
   return (
-    <mesh material={mat} position={[center[0], 0, center[1]]} renderOrder={RO_SKY} raycast={() => null} frustumCulled={false}>
-      <sphereGeometry args={[4400, 32, 16]} />
+    <mesh ref={ref} material={mat} position={[center[0], 0, center[1]]} renderOrder={RO_SKY} raycast={() => null} frustumCulled={false}>
+      <sphereGeometry args={[400, 32, 16]} />
     </mesh>
   );
 }

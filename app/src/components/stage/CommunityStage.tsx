@@ -16,13 +16,13 @@ import { FLOOR_TO_FLOOR_M, HOTSPOTS, PODIUM_HEIGHT_M, PROJECT, TOWERS, UNIT_TYPE
 import { imageRingToLocal, ringAreaM2 } from '@/lib/geo';
 import { indicativePrice } from '@/lib/pricing';
 import { fmtCr, fmtInr } from '@/lib/scale';
-import { SITE_ORIGIN } from '@/data/sobha/siteFrame';
-import { istDay, istHoursNow, istTodayYmd, sunPosition, istDate, sunTimes } from '@/lib/solar';
+import { istHoursNow, istTodayYmd } from '@/lib/solar';
 import { Facts, InfoCard, StageCard, useStageKeys, type Crumb, type Stepper } from './ContextUI';
 import { ChoiceList, Dock, type DockTab } from './Dock';
 import { VRButton } from '@/components/three/VRButton';
 import { NavDriver } from './NavDriver';
 import { StageLoader } from './StageLoader';
+import { SunPanel } from './SunPanel';
 import { useFinder } from './Finder';
 import { HeadingProbe, siteBearing } from './HeadingProbe';
 
@@ -75,9 +75,6 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
   const [date, setDate] = useState(() => istTodayYmd());
   // first view in daylight: the live IST hour when the sun is up, else mid-morning ("Now (IST)" restores the clock)
   const [hour, setHour] = useState(() => { const h = Math.round(istHoursNow() * 2) / 2; return h >= 7 && h <= 17.5 ? h : 10.5; });
-  const sunNow = sunPosition(istDate(istDay(date), hour), SITE_ORIGIN.lat, SITE_ORIGIN.lng);
-  const times = sunTimes(istDay(date), SITE_ORIGIN.lat, SITE_ORIGIN.lng);
-  const hhmm = (h: number | null) => (h === null ? '–' : `${String(Math.floor(h)).padStart(2, '0')}:${String(Math.round((h % 1) * 60)).padStart(2, '0')}`);
 
   const tourWing = wing ?? 1;
   const tour = useMemo(() => siteTour(tourWing), [tourWing]);
@@ -254,24 +251,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
     </details>
     </div>
   );
-  const timePanel = (
-    <div className="flex flex-col gap-3">
-    <Panel title="Sun and time">
-      <div className="grid grid-cols-[auto_1fr] items-center gap-2 text-xs">
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="rounded-md border border-line bg-bg-2 px-2 py-1 text-xs" aria-label="Date (IST)" />
-        <label className="block">
-          <span className="label">Sun · {hhmm(hour)} IST</span>
-          <input type="range" min={5} max={20} step={0.5} value={hour} onChange={(e) => setHour(parseFloat(e.target.value))} className="w-full" aria-label="Hour of day (IST)" />
-        </label>
-        <button type="button" className="btn col-span-2 justify-center" onClick={() => { setDate(istTodayYmd()); setHour(Math.min(20, Math.max(5, Math.round(istHoursNow() * 2) / 2))); }}>Now (IST)</button>
-      </div>
-      <p className="mt-1 text-[11px] text-fg-muted">
-        Sun {sunNow.altitudeDeg < 0 ? 'below the horizon' : `${Math.round(sunNow.altitudeDeg)}° up, bearing ${Math.round(sunNow.azimuthDeg)}°`} · sunrise {hhmm(times.sunrise)} · sunset {hhmm(times.sunset)}.
-        Direction is computed for the site (NOAA); towers are massing, so shadows are illustrative.
-      </p>
-    </Panel>
-    </div>
-  );
+  const timePanel = <SunPanel date={date} hour={hour} onDate={setDate} onHour={setHour} note="Sun direction computed for the site (NOAA). Towers are massing, so shadows are illustrative." />;
   const placesPanel = (
     <div className="flex flex-col gap-3">
       <ChoiceList items={PLACES.map((p) => ({ key: p.id, label: p.name, active: hotspot === p.id, onClick: () => selectPlace(p.id) }))} />
@@ -300,7 +280,7 @@ export default function CommunityStage({ resetToken: northToken, intro = false, 
     ...(floorsPanel ? [{ id: 'floors', label: 'Floors', panel: floorsPanel }] : []),
     { id: 'find', label: 'Find a home', panel: finder.card },
     { id: 'tour', label: 'Guided tour', onClick: () => set({ tour: 1 }), title: 'Gate → club → stadium → courts → wing, then into a home' },
-    { id: 'time', label: 'Time of day', panel: timePanel },
+    { id: 'time', label: 'Sunlight', panel: timePanel },
     { id: 'view', label: 'View', panel: viewPanel },
   ];
 
